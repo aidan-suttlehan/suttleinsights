@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzFCMkI0QiIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzAwIiAKICAgICAgICBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iLTAuNSI+UzwvdGV4dD4KPC9zdmc+">
 <title>Suttle Insights</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -273,6 +274,16 @@
     font-weight: 700;
     color: var(--accent-light);
     line-height: 1;
+  }
+
+  .stat-plus {
+    opacity: 0;
+    display: inline-block;
+    transition: opacity 0.5s ease;
+  }
+
+  .stat-plus.visible {
+    opacity: 1;
   }
 
   .hero-stat-label {
@@ -3031,17 +3042,6 @@
     display: block;
   }
   .footer-nav-link:hover { color: rgba(255,255,255,0.88); }
-  .footer-linkedin {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.38);
-    text-decoration: none;
-    transition: color 0.2s;
-    margin-top: 4px;
-  }
-  .footer-linkedin:hover { color: var(--accent-light); }
   .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -3153,7 +3153,7 @@
         <span class="hero-stat-label">Core Service Areas</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-num">20K+</span>
+        <span class="hero-stat-num"><span class="stat-count">0</span><span class="stat-plus">+</span></span>
         <span class="hero-stat-label">Employees Surveyed in Practice</span>
       </div>
       <div class="hero-stat">
@@ -3309,11 +3309,7 @@
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
-          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
-          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>
         </div>
       </div>
       <div class="footer-nav-col">
@@ -3487,11 +3483,7 @@
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
-          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
-          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>
         </div>
       </div>
       <div class="footer-nav-col">
@@ -3657,11 +3649,7 @@
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
-          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
-          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>
         </div>
       </div>
       <div class="footer-nav-col">
@@ -3812,11 +3800,7 @@
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
-          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
-          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>
         </div>
       </div>
       <div class="footer-nav-col">
@@ -3953,11 +3937,7 @@
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
-          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
-          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>
         </div>
       </div>
       <div class="footer-nav-col">
@@ -4095,11 +4075,7 @@
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
-          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
-          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>
         </div>
       </div>
       <div class="footer-nav-col">
@@ -4238,11 +4214,7 @@
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
-          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
-          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>
         </div>
       </div>
       <div class="footer-nav-col">
@@ -4403,11 +4375,7 @@
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
-          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
-          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>
         </div>
       </div>
       <div class="footer-nav-col">
@@ -4493,6 +4461,12 @@ function showPage(name, anchor) {
   const currentPageEl = document.querySelector('.page.active');
   const currentIsSvc  = currentPageEl && currentPageEl.id.startsWith('page-svc-');
   const targetIsSvc   = name.startsWith('svc-');
+
+  // Update the URL hash
+  const newHash = name === 'home' ? '' : '#' + name;
+  if (window.location.hash !== newHash) {
+    history.pushState(null, '', newHash || window.location.pathname);
+  }
 
   function doSwitch() {
     if (name !== 'home') heroAnimated = true;
@@ -4776,6 +4750,21 @@ document.querySelectorAll('#contact-form input, #contact-form textarea').forEach
   field.addEventListener('input', () => { field.style.borderColor = ''; });
 });
 
+// ─── HASH ROUTING ───
+(function() {
+  function routeFromHash() {
+    const hash = window.location.hash.replace('#', '').trim();
+    const validPages = ['home','about','contact','svc-listening','svc-team','svc-diagnostic','svc-tna','svc-prd'];
+    if (hash && validPages.includes(hash)) {
+      showPage(hash);
+    } else {
+      showPage('home');
+    }
+  }
+  routeFromHash();
+  window.addEventListener('popstate', routeFromHash);
+})();
+
 // ─── BOOT ───
 // Run on initial home page load
 // ── Hero canvas animation ──────────────────────────────────────────────────
@@ -4976,13 +4965,21 @@ function initReveal(pageEl) {
 // ══════════════════════════════════════════════
 // ENHANCEMENT 3: ANIMATED HERO STATS
 // ══════════════════════════════════════════════
-function animateCount(el, target, suffix, duration) {
-  const start = performance.now();
-  const update = (now) => {
-    const pct = Math.min((now - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - pct, 3);
-    el.textContent = Math.round(ease * target) + suffix;
-    if (pct < 1) requestAnimationFrame(update);
+function animateCount(el, target, duration) {
+  const countEl = el.querySelector('.stat-count') || el;
+  const plusEl  = el.querySelector('.stat-plus');
+  const start   = performance.now();
+  const update  = (now) => {
+    const pct  = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - pct, 4);
+    const val  = Math.round(ease * target);
+    countEl.textContent = val.toLocaleString();
+    if (pct < 1) {
+      requestAnimationFrame(update);
+    } else {
+      countEl.textContent = target.toLocaleString();
+      if (plusEl) plusEl.classList.add('visible');
+    }
   };
   requestAnimationFrame(update);
 }
@@ -4993,10 +4990,8 @@ function initHeroStats() {
 
   function runCount() {
     strip.querySelectorAll('.hero-stat-num').forEach(el => {
-      const t = el.textContent.trim();
-      if (t.includes('20K') || t === '0K+') {
-        el.textContent = '0K+';
-        setTimeout(() => animateCount(el, 20, 'K+', 2400), 160);
+      if (el.querySelector('.stat-count')) {
+        animateCount(el, 20000, 3000);
       }
     });
   }
@@ -5006,7 +5001,7 @@ function initHeroStats() {
   if (heroAnimated) {
     setTimeout(runCount, 350);
   } else {
-    setTimeout(runCount, 4650);
+    setTimeout(runCount, 4500);
   }
 }
 
