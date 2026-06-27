@@ -1,0 +1,5078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Suttle Insights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F2040;
+    --navy-mid: #1A3259;
+    --blue: #2563A8;
+    --blue-light: #3B82C4;
+    --slate: #4A5568;
+    --steel: #64748B;
+    --cream: #F8F6F1;
+    --warm-white: #FDFCFA;
+    --accent: #C8922A;
+    --accent-light: #E8B050;
+    --text: #1A202C;
+    --text-light: #4A5568;
+    --border: #E2E8F0;
+    --section-gap: 100px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--warm-white);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(15, 32, 64, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 60px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+
+  .nav-logo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+
+  .nav-logo-tag {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--accent-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links li {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    cursor: pointer;
+    padding: 8px 4px;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--accent-light);
+  }
+
+  .nav-cta {
+    background: var(--accent);
+    color: #fff !important;
+    padding: 10px 20px !important;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent-light) !important;
+    color: var(--navy) !important;
+  }
+
+  /* ─── PAGES ─── */
+  .page { display: none; padding-top: 70px; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ─── HOME ─── */
+  .hero {
+    background: var(--navy);
+    min-height: 88vh;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+    padding: 110px 60px 80px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(37,99,168,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: 30%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(200,146,42,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 960px;
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4.8vw, 62px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.12;
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent-light);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    max-width: 640px;
+    margin-bottom: 44px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-light);
+    color: var(--navy);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-outline:hover {
+    border-color: rgba(255,255,255,0.6);
+    color: #fff;
+  }
+
+  .hero-stat-strip {
+    position: absolute;
+    bottom: 24px; left: 0; right: 0;
+    background: transparent;
+    border-top: none;
+    padding: 14px 60px;
+    display: flex;
+    gap: 60px;
+    z-index: 2;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-light);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+
+  /* what i do strip */
+  .what-strip {
+    background:
+      radial-gradient(ellipse 100% 55% at 50% 0%,
+        rgba(37,99,168,0.10) 0%,
+        rgba(37,99,168,0.04) 45%,
+        transparent 68%),
+      var(--cream);
+    padding: 80px 60px 0;
+    border-bottom: none;
+  }
+
+  .svc-cat-wrap {
+    position: relative;
+    padding: 40px 0 60px;
+    margin-top: 32px;
+  }
+
+  .svc-cat-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: calc(-50vw + 50%);
+    right: calc(-50vw + 50%);
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 100%, rgba(200,146,42,0.07) 0%, transparent 60%),
+      linear-gradient(170deg, #ede8de 0%, #e5e0d5 100%);
+    border-top: 1px solid rgba(200,146,42,0.15);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .svc-cat-wrap > * { position: relative; z-index: 1; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  /* Suppress ::after in org-psych eyebrow (has its own HTML line) */
+  .org-psych-eyebrow .section-label::after { display: none; }
+
+  /* section-title moved to enhancements */
+
+  .section-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-light);
+    line-height: 1.8;
+    max-width: 620px;
+    margin-bottom: 56px;
+  }
+
+  .section-body + .section-body { margin-top: -40px; }
+
+  /* I/O explainer two-column layout */
+  /* ─── ORG PSYCH SECTION ─── */
+  .org-psych-section {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 72px 60px;
+  }
+  .org-psych-inner { width: 100%; }
+  .org-psych-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  .org-psych-eyebrow-line {
+    flex: 1;
+    max-width: 48px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .io-explainer-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 56px;
+    align-items: start;
+  }
+  .org-psych-lead {
+    font-size: 16px;
+    color: var(--navy);
+    line-height: 1.8;
+    font-weight: 400;
+    margin-bottom: 28px;
+  }
+  .org-psych-questions {
+    list-style: none;
+    padding: 0 0 0 20px;
+    margin: 0 0 28px;
+    border-left: 2px solid rgba(200,146,42,0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .org-psych-questions li {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.65;
+    font-style: italic;
+  }
+  .org-psych-close {
+    font-size: 16px;
+    color: var(--navy);
+    line-height: 1.8;
+    font-weight: 400;
+  }
+  .io-explainer-callout {
+    padding: 8px 0 0 0;
+  }
+  .svc-cat-wrap { display: flex; flex-direction: column; gap: 28px; margin-top: 48px; }
+  .svc-top-row { display: flex; gap: 16px; align-items: stretch; }
+  .svc-top-row .svc-cat-group { display: flex; flex-direction: column; flex: 1; }
+  .svc-top-row .svc-cat-cards { flex: 1; display: flex; }
+  .svc-top-row .service-card { flex: 1; display: flex; flex-direction: column; }
+  .svc-top-row .service-card p { flex: 1; }
+
+  @media (max-width: 680px) { .svc-top-row { flex-direction: column; } }
+  .svc-cat-group { display: flex; flex-direction: column; gap: 12px; }
+  .svc-cat-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--navy); opacity: 0.55; padding-bottom: 10px; border-bottom: 1px solid rgba(15,32,64,0.12);
+    margin-bottom: 14px;
+  }
+  .svc-cat-cards { display: flex; gap: 16px; }
+  .service-card--featured { border-top: 3px solid var(--blue) !important; }
+  .svc-top-row .service-card {
+    box-shadow: 0 8px 32px rgba(15,32,64,0.10);
+    border-color: rgba(37,99,168,0.22);
+  }
+  .svc-top-row .service-card:hover {
+    box-shadow: 0 16px 48px rgba(15,32,64,0.16);
+  }
+  .service-card--compact { flex: 1; }
+  .svc-lead-pill {
+    display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--blue); background: rgba(37,99,168,0.08);
+    padding: 2px 8px; border-radius: 8px; margin-bottom: 12px;
+  }
+
+  @media (max-width: 680px) {
+    .svc-cat-cards { flex-direction: column; }
+  }
+
+  /* service-card rules moved to enhancements block */
+
+  .service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .service-card-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blue);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .service-card-link::after { content: '→'; transition: transform 0.2s; }
+  .service-card:hover .service-card-link::after { transform: translateX(4px); }
+
+
+  /* ─── SCROLL-TRIGGERED TEXT HIGHLIGHTS ─── */
+  .scroll-hl {
+    background: linear-gradient(120deg, rgba(200,146,42,0.22) 0%, rgba(200,146,42,0.22) 100%);
+    background-size: 0% 88%;
+    background-repeat: no-repeat;
+    background-position: left 52%;
+    padding: 0 2px;
+    border-radius: 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: none;
+    font-weight: 600;
+  }
+  .scroll-hl.hl-visible {
+    background-size: 100% 88%;
+    transition: background-size 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+
+  /* ─── TEAM HEALTH: THREE LAYERS CALLOUT ─── */
+  .thd-layers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 26px 0 32px;
+  }
+
+  .thd-layer {
+    background: #fff;
+    padding: 26px 22px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .thd-layer:hover { background: #fafcff; }
+
+  .thd-layer-num {
+    position: absolute;
+    top: 6px; right: 14px;
+    font-size: 64px;
+    font-weight: 900;
+    font-family: 'DM Sans', sans-serif;
+    color: rgba(15,32,64,0.045);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .thd-layer-bar {
+    width: 28px;
+    height: 3px;
+    background: var(--blue);
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+
+  .thd-layer-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .thd-layer-desc {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.68;
+  }
+
+  @media (max-width: 680px) {
+    .thd-layers { grid-template-columns: 1fr; }
+    .thd-layer:not(:last-child) { border-bottom: 1px solid var(--border); }
+  }
+
+
+
+
+  /* ─── SERVICE PAGE ILLUSTRATION ─── */
+  .svc-graphic {
+    padding: 40px 60px;
+    overflow: hidden;
+  }
+  .svc-graphic svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 175px;
+  }
+  .ov-fade { opacity: 0; }
+  .ov-draw { stroke-dashoffset: var(--dl,400); opacity:0; }
+  .svc-graphic.ov-active .ov-fade { animation: ovFade  0.45s ease both; }
+  .svc-graphic.ov-active .ov-draw { animation: ovDraw  0.85s ease both; }
+  .svc-graphic.ov-active .ov-pulse{ animation: ovPulse 2.8s ease-in-out infinite; }
+  @keyframes ovFade  { from{opacity:0;transform:scale(.85)} to{opacity:1;transform:scale(1)} }
+  @keyframes ovDraw  { from{stroke-dashoffset:var(--dl,400);opacity:0} 12%{opacity:1} to{stroke-dashoffset:0;opacity:1} }
+  @keyframes ovPulse { 0%,100%{transform:scale(1);opacity:.7} 50%{transform:scale(1.14);opacity:1} }
+  @media (min-width:769px){ .svc-graphic{padding-left:80px;padding-right:80px;} }
+  @media (max-width:768px){ .svc-graphic{padding:24px 20px;} .svc-graphic svg{max-height:145px;} }
+
+
+
+  .who-item--highlight {
+    background: rgba(200,146,42,0.07);
+    border-left-color: var(--accent);
+    border-color: rgba(200,146,42,0.3);
+    margin-top: 6px;
+  }
+  .who-item--highlight .who-item-text {
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .who-item--highlight .who-item-icon svg {
+    stroke: var(--accent);
+  }
+
+
+  /* ─── ELS INSIGHT QUESTIONS ─── */
+  .els-reveals {
+    margin: 28px 0 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, #faf8f4 0%, #f5f0e8 100%);
+  }
+  .els-reveal {
+    display: grid;
+    grid-template-columns: 3px 1fr;
+    gap: 0;
+    border-bottom: 1px solid rgba(200,146,42,0.15);
+    transition: background 0.2s;
+  }
+  .els-reveal:last-child { border-bottom: none; }
+  .els-reveal:hover { background: rgba(200,146,42,0.06); }
+  .els-reveal-bar {
+    background: rgba(200,146,42,0.25);
+    transition: background 0.2s;
+  }
+  .els-reveal:hover .els-reveal-bar { background: var(--accent); }
+  .els-reveal-content {
+    padding: 22px 26px;
+  }
+  .els-reveal-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .els-reveal-a {
+    font-size: 12.5px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* ─── CHANGE READINESS STAGES ─── */
+  .change-stages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 28px 0 32px;
+  }
+  .change-stage {
+    padding: 22px 20px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+  .change-stage:hover { box-shadow: 0 4px 16px rgba(15,32,64,0.08); }
+  .change-stage--past  { border-left-color: rgba(200,146,42,0.5); }
+  .change-stage--live  { border-left-color: var(--blue); }
+  .change-stage--ahead { border-left-color: rgba(15,32,64,0.25); }
+  .change-stage-when {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .change-stage--past  .change-stage-when { color: var(--accent); }
+  .change-stage--live  .change-stage-when { color: var(--blue); }
+  .change-stage--ahead .change-stage-when { color: rgba(15,32,64,0.4); }
+  .change-stage-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .change-stage-desc {
+    font-size: 12.5px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  @media (max-width: 680px) {
+    .change-stages { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* ─── TNA DIAGNOSTIC ─── */
+  .tna-diagnostic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 28px 0 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .tna-col {
+    padding: 26px 22px;
+  }
+  .tna-col--yes {
+    background: rgba(37,99,168,0.04);
+    border-right: 1px solid var(--border);
+  }
+  .tna-col--no {
+    background: rgba(200,146,42,0.04);
+  }
+  .tna-col-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .tna-col--yes .tna-col-label { color: var(--blue); }
+  .tna-col--no  .tna-col-label { color: var(--accent); }
+  .tna-col-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+  .tna-item {
+    font-size: 12.5px;
+    color: var(--text-light);
+    line-height: 1.55;
+    padding: 5px 0;
+    border-top: 1px solid rgba(15,32,64,0.07);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .tna-item:first-of-type { border-top: none; }
+  .tna-item::before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .tna-col--yes .tna-item::before { background: var(--blue); opacity: 0.6; }
+  .tna-col--no  .tna-item::before { background: var(--accent); opacity: 0.6; }
+  @media (max-width: 680px) {
+    .tna-diagnostic { grid-template-columns: 1fr; }
+    .tna-col--yes { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  /* ─── PERFORMANCE IMPACT ROWS ─── */
+  .perf-impact {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 28px 0 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .perf-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+  .perf-row:last-child { border-bottom: none; }
+  .perf-row-who {
+    padding: 20px 18px;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .perf-row-role {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 4px;
+  }
+  .perf-row-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .perf-row-gain {
+    padding: 20px 22px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+  }
+  .perf-row-gain p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .perf-row-gain strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+  @media (max-width: 680px) {
+    .perf-row { grid-template-columns: 1fr; }
+    .perf-row-who { padding: 14px 18px; }
+  }
+
+  /* who i work with */
+  .who-section {
+    padding: var(--section-gap) 60px;
+    background:
+      radial-gradient(ellipse 75% 70% at 20% 60%, rgba(200,146,42,0.08) 0%, transparent 65%),
+      linear-gradient(160deg, #f5f0e8 0%, #f0e9d8 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  .who-intro {}
+
+  .who-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 8px;
+  }
+
+  .who-item {
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(200,146,42,0.18);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .who-item-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .who-item-text {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .who-closing {
+    font-size: 13px;
+    color: var(--steel);
+    line-height: 1.7;
+    margin-top: 16px;
+    font-style: italic;
+    padding-top: 16px;
+    border-top: 1px solid rgba(200,146,42,0.22);
+  }
+
+  .who-visual {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 52px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .who-visual::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(200,146,42,0.15) 0%, transparent 70%);
+  }
+
+  .who-visual-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 20px;
+    opacity: 0.6;
+  }
+
+  .who-visual-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .who-visual-attr {
+    margin-top: 28px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .who-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .who-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .who-list li::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  /* process section */
+  .process-section {
+    background: var(--navy);
+    padding: var(--section-gap) 60px;
+    color: #fff;
+  }
+
+  .process-section .section-title { color: #fff; }
+  .process-section .section-label { color: var(--accent-light); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 56px;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px; left: 10%; right: 10%;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .process-step {
+    text-align: center;
+    padding: 0 16px;
+    position: relative;
+  }
+
+  .step-num {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .step-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .step-desc {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+  }
+
+  /* cta section */
+  .cta-section {
+    background:
+      radial-gradient(ellipse 70% 120% at 50% 50%, rgba(200,146,42,0.11) 0%, transparent 68%),
+      linear-gradient(180deg, #0c1e3e 0%, #0f2040 100%);
+    padding: 56px 60px;
+    text-align: center;
+    border-top: none;
+  }
+
+  .cta-section .section-label { color: var(--accent-light); }
+  .cta-section .section-title { margin: 0 auto 14px; color: #fff; }
+  .cta-section .section-body { margin: 0 auto 28px; text-align: center; color: rgba(255,255,255,0.62); }
+
+  .cta-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── SERVICES PAGE ─── */
+  .page-hero {
+    background: var(--navy);
+    padding: 80px 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    top: -100px; left: 60px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(37,99,168,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .page-hero-content { position: relative; z-index: 2; max-width: 780px; padding-bottom: 36px; }
+
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 18px;
+  }
+
+  .page-hero p {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+  }
+
+  .services-detail {
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .services-with-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .services-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-detail-card {
+    padding: 48px 0;
+    border-bottom: none;
+    position: relative;
+  }
+
+  .service-detail-card:last-child { border-bottom: none; }
+
+  /* Gradient divider between service sections */
+  .service-detail-card:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(37, 99, 168, 0.12) 10%,
+      rgba(37, 99, 168, 0.38) 35%,
+      rgba(200, 146, 42, 0.55) 50%,
+      rgba(37, 99, 168, 0.38) 65%,
+      rgba(37, 99, 168, 0.12) 90%,
+      transparent 100%
+    );
+    border-radius: 2px;
+  }
+
+  /* Two-column inner layout - starts at badge level */
+  .service-inner {
+    display: grid;
+    grid-template-columns: 1fr clamp(200px, 28%, 270px);
+    gap: 32px;
+    margin-top: 16px;
+    align-items: start;
+  }
+
+  .service-left {
+    min-width: 0;
+  }
+
+  /* h2 and tagline now inside service-left - remove top gap */
+  .service-left h2 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  /* Timeline inside service-left - sits after description, before includes box */
+  .service-left .service-timeline {
+    margin-top: 28px;
+  }
+
+  .service-includes-box {
+    background: #EEF4FB;
+    border: 1px solid rgba(37,99,168,0.2);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 18px;
+    align-self: start;
+  }
+
+  .service-includes-box .includes-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+
+  .service-includes-box .includes-list {
+    margin-bottom: 0;
+  }
+
+  .service-includes-box .includes-list li {
+    font-size: 12.5px;
+    color: var(--navy);
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(37,99,168,0.1);
+    line-height: 1.45;
+  }
+
+  .service-includes-box .includes-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .service-includes-box .includes-list li::before {
+    content: '✓';
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .service-includes-box .addon-note {
+    font-size: 11.5px;
+    color: var(--slate);
+    background: rgba(37,99,168,0.06);
+    border: none;
+    border-left: 2px solid var(--blue);
+    border-radius: 0 4px 4px 0;
+    padding: 9px 10px;
+    line-height: 1.55;
+    margin-top: 12px;
+  }
+
+  .service-includes-box .addon-note strong {
+    color: var(--blue);
+  }
+
+  .services-sidebar {
+    position: sticky;
+    top: 24px;
+  }
+
+  .sidebar-card {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 36px 32px;
+    color: #fff;
+  }
+
+  .service-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(37,99,168,0.08);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .service-detail-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .service-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.65;
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    max-width: 680px;
+  }
+
+  .service-description {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .includes-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+
+  .includes-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .includes-list li {
+    font-size: 14px;
+    color: var(--text-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .includes-list li::before {
+    content: '✓';
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .addon-note {
+    font-size: 13px;
+    color: var(--steel);
+    background: var(--cream);
+    padding: 14px 18px;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    line-height: 1.6;
+  }
+
+  /* pricing card */
+  .pricing-card {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 36px 32px;
+    color: #fff;
+    position: sticky;
+    top: 90px;
+  }
+
+  .pricing-card-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 20px;
+  }
+
+  .pricing-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .pricing-row:last-of-type { border-bottom: none; }
+
+  .pricing-tier {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.4;
+  }
+
+  .pricing-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent-light);
+  }
+
+  .pricing-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 16px;
+    line-height: 1.6;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .pricing-cta {
+    margin-top: 24px;
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    padding: 13px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .pricing-cta:hover { background: var(--accent-light); color: var(--navy); }
+
+  /* ─── ABOUT PAGE ─── */
+  .about-layout {
+    padding: 80px 60px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-photo {
+    background: var(--navy);
+    border-radius: 12px;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 90px;
+    overflow: hidden;
+  }
+
+  .about-photo-placeholder {
+    text-align: center;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .about-photo-placeholder .icon { margin-bottom: 12px; }
+  .about-photo-placeholder p { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .about-photo-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0F2040 0%, #1A3259 50%, #0F2040 100%);
+  }
+
+  .about-photo-accent {
+    position: absolute;
+    bottom: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(200,146,42,0.2) 0%, transparent 70%);
+  }
+
+  .credentials-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 32px 0;
+  }
+
+  .credential-tag {
+    background: rgba(37,99,168,0.08);
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  .about-body {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.85;
+  }
+
+  .about-body p { margin-bottom: 22px; }
+
+  .about-body p:last-child { margin-bottom: 0; }
+
+  .about-body strong { color: var(--navy); font-weight: 600; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+
+  .value-item {
+    padding: 24px;
+    background: var(--cream);
+    border-radius: 8px;
+  }
+
+  .value-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .value-item p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ─── CONTACT PAGE ─── */
+  .contact-layout {
+    padding: 80px 60px;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .contact-info p {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+
+  .contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .contact-detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .contact-detail-icon {
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-detail-text h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+
+  .contact-detail-text p {
+    font-size: 14px;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .discovery-box {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 28px;
+    color: #fff;
+  }
+
+  .discovery-box h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 10px;
+  }
+
+  .discovery-box p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* form */
+  .contact-form {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 48px;
+  }
+
+  .contact-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 32px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .form-group.full { margin-bottom: 20px; }
+
+  label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  input, select, textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--blue);
+    background: #fff;
+  }
+
+  textarea { min-height: 120px; resize: vertical; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--navy);
+    color: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+
+  .form-submit:hover { background: var(--blue); transform: translateY(-1px); }
+
+  .form-note {
+    font-size: 12px;
+    color: var(--steel);
+    text-align: center;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  /* ─── FOOTER ─── */
+  /* footer CSS moved to enhancements */
+
+  /* ─── SERVICE TIMELINES ─── */
+  /* ── Timeline ── */
+  .tl {
+    margin-top: 36px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--navy);
+    overflow: hidden;
+  }
+
+  .tl-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .tl-label-text {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .tl-duration {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent-light);
+    background: rgba(200,146,42,0.15);
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Desktop: all labels above, dots on same horizontal line */
+  .tl-track {
+    display: flex;
+    align-items: flex-end;
+    padding: 0 12px 20px;
+  }
+
+  .tl-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+
+  .tl-cap {
+    min-width: 80px;
+    max-width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 6px 12px;
+    gap: 4px;
+  }
+
+  .tl-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent-light);
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+
+  .tl-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 2.5px solid var(--accent);
+    box-shadow: 0 0 0 4px rgba(200,146,42,0.12);
+    flex-shrink: 0;
+  }
+
+  .tl-conn {
+    flex: 1;
+    min-width: 8px;
+    height: 1.5px;
+    margin-bottom: 6px;
+    background: linear-gradient(to right, rgba(37,99,168,0.35), rgba(200,146,42,0.45));
+    border-radius: 2px;
+  }
+
+  .tl-week {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.38);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    line-height: 1.3;
+  }
+
+  .tl-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.3;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+
+  .tl-detail {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.4;
+    margin-top: 3px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  /* Mobile: clean vertical stack */
+  @media (max-width: 580px) {
+    .tl-track { flex-direction: column; align-items: flex-start; padding: 4px 16px 20px; gap: 0; }
+
+    .tl-step {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 14px;
+      width: 100%;
+      flex: none;
+    }
+
+    .tl-dot {
+      order: -1;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .tl-num { display: none; }
+
+    .tl-cap {
+      order: 0;
+      min-width: 0;
+      max-width: none;
+      flex: 1;
+      align-items: flex-start;
+      text-align: left;
+      padding: 14px 0 2px;
+    }
+
+    .tl-conn {
+      width: 1.5px;
+      height: 16px;
+      flex: none;
+      margin-bottom: 0;
+      margin-left: 6px;
+      background: linear-gradient(to bottom, rgba(37,99,168,0.35), rgba(200,146,42,0.45));
+    }
+
+    .tl-week { font-size: 10px; }
+    .tl-name { font-size: 13px; white-space: normal; }
+    .tl-detail { text-align: left; font-size: 11px; }
+  }
+
+  /* Dimension tags */
+  .dimensions-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+  .dimension-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 28px;
+  }
+  .dim-tag {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--blue);
+    background: rgba(37,99,168,0.07);
+    border: 1px solid rgba(37,99,168,0.18);
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+    transition: all 0.2s;
+  }
+  .dim-tag:hover {
+    background: rgba(37,99,168,0.13);
+    border-color: var(--blue);
+  }
+
+  /* Philosophy quote */
+  .philosophy-quote {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 36px 44px;
+    margin: 48px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .philosophy-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -28px; left: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 140px;
+    color: rgba(200,146,42,0.12);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .philosophy-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: #fff;
+    line-height: 1.65;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 14px;
+  }
+  .philosophy-quote cite {
+    font-size: 11px;
+    font-style: normal;
+    color: var(--accent-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
+
+  /* Deliverable badge */
+  .deliverable-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(30, 92, 53, 0.08);
+    color: #1E5C35;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  /* ─── ANIMATIONS ─── */
+
+  /* Base keyframes */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes scalePop {
+    from { opacity: 0; transform: scale(0.88); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes drawLine {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  @keyframes stepReveal {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Elements that animate via IntersectionObserver get .anim-ready initially */
+  .anim-ready {
+    opacity: 0;
+  }
+  .anim-ready.animated {
+    opacity: 1;
+  }
+
+  /* Variant classes applied by JS */
+  .anim-fadeup.animated        { animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .anim-fadein.animated        { animation: fadeIn 0.7s ease forwards; }
+  .anim-left.animated          { animation: slideInLeft 0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .anim-right.animated         { animation: slideInRight 0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .anim-pop.animated           { animation: scalePop 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+  /* Hero: staggered reveal sequence */
+  @keyframes heroSlideLeft {
+    from { opacity: 0; transform: translateX(-16px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes heroSlideUpBlur {
+    from { opacity: 0; transform: translateY(22px); filter: blur(6px); }
+    to   { opacity: 1; transform: translateY(0);  filter: blur(0px); }
+  }
+  @keyframes heroSlideUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes heroFadeOnly {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .hero-content { opacity: 1; animation: none; }
+
+  /* 1 - Line 1 rises first */
+  .hero-line1 {
+    display: block;
+    opacity: 0;
+    animation: heroSlideUpBlur 1.0s cubic-bezier(0.22,1,0.36,1) 0.3s forwards;
+  }
+
+  /* 2 - Line 2 follows after a deliberate pause */
+  .hero-line2 {
+    opacity: 0;
+    animation: heroSlideUp 0.8s cubic-bezier(0.22,1,0.36,1) 2.1s forwards;
+  }
+
+  /* 3 - Everything else arrives after the pause */
+  .hero-eyebrow {
+    opacity: 0;
+    animation: heroSlideLeft 0.6s cubic-bezier(0.22,1,0.36,1) 4.0s forwards;
+  }
+  .hero-sub {
+    opacity: 0;
+    animation: heroSlideUp 0.7s ease 4.0s forwards;
+  }
+  .hero-actions {
+    opacity: 0;
+    animation: heroSlideUp 0.7s ease 4.3s forwards;
+  }
+
+  /* 4 - Stats fade in last */
+  .hero-stat-strip {
+    opacity: 0;
+    animation: heroFadeOnly 0.7s ease 4.5s forwards;
+  }
+
+  /* Page hero (triggers on page switch) */
+  .page.active .page-hero-content {
+    animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.05s both;
+  }
+
+  /* Process steps: sequential reveal via CSS + JS class */
+  .process-step {
+    opacity: 0;
+  }
+  .process-step.step-in {
+    animation: stepReveal 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  /* Process line draw */
+  .process-steps::before {
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 1.2s cubic-bezier(0.22,1,0.36,1) 0.3s;
+  }
+  .process-steps.line-drawn::before {
+    transform: scaleX(1);
+  }
+
+  /* About photo shimmer while placeholder */
+  .about-photo-bg {
+    background: linear-gradient(
+      90deg,
+      #0F2040 0%,
+      #1A3259 40%,
+      #243d6b 50%,
+      #1A3259 60%,
+      #0F2040 100%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 3.5s ease-in-out infinite;
+  }
+
+  /* Credential tags stagger via inline delay set by JS */
+  .credential-tag {
+    opacity: 0;
+  }
+  .credential-tag.tag-in {
+    animation: scalePop 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  /* Value grid items */
+  .value-item {
+    opacity: 0;
+  }
+  .value-item.val-in {
+    animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  /* Contact detail items */
+  .contact-detail-item {
+    opacity: 0;
+  }
+  .contact-detail-item.cdi-in {
+    animation: slideInLeft 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  /* ─── DESKTOP CONTENT INSET ─── */
+  @media (min-width: 769px) {
+    nav                  { padding-left: 80px; padding-right: 80px; }
+    .hero                { padding-left: 80px; padding-right: 80px; }
+    .hero-stat-strip     { padding-left: 80px; padding-right: 80px; }
+    .what-strip          { padding-left: 80px; padding-right: 80px; }
+    .who-section         { padding-left: 80px; padding-right: 80px; }
+    .process-section     { padding-left: 80px; padding-right: 80px; }
+    .cta-section         { padding-left: 80px; padding-right: 80px; }
+    .page-hero           { padding-left: 80px; padding-right: 80px; }
+    .services-detail     { padding-left: 80px; padding-right: 80px; }
+    .about-layout        { padding-left: 80px; padding-right: 80px; }
+    .org-psych-section   { padding-left: 80px; padding-right: 80px; }
+    .contact-layout      { padding-left: 80px; padding-right: 80px; }
+    footer               { padding-left: 80px; padding-right: 80px; }
+  }
+
+  /* Very large screens: grow padding to prevent sprawl beyond ~1500px content width */
+  @media (min-width: 1660px) {
+    nav, .hero, .hero-stat-strip, .what-strip, .who-section,
+    .process-section, .cta-section, .page-hero, .services-detail,
+    .about-layout, .org-psych-section, .contact-layout, footer {
+      padding-left: calc((100vw - 1500px) / 2);
+      padding-right: calc((100vw - 1500px) / 2);
+    }
+  }
+
+  /* Medium screens: outer grid stacks, inner stays two-column */
+  @media (min-width: 769px) and (max-width: 1100px) {
+    .services-with-sidebar { grid-template-columns: 1fr; }
+    .services-sidebar { position: static; margin-top: 48px; }
+    .sidebar-card { max-width: 480px; }
+    .service-inner { grid-template-columns: 1fr clamp(200px, 30%, 280px); }
+  }
+
+  /* ─── HAMBURGER ─── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+
+    /* Nav */
+    nav { padding: 0 20px; }
+    .nav-hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      background: rgba(15,32,64,0.98);
+      backdrop-filter: blur(12px);
+      flex-direction: column;
+      padding: 8px 0 20px;
+      gap: 0;
+      z-index: 99;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li {
+      display: block;  /* override desktop flex so dropdown flows below, not beside */
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-links a {
+      display: block;
+      padding: 16px 28px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+    .nav-dropdown > a {
+      justify-content: center; /* center the "Services ▼" text within its flex row */
+    }
+    .nav-cta {
+      margin: 14px 28px 0;
+      display: block;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    /* Hero */
+    .hero {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 52px 24px 0;
+      min-height: auto;
+    }
+    .hero-content { padding-bottom: 40px; }
+    .hero::before, .hero::after { display: none; }
+    .hero-eyebrow { display: none; }
+    .hero h1 { font-size: 24px; line-height: 1.18; margin-bottom: 16px; }
+    .hero-sub { font-size: 15px; margin-bottom: 32px; }
+    .hero-actions { flex-direction: column; gap: 10px; }
+    .btn-primary, .btn-outline { text-align: center; width: 100%; box-sizing: border-box; padding: 13px 24px; }
+    .hero-stat-strip {
+      position: static;
+      width: calc(100% + 48px);
+      margin-left: -24px;
+      margin-right: -24px;
+      box-sizing: border-box;
+      padding: 14px 24px;
+      flex-wrap: wrap;
+      gap: 14px 0;
+    }
+    .hero-stat { width: 50%; padding: 0 12px; box-sizing: border-box; }
+    .hero-stat-num { font-size: 20px; }
+    .hero-stat-label { font-size: 10px; letter-spacing: 0.04em; }
+
+    /* What strip */
+    .what-strip { padding: 56px 24px 0; }
+    .svc-cat-group { margin-top: 28px; }
+    .svc-top-row > .svc-cat-group:first-child { margin-top: 0; }
+    .section-body { max-width: 100%; margin-bottom: 36px; }
+    .services-grid { grid-template-columns: 1fr; gap: 16px; }
+
+    /* Who section */
+    .who-section { padding: 48px 24px; grid-template-columns: 1fr; gap: 36px; }
+    .who-visual { padding: 36px 28px; }
+    .who-visual-text { font-size: 18px; }
+
+    /* Process */
+    .process-section { padding: 56px 24px; }
+    .process-steps { grid-template-columns: repeat(3, 1fr); gap: 36px; }
+    .process-steps::before { display: none; }
+
+    /* CTA */
+    .cta-section { padding: 44px 24px; }
+
+    /* Page hero */
+    .page-hero { padding: 56px 24px 0; }
+    .page-hero h1 { font-size: 30px; }
+
+    /* I/O explainer */
+    div[style*="padding:48px 80px"] { padding: 36px 24px !important; }
+    /* Service nav guide grid */
+    div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    /* New 3-col nav grid on mobile */
+    .service-nav-grid { grid-template-columns: 1fr !important; }
+    /* Nav category cards on mobile */
+    .svc-nav-cat-cards { flex-direction: column !important; }
+    /* IO explainer on mobile */
+    .org-psych-section { padding: 48px 24px; }
+    .io-explainer-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+    .io-explainer-callout { position: static !important; }
+    /* Nav guide section padding on mobile */
+    div[style*="padding:32px 80px"] { padding: 28px 24px 32px !important; }
+
+    /* Services page */
+    .services-detail { padding: 36px 24px; }
+    .services-with-sidebar { grid-template-columns: 1fr; gap: 0; }
+    .services-sidebar { position: static; margin-top: 40px; }
+    .sidebar-card { padding: 28px 24px; }
+    .service-detail-card { padding: 40px 0; }
+    .service-detail-card h2 { font-size: 22px; }
+    .service-description { font-size: 14px; }
+    .service-inner { grid-template-columns: 1fr; gap: 20px; }
+    .service-includes-box { position: static; border-radius: 0 6px 6px 0; }
+
+    /* Timeline: horizontal scroll */
+
+
+    /* Dimension tags */
+    .dimension-tags { gap: 6px; }
+    .dim-tag { font-size: 11px; padding: 4px 10px; }
+
+    /* About */
+    .about-layout { grid-template-columns: 1fr; padding: 36px 24px; gap: 36px; }
+    .about-photo { position: relative; aspect-ratio: 4/3; max-height: 220px; border-radius: 10px; overflow: hidden; }
+    .credentials-strip { margin: 20px 0; }
+    .about-body { font-size: 15px; }
+    .values-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; padding-top: 36px; }
+
+    /* Contact */
+    .contact-layout { grid-template-columns: 1fr; padding: 36px 24px; gap: 36px; }
+    .contact-form { padding: 28px 20px; border-radius: 8px; }
+    .contact-form h3 { font-size: 20px; margin-bottom: 24px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .discovery-box { padding: 22px; }
+
+    /* Footer */
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 36px 24px; }
+    .footer-right { text-align: center; }
+
+    /* General */
+    .section-title { font-size: 26px; }
+    .section-label { font-size: 10px; }
+    .includes-list li { font-size: 13px; }
+    .addon-note { font-size: 12px; }
+    .philosophy-quote { padding: 24px 24px; }
+    .philosophy-quote p { font-size: 16px; }
+  }
+
+  @media (max-width: 600px) {
+    .process-steps {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .process-steps::before { display: none; }
+    .process-section { padding: 48px 24px; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 14px;
+      row-gap: 3px;
+      align-items: start;
+      text-align: left;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .process-step:last-child { border-bottom: none; }
+    .step-num {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      width: 36px;
+      height: 36px;
+      font-size: 15px;
+      flex-shrink: 0;
+      margin: 0;
+      align-self: start;
+    }
+    .step-title {
+      grid-column: 2;
+      grid-row: 1;
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+    .step-desc {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .hero h1 { font-size: 22px; }
+    .hero-stat { width: 50%; }
+    .service-detail-card h2 { font-size: 22px; }
+  }
+
+
+  /* ─── NAV DROPDOWN ─── */
+  .nav-dropdown { position: relative; }
+
+  .nav-dropdown > a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .nav-dropdown-arrow {
+    font-size: 9px;
+    transition: transform 0.2s;
+    display: inline-block;
+    line-height: 1;
+    margin-top: 1px;
+  }
+
+  .nav-dropdown:hover .nav-dropdown-arrow,
+  .nav-dropdown.open .nav-dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: -16px;
+    min-width: 360px;
+    background: rgba(12, 24, 52, 0.99);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
+    z-index: 200;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+    will-change: opacity, transform;
+  }
+
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown.open .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.14s ease, transform 0.14s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-dropdown-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 2px;
+    height: 55%;
+    background: var(--accent-light);
+    border-radius: 2px;
+    transition: transform 0.14s ease-out;
+  }
+
+  .nav-dropdown-item:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateX(4px);
+  }
+
+  .nav-dropdown-item:hover::before {
+    transform: translateY(-50%) scaleY(1);
+  }
+
+  .nav-dropdown-item:hover .nav-dd-icon {
+    background: rgba(37,99,168,0.36);
+    transform: scale(1.08);
+  }
+
+  .nav-dropdown-item:hover .nav-dd-text {
+    color: #fff;
+  }
+
+  .nav-dropdown-item:hover .nav-dd-sub {
+    color: rgba(255,255,255,0.55);
+  }
+
+  .nav-dropdown-item--featured {
+    border-left: none;
+  }
+  .nav-dropdown-item--featured:hover {
+    background: rgba(255,255,255,0.07);
+  }
+  .nav-dd-featured-badge {
+    margin-left: auto;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    background: rgba(200,146,42,0.15);
+    padding: 2px 7px;
+    border-radius: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .nav-dd-icon {
+    width: 30px;
+    height: 30px;
+    background: rgba(37,99,168,0.18);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.18s, transform 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  .nav-dd-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.84);
+    line-height: 1.2;
+  }
+
+  .nav-dd-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.38);
+    margin-top: 2px;
+    line-height: 1.3;
+  }
+
+  .nav-dropdown-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 6px 8px;
+  }
+
+  .nav-dd-cta-item {
+    background: rgba(200,146,42,0.1);
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.14s;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-dd-cta-item:hover { background: rgba(200,146,42,0.2); }
+
+  .nav-dd-cta-text {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--accent-light);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ─── WHO ITEM ICONS ─── */
+  .who-item-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(37,99,168,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ─── SERVICE PAGE NAVIGATION STRIP ─── */
+  .svc-page-nav {
+    position: sticky;
+    top: 70px;
+    z-index: 85;
+    background: linear-gradient(180deg, #0f2040 0%, #142748 50%, #0f2040 100%);
+    border-bottom: 1px solid rgba(200,146,42,0.25);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.28);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .svc-page-nav::-webkit-scrollbar { display: none; }
+
+  .svc-nav-strip {
+    display: flex;
+    padding: 0 60px;
+    white-space: nowrap;
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .svc-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    flex: 1;
+    padding: 15px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.18s, background 0.18s, transform 0.22s cubic-bezier(0.34,1.56,0.64,1);
+    white-space: nowrap;
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Growing gold underline from center on hover (inactive items only) */
+  .svc-nav-item:not(.svc-nav-active)::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 50%;
+    width: 70%;
+    height: 2px;
+    background: rgba(200,146,42,0.45);
+    border-radius: 1px;
+    transform: translateX(-50%) scaleX(0);
+    transition: transform 0.26s ease-out;
+    pointer-events: none;
+  }
+
+  .svc-nav-item:not(.svc-nav-active):hover::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  /* Icon scales up on hover */
+  .svc-nav-item svg {
+    transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s;
+  }
+
+  .svc-nav-item:hover svg {
+    transform: scale(1.25);
+  }
+
+  .svc-nav-item:hover {
+    color: rgba(255,255,255,0.92);
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-1px);
+  }
+
+  .svc-nav-active {
+    color: var(--accent-light) !important;
+    font-weight: 700 !important;
+    border-bottom-color: var(--accent) !important;
+    background: rgba(200,146,42,0.09) !important;
+  }
+
+  /* Disable transform animations on mobile scroll strip */
+  @media (max-width: 768px) {
+    .svc-nav-item:hover { transform: none; }
+    .svc-nav-item:not(.svc-nav-active)::after { display: none; }
+    .svc-nav-item:hover svg { transform: none; }
+  }
+
+
+  /* ─── SERVICE STATS BAR ─── */
+  .svc-stats-bar {
+    position: static;
+    background: transparent;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: none;
+    margin: 0 -60px;
+    padding: 18px 60px;
+    display: flex;
+    gap: 0;
+    align-items: center;
+    flex-wrap: nowrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  .svc-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    padding-right: 28px;
+    margin-right: 28px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .svc-stat-item:last-child {
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
+  }
+
+  .svc-stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.42);
+  }
+
+  .svc-stat-val {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.25;
+  }
+
+  .svc-stat-divider {
+    display: none;
+  }
+
+  /* ─── SERVICE PAGE BODY ─── */
+  .service-left > h2 { display: none; }
+  .svc-page-body {
+    padding: 52px 60px 80px;
+    background: #fff;
+  }
+
+  /* ── Service inner grid ── */
+  .svc-page-body .service-inner {
+    gap: 52px;
+  }
+
+  /* ── Premium dark includes box ── */
+  .svc-page-body .service-includes-box {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+    background: var(--navy) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 24px 22px !important;
+  }
+  .svc-page-body .service-includes-box .includes-title {
+    color: var(--accent-light) !important;
+    font-size: 10px !important;
+    letter-spacing: 0.14em !important;
+  }
+  .svc-page-body .service-includes-box .includes-list li {
+    color: rgba(255,255,255,0.82) !important;
+    border-bottom-color: rgba(255,255,255,0.08) !important;
+    font-size: 13px !important;
+    padding: 7px 0 !important;
+  }
+  .svc-page-body .service-includes-box .includes-list li::before {
+    color: var(--accent-light) !important;
+  }
+  .svc-page-body .service-includes-box .addon-note {
+    background: rgba(255,255,255,0.06) !important;
+    border-left-color: var(--accent) !important;
+    color: rgba(255,255,255,0.55) !important;
+  }
+  .svc-page-body .service-includes-box .addon-note strong {
+    color: var(--accent-light) !important;
+  }
+
+  /* ── More breathing room in descriptions ── */
+  .svc-page-body .service-description {
+    margin-bottom: 28px;
+    line-height: 1.85;
+  }
+
+  /* ── Visual anchor before each callout block ── */
+  .svc-page-body .els-reveals,
+  .svc-page-body .thd-layers,
+  .svc-page-body .change-stages,
+  .svc-page-body .tna-diagnostic,
+  .svc-page-body .perf-impact {
+    margin-top: 32px;
+    margin-bottom: 36px;
+  }
+
+  /* ── Dimension tags section ── */
+  .svc-page-body .dimensions-label {
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    color: var(--steel);
+  }
+  .svc-page-body .dimension-tags {
+    margin-bottom: 0;
+  }
+
+  /* ── Addon note styling (standalone, outside includes box) ── */
+  .svc-page-body .addon-note {
+    margin-top: 28px;
+    background: rgba(37,99,168,0.04);
+    border-left-color: var(--blue);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ─── FLOATING DISCOVERY CTA ─── */
+  .svc-float-cta {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 150;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    padding: 14px 26px;
+    border-radius: 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(200,146,42,0.4);
+  }
+
+  .svc-float-cta.svc-float-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .svc-float-cta:hover {
+    background: var(--accent-light);
+    color: var(--navy);
+  }
+
+  /* ─── SERVICE PAGE HERO BADGE ─── */
+  .service-badge--hero {
+    background: rgba(255,255,255,0.1);
+    color: var(--accent-light);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .service-badge--hero svg { stroke: var(--accent-light); }
+
+  /* ─── RELATED SERVICES GRID ─── */
+  .svc-related-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 720px;
+  }
+
+  /* ─── DESKTOP INSET FOR NEW SECTIONS ─── */
+  @media (min-width: 769px) {
+    .svc-stats-bar     { margin-left: -80px; margin-right: -80px; padding-left: 80px; padding-right: 80px; }
+    .svc-nav-strip     { padding-left: 80px; padding-right: 80px; }
+    .svc-page-body     { padding-left: 80px; padding-right: 80px; }
+  }
+
+  @media (min-width: 1660px) {
+    .svc-stats-bar, .svc-page-body {
+      padding-left: calc((100vw - 1500px) / 2);
+      padding-right: calc((100vw - 1500px) / 2);
+    }
+    .svc-nav-strip {
+      padding-left: calc((100vw - 1500px) / 2);
+      padding-right: calc((100vw - 1500px) / 2);
+    }
+  }
+
+  /* ─── MOBILE ADDITIONS ─── */
+  @media (max-width: 768px) {
+
+    /* Dropdown in mobile nav: accordion style */
+    .nav-dropdown-menu {
+      position: static;
+      opacity: 1 !important;
+      visibility: hidden;
+      max-height: 0;
+      overflow: hidden;
+      transform: none !important;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: none;
+      box-shadow: none;
+      transition: max-height 0.28s ease, visibility 0.28s;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+      visibility: visible;
+      max-height: 400px;
+    }
+
+    .nav-dropdown-item {
+      padding: 13px 28px 13px 44px;
+      border-radius: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-dd-icon { width: 24px; height: 24px; }
+    .nav-dd-text { font-size: 13px; }
+    .nav-dd-sub { display: none; }
+
+    .nav-dd-cta-item {
+      margin: 0;
+      border-radius: 0;
+      padding: 14px 28px 14px 44px;
+    }
+    .nav-dropdown-item:hover { transform: none; }
+    .nav-dropdown-item::before { display: none; }
+    /* Prevent desktop hover from interfering with mobile tap */
+    .nav-dropdown:hover .nav-dropdown-menu {
+      visibility: hidden !important;
+      max-height: 0 !important;
+    }
+    .nav-dropdown:hover .nav-dropdown-arrow {
+      transform: none !important;
+    }
+    /* Eliminate 300ms tap delay on the services button */
+    .nav-dropdown > a {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-dropdown-divider { margin: 0; }
+
+    /* Service page nav */
+    .svc-stats-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 0 -24px;
+      padding: 0 24px;
+      gap: 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .svc-stat-divider { display: none; }
+    .svc-stat-item {
+      padding: 16px 0;
+      border-right: none !important;
+      padding-right: 0 !important;
+      margin-right: 0 !important;
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    /* Left column items (DOM positions 1 & 5), right border + padding */
+    .svc-stat-item:nth-child(1),
+    .svc-stat-item:nth-child(5) {
+      border-right: 1px solid rgba(255,255,255,0.1) !important;
+      padding-right: 16px !important;
+    }
+    /* Right column items (DOM positions 3 & 7), left padding */
+    .svc-stat-item:nth-child(3),
+    .svc-stat-item:nth-child(7) { padding-left: 16px; }
+    /* Row 1 items, dividing line below */
+    .svc-stat-item:nth-child(1),
+    .svc-stat-item:nth-child(3) { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .svc-nav-strip { padding: 0 24px; box-sizing: border-box; }
+    .svc-nav-item { flex: none; justify-content: flex-start; padding: 13px 16px; font-size: 10.5px; }
+
+    /* Service page body */
+    .svc-page-body { padding: 32px 24px 60px; }
+    .svc-page-body .service-inner { grid-template-columns: 1fr; gap: 24px; }
+    .svc-page-body .service-includes-box { order: -1; position: static; border-radius: 8px !important; }
+
+    /* Related services */
+    .svc-related-grid { grid-template-columns: 1fr !important; max-width: 100% !important; }
+
+    /* Float CTA */
+    .svc-float-cta { bottom: 18px; right: 14px; padding: 12px 20px; font-size: 12.5px; }
+  }
+
+
+
+  /* ══════════════════════════════════════════
+     ENHANCEMENT 1: SCROLL REVEALS
+  ══════════════════════════════════════════ */
+  .anim-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    will-change: opacity, transform;
+  }
+  .anim-reveal.anim-revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition-delay: inherit;
+  }
+
+
+
+
+  /* ══════════════════════════════════════════
+     ENHANCEMENT 6: SCROLL PROGRESS BAR
+  ══════════════════════════════════════════ */
+  #svc-progress {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    z-index: 300;
+    opacity: 0;
+    transition: width 0.08s linear, opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: 0 1px 1px 0;
+  }
+  #svc-progress.visible { opacity: 1; }
+
+  /* ══════════════════════════════════════════
+     ENHANCEMENT 7: PREMIUM SERVICE CARD HOVER
+  ══════════════════════════════════════════ */
+  .service-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 36px 32px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.28s cubic-bezier(0.22,1,0.36,1),
+                box-shadow 0.28s ease,
+                background 0.28s ease,
+                border-color 0.28s ease;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0%;
+    background: var(--accent);
+    transition: height 0.3s cubic-bezier(0.22,1,0.36,1);
+    border-radius: 0;
+    transform: none;
+    transform-origin: unset;
+  }
+  .service-card:hover {
+    background: rgba(15,32,64,0.025);
+    border-color: rgba(200,146,42,0.35);
+    box-shadow: 0 16px 48px rgba(15,32,64,0.12), 0 2px 8px rgba(200,146,42,0.08);
+    transform: translateY(-2px);
+  }
+  .service-card:hover::before { height: 100%; }
+
+
+
+  /* ══════════════════════════════════════════
+     ENHANCEMENT 9: LARGER SECTION TITLES
+  ══════════════════════════════════════════ */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.4vw, 52px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.18;
+    margin-bottom: 20px;
+  }
+
+  /* ══════════════════════════════════════════
+     ENHANCEMENT 10: FOOTER REDESIGN
+  ══════════════════════════════════════════ */
+  footer {
+    background: #060f1f;
+    padding: 52px 60px 40px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-bottom: 40px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .footer-tagline {
+    font-size: 12px;
+    color: rgba(255,255,255,0.30);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    max-width: 300px;
+  }
+  .footer-contact {
+    font-size: 12px;
+    color: rgba(255,255,255,0.38);
+    line-height: 1.8;
+  }
+  .footer-contact a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-contact a:hover { color: var(--accent-light); }
+  .footer-nav-col {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .footer-nav-section { display: flex; flex-direction: column; gap: 8px; }
+  .footer-nav-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.22);
+    margin-bottom: 4px;
+  }
+  .footer-nav-link {
+    font-size: 13px;
+    color: rgba(255,255,255,0.48);
+    cursor: pointer;
+    transition: color 0.18s;
+    text-decoration: none;
+    display: block;
+  }
+  .footer-nav-link:hover { color: rgba(255,255,255,0.88); }
+  .footer-linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.38);
+    text-decoration: none;
+    transition: color 0.2s;
+    margin-top: 4px;
+  }
+  .footer-linkedin:hover { color: var(--accent-light); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.18);
+    letter-spacing: 0.04em;
+  }
+
+  /* ══════════════════════════════════════════
+     ENHANCEMENT 13: SERVICE NAV SCROLL TRACKING
+  ══════════════════════════════════════════ */
+  .svc-nav-active {
+    position: relative;
+    overflow: visible;
+  }
+  .svc-nav-active .svc-progress-fill {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--accent-light);
+    border-radius: 1px;
+    transition: width 0.12s linear;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; margin-bottom: 28px; padding-bottom: 28px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    footer { padding: 44px 24px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <span class="nav-logo-name">Suttle Insights</span>
+    <span class="nav-logo-tag">People Analytics & OD Consulting</span>
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a onclick="showPage('home');closeMobileNav()" id="nav-home" class="active">Home</a></li>
+    <li class="nav-dropdown" id="nav-services-li">
+      <a id="nav-services" onclick="handleServicesClick(event)">Services <span class="nav-dropdown-arrow">&#9660;</span></a>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-item nav-dropdown-item--featured" onclick="showPage('svc-listening');closeMobileNav()">
+          <div class="nav-dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6BA3D8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></div>
+          <div><div class="nav-dd-text">Employee Listening Survey</div><div class="nav-dd-sub">Org-wide survey &amp; action planning</div></div>
+          <span class="nav-dd-featured-badge">Start here</span>
+        </div>
+        <div class="nav-dropdown-item" onclick="showPage('svc-team');closeMobileNav()">
+          <div class="nav-dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6BA3D8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg></div>
+          <div><div class="nav-dd-text">Team Health Diagnostic</div><div class="nav-dd-sub">Team dynamics &amp; perception gap analysis</div></div>
+        </div>
+        <div class="nav-dropdown-item" onclick="showPage('svc-diagnostic');closeMobileNav()">
+          <div class="nav-dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6BA3D8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><circle cx="12" cy="15" r="1.5" fill="#6BA3D8" stroke="none"/></svg></div>
+          <div><div class="nav-dd-text">Change Readiness Pulse</div><div class="nav-dd-sub">Change sentiment &amp; workforce readiness</div></div>
+        </div>
+        <div class="nav-dropdown-item" onclick="showPage('svc-tna');closeMobileNav()">
+          <div class="nav-dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6BA3D8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="#6BA3D8"/></svg></div>
+          <div><div class="nav-dd-text">Training Needs Assessment</div><div class="nav-dd-sub">Gap analysis &amp; training prioritization</div></div>
+        </div>
+        <div class="nav-dropdown-item" onclick="showPage('svc-prd');closeMobileNav()">
+          <div class="nav-dd-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6BA3D8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="#6BA3D8" stroke="none"/></svg></div>
+          <div><div class="nav-dd-text">Performance Standards Toolkit</div><div class="nav-dd-sub">Behavioral standards &amp; review tools</div></div>
+        </div>
+
+      </div>
+    </li>
+    <li><a onclick="showPage('about');closeMobileNav()" id="nav-about">About</a></li>
+    <li><a onclick="showPage('contact');closeMobileNav()" id="nav-contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════════ -->
+<div id="svc-progress"></div>
+
+<div id="page-home" class="page active">
+
+  <button class="svc-float-cta" id="float-cta-home" onclick="showPage('contact')">Book Discovery Call</button>
+
+  <section class="hero">
+    <canvas id="hero-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;"></canvas>
+    <div class="hero-content">
+      <div class="hero-eyebrow">People Analytics · Team Assessments · Workforce Diagnostics</div>
+      <h1><span class="hero-line1">Your people shape everything.</span><span class="hero-line2" style="display:block; margin-top:0.35em;"><em>So ask the questions that matter.</em></span></h1>
+      <p class="hero-sub">Most organizations and small businesses don't have a systematic way to understand what their people think, feel, or need. Suttle Insights brings the same caliber of survey design, team assessment, and workforce diagnostics — once reserved for corporations with dedicated HR analytics teams — at a fixed project fee built for your size.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('svc-listening')">Explore Services</button>
+        <button class="btn-outline" onclick="showPage('contact')">Book a Free Discovery Call</button>
+      </div>
+    </div>
+    <div class="hero-stat-strip">
+      <div class="hero-stat">
+        <span class="hero-stat-num">Fortune 100</span>
+        <span class="hero-stat-label">In-House Experience</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">5</span>
+        <span class="hero-stat-label">Core Service Areas</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">20K+</span>
+        <span class="hero-stat-label">Employees Surveyed in Practice</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">M.A.</span>
+        <span class="hero-stat-label">I/O Psychology, GMU</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="what-strip">
+    <h2 class="section-title">Clear answers to the questions every organization has about its people</h2>
+    <p class="section-body">You don't need a full-time HR analytics department to understand your people. You need the right questions, the right analysis, and a report your leadership team can actually use.</p>
+
+    <div class="svc-cat-wrap">
+
+      <!-- Row 1: ELS + THD side by side -->
+      <div class="svc-top-row">
+
+        <div class="svc-cat-group" style="flex:1;">
+          <div class="svc-cat-label">Employee Listening &amp; Engagement</div>
+          <div class="svc-cat-cards">
+            <div class="service-card service-card--featured anim-ready anim-fadeup" onclick="showPage('svc-listening')" style="flex:1; background:linear-gradient(145deg, #eef3fa 0%, #f6f9fd 40%, #ffffff 75%); border-top:3px solid var(--blue);">
+              <span class="svc-lead-pill" style="position:absolute; top:14px; left:16px; margin-bottom:0;">Most Accessible &middot; Start Here</span>
+              <div class="service-icon" style="margin-top:6px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></div>
+              <h3>Employee Listening Survey &amp; Action Plan</h3>
+              <p>Understand what employees are experiencing, what's working, and what your organization should focus on next, delivered as a clear report with prioritized recommendations and an action plan leadership can use right away.</p>
+              <span class="service-card-link">Learn more</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-cat-group" style="flex:1;">
+          <div class="svc-cat-label">Team &amp; Manager Effectiveness</div>
+          <div class="svc-cat-cards">
+            <div class="service-card anim-ready anim-fadeup" onclick="showPage('svc-team')" style="flex:1;">
+              <div class="service-icon" style="margin-top:6px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg></div>
+              <h3>Team Health Diagnostic</h3>
+              <p>Get a structured, honest picture of how a specific team is functioning, whether you're sustaining strong performance, navigating a growth period, or working through friction that's starting to affect results.</p>
+              <span class="service-card-link">Learn more</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Row 2: Change, Training & Performance -->
+      <div class="svc-cat-group">
+        <div class="svc-cat-label">Change, Training &amp; Performance</div>
+        <div class="svc-cat-cards svc-cat-cards--row">
+          <div class="service-card service-card--compact anim-ready anim-fadeup" onclick="showPage('svc-diagnostic')">
+            <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="3" y1="15" x2="5" y2="15"/><line x1="21" y1="15" x2="19" y2="15"/><line x1="12" y1="15" x2="17" y2="10"/><circle cx="12" cy="15" r="1.5" fill="#2563A8" stroke="none"/></svg></div>
+            <h3>Change Readiness Pulse &amp; Roadmap</h3>
+            <p>Understand how your workforce is experiencing a significant change and get a clear picture of what to do next.</p>
+            <span class="service-card-link">Learn more</span>
+          </div>
+          <div class="service-card service-card--compact anim-ready anim-fadeup" onclick="showPage('svc-tna')">
+            <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="#2563A8"/></svg></div>
+            <h3>Training Needs Assessment</h3>
+            <p>Find out whether training is the right solution, what to prioritize, and where development investment will make the most difference.</p>
+            <span class="service-card-link">Learn more</span>
+          </div>
+          <div class="service-card service-card--compact anim-ready anim-fadeup" onclick="showPage('svc-prd')">
+            <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="#2563A8" stroke="none"/><circle cx="15" cy="12" r="2.5" fill="#2563A8" stroke="none"/><circle cx="11" cy="18" r="2.5" fill="#2563A8" stroke="none"/></svg></div>
+            <h3>Performance Standards &amp; Review Toolkit</h3>
+            <p>Define clear, consistent performance expectations so managers can evaluate fairly and employees know what's expected.</p>
+            <span class="service-card-link">Learn more</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="who-section">
+
+    <div class="who-intro anim-ready anim-left">
+      <div class="section-label">Who I Work With</div>
+      <h2 class="section-title">The same quality of insight, without the enterprise price tag</h2>
+      <p class="section-body">Suttle Insights is a deliberate nod to the nature of the work — the most valuable things this practice surfaces are rarely the ones anyone was already looking for.</p>
+      <p class="section-body">I work with organizations that have real workforce complexity but no dedicated HR analytics function to make sense of it. Multiple roles, multiple levels, sometimes multiple locations — and leadership teams making decisions about their people without a clear picture of what's actually going on.</p>
+      <p class="who-closing">This kind of work should be accessible to any organization that takes its people seriously. Budget and headcount shouldn't be the reason it isn't.</p>
+    </div>
+
+    <div class="who-items anim-ready anim-right">
+      <div class="who-item">
+        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <span class="who-item-text">Organizations with 10–300 employees navigating growth, change, or cultural tension</span>
+      </div>
+      <div class="who-item">
+        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+        <span class="who-item-text">Organizations with layered teams and no internal I/O or people analytics capacity</span>
+      </div>
+      <div class="who-item">
+        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.5" fill="#2563A8"/></svg></div>
+        <span class="who-item-text">Leadership teams making decisions about retention, structure, or culture without good data</span>
+      </div>
+      <div class="who-item">
+        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <span class="who-item-text">Leaders who sense something is off with their people but don't have the data to understand it clearly</span>
+      </div>
+      <div class="who-item who-item--highlight">
+        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C8922A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="rgba(200,146,42,0.15)"/></svg></div>
+        <span class="who-item-text">Businesses that have never formally asked their employees what's working, and are ready to</span>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="process-section">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">A clear process from first call to final report</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div class="step-title">Discovery Call</div>
+        <div class="step-desc">We talk through what's going on with your workforce, which service fits, and what the engagement would involve. Always free.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div class="step-title">Proposal &amp; Agreement</div>
+        <div class="step-desc">You receive a written proposal with the scope, deliverables, timeline, and flat fee. Work begins once it's signed and agreed.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div class="step-title">Design &amp; Collection</div>
+        <div class="step-desc">I design the survey, interview guide, or assessment approach tailored to your organization, not a generic template, and we collect the data.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <div class="step-title">Analysis &amp; Report</div>
+        <div class="step-desc">You receive a clear, executive-ready report with findings, themes, and prioritized next steps, not raw data.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">5</div>
+        <div class="step-title">Debrief &amp; Action Plan</div>
+        <div class="step-desc">We walk through the findings together and, for listening and team engagements, close with a concrete action plan for what to do next.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">The first conversation is always free</h2>
+    <p class="section-body">Tell me what's going on with your workforce and we'll figure out together which service fits. No pitch, no pressure, and no commitment until you decide to move forward.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
+    <p class="cta-note">No commitment required. Discovery calls are 30 minutes by phone or video.</p>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
+        <div class="footer-contact">
+          Denver, CO<br>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
+          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Services</div>
+          <span class="footer-nav-link" onclick="showPage('svc-listening')">Employee Listening Survey</span>
+          <span class="footer-nav-link" onclick="showPage('svc-team')">Team Health Diagnostic</span>
+          <span class="footer-nav-link" onclick="showPage('svc-diagnostic')">Change Readiness Pulse</span>
+          <span class="footer-nav-link" onclick="showPage('svc-tna')">Training Needs Assessment</span>
+          <span class="footer-nav-link" onclick="showPage('svc-prd')">Performance Standards</span>
+        </div>
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Practice</div>
+          <span class="footer-nav-link" onclick="showPage('about')">About</span>
+          <span class="footer-nav-link" onclick="showPage('contact')">Book a Discovery Call</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Suttle Insights. All rights reserved.</span>
+      <span>suttleinsights.com</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SERVICE: Employee Listening Survey
+══════════════════════════════════════════════ -->
+<div id="page-svc-listening" class="page">
+
+  <button class="svc-float-cta" id="float-cta-els" onclick="showPage('contact')">Book Discovery Call</button>
+
+
+  <div class="svc-page-nav">
+    <div class="svc-nav-strip">
+      <div class="svc-nav-item svc-nav-active">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>
+        Employee Listening
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-team')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>
+        Team Health
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-diagnostic')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>
+        Change Readiness
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-tna')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>
+        Training Needs
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-prd')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/></svg>
+        Performance
+      </div>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <h1>Employee Listening Survey &amp; Action Plan</h1>
+      <p>A custom survey deployed to your workforce, analyzed for patterns and themes, and delivered back as an executive-ready report with prioritized recommendations and a concrete action plan.</p>
+    </div>
+  <div class="svc-stats-bar">
+    <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">4&ndash;6 weeks</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Custom survey design</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Key Output</span><span class="svc-stat-val">Executive Report + Action Roadmap</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Scope</span><span class="svc-stat-val">Full workforce</span></div>
+  </div>
+  </div>
+
+
+  <div class="svc-page-body">
+    <p class="service-tagline">Understand what your employees are experiencing, what&#39;s getting in the way, and what to do next.</p>
+  <div class="service-inner">
+      <div class="service-left">
+
+        
+        <p class="service-description">For most leadership teams, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey changes that. Whether you're trying to get ahead of emerging concerns, establish a <span class="scroll-hl" data-hl-delay="0">first real listening baseline</span>, make sense of a period of growth or change, or simply confirm that what seems to be working is actually working, an Employee Listening Survey &amp; Action Plan gives you a structured, professionally designed instrument deployed to your workforce, analyzed for patterns and themes, and delivered as a clear report your leadership team can <span class="scroll-hl" data-hl-delay="200">read, discuss, and act on</span>. The report includes <span class="scroll-hl" data-hl-delay="0">specific, prioritized recommendations</span> and a concrete action plan.</p>
+        <div class="els-reveals">
+          <div class="els-reveal">
+            <div class="els-reveal-bar"></div>
+            <div class="els-reveal-content">
+              <div class="els-reveal-q">What are our employees actually experiencing, and what's getting in the way?</div>
+              <div class="els-reveal-a">The themes, friction points, and strengths that exist in your organization right now, surfaced in a way that's impossible to get through informal conversation or assumption.</div>
+            </div>
+          </div>
+          <div class="els-reveal">
+            <div class="els-reveal-bar"></div>
+            <div class="els-reveal-content">
+              <div class="els-reveal-q">What's driving the patterns we're seeing, and how significant are they?</div>
+              <div class="els-reveal-a">Not just what employees said, but what's underneath it: the conditions, relationships, and structural factors that explain why things are the way they are.</div>
+            </div>
+          </div>
+          <div class="els-reveal">
+            <div class="els-reveal-bar"></div>
+            <div class="els-reveal-content">
+              <div class="els-reveal-q">What should we do first, who owns it, and what do we tell employees after?</div>
+              <div class="els-reveal-a">A prioritized action plan built from what your people told you, with clear owners, next steps, and a communication strategy that closes the loop.</div>
+            </div>
+          </div>
+        </div>
+        <p class="service-description">The report is not the outcome. <span class="scroll-hl" data-hl-delay="0">The actions your organization takes are the outcome.</span> Every engagement closes with a written plan and a live walkthrough with your leadership team.<br><br>Every survey is built around your specific workforce. For smaller teams, the methodology adapts: when response volume is limited, analysis leads with themes and careful interpretation rather than statistics, so the findings stay honest and useful regardless of headcount.</p>
+
+        <div class="dimensions-label">Validated survey dimensions</div>
+        <div class="dimension-tags">
+          <span class="dim-tag">Employee Engagement</span>
+          <span class="dim-tag">Organizational Commitment</span>
+          <span class="dim-tag">Job Satisfaction</span>
+          <span class="dim-tag">Recognition</span>
+          <span class="dim-tag">Communication</span>
+          <span class="dim-tag">Perception of Voice</span>
+          <span class="dim-tag">Role Clarity</span>
+          <span class="dim-tag">Manager Relationship</span>
+          <span class="dim-tag">Peer Relationships</span>
+          <span class="dim-tag">Burnout</span>
+          <span class="dim-tag">Intent to Stay</span>
+          <span class="dim-tag">Structural Barriers</span>
+        </div>
+
+        <div class="tl">
+          <div class="tl-header">
+            <span class="tl-label-text">Rough Timeline</span>
+            <span class="tl-duration">~4&ndash;6 weeks</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">01</span><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Survey Design</span><span class="tl-detail">Kick-off, org screener, custom survey build</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">02</span><span class="tl-week">Weeks 2&ndash;3</span><span class="tl-name">Survey Deployment</span><span class="tl-detail">Anonymous survey delivered with communication support</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">03</span><span class="tl-week">Weeks 3&ndash;5</span><span class="tl-name">Analysis</span><span class="tl-detail">Item, dimension, and open-text theme analysis</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">04</span><span class="tl-week">Weeks 5&ndash;6</span><span class="tl-name">Report &amp; Walkthrough</span><span class="tl-detail">Executive report and live leadership session</span></div><div class="tl-dot"></div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="service-includes-box">
+        <div class="includes-title">What&#39;s Included</div>
+        <ul class="includes-list">
+          <li>Intake call + signed scope agreement before work begins</li>
+          <li>Organizational screener to capture workforce structure, roles, and context</li>
+          <li>Custom survey instrument built around your workforce and goals</li>
+          <li>Recruitment and reminder email templates for your team to send</li>
+          <li>Full analysis: item-level, dimension-level, and open-text themes</li>
+          <li>Executive Summary report with findings, employee quotes, and prioritized recommendations</li>
+          <li>Live walkthrough session with leadership</li>
+          <li>Action Roadmap: top priorities, recommended actions, and guidance on communicating results back to employees</li>
+        </ul>
+        <div class="addon-note"><strong>Add-ons available:</strong> Pulse check 90 days post-delivery, manager-level breakouts, focus group facilitation, or a results presentation for your full staff.</div>
+
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">Ready to hear what your employees are actually saying?</h2>
+    <p class="section-body">A listening engagement typically runs 4&#8211;6 weeks from first call to final report. Start with a conversation &#8212; it&#39;s free, and there&#39;s no commitment until you&#39;ve seen the proposal.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
+    <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
+        <div class="footer-contact">
+          Denver, CO<br>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
+          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Services</div>
+          <span class="footer-nav-link" onclick="showPage('svc-listening')">Employee Listening Survey</span>
+          <span class="footer-nav-link" onclick="showPage('svc-team')">Team Health Diagnostic</span>
+          <span class="footer-nav-link" onclick="showPage('svc-diagnostic')">Change Readiness Pulse</span>
+          <span class="footer-nav-link" onclick="showPage('svc-tna')">Training Needs Assessment</span>
+          <span class="footer-nav-link" onclick="showPage('svc-prd')">Performance Standards</span>
+        </div>
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Practice</div>
+          <span class="footer-nav-link" onclick="showPage('about')">About</span>
+          <span class="footer-nav-link" onclick="showPage('contact')">Book a Discovery Call</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Suttle Insights. All rights reserved.</span>
+      <span>suttleinsights.com</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SERVICE: Team Health Diagnostic
+══════════════════════════════════════════════ -->
+<div id="page-svc-team" class="page">
+
+  <button class="svc-float-cta" id="float-cta-team" onclick="showPage('contact')">Book Discovery Call</button>
+
+
+  <div class="svc-page-nav">
+    <div class="svc-nav-strip">
+      <div class="svc-nav-item" onclick="showPage('svc-listening')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>
+        Employee Listening
+      </div>
+      <div class="svc-nav-item svc-nav-active">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>
+        Team Health
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-diagnostic')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>
+        Change Readiness
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-tna')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>
+        Training Needs
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-prd')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/></svg>
+        Performance
+      </div>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <h1>Team Health Diagnostic</h1>
+      <p>A structured, multi-dimensional evaluation of how your team is actually working across processes, climate, and role interdependence, including a perception gap analysis that shows where team members see things differently.</p>
+    </div>
+  <div class="svc-stats-bar">
+    <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">4&ndash;6 weeks</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Survey + stakeholder interview</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Key Output</span><span class="svc-stat-val">Team Dynamics Report</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Team Size</span><span class="svc-stat-val">Typically 5–25 members</span></div>
+  </div>
+  </div>
+
+
+  <div class="svc-page-body">
+    <p class="service-tagline">Understand how your team is really functioning, where alignment is strong, and where friction or perception gaps need attention.</p>
+  <div class="service-inner">
+      <div class="service-left">
+
+        
+        <p class="service-description">Most teams never get a clear, honest picture of how they&#39;re actually functioning. A Team Health Diagnostic provides that picture, whether a team is navigating growth, working through a leadership change, dealing with friction that&#39;s affecting results, or simply wanting to understand what&#39;s making it work. It&#39;s a structured, multi-dimensional evaluation examining three distinct layers simultaneously:</p>
+        <div class="thd-layers">
+          <div class="thd-layer">
+            <span class="thd-layer-num">01</span>
+            <div class="thd-layer-bar"></div>
+            <div class="thd-layer-title">Team Processes</div>
+            <div class="thd-layer-desc">How your team plans, coordinates, monitors progress, and manages conflict. These are the operational mechanics that either enable or constrain performance.</div>
+          </div>
+          <div class="thd-layer">
+            <span class="thd-layer-num">02</span>
+            <div class="thd-layer-bar"></div>
+            <div class="thd-layer-title">Team Climate</div>
+            <div class="thd-layer-desc">The quality of trust, cohesion, cooperation, and leadership within the team. These are the interpersonal conditions that determine whether people bring their best work.</div>
+          </div>
+          <div class="thd-layer">
+            <span class="thd-layer-num">03</span>
+            <div class="thd-layer-bar"></div>
+            <div class="thd-layer-title">Role Interdependence</div>
+            <div class="thd-layer-desc">Whether team members share an accurate understanding of how their work connects and who depends on whom. This is often the least visible source of friction.</div>
+          </div>
+        </div>
+        <p class="service-description">What makes this service different is the <span class="scroll-hl" data-hl-delay="0">perception gap analysis</span>. Most team surveys report averages. <span class="scroll-hl" data-hl-delay="0">Averages hide the real story.</span> When one team member rates trust at a 5 and another rates it at a 2, the mean of 3.5 tells you almost nothing useful. This assessment examines variance, explicitly mapping <span class="scroll-hl" data-hl-delay="200">where they see the team differently</span>. That disagreement is often the <span class="scroll-hl" data-hl-delay="0">most diagnostic signal</span> of all.<br><br>The deliverable is a Team Dynamics Report with clear areas of strength, prioritized opportunities, and <span class="scroll-hl" data-hl-delay="0">targeted, evidence-based recommendations</span> your team lead or manager can act on immediately.</p>
+
+        <div class="dimensions-label">What the assessment examines</div>
+        <div class="dimension-tags">
+          <span class="dim-tag">Team Processes</span>
+          <span class="dim-tag">Planning &amp; Coordination</span>
+          <span class="dim-tag">Conflict Management</span>
+          <span class="dim-tag">Trust</span>
+          <span class="dim-tag">Cohesion &amp; Cooperation</span>
+          <span class="dim-tag">Team Climate</span>
+          <span class="dim-tag">Leadership Quality</span>
+          <span class="dim-tag">Role Interdependence</span>
+          <span class="dim-tag">Perception Gap Analysis</span>
+        </div>
+
+        <div class="tl">
+          <div class="tl-header">
+            <span class="tl-label-text">Rough Timeline</span>
+            <span class="tl-duration">~4&ndash;6 weeks</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">01</span><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Interviews</span><span class="tl-detail">Context call and brief stakeholder interview</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">02</span><span class="tl-week">Weeks 1&ndash;2</span><span class="tl-name">Survey Design</span><span class="tl-detail">Custom multi-dimensional team survey built</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">03</span><span class="tl-week">Weeks 2&ndash;4</span><span class="tl-name">Data Collection</span><span class="tl-detail">Anonymous team member survey deployed</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">04</span><span class="tl-week">Weeks 4&ndash;5</span><span class="tl-name">Analysis</span><span class="tl-detail">Means, variance, and perception gap analysis</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">05</span><span class="tl-week">Weeks 5&ndash;6</span><span class="tl-name">Report &amp; Debrief</span><span class="tl-detail">Team Dynamics Report and leadership debrief</span></div><div class="tl-dot"></div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="service-includes-box">
+        <div class="includes-title">What&#39;s Included</div>
+        <ul class="includes-list">
+          <li>Intake call and brief stakeholder interview to understand team context, goals, and what you&#39;re trying to learn</li>
+          <li>Custom survey deployment using validated team process and climate dimensions</li>
+          <li>Perception gap analysis examining both means and variance across dimensions</li>
+          <li>Team Dynamics Report with dimension-level findings, prioritized opportunities, and evidence-based recommendations</li>
+        </ul>
+        <div class="addon-note"><strong>Add-ons available:</strong> Team debrief facilitation session, follow-up pulse survey 60&ndash;90 days post-delivery, or manager coaching session on report findings.</div>
+
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">Ready to see what your team data actually shows?</h2>
+    <p class="section-body">Whether your team is performing well and you want to protect it, or friction is starting to affect results &#8212; a clearer picture changes what&#39;s possible. The first conversation is free.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
+    <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
+        <div class="footer-contact">
+          Denver, CO<br>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
+          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Services</div>
+          <span class="footer-nav-link" onclick="showPage('svc-listening')">Employee Listening Survey</span>
+          <span class="footer-nav-link" onclick="showPage('svc-team')">Team Health Diagnostic</span>
+          <span class="footer-nav-link" onclick="showPage('svc-diagnostic')">Change Readiness Pulse</span>
+          <span class="footer-nav-link" onclick="showPage('svc-tna')">Training Needs Assessment</span>
+          <span class="footer-nav-link" onclick="showPage('svc-prd')">Performance Standards</span>
+        </div>
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Practice</div>
+          <span class="footer-nav-link" onclick="showPage('about')">About</span>
+          <span class="footer-nav-link" onclick="showPage('contact')">Book a Discovery Call</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Suttle Insights. All rights reserved.</span>
+      <span>suttleinsights.com</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SERVICE: Change Readiness Pulse
+══════════════════════════════════════════════ -->
+<div id="page-svc-diagnostic" class="page">
+
+  <button class="svc-float-cta" id="float-cta-diag" onclick="showPage('contact')">Book Discovery Call</button>
+
+
+  <div class="svc-page-nav">
+    <div class="svc-nav-strip">
+      <div class="svc-nav-item" onclick="showPage('svc-listening')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>
+        Employee Listening
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-team')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>
+        Team Health
+      </div>
+      <div class="svc-nav-item svc-nav-active">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>
+        Change Readiness
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-tna')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>
+        Training Needs
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-prd')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/></svg>
+        Performance
+      </div>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <h1>Change Readiness Pulse &amp; Roadmap</h1>
+      <p>A structured diagnostic that combines focus groups and a validated survey to show how your workforce is experiencing a significant change, and what your leadership team should do next.</p>
+    </div>
+  <div class="svc-stats-bar">
+    <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">6&ndash;8 weeks</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Focus groups + survey</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Key Output</span><span class="svc-stat-val">Change Readiness Report</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Stage Flexibility</span><span class="svc-stat-val">Before, during, or after</span></div>
+  </div>
+  </div>
+
+
+  <div class="svc-page-body">
+    <p class="service-tagline">Understand how your workforce is experiencing a significant change, what&#39;s helping, what&#39;s getting in the way, and what to do next.</p>
+  <div class="service-inner">
+      <div class="service-left">
+
+        
+        <p class="service-description">Change is rarely a single moment. It&#39;s a restructuring that happened six months ago that still has people unsettled. A technology rollout that technically launched but never quite landed. A leadership transition that left the organization misaligned in ways no one has fully named. Or a change on the horizon that leadership suspects the workforce isn&#39;t ready for.</p>
+        <div class="change-stages">
+          <div class="change-stage change-stage--past"><div class="change-stage-when">Already behind you</div><div class="change-stage-title">The change that never quite landed</div><div class="change-stage-desc">A restructure, rollout, or leadership transition that technically happened, but left gaps, confusion, or unresolved tension in its wake.</div></div>
+          <div class="change-stage change-stage--live"><div class="change-stage-when">Happening now</div><div class="change-stage-title">Change in progress</div><div class="change-stage-desc">You're in the middle of it and need to know how people are experiencing it, what's helping, what's getting in the way, and where to course-correct.</div></div>
+          <div class="change-stage change-stage--ahead"><div class="change-stage-when">On the horizon</div><div class="change-stage-title">Change you're about to introduce</div><div class="change-stage-desc">A decision has been made. Before you announce it, understand whether your workforce is ready and what needs to be in place for it to stick.</div></div>
+        </div>
+        <p class="service-description">The Change Readiness Pulse &amp; Roadmap is a structured diagnostic built for all of it: changes that are coming, changes that are underway, and <span class="scroll-hl" data-hl-delay="0">changes that are already behind you</span>. It&#39;s also the right service for organizations that want a deeper, more targeted look at employee sentiment and engagement around a specific strategic initiative or challenge, beyond what a general listening survey covers.<br><br>Through a structured combination of stakeholder focus groups and a survey designed around the factors that matter most: change readiness, management support, communication clarity, and employee confidence. Together, these develop a complete picture of where your organization stands and what specific steps will move things forward.<br><br>The deliverable is a consulting report with <span class="scroll-hl" data-hl-delay="100">root cause analysis</span>, prioritized findings, and tailored recommendations your leadership team can act on. Practical, evidence-based, and <span class="scroll-hl" data-hl-delay="0">specific to your organization</span>&#39;s culture, structure, and resources. Not generic best practices, but a real plan built from <span class="scroll-hl" data-hl-delay="150">what your people actually told us</span>.</p>
+
+        <div class="dimensions-label">What the assessment examines</div>
+        <div class="dimension-tags">
+          <span class="dim-tag">Change Readiness</span>
+          <span class="dim-tag">Management Support</span>
+          <span class="dim-tag">Communication Clarity</span>
+          <span class="dim-tag">Employee Confidence</span>
+          <span class="dim-tag">Perceived Capacity for Change</span>
+          <span class="dim-tag">Sentiment &amp; Concerns</span>
+          <span class="dim-tag">Engagement with the Change</span>
+        </div>
+
+        <div class="tl">
+          <div class="tl-header">
+            <span class="tl-label-text">Rough Timeline</span>
+            <span class="tl-duration">~6&ndash;8 weeks</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">01</span><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Scoping</span><span class="tl-detail">Change context, stakeholder map, engagement plan</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">02</span><span class="tl-week">Weeks 2&ndash;3</span><span class="tl-name">Focus Groups</span><span class="tl-detail">Structured conversations with workforce segments</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">03</span><span class="tl-week">Weeks 3&ndash;5</span><span class="tl-name">Survey Deployment</span><span class="tl-detail">Validated change readiness instrument deployed</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">04</span><span class="tl-week">Weeks 5&ndash;7</span><span class="tl-name">Analysis</span><span class="tl-detail">Integrated qualitative and quantitative synthesis</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">05</span><span class="tl-week">Weeks 7&ndash;8</span><span class="tl-name">Report &amp; Walkthrough</span><span class="tl-detail">Change Readiness Report with prioritized roadmap</span></div><div class="tl-dot"></div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="service-includes-box">
+        <div class="includes-title">What&#39;s Included</div>
+        <ul class="includes-list">
+          <li>Scoping call to understand the change, context, and key stakeholders</li>
+          <li>Signed engagement overview confirming scope before work begins</li>
+          <li>Focus group(s) to surface perceptions, concerns, and recurring themes</li>
+          <li>Survey using validated change readiness instruments (readiness, support, efficacy, communication)</li>
+          <li>Integrated qualitative and quantitative analysis</li>
+          <li>Change Readiness Report with root causes and prioritized recommendations</li>
+        </ul>
+        <div class="addon-note"><strong>Add-ons available:</strong> Additional focus group sessions, pulse survey at 60 days post-change, or stakeholder presentation support.</div>
+
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">Not sure whether your workforce is ready for what&#39;s ahead?</h2>
+    <p class="section-body">Or trying to understand why a change that already happened still hasn&#39;t fully landed? Either way, that&#39;s exactly what this is built for. The first conversation is free.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
+    <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
+        <div class="footer-contact">
+          Denver, CO<br>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
+          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Services</div>
+          <span class="footer-nav-link" onclick="showPage('svc-listening')">Employee Listening Survey</span>
+          <span class="footer-nav-link" onclick="showPage('svc-team')">Team Health Diagnostic</span>
+          <span class="footer-nav-link" onclick="showPage('svc-diagnostic')">Change Readiness Pulse</span>
+          <span class="footer-nav-link" onclick="showPage('svc-tna')">Training Needs Assessment</span>
+          <span class="footer-nav-link" onclick="showPage('svc-prd')">Performance Standards</span>
+        </div>
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Practice</div>
+          <span class="footer-nav-link" onclick="showPage('about')">About</span>
+          <span class="footer-nav-link" onclick="showPage('contact')">Book a Discovery Call</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Suttle Insights. All rights reserved.</span>
+      <span>suttleinsights.com</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SERVICE: Training Needs Assessment
+══════════════════════════════════════════════ -->
+<div id="page-svc-tna" class="page">
+
+  <button class="svc-float-cta" id="float-cta-tna" onclick="showPage('contact')">Book Discovery Call</button>
+
+
+  <div class="svc-page-nav">
+    <div class="svc-nav-strip">
+      <div class="svc-nav-item" onclick="showPage('svc-listening')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>
+        Employee Listening
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-team')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>
+        Team Health
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-diagnostic')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>
+        Change Readiness
+      </div>
+      <div class="svc-nav-item svc-nav-active">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>
+        Training Needs
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-prd')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/></svg>
+        Performance
+      </div>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <h1>Training Needs Assessment</h1>
+      <p>Before your organization invests in training, find out whether training is actually the right fix, what to prioritize, and where development investment will make the most difference.</p>
+    </div>
+  <div class="svc-stats-bar">
+    <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">4&ndash;6 weeks</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Leadership interviews + survey</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Key Output</span><span class="svc-stat-val">Prioritized TNA Report</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Decision It Enables</span><span class="svc-stat-val">Commit, redirect, or hold</span></div>
+  </div>
+  </div>
+
+
+  <div class="svc-page-body">
+    <p class="service-tagline">Understand what&#39;s actually behind the performance gap, whether training is the right response, and where a development investment will have the most impact.</p>
+  <div class="service-inner">
+      <div class="service-left">
+
+        
+        <p class="service-description">When performance isn&#39;t where it should be, training is often the first thing organizations reach for. Sometimes that&#39;s the right call. Often it isn&#39;t. The problem might be a process issue, a tool gap, unclear expectations, or a management routine that needs attention. Training cannot address any of these.</p>
+        <div class="tna-diagnostic">
+          <div class="tna-col tna-col--yes"><div class="tna-col-label">When it is a training problem</div><div class="tna-col-heading">A genuine capability gap</div><div class="tna-item">People lack the skills or knowledge the role requires</div><div class="tna-item">The gap is consistent across multiple role incumbents</div><div class="tna-item">Training addresses the actual root cause</div><div class="tna-item">There's a clear, prioritized development path forward</div></div>
+          <div class="tna-col tna-col--no"><div class="tna-col-label">When it isn't a training problem</div><div class="tna-col-heading">Something else is in the way</div><div class="tna-item">Unclear expectations or shifting role definitions</div><div class="tna-item">Process or tooling gaps that training can't fix</div><div class="tna-item">Management routines that undercut performance</div><div class="tna-item">Motivation or environment, not capability</div></div>
+        </div>
+        <p class="service-description">A Training Needs Assessment helps you figure out which one you&#39;re dealing with <span class="scroll-hl" data-hl-delay="0">before committing the budget</span>. Through leadership interviews and a targeted questionnaire with role incumbents, this service maps what the role actually requires, where <span class="scroll-hl" data-hl-delay="100">genuine capability gaps</span> exist, and <span class="scroll-hl" data-hl-delay="200">whether training is the right solution</span>. The result is a clear, prioritized report that tells you what to train, who needs it most, and why, along with any non-training barriers that should be addressed first.<br><br>This service identifies what training is needed and why. It does not design or deliver the training itself. The report gives you the clarity to <span class="scroll-hl" data-hl-delay="0">make a confident development investment</span>. For organizations that want a head start on structuring the training itself, a high-level learning outline for the top-priority need is available as an add-on.</p>
+
+        <div class="tl">
+          <div class="tl-header">
+            <span class="tl-label-text">Rough Timeline</span>
+            <span class="tl-duration">~4&ndash;6 weeks</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">01</span><span class="tl-week">Week 1</span><span class="tl-name">Org Analysis</span><span class="tl-detail">Leadership interview: goals, context, training history</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">02</span><span class="tl-week">Weeks 1&ndash;2</span><span class="tl-name">Task &amp; Person Analysis</span><span class="tl-detail">Role requirements and performance gap mapping</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">03</span><span class="tl-week">Weeks 2&ndash;4</span><span class="tl-name">Analysis &amp; Synthesis</span><span class="tl-detail">Gap prioritization and root cause identification</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">04</span><span class="tl-week">Weeks 4&ndash;6</span><span class="tl-name">Report &amp; Debrief</span><span class="tl-detail">Prioritized TNA Report with recommended approaches</span></div><div class="tl-dot"></div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="service-includes-box">
+        <div class="includes-title">What&#39;s Included</div>
+        <ul class="includes-list">
+          <li>Leadership interview for organizational context, strategic goals, and current training efforts</li>
+          <li>Task and person analysis via survey and/or interviews with managers and role incumbents</li>
+          <li>Role incumbent survey to identify where capability gaps are most significant and confirm whether training is the right solution</li>
+          <li>Priority ranking of training needs by gap, importance, and readiness</li>
+          <li>TNA Report with prioritized findings and recommended training approaches</li>
+          <li>Transfer recommendations to ensure training sticks post-delivery</li>
+        </ul>
+        <div class="addon-note"><strong>Add-on available:</strong> High-level learning outline for the top-priority training need, to give your team a head start on structuring the content.</div>
+
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">Not sure if training is the right answer?</h2>
+    <p class="section-body">Most organizations find out after spending the budget. This is how you find out before. Tell me what performance gap you&#39;re trying to close &#8212; the first conversation is free.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
+    <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
+        <div class="footer-contact">
+          Denver, CO<br>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
+          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Services</div>
+          <span class="footer-nav-link" onclick="showPage('svc-listening')">Employee Listening Survey</span>
+          <span class="footer-nav-link" onclick="showPage('svc-team')">Team Health Diagnostic</span>
+          <span class="footer-nav-link" onclick="showPage('svc-diagnostic')">Change Readiness Pulse</span>
+          <span class="footer-nav-link" onclick="showPage('svc-tna')">Training Needs Assessment</span>
+          <span class="footer-nav-link" onclick="showPage('svc-prd')">Performance Standards</span>
+        </div>
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Practice</div>
+          <span class="footer-nav-link" onclick="showPage('about')">About</span>
+          <span class="footer-nav-link" onclick="showPage('contact')">Book a Discovery Call</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Suttle Insights. All rights reserved.</span>
+      <span>suttleinsights.com</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SERVICE: Performance Standards & Review Toolkit
+══════════════════════════════════════════════ -->
+<div id="page-svc-prd" class="page">
+
+  <button class="svc-float-cta" id="float-cta-prd" onclick="showPage('contact')">Book Discovery Call</button>
+
+
+  <div class="svc-page-nav">
+    <div class="svc-nav-strip">
+      <div class="svc-nav-item" onclick="showPage('svc-listening')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>
+        Employee Listening
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-team')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg>
+        Team Health
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-diagnostic')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>
+        Change Readiness
+      </div>
+      <div class="svc-nav-item" onclick="showPage('svc-tna')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>
+        Training Needs
+      </div>
+      <div class="svc-nav-item svc-nav-active">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/></svg>
+        Performance
+      </div>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <h1>Performance Standards &amp; Review Toolkit</h1>
+      <p>Custom performance expectations for a specific role or team, grounded in what the job actually requires and described in clear, observable behavioral terms so managers can evaluate consistently and employees know what&#39;s expected.</p>
+    </div>
+  <div class="svc-stats-bar">
+    <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">4&ndash;6 weeks</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Structured interviews</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Key Output</span><span class="svc-stat-val">Standards + Review Toolkit</span></div>
+    <div class="svc-stat-divider"></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Durability</span><span class="svc-stat-val">Built for recurring use</span></div>
+  </div>
+  </div>
+
+
+  <div class="svc-page-body">
+    <p class="service-tagline">Define what good performance looks like in observable terms so managers can give feedback consistently and employees know what&#39;s expected.</p>
+  <div class="service-inner">
+      <div class="service-left">
+
+        
+        <p class="service-description">For most organizations, performance reviews are an afterthought. A generic template gets dusted off once a year, ratings vary from manager to manager, and the process feels <span class="scroll-hl" data-hl-delay="0">arbitrary to the people on the receiving end</span>. That&#39;s not a people problem. It&#39;s a design problem.<br><br>A Performance Standards &amp; Review Toolkit gives your organization a custom set of performance expectations for a specific role or team, grounded in what the job actually requires and described in <span class="scroll-hl" data-hl-delay="0">clear, observable behavioral terms</span>. Managers walk away with a tool they can <span class="scroll-hl" data-hl-delay="0">apply consistently</span>. Employees have a transparent standard to work toward. And performance conversations become <span class="scroll-hl" data-hl-delay="200">specific, credible, and easier to navigate</span> for everyone involved.</p>
+        <div class="perf-impact">
+          <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><div class="perf-row-name">Managers</div></div><div class="perf-row-gain"><p><strong>Consistent language and a structured process.</strong> Every manager evaluates against the same behavioral standard, so ratings reflect actual performance, not personal style or relationship history.</p></div></div>
+          <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><div class="perf-row-name">Employees</div></div><div class="perf-row-gain"><p><strong>Clear expectations and a fair process.</strong> People know what strong performance looks like before the review happens, not after. That transparency changes the conversation entirely.</p></div></div>
+          <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><div class="perf-row-name">Leadership</div></div><div class="perf-row-gain"><p><strong>A defensible, evidence-based process.</strong> Performance decisions grounded in observable behavior, not gut feel, are easier to explain, support, and stand behind when it matters.</p></div></div>
+        </div>
+        <p class="service-description">The work starts with conversations with the people closest to the role: managers who evaluate it and the people who do it. Their real examples of what strong, solid, and developing performance looks like become the foundation, rather than generic competency frameworks imported from somewhere else. Two tiers are available: a practical role scorecard for organizations that need clear standards quickly, and a more rigorously validated instrument for higher-complexity needs.</p>
+
+        <div class="tl">
+          <div class="tl-header">
+            <span class="tl-label-text">Rough Timeline</span>
+            <span class="tl-duration">~4&ndash;6 weeks</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">01</span><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Doc Review</span><span class="tl-detail">Role brief, process review, job description analysis</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">02</span><span class="tl-week">Weeks 1&ndash;2</span><span class="tl-name">Interviews</span><span class="tl-detail">Structured sessions with managers and role incumbents</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">03</span><span class="tl-week">Weeks 2&ndash;4</span><span class="tl-name">Instrument Development</span><span class="tl-detail">Custom standards built from real behavioral examples</span></div><div class="tl-dot"></div></div>
+            <div class="tl-conn"></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">04</span><span class="tl-week">Weeks 4&ndash;6</span><span class="tl-name">Delivery &amp; Rater Guide</span><span class="tl-detail">Review tool, rater guide, and walkthrough session</span></div><div class="tl-dot"></div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="service-includes-box">
+        <div class="includes-title">What&#39;s Included</div>
+        <ul class="includes-list">
+          <li>Consultation on the role(s), current review process, and performance challenges</li>
+          <li>Review of existing job descriptions and appraisal materials</li>
+          <li>Structured interviews with managers and role incumbents to identify what strong, solid, and developing performance actually looks like in this role</li>
+          <li>Custom performance standards with clear, observable behavioral examples at each level</li>
+          <li>Review form or appraisal instrument tailored to your role and organization</li>
+          <li>Rater guide with guidance for consistent, fair evaluation and performance conversations</li>
+        </ul>
+        <div class="addon-note"><strong>Add-ons available:</strong> Manager training session on applying the standards, or a second-role toolkit at a reduced scope.</div>
+
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">Ready to stop guessing what good performance looks like?</h2>
+    <p class="section-body">If your managers are evaluating in their own way and your employees don&#39;t know what to aim for, the toolkit solves both. The first conversation is free.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
+    <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
+        <div class="footer-contact">
+          Denver, CO<br>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
+          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Services</div>
+          <span class="footer-nav-link" onclick="showPage('svc-listening')">Employee Listening Survey</span>
+          <span class="footer-nav-link" onclick="showPage('svc-team')">Team Health Diagnostic</span>
+          <span class="footer-nav-link" onclick="showPage('svc-diagnostic')">Change Readiness Pulse</span>
+          <span class="footer-nav-link" onclick="showPage('svc-tna')">Training Needs Assessment</span>
+          <span class="footer-nav-link" onclick="showPage('svc-prd')">Performance Standards</span>
+        </div>
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Practice</div>
+          <span class="footer-nav-link" onclick="showPage('about')">About</span>
+          <span class="footer-nav-link" onclick="showPage('contact')">Book a Discovery Call</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Suttle Insights. All rights reserved.</span>
+      <span>suttleinsights.com</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════════════ -->
+<div id="page-about" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="section-label" style="color:var(--accent-light); margin-bottom:16px;">About</div>
+      <h1>Organizational psychology for the real world of work</h1>
+      <p>Suttle Insights is a one-person consulting practice built on the belief that smaller businesses deserve the same quality of people analytics that large organizations take for granted.</p>
+    </div>
+  </div>
+
+  <section class="org-psych-section">
+    <div class="org-psych-inner">
+
+      <div class="org-psych-eyebrow">
+        <div class="section-label" style="margin:0;">What is Organizational Psychology?</div>
+        <div class="org-psych-eyebrow-line"></div>
+      </div>
+
+      <div class="io-explainer-grid">
+
+        <div class="io-explainer-text">
+          <p class="org-psych-lead">Industrial-Organizational (I/O) psychology is the scientific study of human behavior in the workplace. It applies structured research methods and psychological principles to the questions every organization faces.</p>
+
+          <ul class="org-psych-questions">
+            <li>How engaged are our employees?</li>
+            <li>What is actually driving turnover?</li>
+            <li>How do our teams function, and what gets in the way?</li>
+            <li>What does our workforce need to succeed?</li>
+            <li>Where should we invest in development?</li>
+          </ul>
+
+          <p class="org-psych-close">I/O psychologists are trained to design the surveys, assessments, and diagnostic tools that answer these questions reliably, analyze the data with appropriate methodology, and translate findings into recommendations grounded in evidence rather than instinct.</p>
+        </div>
+
+        <div class="io-explainer-callout">
+          <p style="font-family:'Playfair Display',serif; font-size:22px; color:var(--navy); line-height:1.6; font-weight:400; margin:0;">It is one of the most practically applicable fields in psychology, and <em style="color:var(--accent); font-style:italic; font-weight:400;">one of the least visible to the small businesses that could benefit from it most.</em></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="about-layout">
+    <div>
+      <div class="section-label">About Aidan Suttlehan</div>
+      <h2 class="section-title" style="margin-bottom:8px;">The person behind the practice</h2>
+
+      <div class="credentials-strip">
+        <span class="credential-tag">M.A. I/O Psychology, GMU, 2023</span>
+        <span class="credential-tag">Organizational Development</span>
+        <span class="credential-tag">People Analytics</span>
+        <span class="credential-tag">Survey Design</span>
+        <span class="credential-tag">Psychometrics</span>
+        <span class="credential-tag">Denver, CO</span>
+      </div>
+
+      <div class="about-body">
+        <p>I'm an Organizational Development professional and I/O Psychology practitioner with a background spanning employee listening, people analytics, psychometrics, and applied consulting.</p>
+
+        <p>In my day-to-day work, I'm embedded on the Talent & Organizational Capabilities team at Lockheed Martin, where I lead data strategy with a focus on organizational culture and employee listening, supporting a workforce of over 15,000 people. That means designing surveys, analyzing open-text responses at scale, and building executive-ready dashboards that translate complex people data into the kind of clear, actionable insight leadership teams can actually use.</p>
+
+        <p>Before that, I worked as an Associate Psychometrician and as a Human Capital Consultant, where I ran real client engagements: everything from initial scoping calls and focus groups through to final presentations and written deliverables. I've worked with federal government agencies, nonprofit organizations, and credentialing bodies.</p>
+
+        <p><strong>Suttle Insights exists because every organization deserves access to honest, substantive people analytics, and cost or headcount shouldn't be the reason it stays out of reach.</strong></p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-item">
+          <h4>Substance without jargon</h4>
+          <p>The methodology is research-backed. The report is written for a business owner, not an academic journal.</p>
+        </div>
+        <div class="value-item">
+          <h4>Defined scope, clean handoff</h4>
+          <p>Every engagement has a clear beginning, middle, and end. You know what you're getting before we start.</p>
+        </div>
+        <div class="value-item">
+          <h4>No upselling</h4>
+          <p>I scope each engagement to what you actually need, not what generates the most follow-on work.</p>
+        </div>
+        <div class="value-item">
+          <h4>Actionable, always</h4>
+          <p>A report that sits in a drawer isn't useful. Every deliverable is built around what you can actually do next.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-photo">
+      <div class="about-photo-bg"></div>
+      <div class="about-photo-accent"></div>
+      <div class="about-photo-placeholder" style="position:relative;z-index:2;">
+        <div class="icon"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <p>Photo coming soon</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <div class="section-label">Work Together</div>
+    <h2 class="section-title">Let's start with a conversation</h2>
+    <p class="section-body">If you're not sure what you need yet, that's exactly what the discovery call is for.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
+        <div class="footer-contact">
+          Denver, CO<br>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
+          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Services</div>
+          <span class="footer-nav-link" onclick="showPage('svc-listening')">Employee Listening Survey</span>
+          <span class="footer-nav-link" onclick="showPage('svc-team')">Team Health Diagnostic</span>
+          <span class="footer-nav-link" onclick="showPage('svc-diagnostic')">Change Readiness Pulse</span>
+          <span class="footer-nav-link" onclick="showPage('svc-tna')">Training Needs Assessment</span>
+          <span class="footer-nav-link" onclick="showPage('svc-prd')">Performance Standards</span>
+        </div>
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Practice</div>
+          <span class="footer-nav-link" onclick="showPage('about')">About</span>
+          <span class="footer-nav-link" onclick="showPage('contact')">Book a Discovery Call</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Suttle Insights. All rights reserved.</span>
+      <span>suttleinsights.com</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════════════ -->
+<div id="page-contact" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="section-label" style="color:var(--accent-light); margin-bottom:16px;">Get in Touch</div>
+      <h1>Let's start with a conversation</h1>
+      <p>Tell me what's going on with your organization. I'll be straightforward about whether and how I can help.</p>
+    </div>
+  </div>
+
+  <div class="contact-layout">
+    <div class="contact-info">
+      <h2>Start with a discovery call</h2>
+      <p>Not sure which service fits? Don't have a clear scope yet? That's what the discovery call is for. It's 30 minutes, no commitment, and completely free.</p>
+
+      <div class="contact-detail">
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+          <div class="contact-detail-text">
+            <h4>Location</h4>
+            <p>Denver, CO, serving clients remotely nationwide</p>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
+          <div class="contact-detail-text">
+            <h4>Email</h4>
+            <p>aidan@suttleinsights.com</p>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15.5,14"/></svg></div>
+          <div class="contact-detail-text">
+            <h4>Response Time</h4>
+            <p>I respond to all inquiries within 1–2 business days</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="discovery-box">
+        <h4>What to expect from the discovery call</h4>
+        <p>We'll talk through your workforce situation, what questions you're trying to answer, and your organization's size and structure. By the end of 30 minutes, you'll have a clear sense of which service fits, and what it would cost. No pressure, no pitch.</p>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h3>Send a message</h3>
+
+      <!-- SUCCESS STATE -->
+      <div id="form-success" style="display:none; text-align:center; padding: 48px 24px;">
+        <div style="margin-bottom:20px;"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7,12 10,15 17,8"/></svg></div>
+        <h3 style="font-family:'Playfair Display',serif; color:var(--navy); margin-bottom:12px;">Message received.</h3>
+        <p style="font-size:15px; color:var(--text-light); line-height:1.7;">Thanks for reaching out. I'll be in touch within 1–2 business days to schedule a discovery call.</p>
+      </div>
+
+      <!-- ERROR STATE -->
+      <div id="form-error" style="display:none; background:#fff3f3; border:1px solid #ffcccc; border-radius:8px; padding:16px 20px; margin-bottom:20px;">
+        <p style="font-size:14px; color:#c0392b; line-height:1.6;">Something went wrong sending your message. Please try again, or email me directly at <strong>aidan@suttleinsights.com</strong>.</p>
+      </div>
+
+      <!-- FORM -->
+      <form id="contact-form" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first-name">First Name <span style="color:#c0392b;">*</span></label>
+            <input type="text" id="first-name" name="first_name" placeholder="Jane" required>
+          </div>
+          <div class="form-group">
+            <label for="last-name">Last Name <span style="color:#c0392b;">*</span></label>
+            <input type="text" id="last-name" name="last_name" placeholder="Smith" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email <span style="color:#c0392b;">*</span></label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Acme Co.">
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <label for="company-size">Company Size</label>
+          <select id="company-size" name="company_size">
+            <option value="">Select employee count...</option>
+            <option>Under 25 employees</option>
+            <option>25–75 employees</option>
+            <option>76–150 employees</option>
+            <option>151–300 employees</option>
+            <option>300+ employees</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label for="service">Which service interests you?</label>
+          <select id="service" name="service_interest">
+            <option value="">Select a service area...</option>
+            <option>Employee Listening Survey &amp; Action Plan</option>
+            <option>Team Health Diagnostic</option>
+            <option>Training Needs Assessment</option>
+            <option>Change Readiness Pulse &amp; Roadmap</option>
+            <option>Performance Standards &amp; Review Toolkit</option>
+            <option>Not sure yet, need guidance</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label for="message">Tell me a bit more <span style="color:#c0392b;">*</span></label>
+          <textarea id="message" name="message" placeholder="What's going on with your workforce? What prompted you to reach out? Any context helps." required></textarea>
+        </div>
+
+        <!-- Honeypot spam trap, hidden from real users -->
+        <input type="text" name="_gotcha" style="display:none;">
+
+        <button type="submit" class="form-submit" id="submit-btn">Send Message</button>
+        <p class="form-note">I'll respond within 1–2 business days to schedule a discovery call or answer any questions.</p>
+
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
+        <div class="footer-contact">
+          Denver, CO<br>
+          <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br>
+          <a href="https://www.linkedin.com/in/aidan-suttlehan" target="_blank" class="footer-linkedin">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Services</div>
+          <span class="footer-nav-link" onclick="showPage('svc-listening')">Employee Listening Survey</span>
+          <span class="footer-nav-link" onclick="showPage('svc-team')">Team Health Diagnostic</span>
+          <span class="footer-nav-link" onclick="showPage('svc-diagnostic')">Change Readiness Pulse</span>
+          <span class="footer-nav-link" onclick="showPage('svc-tna')">Training Needs Assessment</span>
+          <span class="footer-nav-link" onclick="showPage('svc-prd')">Performance Standards</span>
+        </div>
+        <div class="footer-nav-section">
+          <div class="footer-nav-label">Practice</div>
+          <span class="footer-nav-link" onclick="showPage('about')">About</span>
+          <span class="footer-nav-link" onclick="showPage('contact')">Book a Discovery Call</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Suttle Insights. All rights reserved.</span>
+      <span>suttleinsights.com</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ─── MOBILE NAV ───
+function toggleMobileNav() {
+  const links = document.getElementById('nav-links');
+  const burger = document.getElementById('nav-hamburger');
+  links.classList.toggle('open');
+  burger.classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('nav-links').classList.remove('open');
+  document.getElementById('nav-hamburger').classList.remove('open');
+}
+
+// ─── PAGE NAVIGATION ───
+function positionSidebar() {
+  const sidebar = document.querySelector('.services-sidebar');
+  const firstIncludes = document.querySelector('.service-includes-box');
+  const servicesMain = document.querySelector('.services-main');
+  if (!sidebar || !firstIncludes || !servicesMain) return;
+  if (window.innerWidth <= 960) {
+    sidebar.style.paddingTop = '';
+    sidebar.style.top = '';
+    return;
+  }
+  const mainTop = servicesMain.getBoundingClientRect().top + window.scrollY;
+  const includesTop = firstIncludes.getBoundingClientRect().top + window.scrollY;
+  const offset = Math.max(0, includesTop - mainTop);
+  // Push card down to align with first includes box initially
+  sidebar.style.paddingTop = offset + 'px';
+  // Adjust sticky threshold so card appears 20px below the 70px navbar when sticky
+  sidebar.style.top = (90 - offset) + 'px';
+}
+
+let heroAnimated = false;
+
+function revealHeroInstantly() {
+  ['.hero-line1', '.hero-line2', '.hero-eyebrow', '.hero-sub', '.hero-actions', '.hero-stat-strip'].forEach(sel => {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    el.style.animation = 'none';
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+    el.style.filter = 'none';
+  });
+  // Restore canvas dimensions if they were zeroed while the home page was hidden
+  const c = document.getElementById('hero-canvas');
+  if (c) {
+    const s = c.parentElement;
+    if (s.offsetWidth && s.offsetHeight &&
+        (c.width !== s.offsetWidth || c.height !== s.offsetHeight)) {
+      c.width  = s.offsetWidth;
+      c.height = s.offsetHeight;
+    }
+  }
+}
+
+function showPage(name, anchor) {
+  const currentPageEl = document.querySelector('.page.active');
+  const currentIsSvc  = currentPageEl && currentPageEl.id.startsWith('page-svc-');
+  const targetIsSvc   = name.startsWith('svc-');
+
+  function doSwitch() {
+    if (name !== 'home') heroAnimated = true;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const pageEl = document.getElementById('page-' + name);
+    if (pageEl) pageEl.classList.add('active');
+    if (targetIsSvc) {
+      document.getElementById('nav-services')?.classList.add('active');
+    } else {
+      document.getElementById('nav-' + name)?.classList.add('active');
+    }
+    if (anchor) {
+      setTimeout(() => {
+        const target = document.getElementById(anchor);
+        if (target) {
+          const offset = target.getBoundingClientRect().top + window.scrollY - 90;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+      }, 80);
+    }
+    if (name === 'home' && heroAnimated) revealHeroInstantly();
+    if (targetIsSvc && pageEl) {
+      setTimeout(() => {
+        const navEl    = pageEl.querySelector('.svc-page-nav');
+        const activeEl = pageEl.querySelector('.svc-nav-active');
+        if (navEl && activeEl) {
+          const targetLeft = activeEl.offsetLeft - (navEl.offsetWidth / 2) + (activeEl.offsetWidth / 2);
+          navEl.scrollLeft = targetLeft;
+        }
+      }, 20);
+    }
+    document.querySelectorAll('.svc-float-cta').forEach(btn => btn.classList.remove('svc-float-visible'));
+    document.getElementById('nav-services-li')?.classList.remove('open');
+    setTimeout(() => initPageAnimations(name), 60);
+    if (targetIsSvc) triggerSvcGraphic(pageEl);
+    setTimeout(() => document.dispatchEvent(new Event('pageShown')), 80);
+  }
+
+  if (!anchor) {
+    if (currentIsSvc && targetIsSvc && window.scrollY > 80) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(doSwitch, 180);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      doSwitch();
+    }
+    return;
+  }
+  doSwitch();
+}
+
+// ─── SERVICES DROPDOWN ───
+let _svcToggleTs = 0;
+
+function handleServicesClick(e) {
+  if (window.innerWidth <= 768) {
+    e.preventDefault();
+    e.stopPropagation();
+    _svcToggleTs = Date.now();
+    document.getElementById('nav-services-li').classList.toggle('open');
+  }
+  // Desktop: CSS :hover handles the dropdown
+}
+
+// Close dropdown when clicking outside, guard against immediately re-closing on mobile
+document.addEventListener('click', function(e) {
+  if (Date.now() - _svcToggleTs < 400) return; // ignore clicks right after toggle
+  const ddLi = document.getElementById('nav-services-li');
+  if (ddLi && !ddLi.contains(e.target)) {
+    ddLi.classList.remove('open');
+  }
+});
+
+// ─── FLOAT CTA SCROLL VISIBILITY ───
+window.addEventListener('scroll', function() {
+  const activePage = document.querySelector('.page.active');
+  if (!activePage) return;
+  const floatCTA = activePage.querySelector('.svc-float-cta');
+  if (!floatCTA) return;
+  if (window.scrollY > 300) {
+    floatCTA.classList.add('svc-float-visible');
+  } else {
+    floatCTA.classList.remove('svc-float-visible');
+  }
+}, { passive: true });
+
+function scrollToService(anchor) {
+  const target = document.getElementById(anchor);
+  if (target) {
+    const offset = target.getBoundingClientRect().top + window.scrollY - 90;
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+  }
+}
+
+// ─── INTERSECTION OBSERVER: scroll-triggered fade/slide ───
+const seenElements = new WeakSet();
+
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !seenElements.has(entry.target)) {
+      seenElements.add(entry.target);
+      const el = entry.target;
+      const delay = el.dataset.delay ? parseFloat(el.dataset.delay) : 0;
+      setTimeout(() => el.classList.add('animated'), delay);
+      scrollObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+function observeAnimElements(page) {
+  const pageEl = document.getElementById('page-' + page);
+  if (!pageEl) return;
+  pageEl.querySelectorAll('.anim-ready').forEach((el, i) => {
+    if (!seenElements.has(el)) {
+      // Stagger siblings in the same parent container
+      const siblings = Array.from(el.parentElement.querySelectorAll('.anim-ready'));
+      const idx = siblings.indexOf(el);
+      if (!el.dataset.delay) el.dataset.delay = idx * 90;
+      scrollObserver.observe(el);
+    }
+  });
+}
+
+// ─── PROCESS STEPS: sequential reveal + line draw ───
+const processTriggered = {};
+
+function initProcessSteps() {
+  const section = document.querySelector('.process-section');
+  if (!section || processTriggered['home']) return;
+
+  const stepsEl = section.querySelector('.process-steps');
+  const steps = section.querySelectorAll('.process-step');
+
+  const stepObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !processTriggered['home']) {
+        processTriggered['home'] = true;
+        // Draw the connecting line
+        setTimeout(() => stepsEl.classList.add('line-drawn'), 100);
+        // Reveal each step sequentially
+        steps.forEach((step, i) => {
+          setTimeout(() => step.classList.add('step-in'), 200 + i * 180);
+        });
+        stepObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  stepObserver.observe(section);
+}
+
+// ─── CREDENTIAL TAGS: staggered pop ───
+const tagsTriggered = {};
+
+function initCredentialTags() {
+  const strip = document.querySelector('.credentials-strip');
+  if (!strip || tagsTriggered['about']) return;
+
+  const tags = strip.querySelectorAll('.credential-tag');
+  const tagObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !tagsTriggered['about']) {
+        tagsTriggered['about'] = true;
+        tags.forEach((tag, i) => {
+          setTimeout(() => tag.classList.add('tag-in'), i * 80);
+        });
+        tagObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.6 });
+
+  tagObserver.observe(strip);
+}
+
+// ─── VALUE GRID ITEMS ───
+const valuesTriggered = {};
+
+function initValueItems() {
+  const grid = document.querySelector('.values-grid');
+  if (!grid || valuesTriggered['about']) return;
+
+  const items = grid.querySelectorAll('.value-item');
+  const valObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !valuesTriggered['about']) {
+        valuesTriggered['about'] = true;
+        items.forEach((item, i) => {
+          setTimeout(() => item.classList.add('val-in'), i * 100);
+        });
+        valObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  valObserver.observe(grid);
+}
+
+// ─── CONTACT DETAIL ITEMS ───
+const contactTriggered = {};
+
+function initContactDetails() {
+  const detail = document.querySelector('.contact-detail');
+  if (!detail || contactTriggered['contact']) return;
+
+  const items = detail.querySelectorAll('.contact-detail-item');
+  const cdObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !contactTriggered['contact']) {
+        contactTriggered['contact'] = true;
+        items.forEach((item, i) => {
+          setTimeout(() => item.classList.add('cdi-in'), i * 110);
+        });
+        cdObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  cdObserver.observe(detail);
+}
+
+// ─── PER-PAGE INIT ───
+function initPageAnimations(page) {
+  observeAnimElements(page);
+  if (page === 'home') initProcessSteps();
+  if (page === 'about') { initCredentialTags(); initValueItems(); }
+  if (page === 'contact') initContactDetails();
+}
+
+// ─── CONTACT FORM: FORMSPREE ───
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeedwlkk';
+
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const successMsg = document.getElementById('form-success');
+  const errorMsg = document.getElementById('form-error');
+
+  const required = form.querySelectorAll('[required]');
+  let valid = true;
+  required.forEach(field => {
+    if (!field.value.trim()) {
+      field.style.borderColor = '#c0392b';
+      valid = false;
+    } else {
+      field.style.borderColor = '';
+    }
+  });
+  if (!valid) return;
+
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
+  submitBtn.style.opacity = '0.7';
+  errorMsg.style.display = 'none';
+
+  const data = new FormData(form);
+
+  try {
+    const response = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (response.ok) {
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+    } else {
+      throw new Error('Failed');
+    }
+  } catch (err) {
+    errorMsg.style.display = 'block';
+    submitBtn.textContent = 'Send Message';
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '1';
+  }
+});
+
+document.querySelectorAll('#contact-form input, #contact-form textarea').forEach(field => {
+  field.addEventListener('input', () => { field.style.borderColor = ''; });
+});
+
+// ─── BOOT ───
+// Run on initial home page load
+// ── Hero canvas animation ──────────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  // Lighter blue so nodes show against navy
+  const BL = '100,165,230';
+  const GO = '200,146,42';
+  let CONNECT_DIST = 110;
+  let W, H, nodes = [], frame = 0, lastPulse = 0;
+
+  // Scale node count with canvas area - ~55 nodes at 375x600px, grows with screen
+  function getNodeCount() {
+    return Math.max(50, Math.round(55 * Math.sqrt((W * H) / 225000)));
+  }
+
+  function resize() {
+    const s = canvas.parentElement;
+    const w = s.offsetWidth;
+    const h = s.offsetHeight;
+    if (!w || !h) return; // skip when page is hidden (display:none gives 0)
+    W = canvas.width = w;
+    H = canvas.height = h;
+    // Connection distance scales with width: 110px on phones, up to ~155px on wide screens
+    CONNECT_DIST = Math.round(Math.min(155, Math.max(110, W * 0.09)));
+  }
+
+  function Node() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.r = 2.2 + Math.random() * 3.2;
+    const a = Math.random() * Math.PI * 2;
+    const s = 0.1 + Math.random() * 0.15;
+    this.vx = Math.cos(a) * s;
+    this.vy = Math.sin(a) * s;
+    this.alpha = 0;
+    this.delay = Math.floor(Math.random() * 22);
+    this.gold = Math.random() < 0.07;
+    this.pr = 0; this.pa = 0;
+  }
+  Node.prototype.pulse = function() { this.pr = 0; this.pa = 0.7; };
+  Node.prototype.tick = function() {
+    if (frame > this.delay) this.alpha = Math.min(1, this.alpha + 0.015);
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 4 || this.x > W - 4) this.vx *= -1;
+    if (this.y < 4 || this.y > H - 4) this.vy *= -1;
+    if (this.pa > 0) { this.pr += 1.6; this.pa -= 0.014; }
+  };
+  Node.prototype.draw = function() {
+    if (this.alpha <= 0) return;
+    if (this.pa > 0) {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r + this.pr, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${GO},${this.pa * this.alpha * 0.6})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = this.gold
+      ? `rgba(${GO},${this.alpha * 0.75})`
+      : `rgba(${BL},${this.alpha * 0.65})`;
+    ctx.fill();
+  };
+
+  function init() {
+    nodes = Array.from({ length: getNodeCount() }, () => new Node());
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        if (a.alpha <= 0 || b.alpha <= 0) continue;
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < CONNECT_DIST) {
+          const op = (1 - d / CONNECT_DIST) * Math.min(a.alpha, b.alpha) * 0.32;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(${BL},${op})`;
+          ctx.lineWidth = 0.9;
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => { n.tick(); n.draw(); });
+    if (frame - lastPulse > 220) {
+      const g = nodes.filter(n => n.gold && n.alpha > 0.5);
+      if (g.length) g[Math.floor(Math.random() * g.length)].pulse();
+      lastPulse = frame;
+    }
+    frame++;
+    requestAnimationFrame(tick);
+  }
+
+  resize();
+  init();
+  tick();
+  window.addEventListener('resize', () => {
+    resize();
+    nodes.forEach(n => { n.x = Math.min(n.x, W - 4); n.y = Math.min(n.y, H - 4); });
+    // Add or remove nodes to match the new count
+    const target = getNodeCount();
+    while (nodes.length < target) nodes.push(new Node());
+    if (nodes.length > target) nodes.splice(target);
+  });
+})();
+
+initPageAnimations('home');
+
+
+
+
+// ─── SERVICE ILLUSTRATION ANIMATIONS ───
+function triggerSvcGraphic(pageEl) {
+  const g = pageEl && pageEl.querySelector('.svc-graphic');
+  if (!g) return;
+  g.classList.remove('ov-active');
+  void g.offsetWidth;
+  g.classList.add('ov-active');
+}
+
+// ─── SCROLL HIGHLIGHT ANIMATIONS ───
+(function() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = parseInt(el.dataset.hlDelay) || 0;
+        setTimeout(() => el.classList.add('hl-visible'), delay);
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.6, rootMargin: '0px 0px -40px 0px' });
+
+  function initHighlights() {
+    document.querySelectorAll('.scroll-hl:not(.hl-observed)').forEach(el => {
+      el.classList.add('hl-observed');
+      io.observe(el);
+    });
+  }
+  initHighlights();
+  // Re-run when a new service page is shown
+  document.addEventListener('pageShown', initHighlights);
+})();
+
+
+// positionSidebar only needed for legacy services page
+
+// ══════════════════════════════════════════════
+// ENHANCEMENT 1: SCROLL REVEALS (lightweight)
+// ══════════════════════════════════════════════
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('anim-revealed');
+      revealIO.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+function initReveal(pageEl) {
+  if (!pageEl) return;
+  const isHome = pageEl.id === 'page-home';
+  const isSvc  = pageEl.id.startsWith('page-svc-');
+  const isAbout = pageEl.id === 'page-about';
+
+  // Only reveal content below the fold — avoid conflicting with existing
+  // hero animations (anim-ready/anim-fadeup) and process-step system
+  const SELECTORS = isSvc
+    ? ['.service-tagline', '.service-description', '.tl',
+       '.els-reveals', '.thd-layers', '.change-stages',
+       '.tna-diagnostic', '.perf-impact', '.dimensions-label']
+    : isAbout
+    ? ['.org-psych-lead', '.org-psych-close', '.org-psych-questions',
+       '.who-visual', '.value-item', '.credentials-strip']
+    : isHome
+    ? ['.who-item', '.section-body']
+    : [];
+
+  SELECTORS.forEach(sel => {
+    pageEl.querySelectorAll(sel).forEach((el, i) => {
+      if (el.closest('footer') || el.closest('.svc-page-nav') || el.classList.contains('anim-reveal')) return;
+      // Skip elements that already use the existing anim-ready system
+      if (el.classList.contains('anim-ready')) return;
+      el.classList.add('anim-reveal');
+      el.style.transitionDelay = Math.min(i * 50, 220) + 'ms';
+      revealIO.observe(el);
+    });
+  });
+}
+
+// ══════════════════════════════════════════════
+// ENHANCEMENT 3: ANIMATED HERO STATS
+// ══════════════════════════════════════════════
+function animateCount(el, target, suffix, duration) {
+  const start = performance.now();
+  const update = (now) => {
+    const pct = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - pct, 3);
+    el.textContent = Math.round(ease * target) + suffix;
+    if (pct < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+function initHeroStats() {
+  const strip = document.querySelector('.hero-stat-strip');
+  if (!strip) return;
+
+  function runCount() {
+    strip.querySelectorAll('.hero-stat-num').forEach(el => {
+      const t = el.textContent.trim();
+      if (t.includes('20K') || t === '0K+') {
+        el.textContent = '0K+';
+        setTimeout(() => animateCount(el, 20, 'K+', 2400), 160);
+      }
+    });
+  }
+
+  // heroAnimated is true when user has navigated away from home (strip already visible)
+  // On first load heroAnimated is false — wait for the 4.5s CSS animation delay
+  if (heroAnimated) {
+    setTimeout(runCount, 350);
+  } else {
+    setTimeout(runCount, 4650);
+  }
+}
+
+// Enhancement 5 (page transitions) removed per user request
+function triggerPageEntrance(pageEl) { /* no-op */ }
+
+// ══════════════════════════════════════════════
+// ENHANCEMENT 6 + 13: SCROLL PROGRESS + SERVICE NAV
+// ══════════════════════════════════════════════
+const progressBar = document.getElementById('svc-progress');
+let activeProgressFill = null;
+
+function updateProgress() {
+  const page = document.querySelector('.page.active');
+  if (!page || !page.id.startsWith('page-svc-')) {
+    if (progressBar) { progressBar.style.width = '0%'; progressBar.classList.remove('visible'); }
+    return;
+  }
+  const scrollTop = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? Math.min(100, (scrollTop / docH) * 100) : 0;
+
+  if (progressBar) {
+    progressBar.style.width = pct + '%';
+    progressBar.classList.toggle('visible', scrollTop > 80);
+  }
+
+  // Enhancement 13: fill active nav item bottom border
+  if (!activeProgressFill) {
+    const active = page.querySelector('.svc-nav-active');
+    if (active) {
+      let fill = active.querySelector('.svc-progress-fill');
+      if (!fill) { fill = document.createElement('div'); fill.className = 'svc-progress-fill'; active.appendChild(fill); }
+      activeProgressFill = fill;
+    }
+  }
+  if (activeProgressFill) activeProgressFill.style.width = pct + '%';
+}
+
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+// Reset fill reference on page change
+function resetProgressFill() { activeProgressFill = null; }
+
+// ══════════════════════════════════════════════
+// HOOK INTO EXISTING PAGE SYSTEM via pageShown event
+// ══════════════════════════════════════════════
+document.addEventListener('pageShown', function() {
+  const pageEl = document.querySelector('.page.active');
+  if (!pageEl) return;
+  const name = pageEl.id.replace('page-', '');
+  triggerPageEntrance(pageEl);
+  setTimeout(() => initReveal(pageEl), 80);
+  resetProgressFill();
+  updateProgress();
+  if (name === 'home') setTimeout(initHeroStats, 200);
+});
+
+// Init on first load
+setTimeout(function() {
+  const homeEl = document.getElementById('page-home');
+  triggerPageEntrance(homeEl);
+  initReveal(homeEl);
+  initHeroStats();
+}, 200);
+
+</script>
+</body>
+</html>
