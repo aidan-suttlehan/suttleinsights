@@ -2805,7 +2805,8 @@
       transition: max-height 0.28s ease, visibility 0.28s;
     }
 
-    .nav-dropdown.open .nav-dropdown-menu {
+    .nav-dropdown.open .nav-dropdown-menu,
+    #nav-services-li.open .nav-dropdown-menu {
       visibility: visible !important;
       max-height: 400px !important;
     }
@@ -2834,6 +2835,9 @@
     }
     .nav-dropdown:hover .nav-dropdown-arrow {
       transform: none !important;
+    }
+    #nav-services-li.open .nav-dropdown-arrow {
+      transform: rotate(180deg) !important;
     }
     /* Eliminate 300ms tap delay on the services button */
     .nav-dropdown > a {
