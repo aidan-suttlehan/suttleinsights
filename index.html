@@ -54,15 +54,26 @@
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    gap: 0;
   }
 
   .nav-logo-name {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
+    font-size: 19px;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+
+  .nav-name-a {
+    font-style: normal;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  .nav-name-b {
+    font-style: normal;
     font-weight: 700;
     color: #fff;
-    letter-spacing: 0.02em;
-    line-height: 1;
   }
 
   .nav-logo-tag {
@@ -1681,7 +1692,10 @@
   .tl-track {
     display: flex;
     align-items: flex-end;
-    padding: 0 12px 20px;
+    padding: 0 12px 24px;
+    background: rgba(8,18,38,0.45);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.07);
   }
 
   .tl-step {
@@ -1698,68 +1712,67 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 20px 6px 12px;
-    gap: 4px;
+    padding: 20px 8px 12px;
+    gap: 3px;
   }
 
   .tl-num {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--accent-light);
-    opacity: 0.7;
-    margin-bottom: 2px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    opacity: 0.55;
+    margin-bottom: 4px;
   }
 
   .tl-dot {
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: var(--navy);
-    border: 2.5px solid var(--accent);
-    box-shadow: 0 0 0 4px rgba(200,146,42,0.12);
+    background: var(--accent);
+    border: none;
+    box-shadow: 0 0 0 4px rgba(200,146,42,0.18), 0 0 12px rgba(200,146,42,0.2);
     flex-shrink: 0;
   }
 
   .tl-conn {
     flex: 1;
     min-width: 8px;
-    height: 1.5px;
-    margin-bottom: 6px;
-    background: linear-gradient(to right, rgba(37,99,168,0.35), rgba(200,146,42,0.45));
-    border-radius: 2px;
+    height: 1px;
+    margin-bottom: 4px;
+    background: rgba(255,255,255,0.12);
   }
 
   .tl-week {
-    font-size: 10px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.38);
-    letter-spacing: 0.04em;
+    font-size: 9.5px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.03em;
     white-space: nowrap;
     line-height: 1.3;
   }
 
   .tl-name {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 600;
-    color: rgba(255,255,255,0.82);
+    color: rgba(255,255,255,0.9);
     line-height: 1.3;
     white-space: nowrap;
-    margin-top: 1px;
+    margin-top: 2px;
   }
 
   .tl-detail {
-    font-size: 11px;
-    color: rgba(255,255,255,0.35);
-    line-height: 1.4;
-    margin-top: 3px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.32);
+    line-height: 1.45;
+    margin-top: 4px;
     text-align: center;
     white-space: normal;
   }
 
   /* Mobile: clean vertical stack */
   @media (max-width: 580px) {
-    .tl-track { flex-direction: column; align-items: flex-start; padding: 4px 16px 20px; gap: 0; }
+    .tl-track { flex-direction: column; align-items: flex-start; padding: 16px 16px 20px; gap: 0; }
 
     .tl-step {
       flex-direction: row;
@@ -1772,7 +1785,7 @@
     .tl-dot {
       order: -1;
       flex-shrink: 0;
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
     .tl-num { display: none; }
@@ -1784,21 +1797,22 @@
       flex: 1;
       align-items: flex-start;
       text-align: left;
-      padding: 14px 0 2px;
+      padding: 0 0 2px;
+      gap: 2px;
     }
 
     .tl-conn {
-      width: 1.5px;
-      height: 16px;
+      width: 1px;
+      height: 18px;
       flex: none;
       margin-bottom: 0;
-      margin-left: 6px;
-      background: linear-gradient(to bottom, rgba(37,99,168,0.35), rgba(200,146,42,0.45));
+      margin-left: 4px;
+      background: rgba(255,255,255,0.12);
     }
 
-    .tl-week { font-size: 10px; }
-    .tl-name { font-size: 13px; white-space: normal; }
-    .tl-detail { text-align: left; font-size: 11px; }
+    .tl-week { font-size: 9.5px; color: rgba(255,255,255,0.45); }
+    .tl-name { font-size: 12.5px; white-space: normal; }
+    .tl-detail { text-align: left; font-size: 10.5px; }
   }
 
   /* Dimension tags */
@@ -2184,7 +2198,8 @@
     .what-strip { padding: 56px 24px 0; }
     .svc-cat-group { margin-top: 28px; }
     .svc-top-row > .svc-cat-group:first-child { margin-top: 0; }
-    .section-body { max-width: 100%; margin-bottom: 36px; }
+    .section-body { max-width: 100%; margin-bottom: 24px; }
+    .section-body + .section-body { margin-top: 0; }
     .services-grid { grid-template-columns: 1fr; gap: 16px; }
 
     /* Who section */
@@ -2851,33 +2866,35 @@
     .svc-stats-bar {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      align-items: stretch;
       margin: 0 -24px;
-      padding: 0 24px;
+      padding: 0;
       gap: 0;
+      background: transparent;
+      overflow: hidden;
       border-top: 1px solid rgba(255,255,255,0.1);
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     .svc-stat-divider { display: none; }
     .svc-stat-item {
-      padding: 16px 0;
-      border-right: none !important;
-      padding-right: 0 !important;
+      align-self: stretch;
+      justify-content: center;
+      padding: 14px 12px;
+      background: transparent !important;
+      border-right: 1px solid rgba(255,255,255,0.1) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+      padding-right: 12px !important;
       margin-right: 0 !important;
-      border-bottom: none;
       margin-bottom: 0;
     }
-    /* Left column items (DOM positions 1 & 5), right border + padding */
-    .svc-stat-item:nth-child(1),
-    .svc-stat-item:nth-child(5) {
-      border-right: 1px solid rgba(255,255,255,0.1) !important;
-      padding-right: 16px !important;
+    .svc-stat-label {
+      font-size: 9px;
+      letter-spacing: 0.1em;
     }
-    /* Right column items (DOM positions 3 & 7), left padding */
-    .svc-stat-item:nth-child(3),
-    .svc-stat-item:nth-child(7) { padding-left: 16px; }
-    /* Row 1 items, dividing line below */
-    .svc-stat-item:nth-child(1),
-    .svc-stat-item:nth-child(3) { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .svc-stat-val {
+      font-size: 13px;
+      line-height: 1.2;
+    }
     .svc-nav-strip { padding: 0 24px; box-sizing: border-box; }
     .svc-nav-item { flex: none; justify-content: flex-start; padding: 13px 16px; font-size: 10.5px; }
 
@@ -2960,9 +2977,9 @@
     transform-origin: unset;
   }
   .service-card:hover {
-    background: rgba(15,32,64,0.025);
-    border-color: rgba(200,146,42,0.35);
-    box-shadow: 0 16px 48px rgba(15,32,64,0.12), 0 2px 8px rgba(200,146,42,0.08);
+    background: rgba(37,99,168,0.07) !important;
+    border-color: rgba(37,99,168,0.3);
+    box-shadow: 0 16px 48px rgba(15,32,64,0.12), 0 2px 8px rgba(37,99,168,0.08);
     transform: translateY(-2px);
   }
   .service-card:hover::before { height: 100%; }
@@ -3001,8 +3018,7 @@
   .footer-logo {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
-    font-weight: 700;
-    color: #fff;
+    letter-spacing: 0.01em;
     margin-bottom: 8px;
   }
   .footer-tagline {
@@ -3076,7 +3092,11 @@
   }
 
   @media (max-width: 768px) {
-    .footer-inner { grid-template-columns: 1fr; gap: 32px; margin-bottom: 28px; padding-bottom: 28px; }
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; margin-bottom: 28px; padding-bottom: 28px; text-align: center; }
+    .footer-tagline { max-width: 100%; margin-left: auto; margin-right: auto; }
+    .footer-contact { text-align: center; }
+    .footer-nav-col { align-items: center; }
+    .footer-nav-section { align-items: center; }
     .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
     footer { padding: 44px 24px 32px; }
   }
@@ -3087,8 +3107,8 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo" onclick="showPage('home')">
-    <span class="nav-logo-name">Suttle Insights</span>
-    <span class="nav-logo-tag">People Analytics & OD Consulting</span>
+    <div class="nav-logo-name"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
+    <span class="nav-logo-tag">people analytics</span>
   </div>
   <ul class="nav-links" id="nav-links">
     <li><a onclick="showPage('home');closeMobileNav()" id="nav-home" class="active">Home</a></li>
@@ -3236,8 +3256,9 @@
     <div class="who-intro anim-ready anim-left">
       <div class="section-label">Who I Work With</div>
       <h2 class="section-title">The same quality of insight, without the enterprise price tag</h2>
-      <p class="section-body">Suttle Insights is a deliberate nod to the nature of the work — the most valuable things this practice surfaces are rarely the ones anyone was already looking for.</p>
-      <p class="section-body">I work with organizations that have real workforce complexity but no dedicated HR analytics function to make sense of it. Multiple roles, multiple levels, sometimes multiple locations — and leadership teams making decisions about their people without a clear picture of what's actually going on.</p>
+      <p class="section-body">Suttle Insights is a deliberate nod to the nature of the work. The most valuable things this practice surfaces are rarely the ones anyone was already looking for.</p>
+      <p class="section-body">I work with organizations of all sizes and sectors that have real workforce complexity but no internal analytics function to make sense of it. Multiple roles, multiple levels, sometimes multiple locations. And leadership teams making decisions about their people without a clear picture of what's actually going on.</p>
+      <p class="section-body">That has meant working with federal agencies like the U.S. Department of the Interior, large assessment organizations like Educational Testing Service, and small nonprofit animal shelters where understanding the volunteer workforce matters just as much as understanding paid staff. This kind of work belongs in every sector, not just the ones that can afford a dedicated team.</p>
       <p class="who-closing">This kind of work should be accessible to any organization that takes its people seriously. Budget and headcount shouldn't be the reason it isn't.</p>
     </div>
 
@@ -3309,7 +3330,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-logo"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
@@ -3474,8 +3495,8 @@
 
   <section class="cta-section">
     <div class="section-label">Get Started</div>
-    <h2 class="section-title">Ready to hear what your employees are actually saying?</h2>
-    <p class="section-body">A listening engagement typically runs 4&#8211;6 weeks from first call to final report. Start with a conversation &#8212; it&#39;s free, and there&#39;s no commitment until you&#39;ve seen the proposal.</p>
+    <h2 class="section-title">Find out what your employees actually think, and what to do about it.</h2>
+    <p class="section-body">A listening engagement typically runs 4&#8211;6 weeks from first call to final report. Start with a conversation. It&#39;s free, and there&#39;s no commitment until you&#39;ve seen the proposal.</p>
     <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
     <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
   </section>
@@ -3483,7 +3504,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-logo"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
@@ -3640,8 +3661,8 @@
 
   <section class="cta-section">
     <div class="section-label">Get Started</div>
-    <h2 class="section-title">Ready to see what your team data actually shows?</h2>
-    <p class="section-body">Whether your team is performing well and you want to protect it, or friction is starting to affect results &#8212; a clearer picture changes what&#39;s possible. The first conversation is free.</p>
+    <h2 class="section-title">Find out what's really driving the dynamics on your team.</h2>
+    <p class="section-body">Whether your team is performing well and you want to protect it, or friction is starting to affect results, a clearer picture changes what&#39;s possible. The first conversation is free.</p>
     <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
     <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
   </section>
@@ -3649,7 +3670,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-logo"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
@@ -3791,7 +3812,7 @@
 
   <section class="cta-section">
     <div class="section-label">Get Started</div>
-    <h2 class="section-title">Not sure whether your workforce is ready for what&#39;s ahead?</h2>
+    <h2 class="section-title">Find out how ready your workforce actually is before the change lands.</h2>
     <p class="section-body">Or trying to understand why a change that already happened still hasn&#39;t fully landed? Either way, that&#39;s exactly what this is built for. The first conversation is free.</p>
     <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
     <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
@@ -3800,7 +3821,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-logo"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
@@ -3929,7 +3950,7 @@
   <section class="cta-section">
     <div class="section-label">Get Started</div>
     <h2 class="section-title">Not sure if training is the right answer?</h2>
-    <p class="section-body">Most organizations find out after spending the budget. This is how you find out before. Tell me what performance gap you&#39;re trying to close &#8212; the first conversation is free.</p>
+    <p class="section-body">Most organizations find out after spending the budget. This is how you find out before. Tell me what performance gap you&#39;re trying to close. The first conversation is free.</p>
     <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
     <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
   </section>
@@ -3937,7 +3958,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-logo"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
@@ -4066,7 +4087,7 @@
 
   <section class="cta-section">
     <div class="section-label">Get Started</div>
-    <h2 class="section-title">Ready to stop guessing what good performance looks like?</h2>
+    <h2 class="section-title">Find out what a consistent, trusted performance standard looks like for your organization.</h2>
     <p class="section-body">If your managers are evaluating in their own way and your employees don&#39;t know what to aim for, the toolkit solves both. The first conversation is free.</p>
     <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
     <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
@@ -4075,7 +4096,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-logo"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
@@ -4214,7 +4235,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-logo"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
@@ -4375,7 +4396,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-logo">Suttle Insights</div>
+        <div class="footer-logo"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
         <div class="footer-tagline">People analytics and organizational development consulting for organizations that take their people seriously.</div>
         <div class="footer-contact">
           Denver, CO<br>
@@ -4439,6 +4460,7 @@ function positionSidebar() {
 }
 
 let heroAnimated = false;
+let statsCountDone = false;
 
 function revealHeroInstantly() {
   ['.hero-line1', '.hero-line2', '.hero-eyebrow', '.hero-sub', '.hero-actions', '.hero-stat-strip'].forEach(sel => {
@@ -4992,12 +5014,24 @@ function initHeroStats() {
   const strip = document.querySelector('.hero-stat-strip');
   if (!strip) return;
 
+  // If count already ran once, just show final state instantly
+  if (statsCountDone) {
+    strip.querySelectorAll('.hero-stat-num').forEach(el => {
+      const countEl = el.querySelector('.stat-count');
+      const plusEl  = el.querySelector('.stat-plus');
+      if (countEl) countEl.textContent = (20000).toLocaleString();
+      if (plusEl)  plusEl.classList.add('visible');
+    });
+    return;
+  }
+
   function runCount() {
     strip.querySelectorAll('.hero-stat-num').forEach(el => {
       if (el.querySelector('.stat-count')) {
         animateCount(el, 20000, 3000);
       }
     });
+    statsCountDone = true;
   }
 
   // heroAnimated is true when user has navigated away from home (strip already visible)
