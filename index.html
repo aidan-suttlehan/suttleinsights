@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Suttle Insights">
+<meta property="og:description" content="People analytics and organizational development consulting for organizations that take their people seriously.">
+<meta property="og:image" content="https://suttleinsights.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://suttleinsights.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Suttle Insights">
+<meta name="twitter:description" content="People analytics and organizational development consulting for organizations that take their people seriously.">
+<meta name="twitter:image" content="https://suttleinsights.com/og-image.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzFCMkI0QiIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzAwIiAKICAgICAgICBmaWxsPSIjQzg5MjJBIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iLTAuNSI+UzwvdGV4dD4KPC9zdmc+">
 <title>Suttle Insights</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4488,10 +4499,18 @@ function showPage(name, anchor) {
   const currentIsSvc  = currentPageEl && currentPageEl.id.startsWith('page-svc-');
   const targetIsSvc   = name.startsWith('svc-');
 
-  // Update the URL hash
-  const newHash = name === 'home' ? '' : '#' + name;
-  if (window.location.hash !== newHash) {
-    history.pushState(null, '', newHash || window.location.pathname);
+  // Update the URL path (clean, no hash)
+  const _slugMap = {
+    home: '/', about: '/about', contact: '/contact',
+    'svc-listening':   '/employee-listening-survey-and-action-plan',
+    'svc-team':        '/team-health-diagnostic',
+    'svc-diagnostic':  '/change-readiness-pulse-and-roadmap',
+    'svc-tna':         '/training-needs-assessment',
+    'svc-prd':         '/performance-standards-and-review-toolkit',
+  };
+  const newPath = _slugMap[name] || '/';
+  if (window.location.pathname !== newPath) {
+    history.pushState(null, '', newPath);
   }
 
   function doSwitch() {
@@ -4776,19 +4795,33 @@ document.querySelectorAll('#contact-form input, #contact-form textarea').forEach
   field.addEventListener('input', () => { field.style.borderColor = ''; });
 });
 
-// ─── HASH ROUTING ───
+// ─── CLEAN PATH ROUTING ───
 (function() {
-  function routeFromHash() {
-    const hash = window.location.hash.replace('#', '').trim();
-    const validPages = ['home','about','contact','svc-listening','svc-team','svc-diagnostic','svc-tna','svc-prd'];
-    if (hash && validPages.includes(hash)) {
-      showPage(hash);
-    } else {
-      showPage('home');
+  const _pathMap = {
+    '/about':                                       'about',
+    '/contact':                                     'contact',
+    '/employee-listening-survey-and-action-plan':   'svc-listening',
+    '/team-health-diagnostic':                      'svc-team',
+    '/change-readiness-pulse-and-roadmap':          'svc-diagnostic',
+    '/training-needs-assessment':                   'svc-tna',
+    '/performance-standards-and-review-toolkit':    'svc-prd',
+  };
+
+  function routeFromPath() {
+    const redirect = sessionStorage.getItem('si-redirect');
+    if (redirect) {
+      sessionStorage.removeItem('si-redirect');
+      history.replaceState(null, '', redirect);
+      showPage(_pathMap[redirect] || 'home');
+      return;
     }
+    showPage(_pathMap[window.location.pathname] || 'home');
   }
-  routeFromHash();
-  window.addEventListener('popstate', routeFromHash);
+
+  routeFromPath();
+  window.addEventListener('popstate', function() {
+    showPage(_pathMap[window.location.pathname] || 'home');
+  });
 })();
 
 // ─── BOOT ───
