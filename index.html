@@ -432,80 +432,94 @@
   .io-explainer-callout {
     padding: 8px 0 0 0;
   }
-  .svc-cat-wrap { display: flex; flex-direction: column; gap: 28px; margin-top: 48px; }
-  .svc-top-row { display: flex; gap: 16px; align-items: stretch; }
-  .svc-top-row .svc-cat-group { display: flex; flex-direction: column; flex: 1; }
-  .svc-top-row .svc-cat-cards { flex: 1; display: flex; }
-  .svc-top-row .service-card { flex: 1; display: flex; flex-direction: column; }
-  .svc-top-row .service-card p { flex: 1; }
+  .svc-cat-wrap { display: flex; flex-direction: column; gap: 20px; margin-top: 48px; }
 
-  @media (max-width: 680px) { .svc-top-row { flex-direction: column; } }
-  .svc-cat-group { display: flex; flex-direction: column; gap: 12px; }
-  .svc-cat-label {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--navy); opacity: 0.55; padding-bottom: 10px; border-bottom: 1px solid rgba(15,32,64,0.12);
+  .svc-card-row { display: flex; gap: 20px; align-items: stretch; }
+  .svc-card-row > .svc-card { flex: 1; }
+
+  .svc-card {
+    position: relative;
+    background: var(--warm-white);
+    border: 1px solid rgba(15,32,64,0.15);
+    border-radius: 3px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.25s ease, background 0.25s ease;
+  }
+  .svc-card:hover { border-color: rgba(37,99,168,0.4); background: rgba(37,99,168,0.03); }
+  .svc-card--featured { border-top: 3px solid var(--blue); }
+
+  .svc-card-icon {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    color: rgba(200,146,42,0.4);
+    pointer-events: none;
+    user-select: none;
+  }
+  .svc-card-icon svg { display: block; width: 40px; height: 40px; }
+
+  .svc-card-format {
+    position: relative;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
     margin-bottom: 14px;
   }
-  .svc-cat-cards { display: flex; gap: 16px; }
-  .service-card--featured { border-top: 3px solid var(--blue) !important; }
-  .svc-top-row .service-card {
-    box-shadow: 0 8px 32px rgba(15,32,64,0.10);
-    border-color: rgba(37,99,168,0.22);
-  }
-  .svc-top-row .service-card:hover {
-    box-shadow: 0 16px 48px rgba(15,32,64,0.16);
-  }
-  .service-card--compact { flex: 1; }
-  .svc-lead-pill {
-    display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--blue); background: rgba(37,99,168,0.08);
-    padding: 2px 8px; border-radius: 8px; margin-bottom: 12px;
-  }
 
-  @media (max-width: 680px) {
-    .svc-cat-cards { flex-direction: column; }
-  }
+  .svc-card .svc-lead-pill { position: relative; align-self: flex-start; margin-bottom: 12px; }
 
-  /* service-card rules moved to enhancements block */
-
-  .service-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .service-card h3 {
+  .svc-card h3 {
+    position: relative;
     font-family: 'Playfair Display', serif;
     font-size: 20px;
     font-weight: 600;
     color: var(--navy);
-    margin-bottom: 12px;
-    line-height: 1.3;
+    line-height: 1.32;
+    margin-bottom: 10px;
+    max-width: 88%;
+    transition: color 0.25s ease;
   }
+  .svc-card:hover h3 { color: var(--blue); }
 
-  .service-card p {
-    font-size: 14px;
+  .svc-card p {
+    position: relative;
+    font-size: 13.5px;
     color: var(--text-light);
     line-height: 1.7;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+    flex: 1;
   }
 
-  .service-card-link {
-    font-size: 13px;
+  .svc-card-link {
+    position: relative;
+    font-size: 12px;
     font-weight: 600;
-    color: var(--blue);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    text-decoration: none;
-    display: flex;
+    color: var(--blue);
+    display: inline-flex;
     align-items: center;
     gap: 6px;
   }
+  .svc-card-link svg { transition: transform 0.25s ease; }
+  .svc-card:hover .svc-card-link svg { transform: translateX(3px); }
 
-  .service-card-link::after { content: '→'; transition: transform 0.2s; }
-  .service-card:hover .service-card-link::after { transform: translateX(4px); }
+  .svc-lead-pill {
+    display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--blue); background: rgba(37,99,168,0.08);
+    padding: 3px 9px; border-radius: 3px;
+  }
 
+  @media (max-width: 680px) {
+    .svc-card-row { flex-direction: column; }
+    .svc-card-icon svg { width: 32px; height: 32px; }
+  }
 
   /* ─── SCROLL-TRIGGERED TEXT HIGHLIGHTS ─── */
   .scroll-hl {
@@ -614,18 +628,9 @@
 
 
 
-  .who-item--highlight {
-    background: rgba(200,146,42,0.07);
-    border-left-color: var(--accent);
-    border-color: rgba(200,146,42,0.3);
-    margin-top: 6px;
-  }
   .who-item--highlight .who-item-text {
     color: var(--navy);
     font-weight: 500;
-  }
-  .who-item--highlight .who-item-icon svg {
-    stroke: var(--accent);
   }
 
 
@@ -856,45 +861,70 @@
   .who-items {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding-top: 8px;
+    padding: 30px 30px 34px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(15,32,64,0.13);
+    border-radius: 4px;
+  }
+
+  .who-items-lead {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 6px;
   }
 
   .who-item {
-    background: rgba(255,255,255,0.78);
-    border: 1px solid rgba(200,146,42,0.18);
-    border-left: 3px solid var(--blue);
-    border-radius: 0 6px 6px 0;
-    padding: 14px 18px;
     display: flex;
-    align-items: center;
     gap: 14px;
+    align-items: flex-start;
+    padding: 13px 0;
   }
 
-  .who-item-num {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--blue);
-    letter-spacing: 0.06em;
-    opacity: 0.6;
+  .who-item-check {
     flex-shrink: 0;
-    padding-top: 2px;
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+    border: 1.5px solid var(--accent);
+    border-radius: 3px;
+    position: relative;
   }
 
   .who-item-text {
     font-size: 13.5px;
     color: var(--text-light);
-    line-height: 1.6;
+    line-height: 1.65;
+  }
+
+  .who-item--highlight .who-item-check {
+    background: var(--accent);
+  }
+  .who-item--highlight .who-item-check::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 7px;
+    border: solid #fff;
+    border-width: 0 1.5px 1.5px 0;
+    transform: translate(-50%, -60%) rotate(45deg);
   }
 
   .who-closing {
-    font-size: 13px;
-    color: var(--steel);
-    line-height: 1.7;
-    margin-top: 16px;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
-    padding-top: 16px;
-    border-top: 1px solid rgba(200,146,42,0.22);
+    font-size: 17px;
+    color: var(--navy);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  @media (max-width: 680px) {
+    .who-items { padding: 26px 22px 30px; }
+    .who-item { gap: 12px; }
   }
 
   .who-visual {
@@ -1959,11 +1989,11 @@
   }
 
   /* Variant classes applied by JS */
-  .anim-fadeup.animated        { animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
-  .anim-fadein.animated        { animation: fadeIn 0.7s ease forwards; }
-  .anim-left.animated          { animation: slideInLeft 0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
-  .anim-right.animated         { animation: slideInRight 0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
-  .anim-pop.animated           { animation: scalePop 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .anim-fadeup.animated        { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .anim-fadein.animated        { animation: fadeIn 0.5s ease forwards; }
+  .anim-left.animated          { animation: slideInLeft 0.45s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .anim-right.animated         { animation: slideInRight 0.45s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .anim-pop.animated           { animation: scalePop 0.4s cubic-bezier(0.22,1,0.36,1) forwards; }
 
   /* Hero: staggered reveal sequence */
   @keyframes heroSlideLeft {
@@ -2207,8 +2237,6 @@
 
     /* What strip */
     .what-strip { padding: 56px 24px 0; }
-    .svc-cat-group { margin-top: 28px; }
-    .svc-top-row > .svc-cat-group:first-child { margin-top: 0; }
     .section-body { max-width: 100%; margin-bottom: 24px; }
     .section-body + .section-body { margin-top: 0; }
     .services-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -2506,18 +2534,6 @@
     color: var(--accent-light);
     letter-spacing: 0.04em;
     text-transform: uppercase;
-  }
-
-  /* ─── WHO ITEM ICONS ─── */
-  .who-item-icon {
-    width: 36px;
-    height: 36px;
-    background: rgba(37,99,168,0.1);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
   }
 
   /* ─── SERVICE PAGE NAVIGATION STRIP ─── */
@@ -2934,7 +2950,7 @@
   .anim-reveal.anim-revealed {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.35s ease, transform 0.35s ease;
     transition-delay: inherit;
   }
 
@@ -2958,42 +2974,6 @@
     border-radius: 0 1px 1px 0;
   }
   #svc-progress.visible { opacity: 1; }
-
-  /* ══════════════════════════════════════════
-     ENHANCEMENT 7: PREMIUM SERVICE CARD HOVER
-  ══════════════════════════════════════════ */
-  .service-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 36px 32px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.28s cubic-bezier(0.22,1,0.36,1),
-                box-shadow 0.28s ease,
-                background 0.28s ease,
-                border-color 0.28s ease;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px;
-    height: 0%;
-    background: var(--accent);
-    transition: height 0.3s cubic-bezier(0.22,1,0.36,1);
-    border-radius: 0;
-    transform: none;
-    transform-origin: unset;
-  }
-  .service-card:hover {
-    background: rgba(37,99,168,0.07) !important;
-    border-color: rgba(37,99,168,0.3);
-    box-shadow: 0 16px 48px rgba(15,32,64,0.12), 0 2px 8px rgba(37,99,168,0.08);
-    transform: translateY(-2px);
-  }
-  .service-card:hover::before { height: 100%; }
 
 
 
@@ -3082,26 +3062,6 @@
     letter-spacing: 0.04em;
   }
 
-  /* ══════════════════════════════════════════
-     ENHANCEMENT 13: SERVICE NAV SCROLL TRACKING
-  ══════════════════════════════════════════ */
-  .svc-nav-active {
-    position: relative;
-    overflow: visible;
-  }
-  .svc-nav-active .svc-progress-fill {
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    height: 2px;
-    width: 0%;
-    background: var(--accent-light);
-    border-radius: 1px;
-    transition: width 0.12s linear;
-    pointer-events: none;
-    z-index: 2;
-  }
-
   @media (max-width: 768px) {
     .footer-inner { grid-template-columns: 1fr; gap: 32px; margin-bottom: 28px; padding-bottom: 28px; text-align: center; }
     .footer-tagline { max-width: 100%; margin-left: auto; margin-right: auto; }
@@ -3172,7 +3132,7 @@
     <div class="hero-content">
       <div class="hero-eyebrow">People Analytics · Team Assessments · Workforce Diagnostics</div>
       <h1><span class="hero-line1">Your people shape everything.</span><span class="hero-line2" style="display:block; margin-top:0.35em;"><em>So ask the questions that matter.</em></span></h1>
-      <p class="hero-sub">Most organizations and small businesses don't have a systematic way to understand what their people think, feel, or need. Suttle Insights brings the same caliber of survey design, team assessment, and workforce diagnostics — once reserved for corporations with dedicated HR analytics teams — at a fixed project fee built for your size.</p>
+      <p class="hero-sub">Most small businesses and organizations don't have a systematic way to understand what their people think, feel, or need. Suttle Insights brings the same caliber of survey design, team assessment, and workforce diagnostics that used to be reserved for corporations with dedicated HR analytics teams, at a fixed project fee built for your size.</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="showPage('svc-listening')">Explore Services</button>
         <button class="btn-outline" onclick="showPage('contact')">Book a Free Discovery Call</button>
@@ -3200,62 +3160,49 @@
 
   <section class="what-strip">
     <h2 class="section-title">Clear answers to the questions every organization has about its people</h2>
-    <p class="section-body">You don't need a full-time HR analytics department to understand your people. You need the right questions, the right analysis, and a report your leadership team can actually use.</p>
+    <p class="section-body">You don't need a full-time HR analytics department to understand your people. You need the right questions, the right analysis, and a report your leaders can actually use.</p>
 
     <div class="svc-cat-wrap">
 
-      <!-- Row 1: ELS + THD side by side -->
-      <div class="svc-top-row">
-
-        <div class="svc-cat-group" style="flex:1;">
-          <div class="svc-cat-label">Employee Listening &amp; Engagement</div>
-          <div class="svc-cat-cards">
-            <div class="service-card service-card--featured anim-ready anim-fadeup" onclick="showPage('svc-listening')" style="flex:1; background:linear-gradient(145deg, #eef3fa 0%, #f6f9fd 40%, #ffffff 75%); border-top:3px solid var(--blue);">
-              <span class="svc-lead-pill" style="position:absolute; top:14px; left:16px; margin-bottom:0;">Most Accessible &middot; Start Here</span>
-              <div class="service-icon" style="margin-top:6px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></div>
-              <h3>Employee Listening Survey &amp; Action Plan</h3>
-              <p>Understand what employees are experiencing, what's working, and what your organization should focus on next, delivered as a clear report with prioritized recommendations and an action plan leadership can use right away.</p>
-              <span class="service-card-link">Learn more</span>
-            </div>
-          </div>
+      <div class="svc-card-row">
+        <div class="svc-card svc-card--featured anim-ready anim-fadeup" onclick="showPage('svc-listening')">
+          <span class="svc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></span>
+          <span class="svc-card-format">Survey + Action Plan</span>
+          <span class="svc-lead-pill">Most Accessible &middot; Start Here</span>
+          <h3>Employee Listening Survey &amp; Action Plan</h3>
+          <p>Understand what employees are experiencing, what's working, and what your organization should focus on next, delivered as a clear report with prioritized recommendations and an action plan leaders can use right away.</p>
+          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
-
-        <div class="svc-cat-group" style="flex:1;">
-          <div class="svc-cat-label">Team &amp; Manager Effectiveness</div>
-          <div class="svc-cat-cards">
-            <div class="service-card anim-ready anim-fadeup" onclick="showPage('svc-team')" style="flex:1;">
-              <div class="service-icon" style="margin-top:6px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg></div>
-              <h3>Team Health Diagnostic</h3>
-              <p>Get a structured, honest picture of how a specific team is functioning, whether you're sustaining strong performance, navigating a growth period, or working through friction that's starting to affect results.</p>
-              <span class="service-card-link">Learn more</span>
-            </div>
-          </div>
+        <div class="svc-card anim-ready anim-fadeup" onclick="showPage('svc-team')">
+          <span class="svc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg></span>
+          <span class="svc-card-format">Team Assessment</span>
+          <h3>Team Health Diagnostic</h3>
+          <p>Get a clear, honest picture of how a specific team is functioning right now, whether you're protecting strong performance or working through friction that's starting to affect results.</p>
+          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
-
       </div>
 
-      <!-- Row 2: Change, Training & Performance -->
-      <div class="svc-cat-group">
-        <div class="svc-cat-label">Change, Training &amp; Performance</div>
-        <div class="svc-cat-cards svc-cat-cards--row">
-          <div class="service-card service-card--compact anim-ready anim-fadeup" onclick="showPage('svc-diagnostic')">
-            <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="3" y1="15" x2="5" y2="15"/><line x1="21" y1="15" x2="19" y2="15"/><line x1="12" y1="15" x2="17" y2="10"/><circle cx="12" cy="15" r="1.5" fill="#2563A8" stroke="none"/></svg></div>
-            <h3>Change Readiness Pulse &amp; Roadmap</h3>
-            <p>Understand how your workforce is experiencing a significant change and get a clear picture of what to do next.</p>
-            <span class="service-card-link">Learn more</span>
-          </div>
-          <div class="service-card service-card--compact anim-ready anim-fadeup" onclick="showPage('svc-tna')">
-            <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="#2563A8"/></svg></div>
-            <h3>Training Needs Assessment</h3>
-            <p>Find out whether training is the right solution, what to prioritize, and where development investment will make the most difference.</p>
-            <span class="service-card-link">Learn more</span>
-          </div>
-          <div class="service-card service-card--compact anim-ready anim-fadeup" onclick="showPage('svc-prd')">
-            <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="#2563A8" stroke="none"/><circle cx="15" cy="12" r="2.5" fill="#2563A8" stroke="none"/><circle cx="11" cy="18" r="2.5" fill="#2563A8" stroke="none"/></svg></div>
-            <h3>Performance Standards &amp; Review Toolkit</h3>
-            <p>Define clear, consistent performance expectations so managers can evaluate fairly and employees know what's expected.</p>
-            <span class="service-card-link">Learn more</span>
-          </div>
+      <div class="svc-card-row">
+        <div class="svc-card anim-ready anim-fadeup" onclick="showPage('svc-diagnostic')">
+          <span class="svc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="3" y1="15" x2="5" y2="15"/><line x1="21" y1="15" x2="19" y2="15"/><line x1="12" y1="15" x2="17" y2="10"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg></span>
+          <span class="svc-card-format">Readiness Diagnostic</span>
+          <h3>Change Readiness Pulse &amp; Roadmap</h3>
+          <p>Understand how your workforce is experiencing a significant change and get a clear picture of what to do next.</p>
+          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+        <div class="svc-card anim-ready anim-fadeup" onclick="showPage('svc-tna')">
+          <span class="svc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></span>
+          <span class="svc-card-format">Training Assessment</span>
+          <h3>Training Needs Assessment</h3>
+          <p>Find out whether training is the right solution, what to prioritize, and where development investment will make the most difference.</p>
+          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+        <div class="svc-card anim-ready anim-fadeup" onclick="showPage('svc-prd')">
+          <span class="svc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="2.5" fill="currentColor" stroke="none"/><circle cx="11" cy="18" r="2.5" fill="currentColor" stroke="none"/></svg></span>
+          <span class="svc-card-format">Review Toolkit</span>
+          <h3>Performance Standards &amp; Review Toolkit</h3>
+          <p>Define clear, consistent performance expectations so managers can evaluate fairly and employees know what's expected.</p>
+          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </div>
 
@@ -3268,31 +3215,32 @@
       <div class="section-label">Who I Work With</div>
       <h2 class="section-title">The same quality of insight, without the enterprise price tag</h2>
       <p class="section-body">Suttle Insights is a deliberate nod to the nature of the work. The most valuable things this practice surfaces are rarely the ones anyone was already looking for.</p>
-      <p class="section-body">I work with organizations of all sizes and sectors that have real workforce complexity but no internal analytics function to make sense of it. Multiple roles, multiple levels, sometimes multiple locations. And leadership teams making decisions about their people without a clear picture of what's actually going on.</p>
+      <p class="section-body">I work with organizations of all sizes and sectors that have real workforce complexity but no internal analytics function to make sense of it. That might mean several roles, several levels, or offices in more than one location. It usually means leaders making decisions about their people without a clear picture of what's actually going on.</p>
       <p class="section-body">That has meant working with federal agencies like the U.S. Department of the Interior, large assessment organizations like Educational Testing Service, and small nonprofit animal shelters where understanding the volunteer workforce matters just as much as understanding paid staff. This kind of work belongs in every sector, not just the ones that can afford a dedicated team.</p>
-      <p class="who-closing">This kind of work should be accessible to any organization that takes its people seriously. Budget and headcount shouldn't be the reason it isn't.</p>
     </div>
 
     <div class="who-items anim-ready anim-right">
+      <p class="who-closing">This kind of work should be accessible to any organization that takes its people seriously. Budget and headcount shouldn't be the reason it isn't.</p>
+      <p class="who-items-lead">You might be a good fit if:</p>
       <div class="who-item">
-        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-        <span class="who-item-text">Organizations with 10–300 employees navigating growth, change, or cultural tension</span>
+        <span class="who-item-check"></span>
+        <span class="who-item-text">You have anywhere between 10 and ~300 employees, and something is shifting, whether that's growth, change, or friction under the surface.</span>
       </div>
       <div class="who-item">
-        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
-        <span class="who-item-text">Organizations with layered teams and no internal I/O or people analytics capacity</span>
+        <span class="who-item-check"></span>
+        <span class="who-item-text">There are enough layers in your business that no one internally is set up to make sense of the full picture.</span>
       </div>
       <div class="who-item">
-        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.5" fill="#2563A8"/></svg></div>
-        <span class="who-item-text">Leadership teams making decisions about retention, structure, or culture without good data</span>
+        <span class="who-item-check"></span>
+        <span class="who-item-text">You're making calls about retention, structure, or culture without solid data behind them.</span>
       </div>
       <div class="who-item">
-        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <span class="who-item-text">Leaders who sense something is off with their people but don't have the data to understand it clearly</span>
+        <span class="who-item-check"></span>
+        <span class="who-item-text">You can sense something's off with your people, but you don't have the data to pin down what.</span>
       </div>
       <div class="who-item who-item--highlight">
-        <div class="who-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C8922A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="rgba(200,146,42,0.15)"/></svg></div>
-        <span class="who-item-text">Businesses that have never formally asked their employees what's working, and are ready to</span>
+        <span class="who-item-check"></span>
+        <span class="who-item-text">You've never formally asked your employees what's working, and you're ready to start.</span>
       </div>
     </div>
 
@@ -3427,7 +3375,7 @@
       <div class="service-left">
 
         
-        <p class="service-description">For most leadership teams, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey changes that. Whether you're trying to get ahead of emerging concerns, establish a <span class="scroll-hl" data-hl-delay="0">first real listening baseline</span>, make sense of a period of growth or change, or simply confirm that what seems to be working is actually working, an Employee Listening Survey &amp; Action Plan gives you a structured, professionally designed instrument deployed to your workforce, analyzed for patterns and themes, and delivered as a clear report your leadership team can <span class="scroll-hl" data-hl-delay="200">read, discuss, and act on</span>. The report includes <span class="scroll-hl" data-hl-delay="0">specific, prioritized recommendations</span> and a concrete action plan.</p>
+        <p class="service-description">For most leaders, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey changes that. Maybe you want to get ahead of emerging concerns, maybe this is your <span class="scroll-hl" data-hl-delay="0">first real listening baseline</span>, or maybe you just want to confirm that what seems to be working is actually working. An Employee Listening Survey &amp; Action Plan gives you a professionally designed instrument deployed to your workforce, analyzed for patterns and themes, and delivered as a clear report your leaders can <span class="scroll-hl" data-hl-delay="200">read, discuss, and act on</span>, with <span class="scroll-hl" data-hl-delay="0">specific, prioritized recommendations</span> and a concrete action plan.</p>
         <div class="els-reveals">
           <div class="els-reveal">
             <div class="els-reveal-bar"></div>
@@ -3440,7 +3388,7 @@
             <div class="els-reveal-bar"></div>
             <div class="els-reveal-content">
               <div class="els-reveal-q">What's driving the patterns we're seeing, and how significant are they?</div>
-              <div class="els-reveal-a">Not just what employees said, but what's underneath it: the conditions, relationships, and structural factors that explain why things are the way they are.</div>
+              <div class="els-reveal-a">What's underneath what employees said: the conditions, relationships, and structural factors that explain why things are the way they are.</div>
             </div>
           </div>
           <div class="els-reveal">
@@ -3451,7 +3399,7 @@
             </div>
           </div>
         </div>
-        <p class="service-description">The report is not the outcome. <span class="scroll-hl" data-hl-delay="0">The actions your organization takes are the outcome.</span> Every engagement closes with a written plan and a live walkthrough with your leadership team.<br><br>Every survey is built around your specific workforce. For smaller teams, the methodology adapts: when response volume is limited, analysis leads with themes and careful interpretation rather than statistics, so the findings stay honest and useful regardless of headcount.</p>
+        <p class="service-description">The report matters, but <span class="scroll-hl" data-hl-delay="0">what your organization does with it matters more</span>. Every engagement closes with a written plan and a live walkthrough with your leaders.<br><br>Every survey is built around your specific workforce. For smaller teams, the methodology adapts: when response volume is limited, analysis leads with themes and careful interpretation rather than statistics, so the findings stay honest and useful regardless of headcount.</p>
 
         <div class="dimensions-label">Validated survey dimensions</div>
         <div class="dimension-tags">
@@ -3481,7 +3429,7 @@
             <div class="tl-conn"></div>
             <div class="tl-step"><div class="tl-cap"><span class="tl-num">03</span><span class="tl-week">Weeks 3&ndash;5</span><span class="tl-name">Analysis</span><span class="tl-detail">Item, dimension, and open-text theme analysis</span></div><div class="tl-dot"></div></div>
             <div class="tl-conn"></div>
-            <div class="tl-step"><div class="tl-cap"><span class="tl-num">04</span><span class="tl-week">Weeks 5&ndash;6</span><span class="tl-name">Report &amp; Walkthrough</span><span class="tl-detail">Executive report and live leadership session</span></div><div class="tl-dot"></div></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">04</span><span class="tl-week">Weeks 5&ndash;6</span><span class="tl-name">Report &amp; Walkthrough</span><span class="tl-detail">Executive report and live session with leaders</span></div><div class="tl-dot"></div></div>
           </div>
         </div>
 
@@ -3492,10 +3440,10 @@
           <li>Intake call + signed scope agreement before work begins</li>
           <li>Organizational screener to capture workforce structure, roles, and context</li>
           <li>Custom survey instrument built around your workforce and goals</li>
-          <li>Recruitment and reminder email templates for your team to send</li>
+          <li>Recruitment and reminder email templates for leaders to send</li>
           <li>Full analysis: item-level, dimension-level, and open-text themes</li>
           <li>Executive Summary report with findings, employee quotes, and prioritized recommendations</li>
-          <li>Live walkthrough session with leadership</li>
+          <li>Live walkthrough session with leaders</li>
           <li>Action Roadmap: top priorities, recommended actions, and guidance on communicating results back to employees</li>
         </ul>
         <div class="addon-note"><strong>Add-ons available:</strong> Pulse check 90 days post-delivery, manager-level breakouts, focus group facilitation, or a results presentation for your full staff.</div>
@@ -3601,7 +3549,7 @@
       <div class="service-left">
 
         
-        <p class="service-description">Most teams never get a clear, honest picture of how they&#39;re actually functioning. A Team Health Diagnostic provides that picture, whether a team is navigating growth, working through a leadership change, dealing with friction that&#39;s affecting results, or simply wanting to understand what&#39;s making it work. It&#39;s a structured, multi-dimensional evaluation examining three distinct layers simultaneously:</p>
+        <p class="service-description">Most teams never get a clear, honest picture of how they&#39;re actually functioning. A Team Health Diagnostic provides that picture. Maybe your team is navigating growth, working through a leadership change, or dealing with friction that&#39;s affecting results. Or maybe things are going well and you just want to understand what&#39;s making it work. It&#39;s a structured evaluation that examines three distinct layers at the same time:</p>
         <div class="thd-layers">
           <div class="thd-layer">
             <span class="thd-layer-num">01</span>
@@ -3622,7 +3570,7 @@
             <div class="thd-layer-desc">Whether team members share an accurate understanding of how their work connects and who depends on whom. This is often the least visible source of friction.</div>
           </div>
         </div>
-        <p class="service-description">What makes this service different is the <span class="scroll-hl" data-hl-delay="0">perception gap analysis</span>. Most team surveys report averages. <span class="scroll-hl" data-hl-delay="0">Averages hide the real story.</span> When one team member rates trust at a 5 and another rates it at a 2, the mean of 3.5 tells you almost nothing useful. This assessment examines variance, explicitly mapping <span class="scroll-hl" data-hl-delay="200">where they see the team differently</span>. That disagreement is often the <span class="scroll-hl" data-hl-delay="0">most diagnostic signal</span> of all.<br><br>The deliverable is a Team Dynamics Report with clear areas of strength, prioritized opportunities, and <span class="scroll-hl" data-hl-delay="0">targeted, evidence-based recommendations</span> your team lead or manager can act on immediately.</p>
+        <p class="service-description">What makes this service different is the <span class="scroll-hl" data-hl-delay="0">perception gap analysis</span>. Most team surveys just report averages, and averages hide the real story: when one team member rates trust at a 5 and another rates it at a 2, the mean of 3.5 tells you almost nothing useful. This assessment looks at that variance directly, mapping <span class="scroll-hl" data-hl-delay="200">where team members see things differently</span>. That disagreement is often the <span class="scroll-hl" data-hl-delay="0">most useful signal</span> you'll get.<br><br>The deliverable is a Team Dynamics Report with clear areas of strength, prioritized opportunities, and <span class="scroll-hl" data-hl-delay="0">targeted, evidence-based recommendations</span> your team lead or manager can act on immediately.</p>
 
         <div class="dimensions-label">What the assessment examines</div>
         <div class="dimension-tags">
@@ -3651,7 +3599,7 @@
             <div class="tl-conn"></div>
             <div class="tl-step"><div class="tl-cap"><span class="tl-num">04</span><span class="tl-week">Weeks 4&ndash;5</span><span class="tl-name">Analysis</span><span class="tl-detail">Means, variance, and perception gap analysis</span></div><div class="tl-dot"></div></div>
             <div class="tl-conn"></div>
-            <div class="tl-step"><div class="tl-cap"><span class="tl-num">05</span><span class="tl-week">Weeks 5&ndash;6</span><span class="tl-name">Report &amp; Debrief</span><span class="tl-detail">Team Dynamics Report and leadership debrief</span></div><div class="tl-dot"></div></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">05</span><span class="tl-week">Weeks 5&ndash;6</span><span class="tl-name">Report &amp; Debrief</span><span class="tl-detail">Team Dynamics Report and debrief with leaders</span></div><div class="tl-dot"></div></div>
           </div>
         </div>
 
@@ -3673,7 +3621,7 @@
   <section class="cta-section">
     <div class="section-label">Get Started</div>
     <h2 class="section-title">Find out what's really driving the dynamics on your team.</h2>
-    <p class="section-body">Whether your team is performing well and you want to protect it, or friction is starting to affect results, a clearer picture changes what&#39;s possible. The first conversation is free.</p>
+    <p class="section-body">If your team is performing well, this helps you protect it. If friction is starting to affect results, this helps you get ahead of it. Either way, the first conversation is free.</p>
     <button class="btn-primary" onclick="showPage('contact')">Book a Free Discovery Call</button>
     <p class="cta-note">Fixed-fee engagement. No hourly billing. No commitment until you've seen the proposal.</p>
   </section>
@@ -3747,7 +3695,7 @@
   <div class="page-hero">
     <div class="page-hero-content">
       <h1>Change Readiness Pulse &amp; Roadmap</h1>
-      <p>A structured diagnostic that combines focus groups and a validated survey to show how your workforce is experiencing a significant change, and what your leadership team should do next.</p>
+      <p>A structured diagnostic that combines focus groups and a validated survey to show how your workforce is experiencing a significant change, and what your leaders should do next.</p>
     </div>
   <div class="svc-stats-bar">
     <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">6&ndash;8 weeks</span></div>
@@ -3767,13 +3715,13 @@
       <div class="service-left">
 
         
-        <p class="service-description">Change is rarely a single moment. It&#39;s a restructuring that happened six months ago that still has people unsettled. A technology rollout that technically launched but never quite landed. A leadership transition that left the organization misaligned in ways no one has fully named. Or a change on the horizon that leadership suspects the workforce isn&#39;t ready for.</p>
+        <p class="service-description">Change is rarely a single moment. Sometimes it&#39;s a restructuring from six months ago that still has people unsettled, or a technology rollout that technically launched but never quite landed. Sometimes it&#39;s a leadership transition that left the organization misaligned in ways no one has fully named. And sometimes it&#39;s a change on the horizon that leadership suspects the workforce isn&#39;t ready for.</p>
         <div class="change-stages">
           <div class="change-stage change-stage--past"><div class="change-stage-when">Already behind you</div><div class="change-stage-title">The change that never quite landed</div><div class="change-stage-desc">A restructure, rollout, or leadership transition that technically happened, but left gaps, confusion, or unresolved tension in its wake.</div></div>
           <div class="change-stage change-stage--live"><div class="change-stage-when">Happening now</div><div class="change-stage-title">Change in progress</div><div class="change-stage-desc">You're in the middle of it and need to know how people are experiencing it, what's helping, what's getting in the way, and where to course-correct.</div></div>
           <div class="change-stage change-stage--ahead"><div class="change-stage-when">On the horizon</div><div class="change-stage-title">Change you're about to introduce</div><div class="change-stage-desc">A decision has been made. Before you announce it, understand whether your workforce is ready and what needs to be in place for it to stick.</div></div>
         </div>
-        <p class="service-description">The Change Readiness Pulse &amp; Roadmap is a structured diagnostic built for all of it: changes that are coming, changes that are underway, and <span class="scroll-hl" data-hl-delay="0">changes that are already behind you</span>. It&#39;s also the right service for organizations that want a deeper, more targeted look at employee sentiment and engagement around a specific strategic initiative or challenge, beyond what a general listening survey covers.<br><br>Through a structured combination of stakeholder focus groups and a survey designed around the factors that matter most: change readiness, management support, communication clarity, and employee confidence. Together, these develop a complete picture of where your organization stands and what specific steps will move things forward.<br><br>The deliverable is a consulting report with <span class="scroll-hl" data-hl-delay="100">root cause analysis</span>, prioritized findings, and tailored recommendations your leadership team can act on. Practical, evidence-based, and <span class="scroll-hl" data-hl-delay="0">specific to your organization</span>&#39;s culture, structure, and resources. Not generic best practices, but a real plan built from <span class="scroll-hl" data-hl-delay="150">what your people actually told us</span>.</p>
+        <p class="service-description">The Change Readiness Pulse &amp; Roadmap is a structured diagnostic built for all of it: changes that are coming, changes that are underway, and <span class="scroll-hl" data-hl-delay="0">changes that are already behind you</span>. It&#39;s also the right service for organizations that want a deeper, more targeted look at employee sentiment and engagement around a specific strategic initiative or challenge, beyond what a general listening survey covers.<br><br>It combines stakeholder focus groups with a survey built around the factors that matter most: change readiness, management support, communication clarity, and employee confidence. Together, these build a complete picture of where your organization stands and what specific steps will move things forward.<br><br>The deliverable is a consulting report with <span class="scroll-hl" data-hl-delay="100">root cause analysis</span>, prioritized findings, and tailored recommendations your leaders can act on. Practical, evidence-based, and <span class="scroll-hl" data-hl-delay="0">specific to your organization</span>&#39;s culture, structure, and resources, built from <span class="scroll-hl" data-hl-delay="150">what your people actually told me</span>, not generic best practices pulled from somewhere else.</p>
 
         <div class="dimensions-label">What the assessment examines</div>
         <div class="dimension-tags">
@@ -3903,7 +3851,7 @@
   <div class="svc-stats-bar">
     <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">4&ndash;6 weeks</span></div>
     <div class="svc-stat-divider"></div>
-    <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Leadership interviews + survey</span></div>
+    <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Leader interviews + survey</span></div>
     <div class="svc-stat-divider"></div>
     <div class="svc-stat-item"><span class="svc-stat-label">Key Output</span><span class="svc-stat-val">Prioritized TNA Report</span></div>
     <div class="svc-stat-divider"></div>
@@ -3923,7 +3871,7 @@
           <div class="tna-col tna-col--yes"><div class="tna-col-label">When it is a training problem</div><div class="tna-col-heading">A genuine capability gap</div><div class="tna-item">People lack the skills or knowledge the role requires</div><div class="tna-item">The gap is consistent across multiple role incumbents</div><div class="tna-item">Training addresses the actual root cause</div><div class="tna-item">There's a clear, prioritized development path forward</div></div>
           <div class="tna-col tna-col--no"><div class="tna-col-label">When it isn't a training problem</div><div class="tna-col-heading">Something else is in the way</div><div class="tna-item">Unclear expectations or shifting role definitions</div><div class="tna-item">Process or tooling gaps that training can't fix</div><div class="tna-item">Management routines that undercut performance</div><div class="tna-item">Motivation or environment, not capability</div></div>
         </div>
-        <p class="service-description">A Training Needs Assessment helps you figure out which one you&#39;re dealing with <span class="scroll-hl" data-hl-delay="0">before committing the budget</span>. Through leadership interviews and a targeted questionnaire with role incumbents, this service maps what the role actually requires, where <span class="scroll-hl" data-hl-delay="100">genuine capability gaps</span> exist, and <span class="scroll-hl" data-hl-delay="200">whether training is the right solution</span>. The result is a clear, prioritized report that tells you what to train, who needs it most, and why, along with any non-training barriers that should be addressed first.<br><br>This service identifies what training is needed and why. It does not design or deliver the training itself. The report gives you the clarity to <span class="scroll-hl" data-hl-delay="0">make a confident development investment</span>. For organizations that want a head start on structuring the training itself, a high-level learning outline for the top-priority need is available as an add-on.</p>
+        <p class="service-description">A Training Needs Assessment helps you figure out which one you&#39;re dealing with <span class="scroll-hl" data-hl-delay="0">before committing the budget</span>. Through leader interviews and a targeted questionnaire with role incumbents, this service maps what the role actually requires, where <span class="scroll-hl" data-hl-delay="100">genuine capability gaps</span> exist, and <span class="scroll-hl" data-hl-delay="200">whether training is the right solution</span>. The result is a clear, prioritized report that tells you what to train, who needs it most, and why, along with any non-training barriers that should be addressed first.<br><br>This service identifies what training is needed and why. It does not design or deliver the training itself. The report gives you the clarity to <span class="scroll-hl" data-hl-delay="0">make a confident development investment</span>. For organizations that want a head start on structuring the training itself, a high-level learning outline for the top-priority need is available as an add-on.</p>
 
         <div class="tl">
           <div class="tl-header">
@@ -3931,7 +3879,7 @@
             <span class="tl-duration">~4&ndash;6 weeks</span>
           </div>
           <div class="tl-track">
-            <div class="tl-step"><div class="tl-cap"><span class="tl-num">01</span><span class="tl-week">Week 1</span><span class="tl-name">Org Analysis</span><span class="tl-detail">Leadership interview: goals, context, training history</span></div><div class="tl-dot"></div></div>
+            <div class="tl-step"><div class="tl-cap"><span class="tl-num">01</span><span class="tl-week">Week 1</span><span class="tl-name">Org Analysis</span><span class="tl-detail">Leader interview: goals, context, training history</span></div><div class="tl-dot"></div></div>
             <div class="tl-conn"></div>
             <div class="tl-step"><div class="tl-cap"><span class="tl-num">02</span><span class="tl-week">Weeks 1&ndash;2</span><span class="tl-name">Task &amp; Person Analysis</span><span class="tl-detail">Role requirements and performance gap mapping</span></div><div class="tl-dot"></div></div>
             <div class="tl-conn"></div>
@@ -3945,14 +3893,14 @@
       <div class="service-includes-box">
         <div class="includes-title">What&#39;s Included</div>
         <ul class="includes-list">
-          <li>Leadership interview for organizational context, strategic goals, and current training efforts</li>
+          <li>Leader interview for organizational context, strategic goals, and current training efforts</li>
           <li>Task and person analysis via survey and/or interviews with managers and role incumbents</li>
           <li>Role incumbent survey to identify where capability gaps are most significant and confirm whether training is the right solution</li>
           <li>Priority ranking of training needs by gap, importance, and readiness</li>
           <li>TNA Report with prioritized findings and recommended training approaches</li>
           <li>Transfer recommendations to ensure training sticks post-delivery</li>
         </ul>
-        <div class="addon-note"><strong>Add-on available:</strong> High-level learning outline for the top-priority training need, to give your team a head start on structuring the content.</div>
+        <div class="addon-note"><strong>Add-on available:</strong> High-level learning outline for the top-priority training need, to give you a head start on structuring the content.</div>
 
       </div>
     </div>
@@ -4055,11 +4003,11 @@
       <div class="service-left">
 
         
-        <p class="service-description">For most organizations, performance reviews are an afterthought. A generic template gets dusted off once a year, ratings vary from manager to manager, and the process feels <span class="scroll-hl" data-hl-delay="0">arbitrary to the people on the receiving end</span>. That&#39;s not a people problem. It&#39;s a design problem.<br><br>A Performance Standards &amp; Review Toolkit gives your organization a custom set of performance expectations for a specific role or team, grounded in what the job actually requires and described in <span class="scroll-hl" data-hl-delay="0">clear, observable behavioral terms</span>. Managers walk away with a tool they can <span class="scroll-hl" data-hl-delay="0">apply consistently</span>. Employees have a transparent standard to work toward. And performance conversations become <span class="scroll-hl" data-hl-delay="200">specific, credible, and easier to navigate</span> for everyone involved.</p>
+        <p class="service-description">For most organizations, performance reviews are an afterthought. A generic template gets dusted off once a year, ratings vary from manager to manager, and the process feels <span class="scroll-hl" data-hl-delay="0">arbitrary to the people on the receiving end</span>. That&#39;s not really a people problem, it&#39;s a design problem.<br><br>A Performance Standards &amp; Review Toolkit gives your organization a custom set of performance expectations for a specific role or team, grounded in what the job actually requires and described in <span class="scroll-hl" data-hl-delay="0">clear, observable behavioral terms</span>. Managers walk away with a tool they can <span class="scroll-hl" data-hl-delay="0">apply consistently</span>, employees get a transparent standard to work toward, and performance conversations become <span class="scroll-hl" data-hl-delay="200">easier to navigate</span> for everyone involved.</p>
         <div class="perf-impact">
           <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><div class="perf-row-name">Managers</div></div><div class="perf-row-gain"><p><strong>Consistent language and a structured process.</strong> Every manager evaluates against the same behavioral standard, so ratings reflect actual performance, not personal style or relationship history.</p></div></div>
           <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><div class="perf-row-name">Employees</div></div><div class="perf-row-gain"><p><strong>Clear expectations and a fair process.</strong> People know what strong performance looks like before the review happens, not after. That transparency changes the conversation entirely.</p></div></div>
-          <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><div class="perf-row-name">Leadership</div></div><div class="perf-row-gain"><p><strong>A defensible, evidence-based process.</strong> Performance decisions grounded in observable behavior, not gut feel, are easier to explain, support, and stand behind when it matters.</p></div></div>
+          <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><div class="perf-row-name">Leaders</div></div><div class="perf-row-gain"><p><strong>A defensible, evidence-based process.</strong> Performance decisions grounded in observable behavior, not gut feel, are easier to explain, support, and stand behind when it matters.</p></div></div>
         </div>
         <p class="service-description">The work starts with conversations with the people closest to the role: managers who evaluate it and the people who do it. Their real examples of what strong, solid, and developing performance looks like become the foundation, rather than generic competency frameworks imported from somewhere else. Two tiers are available: a practical role scorecard for organizations that need clear standards quickly, and a more rigorously validated instrument for higher-complexity needs.</p>
 
@@ -4199,7 +4147,7 @@
       <div class="about-body">
         <p>I'm an Organizational Development professional and I/O Psychology practitioner with a background spanning employee listening, people analytics, psychometrics, and applied consulting.</p>
 
-        <p>In my day-to-day work, I'm embedded on the Talent & Organizational Capabilities team at Lockheed Martin, where I lead data strategy with a focus on organizational culture and employee listening, supporting a workforce of over 15,000 people. That means designing surveys, analyzing open-text responses at scale, and building executive-ready dashboards that translate complex people data into the kind of clear, actionable insight leadership teams can actually use.</p>
+        <p>In my day-to-day work, I'm embedded on the Talent & Organizational Capabilities team at a Fortune 100 aerospace and defense company, where I lead data strategy with a focus on organizational culture and employee listening, supporting a workforce of over 15,000 people. That means designing surveys, analyzing open-text responses at scale, and building executive-ready dashboards that translate complex people data into the kind of clear, actionable insight leaders can actually use.</p>
 
         <p>Before that, I worked as an Associate Psychometrician and as a Human Capital Consultant, where I ran real client engagements: everything from initial scoping calls and focus groups through to final presentations and written deliverables. I've worked with federal government agencies, nonprofit organizations, and credentialing bodies.</p>
 
@@ -4285,7 +4233,7 @@
     <div class="page-hero-content">
       <div class="section-label" style="color:var(--accent-light); margin-bottom:16px;">Get in Touch</div>
       <h1>Let's start with a conversation</h1>
-      <p>Tell me what's going on with your organization. I'll be straightforward about whether and how I can help.</p>
+      <p>Tell me what's going on with your business. I'll be straightforward about whether and how I can help.</p>
     </div>
   </div>
 
@@ -4320,7 +4268,7 @@
 
       <div class="discovery-box">
         <h4>What to expect from the discovery call</h4>
-        <p>We'll talk through your workforce situation, what questions you're trying to answer, and your organization's size and structure. By the end of 30 minutes, you'll have a clear sense of which service fits, and what it would cost. No pressure, no pitch.</p>
+        <p>We'll talk through your workforce situation, what questions you're trying to answer, and the size and structure of your business. By the end of 30 minutes, you'll have a clear sense of which service fits, and what it would cost. No pressure, no pitch.</p>
       </div>
     </div>
 
@@ -4359,13 +4307,13 @@
             <input type="email" id="email" name="email" placeholder="jane@company.com" required>
           </div>
           <div class="form-group">
-            <label for="company">Company</label>
+            <label for="company">Organization</label>
             <input type="text" id="company" name="company" placeholder="Acme Co.">
           </div>
         </div>
 
         <div class="form-group full">
-          <label for="company-size">Company Size</label>
+          <label for="company-size">Organization Size</label>
           <select id="company-size" name="company_size">
             <option value="">Select employee count...</option>
             <option>Under 25 employees</option>
@@ -4510,7 +4458,7 @@ function showPage(name, anchor) {
   };
   const newPath = _slugMap[name] || '/';
   if (window.location.pathname !== newPath) {
-    history.pushState(null, '', newPath);
+    try { history.pushState(null, '', newPath); } catch (e) { /* blocked on file:// or other restricted origins; page switch continues below */ }
   }
 
   function doSwitch() {
@@ -4620,7 +4568,18 @@ const scrollObserver = new IntersectionObserver((entries) => {
       scrollObserver.unobserve(el);
     }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -70px 0px' });
+
+// Once a scroll-reveal animation finishes, drop the animation class so the
+// element leaves its GPU-composited layer. Left on that layer, text can
+// render soft/blurry compared to normal in-flow text (most noticeable with
+// the translateX slide-in used by the Who I Work With section).
+document.addEventListener('animationend', (e) => {
+  const el = e.target;
+  if (el.classList && el.classList.contains('anim-ready')) {
+    el.classList.remove('anim-fadeup', 'anim-left', 'anim-right', 'anim-pop', 'anim-fadein');
+  }
+});
 
 function observeAnimElements(page) {
   const pageEl = document.getElementById('page-' + page);
@@ -4811,7 +4770,7 @@ document.querySelectorAll('#contact-form input, #contact-form textarea').forEach
     const redirect = sessionStorage.getItem('si-redirect');
     if (redirect) {
       sessionStorage.removeItem('si-redirect');
-      history.replaceState(null, '', redirect);
+      try { history.replaceState(null, '', redirect); } catch (e) { /* blocked on file:// or other restricted origins */ }
       showPage(_pathMap[redirect] || 'home');
       return;
     }
@@ -4988,7 +4947,7 @@ const revealIO = new IntersectionObserver((entries) => {
       revealIO.unobserve(e.target);
     }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
 
 function initReveal(pageEl) {
   if (!pageEl) return;
@@ -4996,7 +4955,7 @@ function initReveal(pageEl) {
   const isSvc  = pageEl.id.startsWith('page-svc-');
   const isAbout = pageEl.id === 'page-about';
 
-  // Only reveal content below the fold — avoid conflicting with existing
+  // Only reveal content below the fold, to avoid conflicting with existing
   // hero animations (anim-ready/anim-fadeup) and process-step system
   const SELECTORS = isSvc
     ? ['.service-tagline', '.service-description', '.tl',
@@ -5068,7 +5027,7 @@ function initHeroStats() {
   }
 
   // heroAnimated is true when user has navigated away from home (strip already visible)
-  // On first load heroAnimated is false — wait for the 4.5s CSS animation delay
+  // On first load heroAnimated is false, so wait for the 4.5s CSS animation delay
   if (heroAnimated) {
     setTimeout(runCount, 350);
   } else {
@@ -5083,7 +5042,6 @@ function triggerPageEntrance(pageEl) { /* no-op */ }
 // ENHANCEMENT 6 + 13: SCROLL PROGRESS + SERVICE NAV
 // ══════════════════════════════════════════════
 const progressBar = document.getElementById('svc-progress');
-let activeProgressFill = null;
 
 function updateProgress() {
   const page = document.querySelector('.page.active');
@@ -5099,24 +5057,11 @@ function updateProgress() {
     progressBar.style.width = pct + '%';
     progressBar.classList.toggle('visible', scrollTop > 80);
   }
-
-  // Enhancement 13: fill active nav item bottom border
-  if (!activeProgressFill) {
-    const active = page.querySelector('.svc-nav-active');
-    if (active) {
-      let fill = active.querySelector('.svc-progress-fill');
-      if (!fill) { fill = document.createElement('div'); fill.className = 'svc-progress-fill'; active.appendChild(fill); }
-      activeProgressFill = fill;
-    }
-  }
-  if (activeProgressFill) activeProgressFill.style.width = pct + '%';
 }
 
 window.addEventListener('scroll', updateProgress, { passive: true });
 
 // Reset fill reference on page change
-function resetProgressFill() { activeProgressFill = null; }
-
 // ══════════════════════════════════════════════
 // HOOK INTO EXISTING PAGE SYSTEM via pageShown event
 // ══════════════════════════════════════════════
@@ -5126,7 +5071,6 @@ document.addEventListener('pageShown', function() {
   const name = pageEl.id.replace('page-', '');
   triggerPageEntrance(pageEl);
   setTimeout(() => initReveal(pageEl), 80);
-  resetProgressFill();
   updateProgress();
   if (name === 'home') setTimeout(initHeroStats, 200);
 });
