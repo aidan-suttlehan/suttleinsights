@@ -562,7 +562,9 @@ h1:focus, #main:focus { outline: none; }
 .io-explainer-callout p { font-family: var(--serif); font-size: clamp(20px, 2vw, 24px); line-height: 1.6; color: var(--navy); }
 .io-explainer-callout em { color: var(--accent-ink); }
 
-.about-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: clamp(40px, 6vw, 80px); align-items: start; padding: clamp(48px, 6vw, 80px) var(--pad-x); }
+.about-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); grid-template-areas: "main side" "values side"; grid-template-rows: auto 1fr; column-gap: clamp(40px, 6vw, 80px); row-gap: 0; align-items: start; padding: clamp(48px, 6vw, 80px) var(--pad-x); }
+.about-main { grid-area: main; min-width: 0; }
+.about-layout > .values-grid { grid-area: values; align-self: start; }
 .about-body { font-size: 17px; line-height: 1.8; color: var(--text-light); max-width: 66ch; }
 .about-body p { margin-bottom: 22px; }
 .about-body p:last-child { margin-bottom: 0; }
@@ -573,11 +575,11 @@ h1:focus, #main:focus { outline: none; }
 .value-item h3 { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
 .value-item p { font-size: 15px; line-height: 1.7; color: var(--text-light); }
 
-.about-side { display: flex; flex-direction: column; gap: 24px; align-self: stretch; min-width: 0; }
+.about-side { grid-area: side; display: flex; flex-direction: column; gap: 24px; align-self: stretch; min-width: 0; }
 .about-photo { margin: 0; }
 .about-photo[hidden] { display: none; }
 .about-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; background: #2b2d31; box-shadow: 0 1px 2px rgba(15, 32, 64, 0.08), 0 8px 24px rgba(15, 32, 64, 0.10); }
-.about-photo figcaption { margin-top: 12px; text-wrap: balance; padding: 0 2px; font-size: 14px; line-height: 1.5; color: var(--text-light); }
+.about-photo figcaption { margin-top: 12px; text-wrap: balance; text-align: center; padding: 0 2px; font-size: 16px; line-height: 1.5; color: var(--text-light); }
 .about-card { position: sticky; top: calc(var(--nav-h) + 24px); background: var(--navy); color: #fff; border-radius: 12px; padding: 32px 30px; overflow: hidden; }
 .about-card::after { content: ''; position: absolute; right: -90px; bottom: -90px; width: 280px; height: 280px; pointer-events: none; background: radial-gradient(circle, rgba(200, 146, 42, 0.2) 0%, transparent 70%); }
 .about-card-title { position: relative; z-index: 1; font-family: var(--serif); font-size: 21px; font-weight: 700; margin-bottom: 18px; }
@@ -663,6 +665,8 @@ h1:focus, #main:focus { outline: none; }
   .who-section { grid-template-columns: 1fr; }
   .io-explainer-grid, .about-layout, .contact-layout { grid-template-columns: 1fr; }
   .about-card { position: relative; top: auto; }
+  .about-layout { grid-template-areas: "main" "side" "values"; grid-template-rows: auto; }
+  .about-side { margin-top: clamp(40px, 6vw, 56px); }
   .about-photo { max-width: 420px; }
   .process-steps { grid-template-columns: 1fr; margin-top: 36px; }
   .process-steps::before { display: none; }
@@ -1387,7 +1391,7 @@ h1:focus, #main:focus { outline: none; }
   </section>
 
   <div class="about-layout">
-    <div>
+    <div class="about-main">
       <div class="section-label">About Aidan Suttlehan</div>
       <h2 class="section-title" style="margin-bottom:28px;">The person behind the practice</h2>
 
@@ -1396,13 +1400,6 @@ h1:focus, #main:focus { outline: none; }
         <p>In my day-to-day work, I'm part of a People Insights team embedded within an Enterprise Operations Research team at a Fortune 100 aerospace and defense company. I focus on organizational culture and employee listening, supporting a workforce of thousands of people. That means designing surveys, making sense of open-text responses at scale, and building executive-ready dashboards that turn complex people data into clear insight leaders can actually use.</p>
         <p>The same thinking runs through the rest of my work. As a psychometrician, I built certification and licensing exams that measure what they claim to measure and hold up to scrutiny, working alongside subject-matter experts who know their fields inside out. As an external consultant across a range of industries, especially nonprofit organizations and even federal agencies, I figured out what roles really demand of the people in them, aligned training and leadership development to match, and listened to employees and volunteers through surveys and open-ended comments that reveal what the numbers alone can't. Through all of it, I've always prioritized telling a story with the data and making sure it's actionable.</p>
         <p><strong>Suttle Insights exists because every organization deserves access to honest, substantive people analytics, and cost or headcount shouldn't be the reason it stays out of reach.</strong></p>
-      </div>
-
-      <div class="values-grid">
-        <div class="value-item"><h3>Substance without jargon</h3><p>The methodology is research-backed. The report is written for a business owner, not an academic journal.</p></div>
-        <div class="value-item"><h3>Defined scope, clean handoff</h3><p>Every engagement has a clear beginning, middle, and end. You know what you're getting before we start.</p></div>
-        <div class="value-item"><h3>No upselling</h3><p>I scope each engagement to what you actually need, not what generates the most follow-on work.</p></div>
-        <div class="value-item"><h3>Actionable, always</h3><p>A report that sits in a drawer isn't useful. Every deliverable is built around what you can actually do next.</p></div>
       </div>
     </div>
 
@@ -1440,6 +1437,13 @@ h1:focus, #main:focus { outline: none; }
         <dd>Denver, CO, serving clients remotely nationwide</dd>
       </dl>
     </aside>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-item"><h3>Substance without jargon</h3><p>The methodology is research-backed. The report is written for a business owner, not an academic journal.</p></div>
+      <div class="value-item"><h3>Defined scope, clean handoff</h3><p>Every engagement has a clear beginning, middle, and end. You know what you're getting before we start.</p></div>
+      <div class="value-item"><h3>No upselling</h3><p>I scope each engagement to what you actually need, not what generates the most follow-on work.</p></div>
+      <div class="value-item"><h3>Actionable, always</h3><p>A report that sits in a drawer isn't useful. Every deliverable is built around what you can actually do next.</p></div>
     </div>
   </div>
 
