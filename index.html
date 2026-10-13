@@ -563,8 +563,6 @@ h1:focus, #main:focus { outline: none; }
 .io-explainer-callout em { color: var(--accent-ink); }
 
 .about-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: clamp(40px, 6vw, 80px); align-items: start; padding: clamp(48px, 6vw, 80px) var(--pad-x); }
-.credentials-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 32px; }
-.credential-tag { font-size: 13px; font-weight: 600; letter-spacing: 0.02em; color: var(--blue-dark); background: rgba(37, 99, 168, 0.08); padding: 7px 14px; border-radius: 20px; }
 .about-body { font-size: 17px; line-height: 1.8; color: var(--text-light); max-width: 66ch; }
 .about-body p { margin-bottom: 22px; }
 .about-body p:last-child { margin-bottom: 0; }
@@ -575,6 +573,10 @@ h1:focus, #main:focus { outline: none; }
 .value-item h3 { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
 .value-item p { font-size: 15px; line-height: 1.7; color: var(--text-light); }
 
+.about-side { display: flex; flex-direction: column; gap: 24px; align-self: stretch; min-width: 0; }
+.about-photo { margin: 0; border-radius: 12px; overflow: hidden; background: #2b2d31; box-shadow: 0 1px 2px rgba(15, 32, 64, 0.08), 0 8px 24px rgba(15, 32, 64, 0.10); aspect-ratio: 4 / 5; }
+.about-photo[hidden] { display: none; }
+.about-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .about-card { position: sticky; top: calc(var(--nav-h) + 24px); background: var(--navy); color: #fff; border-radius: 12px; padding: 32px 30px; overflow: hidden; }
 .about-card::after { content: ''; position: absolute; right: -90px; bottom: -90px; width: 280px; height: 280px; pointer-events: none; background: radial-gradient(circle, rgba(200, 146, 42, 0.2) 0%, transparent 70%); }
 .about-card-title { position: relative; z-index: 1; font-family: var(--serif); font-size: 21px; font-weight: 700; margin-bottom: 18px; }
@@ -582,6 +584,9 @@ h1:focus, #main:focus { outline: none; }
 .about-card dt { font-size: 11.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-light); }
 .about-card dd { font-size: 15px; line-height: 1.55; color: rgba(255, 255, 255, 0.88); margin: 4px 0 18px; }
 .about-card dd:last-child { margin-bottom: 0; }
+.about-card dd ul { display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+.about-card dd li { position: relative; padding-left: 16px; }
+.about-card dd li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
 /* ---------- 8. Contact ---------- */
 .contact-layout { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: clamp(40px, 6vw, 80px); align-items: start; padding: clamp(44px, 6vw, 80px) var(--pad-x); }
@@ -656,7 +661,8 @@ h1:focus, #main:focus { outline: none; }
 @media (max-width: 900px) {
   .who-section { grid-template-columns: 1fr; }
   .io-explainer-grid, .about-layout, .contact-layout { grid-template-columns: 1fr; }
-  .about-card { position: relative; }
+  .about-card { position: relative; top: auto; }
+  .about-photo { max-width: 420px; }
   .process-steps { grid-template-columns: 1fr; margin-top: 36px; }
   .process-steps::before { display: none; }
   .process-step {
@@ -816,7 +822,7 @@ h1:focus, #main:focus { outline: none; }
       </div>
     </div>
     <div class="hero-stat-strip">
-      <div class="hero-stat"><span class="hero-stat-num">Fortune 500</span><span class="hero-stat-label">In-house people analytics</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">Fortune 100</span><span class="hero-stat-label">In-house people analytics</span></div>
       <div class="hero-stat"><span class="hero-stat-num">5</span><span class="hero-stat-label">Core service areas</span></div>
       <div class="hero-stat"><span class="hero-stat-num">20,000+</span><span class="hero-stat-label">Employees surveyed in practice</span></div>
       <div class="hero-stat"><span class="hero-stat-num">M.A.</span><span class="hero-stat-label">I/O Psychology, GMU</span></div>
@@ -1382,21 +1388,12 @@ h1:focus, #main:focus { outline: none; }
   <div class="about-layout">
     <div>
       <div class="section-label">About Aidan Suttlehan</div>
-      <h2 class="section-title" style="margin-bottom:8px;">The person behind the practice</h2>
-
-      <ul class="credentials-strip" aria-label="Credentials and focus areas">
-        <li class="credential-tag">M.A. I/O Psychology, GMU, 2023</li>
-        <li class="credential-tag">Organizational Development</li>
-        <li class="credential-tag">People Analytics</li>
-        <li class="credential-tag">Survey Design</li>
-        <li class="credential-tag">Psychometrics</li>
-        <li class="credential-tag">Denver, CO</li>
-      </ul>
+      <h2 class="section-title" style="margin-bottom:28px;">The person behind the practice</h2>
 
       <div class="about-body">
-        <p>I'm an Organizational Development professional and I/O Psychology practitioner with a background spanning employee listening, people analytics, psychometrics (the science of building reliable surveys and assessments), and applied consulting.</p>
-        <p>In my day-to-day work, I'm embedded on the Talent &amp; Organizational Capabilities team at a Fortune 500 aerospace and defense company, where I lead data strategy with a focus on organizational culture and employee listening, supporting a workforce of over 15,000 people. That means designing surveys, analyzing open-text responses at scale, and building executive-ready dashboards that translate complex people data into the kind of clear, actionable insight leaders can actually use.</p>
-        <p>Before that, I worked as an Associate Psychometrician and as a Human Capital Consultant, where I ran client engagements from the first scoping call and focus groups through final presentations and written deliverables. I've worked with federal government agencies, nonprofit organizations, and credentialing bodies.</p>
+        <p>I'm an Organizational Development professional and I/O Psychology practitioner. My work sits where psychology meets the practical side of running an organization, and my toolkit spans employee listening, people analytics, and applied consulting, along with psychometrics, the practice of measuring what you can't see directly, like engagement, skills, and potential, in a way you can trust.</p>
+        <p>In my day-to-day work, I'm part of a People Insights team embedded within an Enterprise Operations Research team at a Fortune 100 aerospace and defense company. I focus on organizational culture and employee listening, supporting a workforce of thousands of people. That means designing surveys, making sense of open-text responses at scale, and building executive-ready dashboards that turn complex people data into clear insight leaders can actually use.</p>
+        <p>The same thinking runs through the rest of my work. As a psychometrician, I built certification and licensing exams that measure what they claim to measure and hold up to scrutiny, working alongside subject-matter experts who know their fields inside out. As an external consultant across a range of industries, especially nonprofit organizations and even federal agencies, I figured out what roles really demand of the people in them, aligned training and leadership development to match, and listened to employees and volunteers through surveys and open-ended comments that reveal what the numbers alone can't. Through all of it, I've always prioritized telling a story with the data and making sure it's actionable.</p>
         <p><strong>Suttle Insights exists because every organization deserves access to honest, substantive people analytics, and cost or headcount shouldn't be the reason it stays out of reach.</strong></p>
       </div>
 
@@ -1408,20 +1405,40 @@ h1:focus, #main:focus { outline: none; }
       </div>
     </div>
 
-    <!-- To add a headshot later, place an <img> here and keep the card below. -->
+    <div class="about-side">
+    <figure class="about-photo">
+      <img src="/aidan-suttlehan.jpg" width="880" height="1100" loading="lazy" decoding="async"
+           alt="Aidan Suttlehan smiling in a navy suit, seated beside his dog, who is wearing a bow tie"
+           onerror="this.parentNode.hidden=true">
+    </figure>
     <aside class="about-card" aria-labelledby="glance-title">
       <h2 class="about-card-title" id="glance-title">At a glance</h2>
       <dl>
         <dt>Education</dt>
-        <dd>M.A. in Industrial-Organizational Psychology, George Mason University (summa cum laude)</dd>
+        <dd>M.A. in Industrial-Organizational Psychology, George Mason University</dd>
         <dt>Background</dt>
-        <dd>Psychometrics and human capital consulting, plus in-house employee listening and data strategy</dd>
-        <dt>Best fit</dt>
-        <dd>Organizations with roughly 10 to 300 employees and no internal people analytics team</dd>
+        <dd>
+          <ul>
+            <li>Exam development and psychometric analysis</li>
+            <li>Workforce assessment and competency modeling</li>
+            <li>Training and leadership development</li>
+            <li>Employee listening and survey analysis</li>
+            <li>Organizational culture analytics</li>
+            <li>Executive reporting and dashboards</li>
+          </ul>
+        </dd>
+        <dt>Beyond work</dt>
+        <dd>
+          <ul>
+            <li>Music production and audio engineering</li>
+            <li>Photography, with my camera along for every backcountry adventure</li>
+          </ul>
+        </dd>
         <dt>Location</dt>
         <dd>Denver, CO, serving clients remotely nationwide</dd>
       </dl>
     </aside>
+    </div>
   </div>
 
   <section class="cta-section" aria-labelledby="cta-about-title">
