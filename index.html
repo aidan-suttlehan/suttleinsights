@@ -302,6 +302,22 @@ h1:focus, #main:focus { outline: none; }
 .hero-sub { font-size: 18px; line-height: 1.7; color: rgba(255, 255, 255, 0.85); max-width: 620px; margin-bottom: 36px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
+/* First-visit intro (home hero only). app.js removes .hero--intro once it has played, or as soon as the
+   visitor lands on or moves to another page, so returning to Home shows the hero already in place.
+   Skipped entirely for visitors who prefer reduced motion. */
+@keyframes heroSlideUpBlur { from { opacity: 0; transform: translateY(22px); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes heroSlideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes heroSlideLeft { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
+@keyframes heroFadeOnly { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero--intro .hero-line1 { opacity: 0; animation: heroSlideUpBlur 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards; }
+  .hero--intro .hero-line2 { opacity: 0; animation: heroSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 2.1s forwards; }
+  .hero--intro .hero-eyebrow { opacity: 0; animation: heroSlideLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) 4s forwards; }
+  .hero--intro .hero-sub { opacity: 0; animation: heroSlideUp 0.7s ease 4s forwards; }
+  .hero--intro .hero-actions { opacity: 0; animation: heroSlideUp 0.7s ease 4.3s forwards; }
+  .hero--intro .hero-stat-strip { opacity: 0; animation: heroFadeOnly 0.7s ease 4.5s forwards; }
+}
+
 .hero-stat-strip {
   position: relative; z-index: 2;
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -788,11 +804,11 @@ h1:focus, #main:focus { outline: none; }
 <!-- ================= HOME ================= -->
 <div id="page-home" class="page active">
 
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero hero--intro" aria-labelledby="hero-title">
     <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-content">
       <p class="hero-eyebrow">People Analytics &middot; Team Assessments &middot; Workforce Diagnostics</p>
-      <h1 id="hero-title"><span class="hero-line1">Your people shape everything.</span><em>So ask the questions that matter.</em></h1>
+      <h1 id="hero-title"><span class="hero-line1">Your people shape everything.</span><em class="hero-line2">So ask the questions that matter.</em></h1>
       <p class="hero-sub">Most small and mid-sized organizations don't have a reliable way to learn what their people think, feel, and need. I bring the survey design, team assessment, and workforce analysis that large corporations rely on, at a fixed project fee built for your size.</p>
       <div class="hero-actions">
         <a class="btn-primary" href="#services" data-scroll="services">Explore Services</a>
@@ -1603,6 +1619,19 @@ h1:focus, #main:focus { outline: none; }
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
   var current = 'home';
 
+  /* ---------- Home hero intro: plays once on the first visit, never when returning to Home ---------- */
+  var heroEl = document.querySelector('.hero');
+  var heroIntroTimer = null;
+  function endHeroIntro() {
+    if (heroIntroTimer) { clearTimeout(heroIntroTimer); heroIntroTimer = null; }
+    if (heroEl) heroEl.classList.remove('hero--intro');
+  }
+  if (heroEl && heroEl.classList.contains('hero--intro')) {
+    var strip = heroEl.querySelector('.hero-stat-strip');
+    if (strip) strip.addEventListener('animationend', endHeroIntro);   /* last element in the sequence */
+    heroIntroTimer = setTimeout(endHeroIntro, 6500);                    /* safety net */
+  }
+
   /* ---------- Menus ---------- */
   function setServicesOpen(open) {
     servicesLi.classList.toggle('open', open);
@@ -1656,6 +1685,7 @@ h1:focus, #main:focus { outline: none; }
 
     pageEls.forEach(function (p) { p.classList.toggle('active', p.id === 'page-' + name); });
     current = name;
+    if (name !== 'home') endHeroIntro();
     document.title = cfg.title;
     updateNavState(name);
     closeMenus();
