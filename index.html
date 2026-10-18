@@ -362,7 +362,7 @@ h1:focus, #main:focus { outline: none; }
 .who-intro .section-body { margin-bottom: 18px; }
 .who-intro .section-body:last-child { margin-bottom: 0; }
 
-.who-items { background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(15, 32, 64, 0.13); border-radius: 6px; padding: 32px 32px 30px; }
+.who-items { position: sticky; top: calc(var(--nav-h) + 28px); background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(15, 32, 64, 0.13); border-radius: 6px; padding: 32px 32px 30px; }
 .who-items-lead { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--navy); margin-bottom: 8px; }
 .who-item { display: flex; gap: 14px; align-items: flex-start; padding: 13px 0; border-bottom: 1px solid rgba(15, 32, 64, 0.08); }
 .who-item:last-of-type { border-bottom: 0; }
@@ -535,6 +535,138 @@ h1:focus, #main:focus { outline: none; }
 .tl-name { display: block; font-size: 15.5px; font-weight: 600; line-height: 1.3; color: #fff; margin-top: 4px; }
 .tl-detail { display: block; font-size: 13.5px; line-height: 1.55; color: rgba(255, 255, 255, 0.74); margin-top: 6px; }
 
+/* Data graphics: static sample charts in plain HTML/CSS (no scripts, no motion) */
+.chart-card {
+  --c-mid: #B4BCCB;          /* navy at roughly 30% on white, for in-between bars */
+  --c-line: rgba(15, 32, 64, 0.5);
+  margin: 32px 0 36px; padding: 26px 26px 22px; min-width: 0;
+  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+}
+.who-intro .chart-card { margin: 28px 0 28px; }
+.chart-kicker { font-size: 11.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 8px; }
+.chart-title { font-family: var(--serif); font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--navy); }
+.chart-sub { margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--text-light); }
+.chart-plot { margin-top: 24px; max-width: 620px; font-size: 13px; line-height: 1.3; color: var(--navy); }
+.chart-takeaway { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.5; color: var(--navy); }
+.chart-caption { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--text-muted); }
+
+.chart-key { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; margin-bottom: 18px; font-size: 13px; color: var(--text); }
+.chart-key li { display: flex; align-items: center; gap: 7px; }
+.key-dot { flex: none; width: 11px; height: 11px; border-radius: 50%; }
+.key-dot--navy { background: var(--navy); }
+.key-dot--gold { background: var(--accent); }
+.key-sw { flex: none; width: 16px; height: 10px; border-radius: 3px; }
+
+/* 1. Index averages: horizontal bars with an overall-average reference line */
+.hb { --lab: 156px; --gap: 14px; }
+.hb-rows { position: relative; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+.hb-set { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; }
+.hb-set + .hb-set { padding-top: 14px; border-top: 1px solid var(--border); }
+.hb-group { margin: 0 0 2px calc(var(--lab) + var(--gap)); font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--navy); }
+.hb-row { display: grid; grid-template-columns: var(--lab) minmax(0, 1fr); column-gap: var(--gap); align-items: center; }
+.hb-label { font-size: 14px; line-height: 1.3; color: var(--navy); }
+.hb-track { display: flex; align-items: center; min-height: 26px; }
+.hb-bar { flex: none; height: 14px; border-radius: 7px; background: var(--c-mid); }
+.hb-row--strong .hb-bar { background: var(--navy); }
+.hb-row--start .hb-bar { background: var(--accent); }
+.hb-val { flex: none; margin-left: 6px; padding: 1px 4px; background: #fff; font-size: 14px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
+.hb-pill { flex: none; margin-left: 6px; padding: 3px 10px; border-radius: 999px; background: var(--accent-light); font-size: 11.5px; font-weight: 700; line-height: 1.3; color: var(--navy); white-space: nowrap; }
+.hb-avg {
+  position: absolute; z-index: 0; top: -6px; bottom: -8px;
+  left: calc(var(--lab) + var(--gap) + (100% - var(--lab) - var(--gap)) * var(--avg));
+  border-left: 1.5px dashed var(--c-line);
+}
+.hb-avg span { position: absolute; top: 100%; left: 0; transform: translateX(-50%); margin-top: 5px; white-space: nowrap; font-size: 12.5px; font-weight: 600; color: var(--navy); }
+
+/* 2. Team health: heat grid */
+.hm-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) repeat(4, minmax(0, 1fr)) minmax(0, 1.1fr); gap: 5px; align-items: stretch; }
+.hm-h { align-self: end; padding-bottom: 4px; text-align: center; font-size: 12px; font-weight: 600; line-height: 1.25; color: var(--navy); hyphens: manual; }
+.hm-h--avg { margin-left: 6px; }
+.hm-team { display: flex; align-items: center; font-size: 14px; font-weight: 600; color: var(--navy); }
+.hm-cell { display: flex; align-items: center; justify-content: center; height: 46px; border-radius: 6px; font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--navy); }
+.hm-cell--avg { margin-left: 6px; box-shadow: inset 0 0 0 1.5px var(--navy); }
+.hm-b1 { background: #F1ECDF; }
+.hm-b2 { background: #F3DDAA; }
+.hm-b3 { background: var(--accent-light); }
+.hm-b4 { background: #4C6088; color: #fff; }
+.hm-b5 { background: var(--navy); color: #fff; }
+.hm-key { margin: 14px 0 0; gap: 8px; align-items: center; }
+.hm-swatches { display: flex; gap: 3px; }
+.hm-sw { display: block; width: 22px; height: 12px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(15, 32, 64, 0.12); }
+.hm-notes { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.5; color: var(--text-light); }
+.hm-notes strong { color: var(--navy); font-weight: 700; }
+
+/* 3. Change readiness: 100% stacked bars plus a three-step strip */
+.sb-row + .sb-row { margin-top: 14px; }
+.sb-name { margin-bottom: 5px; font-size: 14px; font-weight: 600; color: var(--navy); }
+.sb-bar { display: grid; gap: 2px; height: 34px; border-radius: 17px; overflow: hidden; }
+.sb-seg { display: flex; align-items: center; justify-content: center; min-width: 0; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.sb-seg--1 { background: var(--navy); color: #fff; }
+.sb-seg--2 { background: #B9C2D4; color: var(--navy); }
+.sb-seg--3 { background: var(--accent); color: var(--navy); }
+.key-sw.sb-seg--1, .key-sw.sb-seg--2, .key-sw.sb-seg--3 { display: block; }
+.sb-steps { display: flex; list-style: none; max-width: 620px; margin-top: 26px; }
+.sb-step {
+  flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 7px;
+  margin-left: -10px; padding: 11px 16px 11px 24px; background: var(--cream-deep); font-size: 14px; font-weight: 600; color: var(--navy);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
+}
+.sb-step--first { margin-left: 0; padding-left: 16px; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); border-radius: 6px 0 0 6px; }
+.sb-step--last { padding-right: 12px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 14px 50%); border-radius: 0 6px 6px 0; }
+.sb-step-n { font-family: var(--serif); font-size: 15px; font-weight: 700; color: var(--accent-ink); }
+
+/* 4. Training needs: dumbbell */
+.db-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); column-gap: 14px; align-items: center; min-height: 50px; }
+.db-row + .db-row { border-top: 1px solid rgba(15, 32, 64, 0.07); }
+.db-label { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; padding: 6px 0; }
+.db-name { font-size: 14px; line-height: 1.3; color: var(--navy); }
+.db-pill { padding: 3px 10px; border-radius: 999px; background: var(--accent-light); font-size: 11.5px; font-weight: 700; line-height: 1.3; color: var(--navy); white-space: nowrap; }
+.db-track { position: relative; height: 22px; margin-right: 34px; }
+.db-track::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--border); }
+.db-link { position: absolute; top: calc(50% - 2px); height: 4px; border-radius: 2px; background: rgba(15, 32, 64, 0.28); }
+.db-dot { position: absolute; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(15, 32, 64, 0.22); }
+.db-dot--m { background: var(--navy); z-index: 1; }
+.db-dot--c { background: var(--accent); z-index: 2; }
+.db-v { position: absolute; top: 50%; transform: translateY(-50%); font-size: 13px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
+.db-v--l { right: calc(100% + 6px); }
+.db-v--r { left: calc(100% + 6px); }
+.db-axis { display: grid; grid-template-columns: 150px minmax(0, 1fr); column-gap: 14px; margin-top: 6px; }
+.db-axis-track { position: relative; grid-column: 2; height: 18px; margin-right: 34px; }
+.db-tick { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; color: var(--text-muted); }
+
+/* 5. Performance: dot strip */
+.ds-row + .ds-row { margin-top: 30px; }
+.ds-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px; }
+.ds-name { font-size: 14.5px; font-weight: 700; color: var(--navy); }
+.ds-range { font-size: 13px; color: var(--text-light); }
+.ds-plot { position: relative; height: 92px; margin: 28px 16px 0; border-bottom: 1px solid rgba(15, 32, 64, 0.35); }
+.ds-band { position: absolute; top: 6px; bottom: 0; border-radius: 14px 14px 0 0; background: var(--cream-deep); }
+.ds-avg { position: absolute; top: -8px; bottom: 0; width: 0; border-left: 2px solid var(--accent); }
+.ds-avg span { position: absolute; bottom: 100%; left: 0; transform: translateX(-50%); margin-bottom: 3px; white-space: nowrap; font-size: 12.5px; font-weight: 700; color: var(--navy); }
+.ds-stack { position: absolute; bottom: 4px; display: flex; flex-direction: column-reverse; gap: 4px; transform: translateX(-50%); }
+.ds-dot { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--navy); font-size: 12px; font-weight: 700; color: #fff; }
+.ds-ticks { position: relative; height: 20px; margin: 6px 16px 0; }
+.ds-tick { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; color: var(--text-muted); }
+
+/* 6. Home: expected vs. found, vertical paired columns */
+.ev-key { margin-bottom: 20px; }
+.key-sw--exp { background: transparent; border: 1.5px dashed var(--navy); }
+.key-sw--found { background: var(--navy); }
+.ev-plot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.3fr); gap: 4px; }
+.ev-cluster { padding: 8px 4px 10px; border-radius: 8px; }
+.ev-cluster--hi { background: rgba(200, 146, 42, 0.13); }
+.ev-cols { display: flex; justify-content: center; gap: 6px; height: 190px; border-bottom: 1px solid rgba(15, 32, 64, 0.35); }
+.ev-col { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; width: 28px; max-width: 42%; height: 100%; }
+.ev-val { margin-bottom: 4px; font-size: 13px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
+.ev-bar { display: block; width: 100%; border-radius: 6px 6px 0 0; }
+.ev-bar--exp { border: 1.5px dashed var(--navy); border-bottom: 0; background: transparent; }
+.ev-bar--found { background: var(--navy); }
+.ev-cluster--hi .ev-bar--found { background: var(--accent); }
+.ev-name { margin-top: 8px; text-align: center; font-size: 12.5px; font-weight: 600; line-height: 1.3; color: var(--navy); }
+.ev-tagrow { position: relative; display: flex; justify-content: flex-end; padding-top: 12px; }
+.ev-tagrow::before { content: ''; position: absolute; top: 4px; right: calc(14.5% - 5px); width: 10px; height: 10px; background: var(--accent-light); transform: rotate(45deg); border-radius: 2px; }
+.ev-tag { position: relative; max-width: 190px; padding: 6px 12px; border-radius: 8px; background: var(--accent-light); text-align: center; font-size: 12.5px; font-weight: 700; line-height: 1.35; color: var(--navy); }
+
 /* ---------- 7. About ---------- */
 .page-hero--simple { padding-bottom: 0; }
 .page-hero--simple .page-hero-content { padding-bottom: clamp(40px, 5vw, 60px); }
@@ -652,6 +784,7 @@ h1:focus, #main:focus { outline: none; }
 
 @media (max-width: 900px) {
   .who-section { grid-template-columns: 1fr; }
+  .who-items { position: static; }
   .io-explainer-grid, .about-layout, .contact-layout { grid-template-columns: 1fr; }
   .about-card { position: relative; top: auto; }
   .about-layout { grid-template-areas: "main" "side" "values"; grid-template-rows: auto; }
@@ -744,6 +877,31 @@ h1:focus, #main:focus { outline: none; }
   .hero h1 { font-size: 29px; }
 }
 
+@media (max-width: 560px) {
+  .chart-card { padding: 20px 16px 18px; }
+  .chart-plot { margin-top: 20px; }
+  .chart-takeaway { font-size: 16px; }
+  .hb { --lab: 0px; --gap: 0px; }
+  .hb-row { grid-template-columns: minmax(0, 1fr); row-gap: 5px; }
+  .hb-group { margin-left: 0; }
+  .hm-grid { grid-template-columns: minmax(0, 1.05fr) repeat(4, minmax(0, 1fr)) minmax(0, 1.1fr); gap: 4px; }
+  .hm-h { font-size: 11.5px; }
+  .hm-h--avg, .hm-cell--avg { margin-left: 3px; }
+  .hm-team { font-size: 13px; }
+  .hm-cell { height: 40px; font-size: 14px; }
+  .sb-step { gap: 5px; padding: 10px 12px 10px 20px; font-size: 13px; }
+  .sb-step--first { padding-left: 12px; }
+  .sb-step--last { padding-right: 8px; }
+  .db-row { grid-template-columns: minmax(0, 1fr); row-gap: 4px; min-height: 0; padding: 8px 0 6px; }
+  .db-label { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 0; }
+  .db-axis { grid-template-columns: minmax(0, 1fr); }
+  .db-axis-track { grid-column: 1; }
+  .ev-cols { height: 170px; }
+  .ev-cluster { padding: 6px 2px 8px; }
+  .ev-col { width: 26px; }
+  .ev-name { font-size: 12px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
@@ -824,7 +982,7 @@ h1:focus, #main:focus { outline: none; }
       <div class="svc-row svc-row--2">
         <a class="svc-card svc-card--featured" href="/employee-listening-survey-and-action-plan" data-page="svc-listening">
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></span>
-          <span class="svc-card-top"><span class="svc-card-format">Survey + Action Plan</span><span class="svc-lead-pill">Most Accessible &middot; Start Here</span></span>
+          <span class="svc-card-top"><span class="svc-card-format">Survey + Action Plan</span><span class="svc-lead-pill">Start Here</span></span>
           <h3>Employee Listening Survey &amp; Action Plan</h3>
           <p class="svc-card-q">What are our employees experiencing, and what should we do about it?</p>
           <p class="svc-card-desc">A custom survey of your workforce, analyzed for patterns and themes and delivered as a clear report with prioritized recommendations and an action plan you can use.</p>
@@ -874,14 +1032,61 @@ h1:focus, #main:focus { outline: none; }
     <div class="who-intro">
       <div class="section-label">Who I Work With</div>
       <h2 class="section-title" id="who-title">The same quality of insight, without the enterprise price tag</h2>
-      <p class="section-body">Suttle Insights is a deliberate nod to the nature of the work. The most valuable things this practice surfaces are rarely the ones anyone was already looking for.</p>
+      <p class="section-body">The name is a nod to the work itself. The most valuable things a good analysis turns up are rarely the ones anyone was already looking for.</p>
+        <figure class="chart-card" id="chart-home">
+          <div class="chart-head">
+            <p class="chart-kicker">What this looks like</p>
+            <h3 class="chart-title">Expected vs. found</h3>
+            <p class="chart-sub">Average score on a 1 to 5 scale</p>
+          </div>
+          <div class="chart-plot ev" role="img" aria-label="Three of the four topics came out close to what was expected, but first-90-days experience scored 2.7 against an expected 3.8, the finding no one was looking for.">
+            <ul class="chart-key ev-key">
+              <li><span class="key-sw key-sw--exp"></span>What you expected</li>
+              <li><span class="key-sw key-sw--found"></span>What the data showed</li>
+            </ul>
+            <div class="ev-plot">
+              <div class="ev-cluster">
+                <div class="ev-cols">
+                  <div class="ev-col"><span class="ev-val">2.8</span><span class="ev-bar ev-bar--exp" style="height:45%"></span></div>
+                  <div class="ev-col"><span class="ev-val">3.3</span><span class="ev-bar ev-bar--found" style="height:57.5%"></span></div>
+                </div>
+                <p class="ev-name">Pay and benefits</p>
+              </div>
+              <div class="ev-cluster">
+                <div class="ev-cols">
+                  <div class="ev-col"><span class="ev-val">3.0</span><span class="ev-bar ev-bar--exp" style="height:50%"></span></div>
+                  <div class="ev-col"><span class="ev-val">3.1</span><span class="ev-bar ev-bar--found" style="height:52.5%"></span></div>
+                </div>
+                <p class="ev-name">Workload</p>
+              </div>
+              <div class="ev-cluster">
+                <div class="ev-cols">
+                  <div class="ev-col"><span class="ev-val">4.0</span><span class="ev-bar ev-bar--exp" style="height:75%"></span></div>
+                  <div class="ev-col"><span class="ev-val">4.2</span><span class="ev-bar ev-bar--found" style="height:80%"></span></div>
+                </div>
+                <p class="ev-name">Manager Support</p>
+              </div>
+              <div class="ev-cluster ev-cluster--hi">
+                <div class="ev-cols">
+                  <div class="ev-col"><span class="ev-val">3.8</span><span class="ev-bar ev-bar--exp" style="height:70%"></span></div>
+                  <div class="ev-col"><span class="ev-val">2.7</span><span class="ev-bar ev-bar--found" style="height:42.5%"></span></div>
+                </div>
+                <p class="ev-name">First-90-days experience</p>
+              </div>
+            </div>
+            <div class="ev-tagrow"><span class="ev-tag">The finding no one was looking for.</span></div>
+          </div>
+          <p class="chart-takeaway">A good analysis finds what you didn't think to ask about.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+        </figure>
+
       <p class="section-body">I work with organizations of all sizes and sectors that have real workforce complexity but no internal analytics function to make sense of it. That might mean several roles, several levels, or offices in more than one location. It usually means making decisions about your people without a clear picture of what's actually going on.</p>
-      <p class="section-body">That has meant working with all types and sizes of businesses and organizations, from nonprofits and federal agencies to convenience stores. I/O psychology fits all of them, and Suttle Insights is built on the idea that any leader of people can benefit from these services, not just the ones who can afford a dedicated team.</p>
+      <p class="section-body">That has meant working with all types and sizes of businesses and organizations, from nonprofits and federal agencies to convenience stores. I/O psychology works in all of them, and Suttle Insights is built on the idea that any leader of people can put solid people analytics to work, not just the ones who can afford a dedicated team.</p>
     </div>
 
     <div class="who-items">
       <p class="who-items-lead">You might be a good fit if:</p>
-      <div class="who-item"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">You have anywhere between 10 and ~300 employees, and something is shifting, whether that's growth, change, or friction under the surface.</span></div>
+      <div class="who-item"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">Something is shifting in your organization, whether that's growth, change, or friction under the surface.</span></div>
       <div class="who-item"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">There are enough layers in your business that no one internally is set up to make sense of the full picture.</span></div>
       <div class="who-item"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">You're making calls about retention, structure, or culture without solid data behind them.</span></div>
       <div class="who-item"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">You can sense something's off with your people, but you don't have the data to pin down what.</span></div>
@@ -898,12 +1103,12 @@ h1:focus, #main:focus { outline: none; }
       <li class="process-step">
         <div class="step-num" aria-hidden="true">1</div>
         <h3 class="step-title">Discovery Call</h3>
-        <p class="step-desc">We talk through what's going on with your workforce, which service fits, and what the engagement would involve. Always free.</p>
+        <p class="step-desc">We talk through what's going on with your workforce, which engagement fits, and what it would involve. Always free.</p>
       </li>
       <li class="process-step">
         <div class="step-num" aria-hidden="true">2</div>
         <h3 class="step-title">Proposal &amp; Agreement</h3>
-        <p class="step-desc">You receive a written proposal with the scope, deliverables, timeline, and flat fee. Work begins once you've reviewed and approved it.</p>
+        <p class="step-desc">You receive a written proposal with the scope, deliverables, timeline, and fixed fee. Work begins once you've reviewed and approved it.</p>
       </li>
       <li class="process-step">
         <div class="step-num" aria-hidden="true">3</div>
@@ -913,7 +1118,7 @@ h1:focus, #main:focus { outline: none; }
       <li class="process-step">
         <div class="step-num" aria-hidden="true">4</div>
         <h3 class="step-title">Analysis &amp; Report</h3>
-        <p class="step-desc">You receive a clear, executive-ready report with findings, themes, and prioritized next steps, not raw data.</p>
+        <p class="step-desc">You receive a clear, plain-language report with findings, themes, and prioritized next steps, not raw data.</p>
       </li>
       <li class="process-step">
         <div class="step-num" aria-hidden="true">5</div>
@@ -926,7 +1131,7 @@ h1:focus, #main:focus { outline: none; }
   <section class="cta-section" aria-labelledby="cta-home-title">
     <div class="section-label">Get Started</div>
     <h2 class="section-title" id="cta-home-title">The first conversation is always free</h2>
-    <p class="section-body">Tell me what's going on with your workforce and we'll figure out together which service fits. No pitch, no pressure, and no commitment until you decide to move forward.</p>
+    <p class="section-body">Tell me what's going on with your workforce and we'll figure out together which engagement fits. No pitch, no pressure, and no commitment until you decide to move forward.</p>
     <a class="btn-primary" href="/contact" data-page="contact">Book a Free Discovery Call</a>
     <p class="cta-note">Discovery calls are 30 minutes by phone or video.</p>
   </section>
@@ -958,7 +1163,7 @@ h1:focus, #main:focus { outline: none; }
     <p class="service-tagline">Understand what your employees are experiencing, what's getting in the way, and what to do next.</p>
     <div class="service-inner">
       <div class="service-left">
-        <p class="service-description">In most workplaces, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey changes that. Maybe you want to get ahead of emerging concerns, maybe this is your <span class="hl">first formal look at what employees think</span>, or maybe you just want to confirm that what seems to be working is actually working. An Employee Listening Survey &amp; Action Plan gives you a professionally designed survey for your workforce, analyzed for patterns and themes, and delivered as a clear report you can <span class="hl">read, discuss, and act on</span>, with <span class="hl">specific, prioritized recommendations</span> and a concrete action plan.</p>
+        <p class="service-description">In most workplaces, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey changes that. Maybe you want to get ahead of emerging concerns, maybe this is your <span class="hl">first formal look at what employees think</span>, or maybe you just want to confirm that what seems to be working is actually working. An Employee Listening Survey &amp; Action Plan gives you a survey designed for your workforce, analyzed for patterns and themes, and delivered as a clear report you can <span class="hl">read, discuss, and act on</span>, with <span class="hl">specific, prioritized recommendations</span> and a concrete action plan.</p>
 
         <div class="els-reveals">
           <div class="els-reveal"><div class="els-reveal-bar"></div><div class="els-reveal-content">
@@ -978,6 +1183,52 @@ h1:focus, #main:focus { outline: none; }
         <p class="service-description">The report matters, but <span class="hl">what your organization does with it matters more</span>. Every engagement closes with a written plan and a live walkthrough with you and anyone else you'd like to include.</p>
         <p class="service-description">Every survey is built around your specific workforce. For smaller teams, the approach adapts: when response volume is limited, analysis leads with themes and careful interpretation rather than statistics, so the findings stay honest and useful regardless of headcount.</p>
 
+        <figure class="chart-card" id="chart-listening">
+          <div class="chart-head">
+            <p class="chart-kicker">A sample of what you'd see</p>
+            <h2 class="chart-title">Index averages</h2>
+            <p class="chart-sub">Average score on a 1 to 5 scale</p>
+          </div>
+          <div class="chart-plot hb" role="img" aria-label="Engagement, Manager Support, and Role Clarity are strengths to protect, and Growth and Development, at 3.0, is the best place to start.">
+            <div class="hb-rows">
+              <div class="hb-set hb-set--strong">
+                <p class="hb-group">Strengths to protect</p>
+                <div class="hb-row hb-row--strong">
+                  <div class="hb-label">Engagement</div>
+                  <div class="hb-track"><span class="hb-bar" style="width:77.5%"></span><span class="hb-val">4.1</span></div>
+                </div>
+                <div class="hb-row hb-row--strong">
+                  <div class="hb-label">Manager Support</div>
+                  <div class="hb-track"><span class="hb-bar" style="width:75%"></span><span class="hb-val">4.0</span></div>
+                </div>
+                <div class="hb-row hb-row--strong">
+                  <div class="hb-label">Role Clarity</div>
+                  <div class="hb-track"><span class="hb-bar" style="width:70%"></span><span class="hb-val">3.8</span></div>
+                </div>
+              </div>
+              <div class="hb-set">
+                <div class="hb-row hb-row--mid">
+                  <div class="hb-label">Communication</div>
+                  <div class="hb-track"><span class="hb-bar" style="width:60%"></span><span class="hb-val">3.4</span></div>
+                </div>
+                <div class="hb-row hb-row--mid">
+                  <div class="hb-label">Recognition</div>
+                  <div class="hb-track"><span class="hb-bar" style="width:55%"></span><span class="hb-val">3.2</span></div>
+                </div>
+              </div>
+              <div class="hb-set">
+                <div class="hb-row hb-row--start">
+                  <div class="hb-label">Growth and Development</div>
+                  <div class="hb-track"><span class="hb-bar" style="width:50%"></span><span class="hb-val">3.0</span><span class="hb-pill">Start here</span></div>
+                </div>
+              </div>
+              <div class="hb-avg" style="--avg:0.65"><span>Overall average 3.6</span></div>
+            </div>
+          </div>
+          <p class="chart-takeaway">Scores become a short list of what to do first.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+        </figure>
+
         <h2 class="dimensions-label">Survey topics, drawn from validated research scales</h2>
         <div class="dimension-tags">
           <span class="dim-tag">Employee Engagement</span><span class="dim-tag">Organizational Commitment</span><span class="dim-tag">Job Satisfaction</span>
@@ -987,7 +1238,7 @@ h1:focus, #main:focus { outline: none; }
         </div>
 
         <div class="tl">
-          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">~4&ndash;6 weeks</span></div>
+          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:4">
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Survey Design</span><span class="tl-detail">Kick-off call, a short organization questionnaire, and the custom survey build</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 2&ndash;3</span><span class="tl-name">Survey Deployment</span><span class="tl-detail">Anonymous survey delivered with communication support</span></li>
@@ -1039,7 +1290,7 @@ h1:focus, #main:focus { outline: none; }
     </div>
     <div class="svc-stats-bar">
       <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">4&ndash;6 weeks</span></div>
-      <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Survey + stakeholder interview</span></div>
+      <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Survey + intake interview</span></div>
       <div class="svc-stat-item"><span class="svc-stat-label">Key Output</span><span class="svc-stat-val">Team Dynamics Report</span></div>
       <div class="svc-stat-item"><span class="svc-stat-label">Team Size</span><span class="svc-stat-val">Typically 5&ndash;25 members</span></div>
     </div>
@@ -1063,8 +1314,67 @@ h1:focus, #main:focus { outline: none; }
             <p class="thd-layer-desc">Whether team members share an accurate understanding of how their work connects and who depends on whom. This is often the least visible source of friction.</p></div>
         </div>
 
-        <p class="service-description">What makes this service different is the <span class="hl">perception gap analysis</span>. Most team surveys just report averages, and averages hide the real story: when one team member rates trust at a 5 and another rates it at a 2, the average of 3.5 tells you almost nothing useful. This assessment looks at the spread in answers directly, mapping <span class="hl">where team members see things differently</span>. That disagreement is often the <span class="hl">most useful signal</span> you'll get.</p>
+        <p class="service-description">What makes this diagnostic different is the <span class="hl">perception gap analysis</span>. Most team surveys just report averages, and averages hide the real story: when one team member rates trust at a 5 and another rates it at a 2, the average of 3.5 tells you almost nothing useful. This assessment looks at the spread in answers directly, mapping <span class="hl">where team members see things differently</span>. That disagreement is often the <span class="hl">most useful signal</span> you'll get.</p>
         <p class="service-description">The deliverable is a Team Dynamics Report with clear areas of strength, prioritized opportunities, and <span class="hl">targeted, evidence-based recommendations</span> your team lead or manager can put to work.</p>
+
+        <figure class="chart-card" id="chart-team">
+          <div class="chart-head">
+            <p class="chart-kicker">A sample of what you'd see</p>
+            <h2 class="chart-title">Team health by team and area</h2>
+            <p class="chart-sub">Average score on a 1 to 5 scale</p>
+          </div>
+          <div class="chart-plot hm" role="img" aria-label="Team C is a bright spot at 4.4 on average, while Team D has the clearest opportunity at 2.9, so the same organization tells a different story team by team.">
+            <div class="hm-grid">
+            <div class="hm-corner" aria-hidden="true"></div>
+            <div class="hm-h">Trust</div>
+            <div class="hm-h">Workload</div>
+            <div class="hm-h">Collabo&shy;ration</div>
+            <div class="hm-h">Clarity</div>
+            <div class="hm-h hm-h--avg">Team average</div>
+            <div class="hm-team">Team A</div>
+            <div class="hm-cell hm-b4">4.0</div>
+            <div class="hm-cell hm-b2">3.3</div>
+            <div class="hm-cell hm-b3">3.9</div>
+            <div class="hm-cell hm-b3">3.6</div>
+            <div class="hm-cell hm-cell--avg hm-b3">3.7</div>
+            <div class="hm-team">Team B</div>
+            <div class="hm-cell hm-b3">3.8</div>
+            <div class="hm-cell hm-b2">3.0</div>
+            <div class="hm-cell hm-b3">3.5</div>
+            <div class="hm-cell hm-b2">3.3</div>
+            <div class="hm-cell hm-cell--avg hm-b2">3.4</div>
+            <div class="hm-team">Team C</div>
+            <div class="hm-cell hm-b5">4.6</div>
+            <div class="hm-cell hm-b4">4.1</div>
+            <div class="hm-cell hm-b5">4.5</div>
+            <div class="hm-cell hm-b4">4.4</div>
+            <div class="hm-cell hm-cell--avg hm-b4">4.4</div>
+            <div class="hm-team">Team D</div>
+            <div class="hm-cell hm-b2">3.0</div>
+            <div class="hm-cell hm-b1">2.4</div>
+            <div class="hm-cell hm-b2">3.2</div>
+            <div class="hm-cell hm-b1">2.9</div>
+            <div class="hm-cell hm-cell--avg hm-b1">2.9</div>
+            <div class="hm-team">Team E</div>
+            <div class="hm-cell hm-b3">3.5</div>
+            <div class="hm-cell hm-b2">3.3</div>
+            <div class="hm-cell hm-b3">3.8</div>
+            <div class="hm-cell hm-b3">3.9</div>
+            <div class="hm-cell hm-cell--avg hm-b3">3.6</div>
+            </div>
+          </div>
+          <ul class="chart-key hm-key">
+            <li>Lower</li>
+            <li class="hm-swatches" aria-hidden="true"><span class="hm-sw hm-b1"></span><span class="hm-sw hm-b2"></span><span class="hm-sw hm-b3"></span><span class="hm-sw hm-b4"></span><span class="hm-sw hm-b5"></span></li>
+            <li>Higher</li>
+          </ul>
+          <ul class="hm-notes">
+            <li><strong>Team C</strong> is a bright spot worth learning from.</li>
+            <li><strong>Team D</strong> has the clearest opportunity.</li>
+          </ul>
+          <p class="chart-takeaway">Same organization, different teams, different stories.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+        </figure>
 
         <h2 class="dimensions-label">What the assessment examines</h2>
         <div class="dimension-tags">
@@ -1074,9 +1384,9 @@ h1:focus, #main:focus { outline: none; }
         </div>
 
         <div class="tl">
-          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">~4&ndash;6 weeks</span></div>
+          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:5">
-            <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Interviews</span><span class="tl-detail">Context call and brief stakeholder interview</span></li>
+            <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Interviews</span><span class="tl-detail">Context call and a brief interview</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 1&ndash;2</span><span class="tl-name">Survey Design</span><span class="tl-detail">Custom team survey built</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 2&ndash;4</span><span class="tl-name">Data Collection</span><span class="tl-detail">Anonymous team member survey</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 4&ndash;5</span><span class="tl-name">Analysis</span><span class="tl-detail">Averages, spread, and perception gap analysis</span></li>
@@ -1088,7 +1398,7 @@ h1:focus, #main:focus { outline: none; }
       <aside class="service-includes-box" aria-labelledby="inc-team">
         <h2 class="includes-title" id="inc-team">What's Included</h2>
         <ul class="includes-list">
-          <li>Intake call and brief stakeholder interview to understand team context, goals, and what you're trying to learn</li>
+          <li>Intake call and a brief interview to understand team context, goals, and what you're trying to learn</li>
           <li>Custom team survey built on validated measures of team processes and climate</li>
           <li>Perception gap analysis that looks at both the averages and the spread in answers across each area</li>
           <li>Team Dynamics Report with findings for each area, prioritized opportunities, and evidence-based recommendations</li>
@@ -1141,9 +1451,55 @@ h1:focus, #main:focus { outline: none; }
           <div class="change-stage change-stage--ahead"><div class="change-stage-when">On the horizon</div><h2 class="change-stage-title">Change you're about to introduce</h2><p class="change-stage-desc">A decision has been made. Before you announce it, understand whether your workforce is ready and what needs to be in place for it to stick.</p></div>
         </div>
 
-        <p class="service-description">The Change Readiness Pulse &amp; Roadmap is a structured diagnostic built for all of it: changes that are coming, changes that are underway, and <span class="hl">changes that are already behind you</span>. It's also the right service for organizations that want a deeper, more targeted look at employee sentiment and engagement around a specific strategic initiative or challenge, beyond what a general listening survey covers.</p>
+        <p class="service-description">The Change Readiness Pulse &amp; Roadmap is a structured diagnostic built for all of it: changes that are coming, changes that are underway, and <span class="hl">changes that are already behind you</span>. It's also the right choice for organizations that want a deeper, more targeted look at employee sentiment and engagement around a specific initiative or challenge, beyond what a general listening survey covers.</p>
         <p class="service-description">It combines focus groups with a survey built around the factors that matter most: change readiness, management support, communication clarity, and employee confidence. Together, these build a complete picture of where your organization stands and what specific steps will move things forward.</p>
         <p class="service-description">The deliverable is a report that <span class="hl">explains what's driving the results</span>, with prioritized findings and tailored recommendations you can act on. It's practical, evidence-based, and <span class="hl">specific to your organization's</span> culture, structure, and resources, built from <span class="hl">what your people actually told me</span>, not generic best practices pulled from somewhere else.</p>
+
+        <figure class="chart-card" id="chart-change">
+          <div class="chart-head">
+            <p class="chart-kicker">A sample of what you'd see</p>
+            <h2 class="chart-title">Readiness by group</h2>
+            <p class="chart-sub">Share of each group in each category</p>
+          </div>
+          <div class="chart-plot sb" role="img" aria-label="Readiness differs by group, from 34 percent ready to go on the front line to 70 percent among senior managers, so the plan has to differ too.">
+            <ul class="chart-key sb-key">
+              <li><span class="key-sw sb-seg--1"></span>Ready to go</li>
+              <li><span class="key-sw sb-seg--2"></span>Ready with answers</li>
+              <li><span class="key-sw sb-seg--3"></span>Needs a clearer why</li>
+            </ul>
+            <div class="sb-row">
+              <p class="sb-name">Front-line staff</p>
+              <div class="sb-bar" style="grid-template-columns:34fr 38fr 28fr">
+                <span class="sb-seg sb-seg--1">34%</span><span class="sb-seg sb-seg--2">38%</span><span class="sb-seg sb-seg--3">28%</span>
+              </div>
+            </div>
+            <div class="sb-row">
+              <p class="sb-name">Supervisors</p>
+              <div class="sb-bar" style="grid-template-columns:46fr 36fr 18fr">
+                <span class="sb-seg sb-seg--1">46%</span><span class="sb-seg sb-seg--2">36%</span><span class="sb-seg sb-seg--3">18%</span>
+              </div>
+            </div>
+            <div class="sb-row">
+              <p class="sb-name">Office staff</p>
+              <div class="sb-bar" style="grid-template-columns:58fr 28fr 14fr">
+                <span class="sb-seg sb-seg--1">58%</span><span class="sb-seg sb-seg--2">28%</span><span class="sb-seg sb-seg--3">14%</span>
+              </div>
+            </div>
+            <div class="sb-row">
+              <p class="sb-name">Senior managers</p>
+              <div class="sb-bar" style="grid-template-columns:70fr 18fr 12fr">
+                <span class="sb-seg sb-seg--1">70%</span><span class="sb-seg sb-seg--2">18%</span><span class="sb-seg sb-seg--3">12%</span>
+              </div>
+            </div>
+          </div>
+          <ol class="sb-steps" aria-label="The roadmap in three steps">
+            <li class="sb-step sb-step--first"><span class="sb-step-n">1</span>Listen</li>
+            <li class="sb-step"><span class="sb-step-n">2</span>Prepare</li>
+            <li class="sb-step sb-step--last"><span class="sb-step-n">3</span>Roll out</li>
+          </ol>
+          <p class="chart-takeaway">Readiness differs by group, so the plan does too.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+        </figure>
 
         <h2 class="dimensions-label">What the assessment examines</h2>
         <div class="dimension-tags">
@@ -1153,7 +1509,7 @@ h1:focus, #main:focus { outline: none; }
         </div>
 
         <div class="tl">
-          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">~6&ndash;8 weeks</span></div>
+          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 6&ndash;8 weeks</span></div>
           <ol class="tl-track" style="--steps:5">
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Scoping</span><span class="tl-detail">Change context, who to involve, and the engagement plan</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 2&ndash;3</span><span class="tl-name">Focus Groups</span><span class="tl-detail">Structured conversations with workforce segments</span></li>
@@ -1167,14 +1523,14 @@ h1:focus, #main:focus { outline: none; }
       <aside class="service-includes-box" aria-labelledby="inc-diagnostic">
         <h2 class="includes-title" id="inc-diagnostic">What's Included</h2>
         <ul class="includes-list">
-          <li>Scoping call to understand the change, context, and key stakeholders</li>
+          <li>Scoping call to understand the change, the context, and who needs to be involved</li>
           <li>Signed engagement overview confirming scope before work begins</li>
           <li>Focus group(s) to surface perceptions, concerns, and recurring themes</li>
           <li>Survey built on validated change readiness measures (readiness, support, confidence, communication)</li>
           <li>Combined analysis of focus group themes and survey results</li>
           <li>Change Readiness Report with what's driving the results and prioritized recommendations</li>
         </ul>
-        <p class="addon-note"><strong>Add-ons available:</strong> Additional focus group sessions, pulse survey at 60 days post-change, or stakeholder presentation support.</p>
+        <p class="addon-note"><strong>Add-ons available:</strong> Additional focus group sessions, pulse survey at 60 days post-change, or help presenting the findings to others in your organization.</p>
       </aside>
     </div>
   </div>
@@ -1206,7 +1562,7 @@ h1:focus, #main:focus { outline: none; }
       <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">4&ndash;6 weeks</span></div>
       <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Interviews + survey</span></div>
       <div class="svc-stat-item"><span class="svc-stat-label">Key Output</span><span class="svc-stat-val">Prioritized training report</span></div>
-      <div class="svc-stat-item"><span class="svc-stat-label">Decision It Enables</span><span class="svc-stat-val">Commit, redirect, or hold</span></div>
+      <div class="svc-stat-item"><span class="svc-stat-label">Helps You Decide</span><span class="svc-stat-val">Invest, redirect, or hold off</span></div>
     </div>
   </div>
 
@@ -1229,11 +1585,68 @@ h1:focus, #main:focus { outline: none; }
             <div class="tna-item">Motivation or environment, not capability</div></div>
         </div>
 
-        <p class="service-description">A Training Needs Assessment helps you figure out which one you're dealing with <span class="hl">before committing the budget</span>. Through interviews and a targeted survey of the people in the role, this service maps what the job actually requires, where <span class="hl">genuine skill gaps</span> exist, and <span class="hl">whether training is the right solution</span>. The result is a clear, prioritized report that tells you what to train, who needs it most, and why, along with any non-training barriers that should be addressed first.</p>
-        <p class="service-description">This service identifies what training is needed and why. It does not design or deliver the training itself. The report gives you the clarity to <span class="hl">make a confident development investment</span>. For organizations that want a head start on structuring the training itself, a high-level learning outline for the top-priority need is available as an add-on.</p>
+        <p class="service-description">A Training Needs Assessment helps you figure out which one you're dealing with <span class="hl">before committing the budget</span>. Through interviews and a targeted survey of the people in the role, this assessment maps what the job actually requires, where <span class="hl">genuine skill gaps</span> exist, and <span class="hl">whether training is the right solution</span>. The result is a clear, prioritized report that tells you what to train, who needs it most, and why, along with any non-training barriers that should be addressed first.</p>
+        <p class="service-description">This assessment identifies what training is needed and why. It does not design or deliver the training itself. The report gives you the information you need to <span class="hl">decide where to invest in development</span>. For organizations that want a head start on structuring the training itself, a high-level learning outline for the top-priority need is available as an add-on.</p>
+
+        <figure class="chart-card" id="chart-tna">
+          <div class="chart-head">
+            <p class="chart-kicker">A sample of what you'd see</p>
+            <h2 class="chart-title">What matters and where confidence stands</h2>
+            <p class="chart-sub">Average score on a 1 to 5 scale, widest gap first</p>
+          </div>
+          <div class="chart-plot db" role="img" aria-label="Coaching conversations has the widest gap between how much it matters, 4.4, and confidence today, 2.8, which makes it the best place to invest first.">
+            <ul class="chart-key db-key">
+              <li><span class="key-dot key-dot--navy"></span>How much it matters</li>
+              <li><span class="key-dot key-dot--gold"></span>Confidence today</li>
+            </ul>
+            <div class="db-row">
+              <div class="db-label"><span class="db-name">Coaching conversations</span><span class="db-pill">Invest here first</span></div>
+              <div class="db-track">
+                <span class="db-link" style="left:45%;width:40%"></span>
+                <span class="db-dot db-dot--m" style="left:85%"><span class="db-v db-v--r">4.4</span></span>
+                <span class="db-dot db-dot--c" style="left:45%"><span class="db-v db-v--l">2.8</span></span>
+              </div>
+            </div>
+            <div class="db-row">
+              <div class="db-label"><span class="db-name">Giving feedback</span></div>
+              <div class="db-track">
+                <span class="db-link" style="left:55%;width:32.5%"></span>
+                <span class="db-dot db-dot--m" style="left:87.5%"><span class="db-v db-v--r">4.5</span></span>
+                <span class="db-dot db-dot--c" style="left:55%"><span class="db-v db-v--l">3.2</span></span>
+              </div>
+            </div>
+            <div class="db-row">
+              <div class="db-label"><span class="db-name">Prioritizing work</span></div>
+              <div class="db-track">
+                <span class="db-link" style="left:62.5%;width:20%"></span>
+                <span class="db-dot db-dot--m" style="left:82.5%"><span class="db-v db-v--r">4.3</span></span>
+                <span class="db-dot db-dot--c" style="left:62.5%"><span class="db-v db-v--l">3.5</span></span>
+              </div>
+            </div>
+            <div class="db-row">
+              <div class="db-label"><span class="db-name">Delegating</span></div>
+              <div class="db-track">
+                <span class="db-link" style="left:60%;width:12.5%"></span>
+                <span class="db-dot db-dot--m" style="left:72.5%"><span class="db-v db-v--r">3.9</span></span>
+                <span class="db-dot db-dot--c" style="left:60%"><span class="db-v db-v--l">3.4</span></span>
+              </div>
+            </div>
+            <div class="db-row">
+              <div class="db-label"><span class="db-name">Using new tools</span></div>
+              <div class="db-track">
+                <span class="db-link" style="left:60%;width:10%"></span>
+                <span class="db-dot db-dot--m" style="left:60%"><span class="db-v db-v--l">3.4</span></span>
+                <span class="db-dot db-dot--c" style="left:70%"><span class="db-v db-v--r">3.8</span></span>
+              </div>
+            </div>
+            <div class="db-axis"><div class="db-axis-track"><span class="db-tick" style="left:0%">1</span><span class="db-tick" style="left:25%">2</span><span class="db-tick" style="left:50%">3</span><span class="db-tick" style="left:75%">4</span><span class="db-tick" style="left:100%">5</span></div></div>
+          </div>
+          <p class="chart-takeaway">The widest gap is where training is most worth doing.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+        </figure>
 
         <div class="tl">
-          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">~4&ndash;6 weeks</span></div>
+          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:4">
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Goals &amp; Context</span><span class="tl-detail">Interview: goals, context, and training history</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 1&ndash;2</span><span class="tl-name">Role &amp; Skills Review</span><span class="tl-detail">What the role requires and where performance gaps exist</span></li>
@@ -1285,7 +1698,7 @@ h1:focus, #main:focus { outline: none; }
       <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">4&ndash;6 weeks</span></div>
       <div class="svc-stat-item"><span class="svc-stat-label">Primary Method</span><span class="svc-stat-val">Structured interviews</span></div>
       <div class="svc-stat-item"><span class="svc-stat-label">Key Output</span><span class="svc-stat-val">Standards + Review Toolkit</span></div>
-      <div class="svc-stat-item"><span class="svc-stat-label">Durability</span><span class="svc-stat-val">Built for recurring use</span></div>
+      <div class="svc-stat-item"><span class="svc-stat-label">Designed For</span><span class="svc-stat-val">Recurring use</span></div>
     </div>
   </div>
 
@@ -1302,12 +1715,46 @@ h1:focus, #main:focus { outline: none; }
           <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><h2 class="perf-row-name">Owners &amp; Leaders</h2></div><div class="perf-row-gain"><p><strong>A defensible, evidence-based process.</strong> Performance decisions grounded in observable behavior, not gut feel, are easier to explain, support, and stand behind when it matters.</p></div></div>
         </div>
 
-        <p class="service-description">The work starts with conversations with the people closest to the role: managers who evaluate it and the people who do it. Their real examples of what strong, solid, and developing performance looks like become the foundation, rather than generic competency frameworks imported from somewhere else. The depth scales to the need: a practical role scorecard when you need clear standards quickly, or a more thoroughly tested review instrument when the role is more complex or the stakes are higher.</p>
+        <p class="service-description">The work starts with conversations with the people closest to the role: managers who evaluate it and the people who do it. Their real examples of what strong, solid, and developing performance looks like become the foundation, rather than generic competency frameworks imported from somewhere else. The depth scales to the need: a practical role scorecard when you need clear standards quickly, or a more thoroughly tested review tool when the role is more complex or the stakes are higher.</p>
+
+        <figure class="chart-card" id="chart-prd">
+          <div class="chart-head">
+            <p class="chart-kicker">A sample of what you'd see</p>
+            <h2 class="chart-title">Five reviewers, one employee</h2>
+            <p class="chart-sub">Each dot is one reviewer's rating, from 1 to 5</p>
+          </div>
+          <div class="chart-plot ds" role="img" aria-label="Five reviewers rating the same employee average 3.6 both before and with shared standards, but their ratings spread from 2 to 5 before and only from 3 to 4 with shared standards.">
+          <div class="ds-row">
+            <div class="ds-head"><p class="ds-name">Before shared standards</p><p class="ds-range">Ratings from 2 to 5</p></div>
+            <div class="ds-plot">
+              <div class="ds-band" style="left:calc(25% - 16px);width:calc(75% + 32px)"></div>
+              <div class="ds-avg" style="left:65%"><span>Average 3.6</span></div>
+              <div class="ds-stack" style="left:25%"><span class="ds-dot">2</span></div>
+              <div class="ds-stack" style="left:50%"><span class="ds-dot">3</span></div>
+              <div class="ds-stack" style="left:75%"><span class="ds-dot">4</span><span class="ds-dot">4</span></div>
+              <div class="ds-stack" style="left:100%"><span class="ds-dot">5</span></div>
+            </div>
+            <div class="ds-ticks" aria-hidden="true"><span class="ds-tick" style="left:0%">1</span><span class="ds-tick" style="left:25%">2</span><span class="ds-tick" style="left:50%">3</span><span class="ds-tick" style="left:75%">4</span><span class="ds-tick" style="left:100%">5</span></div>
+          </div>
+          <div class="ds-row">
+            <div class="ds-head"><p class="ds-name">With shared standards</p><p class="ds-range">Ratings from 3 to 4</p></div>
+            <div class="ds-plot">
+              <div class="ds-band" style="left:calc(50% - 16px);width:calc(25% + 32px)"></div>
+              <div class="ds-avg" style="left:65%"><span>Average 3.6</span></div>
+              <div class="ds-stack" style="left:50%"><span class="ds-dot">3</span><span class="ds-dot">3</span></div>
+              <div class="ds-stack" style="left:75%"><span class="ds-dot">4</span><span class="ds-dot">4</span><span class="ds-dot">4</span></div>
+            </div>
+            <div class="ds-ticks" aria-hidden="true"><span class="ds-tick" style="left:0%">1</span><span class="ds-tick" style="left:25%">2</span><span class="ds-tick" style="left:50%">3</span><span class="ds-tick" style="left:75%">4</span><span class="ds-tick" style="left:100%">5</span></div>
+          </div>
+          </div>
+          <p class="chart-takeaway">Same performance, read the same way.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+        </figure>
 
         <div class="tl">
-          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">~4&ndash;6 weeks</span></div>
+          <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:4">
-            <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Doc Review</span><span class="tl-detail">Role brief, process review, and job description analysis</span></li>
+            <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Document Review</span><span class="tl-detail">Role brief, process review, and job description analysis</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 1&ndash;2</span><span class="tl-name">Interviews</span><span class="tl-detail">Structured sessions with managers and the people in the role</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 2&ndash;4</span><span class="tl-name">Standards Development</span><span class="tl-detail">Custom standards built from real behavioral examples</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 4&ndash;6</span><span class="tl-name">Delivery &amp; Rater Guide</span><span class="tl-detail">Review tool, rater guide, and walkthrough session</span></li>
@@ -1364,7 +1811,7 @@ h1:focus, #main:focus { outline: none; }
           <li>What does our workforce need to succeed?</li>
           <li>Where should we invest in development?</li>
         </ul>
-        <p class="org-psych-close">I/O psychologists are trained to design the surveys, assessments, and diagnostic tools that answer these questions reliably, analyze the data with appropriate methodology, and translate findings into recommendations grounded in evidence rather than instinct.</p>
+        <p class="org-psych-close">I/O psychologists are trained to design the surveys, assessments, and diagnostic tools that answer these questions reliably, analyze the data with the right methods, and translate findings into recommendations grounded in evidence rather than instinct.</p>
       </div>
       <div class="io-explainer-callout">
         <p>It is one of the most practically applicable fields in psychology, and <em>one of the least visible to the small businesses that could benefit from it most.</em></p>
@@ -1450,7 +1897,7 @@ h1:focus, #main:focus { outline: none; }
   <div class="contact-layout">
     <div class="contact-info">
       <h2>Start with a discovery call</h2>
-      <p>Not sure which service fits? Don't have a clear scope yet? That's what the discovery call is for. It's 30 minutes, no commitment, and completely free.</p>
+      <p>Not sure where to start? Don't have a clear scope yet? That's what the discovery call is for. It's 30 minutes, no commitment, and completely free.</p>
 
       <div class="contact-detail">
         <div class="contact-detail-item">
@@ -1469,7 +1916,7 @@ h1:focus, #main:focus { outline: none; }
 
       <div class="discovery-box">
         <h3>What to expect from the discovery call</h3>
-        <p>We'll talk through your workforce situation, what questions you're trying to answer, and the size and structure of your organization. By the end of 30 minutes, you'll have a clear sense of which service fits and what it would cost. If it's a good fit, a written proposal with the scope, timeline, and fixed fee follows, with no surprise hourly invoices later. No pressure, no pitch.</p>
+        <p>We'll talk through your workforce situation, what questions you're trying to answer, and the size and structure of your organization. By the end of 30 minutes, you'll have a clear sense of which engagement fits and what it would cost. If it's a good fit, a written proposal with the scope, timeline, and fixed fee follows, with no surprise hourly invoices later. No pressure, no pitch.</p>
       </div>
     </div>
 
@@ -1516,19 +1963,19 @@ h1:focus, #main:focus { outline: none; }
         <div class="form-group">
           <label for="company-size">Organization size</label>
           <select id="company-size" name="company_size">
-            <option value="">Select employee count...</option>
-            <option>Under 25 employees</option>
-            <option>25&ndash;75 employees</option>
-            <option>76&ndash;150 employees</option>
-            <option>151&ndash;300 employees</option>
-            <option>300+ employees</option>
+            <option value="">Select number of people...</option>
+            <option>Under 10 people</option>
+            <option>10&ndash;49 people</option>
+            <option>50&ndash;149 people</option>
+            <option>150&ndash;299 people</option>
+            <option>300+ people</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="service">Which service interests you?</label>
+          <label for="service">What are you interested in?</label>
           <select id="service" name="service_interest">
-            <option value="">Select a service area...</option>
+            <option value="">Select one...</option>
             <option>Employee Listening Survey &amp; Action Plan</option>
             <option>Team Health Diagnostic</option>
             <option>Change Readiness Pulse &amp; Roadmap</option>
