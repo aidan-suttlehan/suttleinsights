@@ -309,11 +309,11 @@ h1:focus, #main:focus { outline: none; }
 @keyframes heroSlideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes heroSlideLeft { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: no-preference) {
-  .hero--intro .hero-line1 { opacity: 0; animation: heroSlideUpBlur 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards; }
-  .hero--intro .hero-line2 { opacity: 0; animation: heroSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 2.1s forwards; }
-  .hero--intro .hero-eyebrow { opacity: 0; animation: heroSlideLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) 4s forwards; }
-  .hero--intro .hero-sub { opacity: 0; animation: heroSlideUp 0.7s ease 4s forwards; }
-  .hero--intro .hero-actions { opacity: 0; animation: heroSlideUp 0.7s ease 4.3s forwards; }
+  .hero--intro .hero-line1 { opacity: 0; animation: heroSlideUpBlur 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards; }
+  .hero--intro .hero-line2 { opacity: 0; animation: heroSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards; }
+  .hero--intro .hero-eyebrow { opacity: 0; animation: heroSlideLeft 0.5s cubic-bezier(0.22, 1, 0.36, 1) 1.6s forwards; }
+  .hero--intro .hero-sub { opacity: 0; animation: heroSlideUp 0.6s ease 1.6s forwards; }
+  .hero--intro .hero-actions { opacity: 0; animation: heroSlideUp 0.6s ease 1.8s forwards; }
 }
 
 
@@ -332,9 +332,9 @@ h1:focus, #main:focus { outline: none; }
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .svc-card:hover { border-color: rgba(37, 99, 168, 0.55); box-shadow: 0 8px 28px rgba(15, 32, 64, 0.08); }
-.svc-card--featured { border-top: 3px solid var(--blue); }
+.svc-card--featured { border-top: 3px solid var(--blue); padding-top: 28px; }  /* 3px border + 28px = same title line as the 1px-border cards */
 .svc-card-icon { position: absolute; top: 18px; right: 18px; color: rgba(200, 146, 42, 0.5); pointer-events: none; }
-.svc-card-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-bottom: 14px; padding-right: 48px; }
+.svc-card-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; min-height: 24px; margin-bottom: 14px; padding-right: 48px; }  /* min-height keeps every card title on one line across a row */
 .svc-card-format { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); }
 .svc-lead-pill {
   font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
@@ -546,8 +546,10 @@ h1:focus, #main:focus { outline: none; }
 .chart-kicker { font-size: 11.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 8px; }
 .chart-title { font-family: var(--serif); font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--navy); }
 .chart-sub { margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--text-light); }
-.chart-plot { margin-top: 24px; max-width: 620px; font-size: 13px; line-height: 1.3; color: var(--navy); }
+.chart-plot { margin-top: 24px; font-size: 13px; line-height: 1.3; color: var(--navy); }
 .chart-takeaway { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.5; color: var(--navy); }
+.chart-lead { margin-top: 16px; padding: 12px 14px; border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; background: var(--cream-deep); font-size: 14px; line-height: 1.5; color: var(--navy); }
+.chart-lead strong { font-weight: 700; }
 .chart-caption { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--text-muted); }
 
 .chart-key { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; margin-bottom: 18px; font-size: 13px; color: var(--text); }
@@ -700,24 +702,62 @@ h1:focus, #main:focus { outline: none; }
 .ds-ticks { position: relative; height: 20px; margin: 6px 16px 0; }
 .ds-tick { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; color: var(--text-muted); }
 
-/* 6. Home: expected vs. found, vertical paired columns */
-.ev-key { margin-bottom: 20px; }
-.key-sw--exp { background: transparent; border: 1.5px dashed var(--navy); }
-.key-sw--found { background: var(--navy); }
-.ev-plot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.3fr); gap: 4px; }
-.ev-cluster { padding: 8px 4px 10px; border-radius: 8px; }
-.ev-cluster--hi { background: rgba(200, 146, 42, 0.13); }
-.ev-cols { display: flex; justify-content: center; gap: 6px; height: 190px; border-bottom: 1px solid rgba(15, 32, 64, 0.35); }
-.ev-col { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; width: 28px; max-width: 42%; height: 100%; }
-.ev-val { margin-bottom: 4px; font-size: 13px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
-.ev-bar { display: block; width: 100%; border-radius: 6px 6px 0 0; }
-.ev-bar--exp { border: 1.5px dashed var(--navy); border-bottom: 0; background: transparent; }
-.ev-bar--found { background: var(--navy); }
-.ev-cluster--hi .ev-bar--found { background: var(--accent); }
-.ev-name { margin-top: 8px; text-align: center; font-size: 12.5px; font-weight: 600; line-height: 1.3; color: var(--navy); }
-.ev-tagrow { position: relative; display: flex; justify-content: flex-end; padding-top: 12px; }
-.ev-tagrow::before { content: ''; position: absolute; top: 4px; right: calc(14.5% - 5px); width: 10px; height: 10px; background: var(--accent-light); transform: rotate(45deg); border-radius: 2px; }
-.ev-tag { position: relative; max-width: 190px; padding: 6px 12px; border-radius: 8px; background: var(--accent-light); text-align: center; font-size: 12.5px; font-weight: 700; line-height: 1.35; color: var(--navy); }
+/* 6. Home: one organization, five lenses (a simplified overview of all five engagements) */
+.mz { --scope: 128px; container: mz / inline-size; }
+.mz-key { margin-bottom: 8px; }
+.key-dot--faint { background: rgba(15, 32, 64, 0.16); }
+.key-sw--gold { background: var(--accent); }
+.mz-tiers { list-style: none; }
+.mz-tier { display: grid; grid-template-columns: var(--scope) minmax(0, 1fr); column-gap: 18px; padding: 18px 0; border-top: 1px solid var(--border); }
+.mz-tier:last-child { border-bottom: 1px solid var(--border); }
+.mz-scope { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.mz-scope-text { display: flex; flex-direction: column; gap: 3px; }
+.mz-scope-note { font-size: 12.5px; line-height: 1.35; color: var(--text-light); }
+.mz-scope-name { font-size: 13px; font-weight: 700; line-height: 1.25; color: var(--navy); }
+.mz-org { display: flex; gap: 9px; }
+.mz-team { display: grid; grid-template-columns: repeat(2, 9px); grid-auto-rows: 9px; gap: 4px; }
+.mz-team i { display: block; border-radius: 50%; background: rgba(15, 32, 64, 0.16); }
+.mz-team i.on { background: var(--navy); }
+.mz-svcs { list-style: none; }
+.mz-svc { display: grid; grid-template-columns: minmax(0, 1fr) 92px; column-gap: 16px; align-items: center; }
+.mz-svc + .mz-svc { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.mz-name { font-size: 14.5px; font-weight: 700; line-height: 1.25; color: var(--navy); }
+.mz-q { margin-top: 3px; font-size: 13.5px; line-height: 1.4; color: var(--text-light); }
+.mz-out { margin-top: 5px; font-size: 12.5px; line-height: 1.35; color: var(--text-light); }
+.mz-out span { font-weight: 700; color: var(--navy); }
+.mz-out span::after { content: ':'; }
+.mg { display: flex; flex-direction: column; justify-content: center; gap: 8px; width: 92px; height: 46px; }
+.mg-row, .mg-db, .mg-lv { position: relative; display: block; height: 9px; }
+.mg-bar { position: absolute; left: 0; top: 0; height: 9px; border-radius: 5px; background: var(--navy); }
+.mg-bar--gold { background: var(--accent); }
+.mg-tick { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; border-radius: 1px; background: var(--navy); box-shadow: 0 0 0 1px #fff; }
+.mg--bins { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; }
+.mg-bin { display: flex; flex-direction: column-reverse; align-items: center; gap: 2px; padding-bottom: 3px; border-radius: 4px; background: rgba(15, 32, 64, 0.05); }
+.mg-bin--in { background: var(--cream-deep); }
+.mg-bin i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--navy); }
+.mg-bin--gold i { background: var(--accent); }
+.mg-stack { display: grid; gap: 1px; height: 9px; border-radius: 5px; overflow: hidden; }
+.mg-stack i:nth-child(1) { background: var(--navy); }
+.mg-stack i:nth-child(2) { background: #B9C2D4; }
+.mg-stack i:nth-child(3) { background: var(--accent); }
+.mg-db::before { content: ''; position: absolute; left: 0; right: 0; top: 4px; border-top: 1px solid var(--border); }
+.mg-link { position: absolute; top: 3px; height: 3px; border-radius: 2px; background: rgba(15, 32, 64, 0.28); }
+.mg-dot { position: absolute; top: 0; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; box-shadow: 0 0 0 1.5px #fff; }
+.mg-dot--m { background: var(--navy); }
+.mg-dot--c { background: var(--accent); }
+.mg-lv { display: flex; align-items: center; gap: 5px; }
+.mg-meter { display: flex; gap: 2px; }
+.mg-meter i { display: block; width: 9px; height: 6px; border-radius: 2px; background: rgba(15, 32, 64, 0.14); }
+.mg-meter i.on { background: var(--navy); }
+.mg-sq { flex: none; width: 6px; height: 6px; margin-left: 3px; border-radius: 1.5px; background: var(--accent); }
+.mg-ln { flex: 1; height: 4px; border-radius: 2px; background: rgba(15, 32, 64, 0.16); }
+
+/* Home overview: when the card is narrow (phones, and the two-column layout just above tablet width), stack each scope above its engagements */
+@container mz (max-width: 470px) {
+  .mz-tier { grid-template-columns: minmax(0, 1fr); row-gap: 14px; padding: 16px 0; }
+  .mz-scope { flex-direction: row; align-items: center; gap: 14px; }
+  .mz-svc { column-gap: 12px; }
+}
 
 /* ---------- 7. About ---------- */
 .page-hero--simple { padding-bottom: 0; }
@@ -956,10 +996,6 @@ h1:focus, #main:focus { outline: none; }
   .db-label { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 0; }
   .db-axis { grid-template-columns: minmax(0, 1fr); }
   .db-axis-track { grid-column: 1; }
-  .ev-cols { height: 170px; }
-  .ev-cluster { padding: 6px 2px 8px; }
-  .ev-col { width: 26px; }
-  .ev-name { font-size: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1052,8 +1088,8 @@ h1:focus, #main:focus { outline: none; }
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg></span>
           <span class="svc-card-top"><span class="svc-card-format">Team Assessment</span></span>
           <h3>Team Health Diagnostic</h3>
-          <p class="svc-card-q">How is this team really working together, and what would help?</p>
-          <p class="svc-card-desc">Get a clear, honest picture of how a specific team is functioning right now, whether you're protecting strong performance or working through friction that's starting to affect results.</p>
+          <p class="svc-card-q">How is each team really working together, and what would help?</p>
+          <p class="svc-card-desc">Get a clear, honest picture of how a team, several teams, or a whole workforce is functioning right now, whether you're protecting strong performance or working through friction that's starting to affect results.</p>
           <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
       </div>
@@ -1095,49 +1131,92 @@ h1:focus, #main:focus { outline: none; }
       <p class="section-body">The name is a nod to the work itself. The most valuable things a good analysis turns up are rarely the ones anyone was already looking for.</p>
         <figure class="chart-card" id="chart-home">
           <div class="chart-head">
-            <p class="chart-kicker">What this looks like</p>
-            <h3 class="chart-title">Expected vs. found</h3>
-            <p class="chart-sub">Average score on a 1 to 5 scale</p>
+            <p class="chart-kicker">A simplified view</p>
+            <h3 class="chart-title">One organization, five ways to look at it</h3>
+            <p class="chart-sub">The general kinds of insight each engagement can surface</p>
           </div>
-          <div class="chart-plot ev" role="img" aria-label="Three of the four topics came out close to what was expected, but first-90-days experience scored 2.7 against an expected 3.8, the finding no one was looking for.">
-            <ul class="chart-key ev-key">
-              <li><span class="key-sw key-sw--exp"></span>What you expected</li>
-              <li><span class="key-sw key-sw--found"></span>What the data showed</li>
+          <div class="chart-plot mz">
+            <ul class="chart-key mz-key">
+              <li><span class="key-dot key-dot--navy"></span>Who&rsquo;s in view</li>
+              <li><span class="key-dot key-dot--faint"></span>Not in this lens</li>
+              <li><span class="key-sw key-sw--gold"></span>What stands out</li>
             </ul>
-            <div class="ev-plot">
-              <div class="ev-cluster">
-                <div class="ev-cols">
-                  <div class="ev-col"><span class="ev-val">2.8</span><span class="ev-bar ev-bar--exp" style="height:45%"></span></div>
-                  <div class="ev-col"><span class="ev-val">3.3</span><span class="ev-bar ev-bar--found" style="height:57.5%"></span></div>
-                </div>
-                <p class="ev-name">Pay and benefits</p>
-              </div>
-              <div class="ev-cluster">
-                <div class="ev-cols">
-                  <div class="ev-col"><span class="ev-val">3.0</span><span class="ev-bar ev-bar--exp" style="height:50%"></span></div>
-                  <div class="ev-col"><span class="ev-val">3.1</span><span class="ev-bar ev-bar--found" style="height:52.5%"></span></div>
-                </div>
-                <p class="ev-name">Workload</p>
-              </div>
-              <div class="ev-cluster">
-                <div class="ev-cols">
-                  <div class="ev-col"><span class="ev-val">4.0</span><span class="ev-bar ev-bar--exp" style="height:75%"></span></div>
-                  <div class="ev-col"><span class="ev-val">4.2</span><span class="ev-bar ev-bar--found" style="height:80%"></span></div>
-                </div>
-                <p class="ev-name">Manager Support</p>
-              </div>
-              <div class="ev-cluster ev-cluster--hi">
-                <div class="ev-cols">
-                  <div class="ev-col"><span class="ev-val">3.8</span><span class="ev-bar ev-bar--exp" style="height:70%"></span></div>
-                  <div class="ev-col"><span class="ev-val">2.7</span><span class="ev-bar ev-bar--found" style="height:42.5%"></span></div>
-                </div>
-                <p class="ev-name">First-90-days experience</p>
-              </div>
+            <ul class="mz-tiers">
+        <li class="mz-tier">
+          <div class="mz-scope">
+            <div class="mz-org" aria-hidden="true"><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+            <div class="mz-scope-text">
+              <p class="mz-scope-name">The whole workforce</p>
             </div>
-            <div class="ev-tagrow"><span class="ev-tag">The finding no one was looking for.</span></div>
           </div>
-          <p class="chart-takeaway">A good analysis finds what you didn't think to ask about.</p>
-          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+          <ul class="mz-svcs">
+            <li class="mz-svc">
+              <div class="mz-text">
+                <p class="mz-name">Employee Listening Survey</p>
+                <p class="mz-q">What are our employees experiencing?</p>
+                <p class="mz-out"><span>You get</span> Executive report + action roadmap</p>
+              </div>
+              <div class="mg" aria-hidden="true"><span class="mg-row"><i class="mg-bar" style="width:86%"></i><b class="mg-tick" style="left:72%"></b></span><span class="mg-row"><i class="mg-bar" style="width:70%"></i><b class="mg-tick" style="left:58%"></b></span><span class="mg-row"><i class="mg-bar mg-bar--gold" style="width:50%"></i><b class="mg-tick" style="left:72%"></b></span></div>
+            </li>
+            <li class="mz-svc">
+              <div class="mz-text">
+                <p class="mz-name">Change Readiness Pulse</p>
+                <p class="mz-q">How is our workforce experiencing this change?</p>
+                <p class="mz-out"><span>You get</span> Readiness report + roadmap</p>
+              </div>
+              <div class="mg" aria-hidden="true"><span class="mg-stack" style="grid-template-columns:62fr 24fr 14fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:49fr 31fr 20fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:41fr 33fr 26fr"><i></i><i></i><i></i></span></div>
+            </li>
+          </ul>
+        </li>
+        <li class="mz-tier">
+          <div class="mz-scope">
+            <div class="mz-org" aria-hidden="true"><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+            <div class="mz-scope-text">
+              <p class="mz-scope-name">One team, or several</p>
+              <p class="mz-scope-note">Or the whole workforce, as one team</p>
+            </div>
+          </div>
+          <ul class="mz-svcs">
+            <li class="mz-svc">
+              <div class="mz-text">
+                <p class="mz-name">Team Health Diagnostic</p>
+                <p class="mz-q">How is each team really working together?</p>
+                <p class="mz-out"><span>You get</span> Team Dynamics Report</p>
+              </div>
+              <div class="mg mg--bins" aria-hidden="true"><span class="mg-bin"></span><span class="mg-bin mg-bin--in mg-bin--gold"><i></i><i></i></span><span class="mg-bin mg-bin--in"></span><span class="mg-bin mg-bin--in"><i></i><i></i></span><span class="mg-bin mg-bin--in"><i></i></span></div>
+            </li>
+          </ul>
+        </li>
+        <li class="mz-tier">
+          <div class="mz-scope">
+            <div class="mz-org" aria-hidden="true"><span class="mz-team"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span><span class="mz-team"><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span><span class="mz-team"><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="mz-team"><i></i><i></i><i></i><i></i><i class="on"></i><i></i></span></div>
+            <div class="mz-scope-text">
+              <p class="mz-scope-name">One role</p>
+            </div>
+          </div>
+          <ul class="mz-svcs">
+            <li class="mz-svc">
+              <div class="mz-text">
+                <p class="mz-name">Training Needs Assessment</p>
+                <p class="mz-q">Is training the right fix?</p>
+                <p class="mz-out"><span>You get</span> Prioritized training report</p>
+              </div>
+              <div class="mg" aria-hidden="true"><span class="mg-db"><i class="mg-link" style="left:22%;width:56%"></i><i class="mg-dot mg-dot--c" style="left:22%"></i><i class="mg-dot mg-dot--m" style="left:78%"></i></span><span class="mg-db"><i class="mg-link" style="left:40%;width:34%"></i><i class="mg-dot mg-dot--c" style="left:40%"></i><i class="mg-dot mg-dot--m" style="left:74%"></i></span><span class="mg-db"><i class="mg-link" style="left:54%;width:16%"></i><i class="mg-dot mg-dot--c" style="left:54%"></i><i class="mg-dot mg-dot--m" style="left:70%"></i></span></div>
+            </li>
+            <li class="mz-svc">
+              <div class="mz-text">
+                <p class="mz-name">Performance Standards</p>
+                <p class="mz-q">What does good performance look like in this role?</p>
+                <p class="mz-out"><span>You get</span> Standards + review toolkit</p>
+              </div>
+              <div class="mg" aria-hidden="true"><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i class="on"></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span></div>
+            </li>
+          </ul>
+        </li>
+            </ul>
+          </div>
+          <p class="chart-takeaway">Whichever lens fits, you finish with a clear deliverable and a live walkthrough.</p>
+          <figcaption class="chart-caption">A simplified overview, not client results. Real findings are specific to your organization.</figcaption>
         </figure>
 
       <p class="section-body">I work with organizations of all sizes and sectors that have real workforce complexity but no internal analytics function to make sense of it. That might mean several roles, several levels, or offices in more than one location. It usually means making decisions about your people without a clear picture of what's actually going on.</p>
@@ -1321,7 +1400,7 @@ h1:focus, #main:focus { outline: none; }
           <li>Custom survey built around your workforce and goals</li>
           <li>Recruitment and reminder email templates ready for you to send</li>
           <li>Full analysis: results by question, results by topic, and themes from open-text comments</li>
-          <li>Benchmark comparisons for your results wherever reliable comparison data is available</li>
+          <li>Benchmark comparisons for your results, where reliable comparison data is available</li>
           <li>Executive Summary report with findings, employee quotes, and prioritized recommendations</li>
           <li>Live walkthrough of the results</li>
           <li>Action Roadmap: top priorities, recommended actions, and guidance on communicating results back to employees</li>
@@ -1382,13 +1461,62 @@ h1:focus, #main:focus { outline: none; }
 
         <p class="service-description">What makes this diagnostic different is the <span class="hl">perception gap analysis</span>. Most team surveys just report averages, and averages hide the real story: when one team member rates trust at a 5 and another rates it at a 2, the average of 3.5 tells you almost nothing useful. This assessment looks at the spread in answers directly, mapping <span class="hl">where team members see things differently</span>. That disagreement is often the <span class="hl">most useful signal</span> you'll get.</p>
         <p class="service-description">The survey also has each team member rate the team&rsquo;s core tasks on two things: how important the task is, and how much it depends on other people. Seeing those ratings side by side shows where everyone agrees on what matters and where people see the work differently.</p>
+        <p class="service-description">It works for a single team, several teams compared side by side, or an entire workforce treated as one team.</p>
         <p class="service-description">The deliverable is a Team Dynamics Report with clear areas of strength, prioritized opportunities, and <span class="hl">targeted, evidence-based recommendations</span> your team lead or manager can put to work.</p>
+
+        <figure class="chart-card" id="chart-team-tasks">
+          <div class="chart-head">
+            <p class="chart-kicker">A sample of what you'd see</p>
+            <h2 class="chart-title">Task ratings from each team member</h2>
+            <p class="chart-sub">Each dot is one team member's rating, from 1 to 5</p>
+          </div>
+          <div class="chart-plot tk" role="img" aria-label="Team members agree that making decisions together is important, but their ratings of how much it depends on teammates run from 2 to 5, the widest disagreement of any task.">
+            <ul class="chart-key tk-key">
+              <li><span class="key-dot key-dot--navy"></span>One team member</li>
+              <li><span class="key-dot key-dot--gold key-dot--ring"></span>Widest disagreement</li>
+              <li><span class="key-sw key-sw--range"></span>Range of ratings</li>
+            </ul>
+            <div class="tk-head">
+              <div class="tk-spacer" aria-hidden="true"></div>
+              <div><p class="tk-colname">Importance</p><p class="tk-coldesc">How much the task matters</p><div class="tk-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+              <div><p class="tk-colname">Interdependence</p><p class="tk-coldesc">How much it relies on teammates</p><div class="tk-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Setting priorities for the week</p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>4.3</strong></span><span>Range 3&ndash;5</span></p></div>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.8</strong></span><span>Range 3&ndash;5</span></p></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Sharing project updates</p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.8</strong></span><span>Range 3&ndash;5</span></p></div>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>4.5</strong></span><span>Range 4&ndash;5</span></p></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Making decisions together<span class="tk-pill">Widest disagreement</span></p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>4.5</strong></span><span>Range 4&ndash;5</span></p></div>
+              <div class="tk-cell tk-cell--gold"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.7</strong></span><span>Range 2&ndash;5</span></p></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Handing off work between people</p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin"></span></div><p class="tk-stat"><span>Average <strong>3.5</strong></span><span>Range 3&ndash;4</span></p></div>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.8</strong></span><span>Range 3&ndash;5</span></p></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Handling routine requests</p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin"></span><span class="tk-bin"></span></div><p class="tk-stat"><span>Average <strong>2.5</strong></span><span>Range 2&ndash;3</span></p></div>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin"></span><span class="tk-bin"></span></div><p class="tk-stat"><span>Average <strong>2.2</strong></span><span>Range 1&ndash;3</span></p></div>
+            </div>
+          </div>
+          <p class="chart-takeaway">Wide spreads show where teammates see the work differently.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+        </figure>
 
         <figure class="chart-card" id="chart-team">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
             <h2 class="chart-title">Team health by team and area</h2>
             <p class="chart-sub">Average score on a 1 to 5 scale</p>
+            <p class="chart-lead"><strong>For workforces with multiple teams</strong>, the work often differs from team to team. Each team can be rated on its own tasks and responsibilities, then compared side by side.</p>
           </div>
           <div class="chart-plot hm" role="img" aria-label="Team C is a bright spot at 4.4 on average, while Team D has the clearest opportunity at 2.9, so the same organization tells a different story team by team.">
             <div class="hm-grid">
@@ -1440,53 +1568,6 @@ h1:focus, #main:focus { outline: none; }
             <li><strong>Team D</strong> has the clearest opportunity.</li>
           </ul>
           <p class="chart-takeaway">Same organization, different teams, different stories.</p>
-          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
-        </figure>
-
-        <figure class="chart-card" id="chart-team-tasks">
-          <div class="chart-head">
-            <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Task ratings from each team member</h2>
-            <p class="chart-sub">Each dot is one team member's rating, from 1 to 5</p>
-          </div>
-          <div class="chart-plot tk" role="img" aria-label="Team members agree that making decisions together is important, but their ratings of how much it depends on teammates run from 2 to 5, the widest disagreement of any task.">
-            <ul class="chart-key tk-key">
-              <li><span class="key-dot key-dot--navy"></span>One team member</li>
-              <li><span class="key-dot key-dot--gold key-dot--ring"></span>Widest disagreement</li>
-              <li><span class="key-sw key-sw--range"></span>Range of ratings</li>
-            </ul>
-            <div class="tk-head">
-              <div class="tk-spacer" aria-hidden="true"></div>
-              <div><p class="tk-colname">Importance</p><p class="tk-coldesc">How much the task matters</p><div class="tk-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
-              <div><p class="tk-colname">Interdependence</p><p class="tk-coldesc">How much it relies on teammates</p><div class="tk-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
-            </div>
-            <div class="tk-row">
-              <p class="tk-task">Setting priorities for the week</p>
-              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>4.3</strong></span><span>Range 3&ndash;5</span></p></div>
-              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.8</strong></span><span>Range 3&ndash;5</span></p></div>
-            </div>
-            <div class="tk-row">
-              <p class="tk-task">Sharing project updates</p>
-              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.8</strong></span><span>Range 3&ndash;5</span></p></div>
-              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>4.5</strong></span><span>Range 4&ndash;5</span></p></div>
-            </div>
-            <div class="tk-row">
-              <p class="tk-task">Making decisions together<span class="tk-pill">Widest disagreement</span></p>
-              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>4.5</strong></span><span>Range 4&ndash;5</span></p></div>
-              <div class="tk-cell tk-cell--gold"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.7</strong></span><span>Range 2&ndash;5</span></p></div>
-            </div>
-            <div class="tk-row">
-              <p class="tk-task">Handing off work between people</p>
-              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin"></span></div><p class="tk-stat"><span>Average <strong>3.5</strong></span><span>Range 3&ndash;4</span></p></div>
-              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.8</strong></span><span>Range 3&ndash;5</span></p></div>
-            </div>
-            <div class="tk-row">
-              <p class="tk-task">Handling routine requests</p>
-              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin"></span><span class="tk-bin"></span></div><p class="tk-stat"><span>Average <strong>2.5</strong></span><span>Range 2&ndash;3</span></p></div>
-              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin"></span><span class="tk-bin"></span></div><p class="tk-stat"><span>Average <strong>2.2</strong></span><span>Range 1&ndash;3</span></p></div>
-            </div>
-          </div>
-          <p class="chart-takeaway">Wide spreads show where teammates see the work differently.</p>
           <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
         </figure>
 
@@ -2248,7 +2329,7 @@ h1:focus, #main:focus { outline: none; }
   if (heroEl && heroEl.classList.contains('hero--intro')) {
     var lastEl = heroEl.querySelector('.hero-actions');
     if (lastEl) lastEl.addEventListener('animationend', endHeroIntro);  /* last element in the sequence */
-    heroIntroTimer = setTimeout(endHeroIntro, 6500);                    /* safety net */
+    heroIntroTimer = setTimeout(endHeroIntro, 3500);                    /* safety net */
   }
 
   /* ---------- Menus ---------- */
