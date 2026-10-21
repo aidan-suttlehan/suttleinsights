@@ -557,26 +557,26 @@ h1:focus, #main:focus { outline: none; }
 .key-dot--gold { background: var(--accent); }
 .key-sw { flex: none; width: 16px; height: 10px; border-radius: 3px; }
 
-/* 1. Index averages: horizontal bars with an overall-average reference line */
-.hb { --lab: 156px; --gap: 14px; }
-.hb-rows { position: relative; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
-.hb-set { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; }
-.hb-set + .hb-set { padding-top: 14px; border-top: 1px solid var(--border); }
-.hb-group { margin: 0 0 2px calc(var(--lab) + var(--gap)); font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--navy); }
-.hb-row { display: grid; grid-template-columns: var(--lab) minmax(0, 1fr); column-gap: var(--gap); align-items: center; }
+/* 1. Index averages: horizontal bars with a benchmark tick on every row */
+.hb { --lab: 164px; --num: 104px; --gap: 14px; }
+.hb-key { margin-bottom: 8px; }
+.hb-sw--above { background: var(--navy); }
+.hb-sw--below { background: var(--c-mid); }
+.hb-sw--start { background: var(--accent); }
+.key-tick { flex: none; width: 3px; height: 16px; margin: 0 6.5px; border-radius: 1px; background: var(--navy); }
+.hb-rows { display: flex; flex-direction: column; }
+.hb-row { display: grid; grid-template-columns: var(--lab) minmax(0, 1fr) var(--num); column-gap: var(--gap); align-items: center; padding: 9px 0; }
+.hb-row + .hb-row { border-top: 1px solid var(--border); }
 .hb-label { font-size: 14px; line-height: 1.3; color: var(--navy); }
-.hb-track { display: flex; align-items: center; min-height: 26px; }
-.hb-bar { flex: none; height: 14px; border-radius: 7px; background: var(--c-mid); }
-.hb-row--strong .hb-bar { background: var(--navy); }
+.hb-track { position: relative; display: flex; align-items: center; height: 28px; }
+.hb-bar { flex: none; height: 14px; border-radius: 7px; background: var(--navy); }
+.hb-row--below .hb-bar { background: var(--c-mid); }
 .hb-row--start .hb-bar { background: var(--accent); }
-.hb-val { flex: none; margin-left: 6px; padding: 1px 4px; background: #fff; font-size: 14px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
-.hb-pill { flex: none; margin-left: 6px; padding: 3px 10px; border-radius: 999px; background: var(--accent-light); font-size: 11.5px; font-weight: 700; line-height: 1.3; color: var(--navy); white-space: nowrap; }
-.hb-avg {
-  position: absolute; z-index: 0; top: -6px; bottom: -8px;
-  left: calc(var(--lab) + var(--gap) + (100% - var(--lab) - var(--gap)) * var(--avg));
-  border-left: 1.5px dashed var(--c-line);
-}
-.hb-avg span { position: absolute; top: 100%; left: 0; transform: translateX(-50%); margin-top: 5px; white-space: nowrap; font-size: 12.5px; font-weight: 600; color: var(--navy); }
+.hb-bm { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1.5px; border-radius: 1px; background: var(--navy); box-shadow: 0 0 0 1.5px #fff; }
+.hb-num { display: flex; flex-direction: column; gap: 1px; line-height: 1.25; }
+.hb-score { font-size: 16px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
+.hb-bmv { font-size: 12.5px; color: var(--text-light); white-space: nowrap; }
+.hb-pill { display: inline-block; margin-top: 5px; padding: 3px 10px; border-radius: 999px; background: var(--accent-light); font-size: 11.5px; font-weight: 700; line-height: 1.3; color: var(--navy); white-space: nowrap; }
 
 /* 2. Team health: heat grid */
 .hm-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) repeat(4, minmax(0, 1fr)) minmax(0, 1.1fr); gap: 5px; align-items: stretch; }
@@ -596,7 +596,31 @@ h1:focus, #main:focus { outline: none; }
 .hm-notes { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.5; color: var(--text-light); }
 .hm-notes strong { color: var(--navy); font-weight: 700; }
 
-/* 3. Change readiness: 100% stacked bars plus a three-step strip */
+/* 2b. Team health: individual task ratings (importance and interdependence) */
+.tk { --tlab: 150px; --tgap: 18px; }
+.tk-key { margin-bottom: 14px; }
+.key-dot--ring { box-shadow: 0 0 0 1.5px var(--navy); }
+.key-sw--range { background: var(--cream-deep); box-shadow: inset 0 0 0 1px rgba(15, 32, 64, 0.12); }
+.tk-head, .tk-row { display: grid; grid-template-columns: var(--tlab) minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--tgap); }
+.tk-head { align-items: end; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.tk-colname { font-size: 14px; font-weight: 700; color: var(--navy); }
+.tk-coldesc { margin-top: 1px; font-size: 12.5px; line-height: 1.3; color: var(--text-light); }
+.tk-scale, .tk-bins { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3px; }
+.tk-scale { margin-top: 8px; }
+.tk-scale span { text-align: center; font-size: 12px; color: var(--text-muted); }
+.tk-row { align-items: center; padding: 11px 0; }
+.tk-row + .tk-row { border-top: 1px solid var(--border); }
+.tk-task { font-size: 14px; line-height: 1.3; color: var(--navy); }
+.tk-pill { display: block; width: max-content; max-width: 100%; margin-top: 6px; padding: 3px 10px; border-radius: 999px; background: var(--accent-light); font-size: 11.5px; font-weight: 700; line-height: 1.3; color: var(--navy); }
+.tk-bin { display: flex; flex-direction: column-reverse; align-items: center; justify-content: flex-start; gap: 3px; height: 48px; padding-bottom: 4px; border-radius: 6px; background: rgba(15, 32, 64, 0.035); }
+.tk-bin--in { background: var(--cream-deep); }
+.tk-dot { flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--navy); }
+.tk-cell--gold .tk-dot { background: var(--accent); box-shadow: 0 0 0 1.5px var(--navy); }
+.tk-stat { margin-top: 6px; font-size: 12.5px; line-height: 1.3; color: var(--text-light); }
+.tk-stat strong { font-weight: 700; color: var(--navy); }
+.tk-stat span { display: inline-block; margin-right: 10px; white-space: nowrap; }
+
+/* 3. Change readiness: 100% stacked bars by factor, plus focus group themes */
 .sb-row + .sb-row { margin-top: 14px; }
 .sb-name { margin-bottom: 5px; font-size: 14px; font-weight: 600; color: var(--navy); }
 .sb-bar { display: grid; gap: 2px; height: 34px; border-radius: 17px; overflow: hidden; }
@@ -605,22 +629,36 @@ h1:focus, #main:focus { outline: none; }
 .sb-seg--2 { background: #B9C2D4; color: var(--navy); }
 .sb-seg--3 { background: var(--accent); color: var(--navy); }
 .key-sw.sb-seg--1, .key-sw.sb-seg--2, .key-sw.sb-seg--3 { display: block; }
-.sb-steps { display: flex; list-style: none; max-width: 620px; margin-top: 26px; }
-.sb-step {
-  flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 7px;
-  margin-left: -10px; padding: 11px 16px 11px 24px; background: var(--cream-deep); font-size: 14px; font-weight: 600; color: var(--navy);
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
-}
-.sb-step--first { margin-left: 0; padding-left: 16px; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); border-radius: 6px 0 0 6px; }
-.sb-step--last { padding-right: 12px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 14px 50%); border-radius: 0 6px 6px 0; }
-.sb-step-n { font-family: var(--serif); font-size: 15px; font-weight: 700; color: var(--accent-ink); }
 
-/* 4. Training needs: dumbbell */
-.db-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); column-gap: 14px; align-items: center; min-height: 50px; }
+.ft { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--border); }
+.ft-head { font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--navy); }
+.ft-list { list-style: none; margin-top: 4px; }
+.ft-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 20px; align-items: center; padding: 11px 0; }
+.ft-item + .ft-item { border-top: 1px solid var(--border); }
+.ft-theme { font-size: 14px; line-height: 1.35; color: var(--navy); }
+.ft-link { margin-top: 2px; font-size: 12.5px; line-height: 1.3; color: var(--text-light); }
+.ft-count { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+.ft-meter { display: flex; gap: 3px; }
+.ft-meter i { display: block; width: 12px; height: 12px; border-radius: 3px; background: rgba(15, 32, 64, 0.12); }
+.ft-meter i.on { background: var(--navy); }
+.ft-num { font-size: 13px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+
+/* 4. Training needs: dumbbell with an invest / redirect / hold off call per row */
+.db { --dec: 100px; }
+.db-row { display: grid; grid-template-columns: 150px minmax(0, 1fr) var(--dec); column-gap: 14px; align-items: center; min-height: 50px; }
 .db-row + .db-row { border-top: 1px solid rgba(15, 32, 64, 0.07); }
 .db-label { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; padding: 6px 0; }
 .db-name { font-size: 14px; line-height: 1.3; color: var(--navy); }
-.db-pill { padding: 3px 10px; border-radius: 999px; background: var(--accent-light); font-size: 11.5px; font-weight: 700; line-height: 1.3; color: var(--navy); white-space: nowrap; }
+.db-dec { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.db-gap { font-size: 12.5px; line-height: 1.2; color: var(--text-light); white-space: nowrap; }
+.db-gap strong { font-weight: 700; color: var(--navy); }
+.db-tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; line-height: 1.3; color: var(--navy); white-space: nowrap; }
+.db-tag--invest { background: var(--accent-light); }
+.db-tag--redirect { background: #fff; box-shadow: inset 0 0 0 1.5px var(--navy); }
+.db-tag--hold { background: rgba(15, 32, 64, 0.08); }
+.db-defs { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 13.5px; line-height: 1.4; color: var(--text-light); }
+.db-defs li { display: flex; align-items: center; gap: 12px; }
+.db-defs .db-tag { flex: none; min-width: 78px; text-align: center; }
 .db-track { position: relative; height: 22px; margin-right: 34px; }
 .db-track::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--border); }
 .db-link { position: absolute; top: calc(50% - 2px); height: 4px; border-radius: 2px; background: rgba(15, 32, 64, 0.28); }
@@ -630,11 +668,25 @@ h1:focus, #main:focus { outline: none; }
 .db-v { position: absolute; top: 50%; transform: translateY(-50%); font-size: 13px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
 .db-v--l { right: calc(100% + 6px); }
 .db-v--r { left: calc(100% + 6px); }
-.db-axis { display: grid; grid-template-columns: 150px minmax(0, 1fr); column-gap: 14px; margin-top: 6px; }
+.db-axis { display: grid; grid-template-columns: 150px minmax(0, 1fr) var(--dec); column-gap: 14px; margin-top: 6px; }
 .db-axis-track { position: relative; grid-column: 2; height: 18px; margin-right: 34px; }
 .db-tick { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; color: var(--text-muted); }
 
-/* 5. Performance: dot strip */
+/* 5. Performance: behaviorally anchored scale, then a rater-consistency dot strip */
+.bs-skill { margin: 0; font-size: 15px; font-weight: 700; color: var(--navy); }
+.bs-skill span { display: block; margin-bottom: 2px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent-ink); }
+.bs-levels { list-style: none; margin-top: 14px; border-top: 1px solid var(--border); }
+.bs-level { display: grid; grid-template-columns: 150px minmax(0, 1fr); column-gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.bs-name { font-size: 15px; font-weight: 700; color: var(--navy); }
+.bs-head { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.bs-meter { display: flex; gap: 3px; }
+.bs-meter i { display: block; width: 22px; height: 8px; border-radius: 3px; background: rgba(15, 32, 64, 0.12); }
+.bs-meter i.on { background: var(--navy); }
+.bs-level:last-child { border-bottom: 0; padding-bottom: 4px; }
+.bs-behaviors { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.bs-behaviors li { position: relative; padding-left: 20px; font-size: 14.5px; line-height: 1.45; color: var(--text); }
+.bs-behaviors li::before { content: ''; position: absolute; left: 2px; top: 0.5em; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
+
 .ds-row + .ds-row { margin-top: 30px; }
 .ds-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px; }
 .ds-name { font-size: 14.5px; font-weight: 700; color: var(--navy); }
@@ -881,18 +933,26 @@ h1:focus, #main:focus { outline: none; }
   .chart-card { padding: 20px 16px 18px; }
   .chart-plot { margin-top: 20px; }
   .chart-takeaway { font-size: 16px; }
-  .hb { --lab: 0px; --gap: 0px; }
-  .hb-row { grid-template-columns: minmax(0, 1fr); row-gap: 5px; }
-  .hb-group { margin-left: 0; }
+  .hb-row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "label num" "track track"; row-gap: 4px; padding: 10px 0 8px; }
+  .hb-label { grid-area: label; }
+  .hb-track { grid-area: track; }
+  .hb-num { grid-area: num; flex-direction: row; align-items: baseline; gap: 8px; }
   .hm-grid { grid-template-columns: minmax(0, 1.05fr) repeat(4, minmax(0, 1fr)) minmax(0, 1.1fr); gap: 4px; }
   .hm-h { font-size: 11.5px; }
   .hm-h--avg, .hm-cell--avg { margin-left: 3px; }
   .hm-team { font-size: 13px; }
   .hm-cell { height: 40px; font-size: 14px; }
-  .sb-step { gap: 5px; padding: 10px 12px 10px 20px; font-size: 13px; }
-  .sb-step--first { padding-left: 12px; }
-  .sb-step--last { padding-right: 8px; }
-  .db-row { grid-template-columns: minmax(0, 1fr); row-gap: 4px; min-height: 0; padding: 8px 0 6px; }
+  .tk-head, .tk-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 12px; }
+  .tk-spacer { display: none; }
+  .tk-task { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-bottom: 8px; }
+  .tk-pill { margin-top: 0; }
+  .tk-bin { height: 44px; }
+  .db-row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "label dec" "track track"; row-gap: 4px; min-height: 0; padding: 8px 0 6px; }
+  .db-label { grid-area: label; }
+  .db-track { grid-area: track; }
+  .db-dec { grid-area: dec; flex-direction: row; align-items: center; gap: 8px; }
+  .bs-level { grid-template-columns: minmax(0, 1fr); row-gap: 10px; padding: 14px 0; }
+  .bs-head { flex-direction: row; align-items: center; gap: 12px; }
   .db-label { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 0; }
   .db-axis { grid-template-columns: minmax(0, 1fr); }
   .db-axis-track { grid-column: 1; }
@@ -1182,51 +1242,56 @@ h1:focus, #main:focus { outline: none; }
 
         <p class="service-description">The report matters, but <span class="hl">what your organization does with it matters more</span>. Every engagement closes with a written plan and a live walkthrough with you and anyone else you'd like to include.</p>
         <p class="service-description">Every survey is built around your specific workforce. For smaller teams, the approach adapts: when response volume is limited, analysis leads with themes and careful interpretation rather than statistics, so the findings stay honest and useful regardless of headcount.</p>
+        <p class="service-description">Where reliable comparison data is available, I also benchmark your results against it. That matters because some topics, recognition especially, tend to score lower across organizations, so a low score on its own doesn&rsquo;t always mean a priority.</p>
 
         <figure class="chart-card" id="chart-listening">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Index averages</h2>
-            <p class="chart-sub">Average score on a 1 to 5 scale</p>
+            <h2 class="chart-title">Index averages against a benchmark</h2>
+            <p class="chart-sub">Average score on a 1 to 5 scale, with a benchmark for comparison</p>
           </div>
-          <div class="chart-plot hb" role="img" aria-label="Engagement, Manager Support, and Role Clarity are strengths to protect, and Growth and Development, at 3.0, is the best place to start.">
+          <div class="chart-plot hb" role="img" aria-label="Recognition has the lowest score, 3.0, but sits right at its benchmark, while Communication, at 3.4 against a benchmark of 3.8, is the largest gap and the best place to start.">
+            <ul class="chart-key hb-key">
+              <li><span class="key-sw hb-sw--above"></span>At or above benchmark</li>
+              <li><span class="key-sw hb-sw--below"></span>Below benchmark</li>
+              <li><span class="key-sw hb-sw--start"></span>Largest gap</li>
+              <li><span class="key-tick"></span>Benchmark</li>
+            </ul>
             <div class="hb-rows">
-              <div class="hb-set hb-set--strong">
-                <p class="hb-group">Strengths to protect</p>
-                <div class="hb-row hb-row--strong">
-                  <div class="hb-label">Engagement</div>
-                  <div class="hb-track"><span class="hb-bar" style="width:77.5%"></span><span class="hb-val">4.1</span></div>
-                </div>
-                <div class="hb-row hb-row--strong">
-                  <div class="hb-label">Manager Support</div>
-                  <div class="hb-track"><span class="hb-bar" style="width:75%"></span><span class="hb-val">4.0</span></div>
-                </div>
-                <div class="hb-row hb-row--strong">
-                  <div class="hb-label">Role Clarity</div>
-                  <div class="hb-track"><span class="hb-bar" style="width:70%"></span><span class="hb-val">3.8</span></div>
-                </div>
+              <div class="hb-row hb-row--above">
+                <div class="hb-label">Employee Engagement</div>
+                <div class="hb-track"><span class="hb-bar" style="width:77.5%"></span><span class="hb-bm" style="left:72.5%"></span></div>
+                <div class="hb-num"><span class="hb-score">4.1</span><span class="hb-bmv">Benchmark 3.9</span></div>
               </div>
-              <div class="hb-set">
-                <div class="hb-row hb-row--mid">
-                  <div class="hb-label">Communication</div>
-                  <div class="hb-track"><span class="hb-bar" style="width:60%"></span><span class="hb-val">3.4</span></div>
-                </div>
-                <div class="hb-row hb-row--mid">
-                  <div class="hb-label">Recognition</div>
-                  <div class="hb-track"><span class="hb-bar" style="width:55%"></span><span class="hb-val">3.2</span></div>
-                </div>
+              <div class="hb-row hb-row--above">
+                <div class="hb-label">Manager Relationship</div>
+                <div class="hb-track"><span class="hb-bar" style="width:75%"></span><span class="hb-bm" style="left:70%"></span></div>
+                <div class="hb-num"><span class="hb-score">4.0</span><span class="hb-bmv">Benchmark 3.8</span></div>
               </div>
-              <div class="hb-set">
-                <div class="hb-row hb-row--start">
-                  <div class="hb-label">Growth and Development</div>
-                  <div class="hb-track"><span class="hb-bar" style="width:50%"></span><span class="hb-val">3.0</span><span class="hb-pill">Start here</span></div>
-                </div>
+              <div class="hb-row hb-row--above">
+                <div class="hb-label">Role Clarity</div>
+                <div class="hb-track"><span class="hb-bar" style="width:70%"></span><span class="hb-bm" style="left:67.5%"></span></div>
+                <div class="hb-num"><span class="hb-score">3.8</span><span class="hb-bmv">Benchmark 3.7</span></div>
               </div>
-              <div class="hb-avg" style="--avg:0.65"><span>Overall average 3.6</span></div>
+              <div class="hb-row hb-row--start">
+                <div class="hb-label">Communication<span class="hb-pill">Start here</span></div>
+                <div class="hb-track"><span class="hb-bar" style="width:60%"></span><span class="hb-bm" style="left:70%"></span></div>
+                <div class="hb-num"><span class="hb-score">3.4</span><span class="hb-bmv">Benchmark 3.8</span></div>
+              </div>
+              <div class="hb-row hb-row--below">
+                <div class="hb-label">Perception of Voice</div>
+                <div class="hb-track"><span class="hb-bar" style="width:55%"></span><span class="hb-bm" style="left:60%"></span></div>
+                <div class="hb-num"><span class="hb-score">3.2</span><span class="hb-bmv">Benchmark 3.4</span></div>
+              </div>
+              <div class="hb-row hb-row--above">
+                <div class="hb-label">Recognition</div>
+                <div class="hb-track"><span class="hb-bar" style="width:50%"></span><span class="hb-bm" style="left:50%"></span></div>
+                <div class="hb-num"><span class="hb-score">3.0</span><span class="hb-bmv">Benchmark 3.0</span></div>
+              </div>
             </div>
           </div>
-          <p class="chart-takeaway">Scores become a short list of what to do first.</p>
-          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+          <p class="chart-takeaway">The benchmark shows which low scores are low for everyone and which are low for you.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results. Benchmarks are included where reliable comparison data is available.</figcaption>
         </figure>
 
         <h2 class="dimensions-label">Survey topics, drawn from validated research scales</h2>
@@ -1242,7 +1307,7 @@ h1:focus, #main:focus { outline: none; }
           <ol class="tl-track" style="--steps:4">
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Survey Design</span><span class="tl-detail">Kick-off call, a short organization questionnaire, and the custom survey build</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 2&ndash;3</span><span class="tl-name">Survey Deployment</span><span class="tl-detail">Anonymous survey delivered with communication support</span></li>
-            <li class="tl-step"><span class="tl-week">Weeks 3&ndash;5</span><span class="tl-name">Analysis</span><span class="tl-detail">Results by question and topic, plus themes from open-text comments</span></li>
+            <li class="tl-step"><span class="tl-week">Weeks 3&ndash;5</span><span class="tl-name">Analysis</span><span class="tl-detail">Results by question and topic, benchmarked where possible, plus themes from open-text comments</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 5&ndash;6</span><span class="tl-name">Report &amp; Walkthrough</span><span class="tl-detail">Executive report and a live results session</span></li>
           </ol>
         </div>
@@ -1256,6 +1321,7 @@ h1:focus, #main:focus { outline: none; }
           <li>Custom survey built around your workforce and goals</li>
           <li>Recruitment and reminder email templates ready for you to send</li>
           <li>Full analysis: results by question, results by topic, and themes from open-text comments</li>
+          <li>Benchmark comparisons for your results wherever reliable comparison data is available</li>
           <li>Executive Summary report with findings, employee quotes, and prioritized recommendations</li>
           <li>Live walkthrough of the results</li>
           <li>Action Roadmap: top priorities, recommended actions, and guidance on communicating results back to employees</li>
@@ -1315,6 +1381,7 @@ h1:focus, #main:focus { outline: none; }
         </div>
 
         <p class="service-description">What makes this diagnostic different is the <span class="hl">perception gap analysis</span>. Most team surveys just report averages, and averages hide the real story: when one team member rates trust at a 5 and another rates it at a 2, the average of 3.5 tells you almost nothing useful. This assessment looks at the spread in answers directly, mapping <span class="hl">where team members see things differently</span>. That disagreement is often the <span class="hl">most useful signal</span> you'll get.</p>
+        <p class="service-description">The survey also has each team member rate the team&rsquo;s core tasks on two things: how important the task is, and how much it depends on other people. Seeing those ratings side by side shows where everyone agrees on what matters and where people see the work differently.</p>
         <p class="service-description">The deliverable is a Team Dynamics Report with clear areas of strength, prioritized opportunities, and <span class="hl">targeted, evidence-based recommendations</span> your team lead or manager can put to work.</p>
 
         <figure class="chart-card" id="chart-team">
@@ -1376,6 +1443,53 @@ h1:focus, #main:focus { outline: none; }
           <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
         </figure>
 
+        <figure class="chart-card" id="chart-team-tasks">
+          <div class="chart-head">
+            <p class="chart-kicker">A sample of what you'd see</p>
+            <h2 class="chart-title">Task ratings from each team member</h2>
+            <p class="chart-sub">Each dot is one team member's rating, from 1 to 5</p>
+          </div>
+          <div class="chart-plot tk" role="img" aria-label="Team members agree that making decisions together is important, but their ratings of how much it depends on teammates run from 2 to 5, the widest disagreement of any task.">
+            <ul class="chart-key tk-key">
+              <li><span class="key-dot key-dot--navy"></span>One team member</li>
+              <li><span class="key-dot key-dot--gold key-dot--ring"></span>Widest disagreement</li>
+              <li><span class="key-sw key-sw--range"></span>Range of ratings</li>
+            </ul>
+            <div class="tk-head">
+              <div class="tk-spacer" aria-hidden="true"></div>
+              <div><p class="tk-colname">Importance</p><p class="tk-coldesc">How much the task matters</p><div class="tk-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+              <div><p class="tk-colname">Interdependence</p><p class="tk-coldesc">How much it relies on teammates</p><div class="tk-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Setting priorities for the week</p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>4.3</strong></span><span>Range 3&ndash;5</span></p></div>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.8</strong></span><span>Range 3&ndash;5</span></p></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Sharing project updates</p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.8</strong></span><span>Range 3&ndash;5</span></p></div>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>4.5</strong></span><span>Range 4&ndash;5</span></p></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Making decisions together<span class="tk-pill">Widest disagreement</span></p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>4.5</strong></span><span>Range 4&ndash;5</span></p></div>
+              <div class="tk-cell tk-cell--gold"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.7</strong></span><span>Range 2&ndash;5</span></p></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Handing off work between people</p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin"></span></div><p class="tk-stat"><span>Average <strong>3.5</strong></span><span>Range 3&ndash;4</span></p></div>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span></div><p class="tk-stat"><span>Average <strong>3.8</strong></span><span>Range 3&ndash;5</span></p></div>
+            </div>
+            <div class="tk-row">
+              <p class="tk-task">Handling routine requests</p>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin"></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin"></span><span class="tk-bin"></span></div><p class="tk-stat"><span>Average <strong>2.5</strong></span><span>Range 2&ndash;3</span></p></div>
+              <div class="tk-cell"><div class="tk-bins"><span class="tk-bin tk-bin--in"><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin tk-bin--in"><span class="tk-dot"></span><span class="tk-dot"></span></span><span class="tk-bin"></span><span class="tk-bin"></span></div><p class="tk-stat"><span>Average <strong>2.2</strong></span><span>Range 1&ndash;3</span></p></div>
+            </div>
+          </div>
+          <p class="chart-takeaway">Wide spreads show where teammates see the work differently.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
+        </figure>
+
         <h2 class="dimensions-label">What the assessment examines</h2>
         <div class="dimension-tags">
           <span class="dim-tag">Team Processes</span><span class="dim-tag">Planning &amp; Coordination</span><span class="dim-tag">Conflict Management</span>
@@ -1389,7 +1503,7 @@ h1:focus, #main:focus { outline: none; }
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Interviews</span><span class="tl-detail">Context call and a brief interview</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 1&ndash;2</span><span class="tl-name">Survey Design</span><span class="tl-detail">Custom team survey built</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 2&ndash;4</span><span class="tl-name">Data Collection</span><span class="tl-detail">Anonymous team member survey</span></li>
-            <li class="tl-step"><span class="tl-week">Weeks 4&ndash;5</span><span class="tl-name">Analysis</span><span class="tl-detail">Averages, spread, and perception gap analysis</span></li>
+            <li class="tl-step"><span class="tl-week">Weeks 4&ndash;5</span><span class="tl-name">Analysis</span><span class="tl-detail">Averages, spread, perception gaps, and task ratings</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 5&ndash;6</span><span class="tl-name">Report &amp; Debrief</span><span class="tl-detail">Team Dynamics Report and live debrief</span></li>
           </ol>
         </div>
@@ -1401,6 +1515,7 @@ h1:focus, #main:focus { outline: none; }
           <li>Intake call and a brief interview to understand team context, goals, and what you're trying to learn</li>
           <li>Custom team survey built on validated measures of team processes and climate</li>
           <li>Perception gap analysis that looks at both the averages and the spread in answers across each area</li>
+          <li>Task ratings from each team member on how important each core task is and how much it depends on others</li>
           <li>Team Dynamics Report with findings for each area, prioritized opportunities, and evidence-based recommendations</li>
         </ul>
         <p class="addon-note"><strong>Add-ons available:</strong> Team debrief facilitation session, follow-up pulse survey 60&ndash;90 days post-delivery, or manager coaching session on report findings.</p>
@@ -1458,46 +1573,58 @@ h1:focus, #main:focus { outline: none; }
         <figure class="chart-card" id="chart-change">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Readiness by group</h2>
-            <p class="chart-sub">Share of each group in each category</p>
+            <h2 class="chart-title">Readiness by factor</h2>
+            <p class="chart-sub">Share of survey responses in each category</p>
           </div>
-          <div class="chart-plot sb" role="img" aria-label="Readiness differs by group, from 34 percent ready to go on the front line to 70 percent among senior managers, so the plan has to differ too.">
+          <div class="chart-plot sb" role="img" aria-label="Management support is the most favorable factor at 62 percent, while communication clarity has the most room to grow at 26 percent unfavorable, which the focus group themes help explain.">
             <ul class="chart-key sb-key">
-              <li><span class="key-sw sb-seg--1"></span>Ready to go</li>
-              <li><span class="key-sw sb-seg--2"></span>Ready with answers</li>
-              <li><span class="key-sw sb-seg--3"></span>Needs a clearer why</li>
+              <li><span class="key-sw sb-seg--1"></span>Favorable</li>
+              <li><span class="key-sw sb-seg--2"></span>Neutral</li>
+              <li><span class="key-sw sb-seg--3"></span>Unfavorable</li>
             </ul>
             <div class="sb-row">
-              <p class="sb-name">Front-line staff</p>
-              <div class="sb-bar" style="grid-template-columns:34fr 38fr 28fr">
-                <span class="sb-seg sb-seg--1">34%</span><span class="sb-seg sb-seg--2">38%</span><span class="sb-seg sb-seg--3">28%</span>
+              <p class="sb-name">Management support</p>
+              <div class="sb-bar" style="grid-template-columns:62fr 24fr 14fr">
+                <span class="sb-seg sb-seg--1">62%</span><span class="sb-seg sb-seg--2">24%</span><span class="sb-seg sb-seg--3">14%</span>
               </div>
             </div>
             <div class="sb-row">
-              <p class="sb-name">Supervisors</p>
-              <div class="sb-bar" style="grid-template-columns:46fr 36fr 18fr">
-                <span class="sb-seg sb-seg--1">46%</span><span class="sb-seg sb-seg--2">36%</span><span class="sb-seg sb-seg--3">18%</span>
+              <p class="sb-name">Employee confidence</p>
+              <div class="sb-bar" style="grid-template-columns:54fr 28fr 18fr">
+                <span class="sb-seg sb-seg--1">54%</span><span class="sb-seg sb-seg--2">28%</span><span class="sb-seg sb-seg--3">18%</span>
               </div>
             </div>
             <div class="sb-row">
-              <p class="sb-name">Office staff</p>
-              <div class="sb-bar" style="grid-template-columns:58fr 28fr 14fr">
-                <span class="sb-seg sb-seg--1">58%</span><span class="sb-seg sb-seg--2">28%</span><span class="sb-seg sb-seg--3">14%</span>
+              <p class="sb-name">Change readiness</p>
+              <div class="sb-bar" style="grid-template-columns:49fr 31fr 20fr">
+                <span class="sb-seg sb-seg--1">49%</span><span class="sb-seg sb-seg--2">31%</span><span class="sb-seg sb-seg--3">20%</span>
               </div>
             </div>
             <div class="sb-row">
-              <p class="sb-name">Senior managers</p>
-              <div class="sb-bar" style="grid-template-columns:70fr 18fr 12fr">
-                <span class="sb-seg sb-seg--1">70%</span><span class="sb-seg sb-seg--2">18%</span><span class="sb-seg sb-seg--3">12%</span>
+              <p class="sb-name">Communication clarity</p>
+              <div class="sb-bar" style="grid-template-columns:41fr 33fr 26fr">
+                <span class="sb-seg sb-seg--1">41%</span><span class="sb-seg sb-seg--2">33%</span><span class="sb-seg sb-seg--3">26%</span>
               </div>
             </div>
           </div>
-          <ol class="sb-steps" aria-label="The roadmap in three steps">
-            <li class="sb-step sb-step--first"><span class="sb-step-n">1</span>Listen</li>
-            <li class="sb-step"><span class="sb-step-n">2</span>Prepare</li>
-            <li class="sb-step sb-step--last"><span class="sb-step-n">3</span>Roll out</li>
-          </ol>
-          <p class="chart-takeaway">Readiness differs by group, so the plan does too.</p>
+          <div class="chart-plot ft">
+            <p class="ft-head">What the focus groups added</p>
+            <ul class="ft-list">
+              <li class="ft-item">
+                <div><p class="ft-theme">People aren&rsquo;t sure why the change is happening</p><p class="ft-link">Helps explain communication clarity</p></div>
+                <div class="ft-count"><span class="ft-meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="ft-num">5 of 6 groups</span></div>
+              </li>
+              <li class="ft-item">
+                <div><p class="ft-theme">People aren&rsquo;t sure how it will change their own work</p><p class="ft-link">Helps explain employee confidence</p></div>
+                <div class="ft-count"><span class="ft-meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="ft-num">4 of 6 groups</span></div>
+              </li>
+              <li class="ft-item">
+                <div><p class="ft-theme">Extra workload while the change settles in</p><p class="ft-link">Helps explain change readiness</p></div>
+                <div class="ft-count"><span class="ft-meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="ft-num">3 of 6 groups</span></div>
+              </li>
+            </ul>
+          </div>
+          <p class="chart-takeaway">The survey shows where. The focus groups explain why.</p>
           <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
         </figure>
 
@@ -1527,7 +1654,7 @@ h1:focus, #main:focus { outline: none; }
           <li>Signed engagement overview confirming scope before work begins</li>
           <li>Focus group(s) to surface perceptions, concerns, and recurring themes</li>
           <li>Survey built on validated change readiness measures (readiness, support, confidence, communication)</li>
-          <li>Combined analysis of focus group themes and survey results</li>
+          <li>Combined analysis: survey results for each factor alongside the focus group themes that help explain them</li>
           <li>Change Readiness Report with what's driving the results and prioritized recommendations</li>
         </ul>
         <p class="addon-note"><strong>Add-ons available:</strong> Additional focus group sessions, pulse survey at 60 days post-change, or help presenting the findings to others in your organization.</p>
@@ -1591,21 +1718,22 @@ h1:focus, #main:focus { outline: none; }
         <figure class="chart-card" id="chart-tna">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">What matters and where confidence stands</h2>
+            <h2 class="chart-title">Training needs ranked by gap</h2>
             <p class="chart-sub">Average score on a 1 to 5 scale, widest gap first</p>
           </div>
-          <div class="chart-plot db" role="img" aria-label="Coaching conversations has the widest gap between how much it matters, 4.4, and confidence today, 2.8, which makes it the best place to invest first.">
+          <div class="chart-plot db" role="img" aria-label="Coaching conversations and giving feedback have the widest gaps between importance and current skill, so they are the best places to invest, while the gap in prioritizing work points to a fix other than training.">
             <ul class="chart-key db-key">
-              <li><span class="key-dot key-dot--navy"></span>How much it matters</li>
-              <li><span class="key-dot key-dot--gold"></span>Confidence today</li>
+              <li><span class="key-dot key-dot--navy"></span>Importance to the job</li>
+              <li><span class="key-dot key-dot--gold"></span>Current skill level</li>
             </ul>
             <div class="db-row">
-              <div class="db-label"><span class="db-name">Coaching conversations</span><span class="db-pill">Invest here first</span></div>
+              <div class="db-label"><span class="db-name">Coaching conversations</span></div>
               <div class="db-track">
                 <span class="db-link" style="left:45%;width:40%"></span>
                 <span class="db-dot db-dot--m" style="left:85%"><span class="db-v db-v--r">4.4</span></span>
                 <span class="db-dot db-dot--c" style="left:45%"><span class="db-v db-v--l">2.8</span></span>
               </div>
+              <div class="db-dec"><span class="db-gap">Gap <strong>1.6</strong></span><span class="db-tag db-tag--invest">Invest</span></div>
             </div>
             <div class="db-row">
               <div class="db-label"><span class="db-name">Giving feedback</span></div>
@@ -1614,6 +1742,7 @@ h1:focus, #main:focus { outline: none; }
                 <span class="db-dot db-dot--m" style="left:87.5%"><span class="db-v db-v--r">4.5</span></span>
                 <span class="db-dot db-dot--c" style="left:55%"><span class="db-v db-v--l">3.2</span></span>
               </div>
+              <div class="db-dec"><span class="db-gap">Gap <strong>1.3</strong></span><span class="db-tag db-tag--invest">Invest</span></div>
             </div>
             <div class="db-row">
               <div class="db-label"><span class="db-name">Prioritizing work</span></div>
@@ -1622,6 +1751,7 @@ h1:focus, #main:focus { outline: none; }
                 <span class="db-dot db-dot--m" style="left:82.5%"><span class="db-v db-v--r">4.3</span></span>
                 <span class="db-dot db-dot--c" style="left:62.5%"><span class="db-v db-v--l">3.5</span></span>
               </div>
+              <div class="db-dec"><span class="db-gap">Gap <strong>0.8</strong></span><span class="db-tag db-tag--redirect">Redirect</span></div>
             </div>
             <div class="db-row">
               <div class="db-label"><span class="db-name">Delegating</span></div>
@@ -1630,6 +1760,7 @@ h1:focus, #main:focus { outline: none; }
                 <span class="db-dot db-dot--m" style="left:72.5%"><span class="db-v db-v--r">3.9</span></span>
                 <span class="db-dot db-dot--c" style="left:60%"><span class="db-v db-v--l">3.4</span></span>
               </div>
+              <div class="db-dec"><span class="db-gap">Gap <strong>0.5</strong></span><span class="db-tag db-tag--hold">Hold off</span></div>
             </div>
             <div class="db-row">
               <div class="db-label"><span class="db-name">Using new tools</span></div>
@@ -1638,10 +1769,16 @@ h1:focus, #main:focus { outline: none; }
                 <span class="db-dot db-dot--m" style="left:60%"><span class="db-v db-v--l">3.4</span></span>
                 <span class="db-dot db-dot--c" style="left:70%"><span class="db-v db-v--r">3.8</span></span>
               </div>
+              <div class="db-dec"><span class="db-gap">No gap</span><span class="db-tag db-tag--hold">Hold off</span></div>
             </div>
             <div class="db-axis"><div class="db-axis-track"><span class="db-tick" style="left:0%">1</span><span class="db-tick" style="left:25%">2</span><span class="db-tick" style="left:50%">3</span><span class="db-tick" style="left:75%">4</span><span class="db-tick" style="left:100%">5</span></div></div>
+            <ul class="db-defs">
+              <li><span class="db-tag db-tag--invest">Invest</span>A real skills gap that training can close</li>
+              <li><span class="db-tag db-tag--redirect">Redirect</span>Another fix, such as process or tools, comes first</li>
+              <li><span class="db-tag db-tag--hold">Hold off</span>Not a priority right now</li>
+            </ul>
           </div>
-          <p class="chart-takeaway">The widest gap is where training is most worth doing.</p>
+          <p class="chart-takeaway">The survey shows the gap. The interviews show whether training is the fix.</p>
           <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
         </figure>
 
@@ -1662,7 +1799,7 @@ h1:focus, #main:focus { outline: none; }
           <li>Interview about your goals, context, and current training efforts</li>
           <li>Survey and/or interviews with managers and the people in the role to map what the job requires</li>
           <li>Survey of the people in the role to show where skill gaps are largest and confirm whether training is the right solution</li>
-          <li>Priority ranking of training needs by gap, importance, and readiness</li>
+          <li>Priority ranking of training needs by gap, importance, and readiness, with an invest, redirect, or hold off call for each</li>
           <li>Training Needs Assessment report with prioritized findings and recommended training approaches</li>
           <li>Recommendations to help new skills carry over to the job after training</li>
         </ul>
@@ -1718,6 +1855,33 @@ h1:focus, #main:focus { outline: none; }
         <p class="service-description">The work starts with conversations with the people closest to the role: managers who evaluate it and the people who do it. Their real examples of what strong, solid, and developing performance looks like become the foundation, rather than generic competency frameworks imported from somewhere else. The depth scales to the need: a practical role scorecard when you need clear standards quickly, or a more thoroughly tested review tool when the role is more complex or the stakes are higher.</p>
 
         <figure class="chart-card" id="chart-prd">
+          <div class="chart-head">
+            <p class="chart-kicker">A sample of what you'd see</p>
+            <h2 class="chart-title">What each level looks like on the job</h2>
+            <p class="chart-sub">One skill from a sample standard, with observable behaviors at each level</p>
+          </div>
+          <div class="chart-plot bs">
+            <p class="bs-skill"><span>Sample skill</span>Keeping customers informed</p>
+            <ol class="bs-levels" aria-label="Behaviors at each level, strongest first">
+            <li class="bs-level">
+              <div class="bs-head"><span class="bs-name">Strong</span><span class="bs-meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+              <ul class="bs-behaviors"><li>Tells customers about a delay before they ask</li><li>Follows up to confirm the issue was fully resolved</li></ul>
+            </li>
+            <li class="bs-level">
+              <div class="bs-head"><span class="bs-name">Solid</span><span class="bs-meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span></div>
+              <ul class="bs-behaviors"><li>Answers customer questions within one business day</li><li>Closes each call by stating the next step</li></ul>
+            </li>
+            <li class="bs-level">
+              <div class="bs-head"><span class="bs-name">Developing</span><span class="bs-meter" aria-hidden="true"><i class="on"></i><i></i><i></i></span></div>
+              <ul class="bs-behaviors"><li>Updates customers when they ask</li><li>Sometimes leaves a question without a reply</li></ul>
+            </li>
+            </ol>
+          </div>
+          <p class="chart-takeaway">Every level is described in behavior you can see and point to.</p>
+          <figcaption class="chart-caption">Illustrative sample standard, not client results.</figcaption>
+        </figure>
+
+        <figure class="chart-card" id="chart-prd-consistency">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
             <h2 class="chart-title">Five reviewers, one employee</h2>
