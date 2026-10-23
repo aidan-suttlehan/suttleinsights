@@ -790,30 +790,41 @@ h1:focus, #main:focus { outline: none; }
 .ds-tick { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; color: var(--text-muted); }
 
 /* 6. Home: one organization, five lenses (a simplified overview of all five engagements) */
-.mz { --scope: 128px; container: mz / inline-size; }
-.mz-key { margin-bottom: 8px; }
+.mz { container: mz / inline-size; --mgw: 92px; }
+.mz-key { margin-bottom: 14px; }
 .key-dot--faint { background: rgba(15, 32, 64, 0.16); }
 .key-sw--gold { background: var(--accent); }
-.mz-tiers { list-style: none; }
-.mz-tier { display: grid; grid-template-columns: var(--scope) minmax(0, 1fr); column-gap: 18px; padding: 18px 0; border-top: 1px solid var(--border); }
-.mz-tier:last-child { border-bottom: 1px solid var(--border); }
-.mz-scope { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-.mz-scope-text { display: flex; flex-direction: column; gap: 3px; }
+.mz-tiers { list-style: none; display: grid; gap: 14px; }
+.mz-tier { padding: 14px; background: var(--cream); border-radius: 10px; }
+.mz-scope { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.mz-scope-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.mz-scope-name { font-size: 13.5px; font-weight: 700; line-height: 1.25; color: var(--navy); }
 .mz-scope-note { font-size: 12.5px; line-height: 1.35; color: var(--text-light); }
-.mz-scope-name { font-size: 13px; font-weight: 700; line-height: 1.25; color: var(--navy); }
-.mz-org { display: flex; gap: 9px; }
+.mz-org { flex: none; display: flex; gap: 9px; }
 .mz-team { display: grid; grid-template-columns: repeat(2, 9px); grid-auto-rows: 9px; gap: 4px; }
 .mz-team i { display: block; border-radius: 50%; background: rgba(15, 32, 64, 0.16); }
 .mz-team i.on { background: var(--navy); }
-.mz-svcs { list-style: none; }
-.mz-svc { display: grid; grid-template-columns: minmax(0, 1fr) 92px; column-gap: 16px; align-items: center; }
-.mz-svc + .mz-svc { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
-.mz-name { font-size: 14.5px; font-weight: 700; line-height: 1.25; color: var(--navy); }
-.mz-q { margin-top: 3px; font-size: 13.5px; line-height: 1.4; color: var(--text-light); }
-.mz-out { margin-top: 5px; font-size: 12.5px; line-height: 1.35; color: var(--text-light); }
-.mz-out span { font-weight: 700; color: var(--navy); }
-.mz-out span::after { content: ':'; }
-.mg { display: flex; flex-direction: column; justify-content: center; gap: 8px; width: 92px; height: 46px; }
+.mz-svcs { list-style: none; display: grid; gap: 10px; }
+/* Each engagement is one link card: hover and keyboard focus show it is clickable */
+.mz-link {
+  display: grid; grid-template-columns: minmax(0, 1fr) var(--mgw); column-gap: 16px; row-gap: 6px; align-items: center;
+  padding: 13px 16px 14px; background: #fff; border: 1px solid var(--border); border-radius: 8px;
+  color: inherit; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.mz-link:hover { border-color: rgba(37, 99, 168, 0.55); box-shadow: 0 6px 20px rgba(15, 32, 64, 0.08); }
+.mz-link:focus-visible { border-radius: 8px; }
+.mz-name { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 15px; font-weight: 700; line-height: 1.25; color: var(--navy); }
+.mz-name-text { text-decoration-color: var(--blue-dark); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.mz-link:hover .mz-name-text { text-decoration-line: underline; }
+.mz-name svg { flex: none; color: var(--blue-dark); transition: transform 0.2s; }
+.mz-link:hover .mz-name svg { transform: translateX(3px); }
+.mz-text { display: block; min-width: 0; }
+.mz-q { display: block; font-size: 13.5px; line-height: 1.4; color: var(--text-light); }
+.mz-out { display: block; margin-top: 5px; font-size: 12.5px; line-height: 1.35; color: var(--text-light); }
+.mz-out > span { font-weight: 700; color: var(--navy); }
+.mz-out > span::after { content: ':'; }
+.mz-caption { margin-top: 16px; }
+.mg { display: flex; flex-direction: column; justify-content: center; gap: 8px; width: var(--mgw); height: 46px; }
 .mg-row, .mg-db, .mg-lv { position: relative; display: block; height: 9px; }
 .mg-bar { position: absolute; left: 0; top: 0; height: 9px; border-radius: 5px; background: var(--navy); }
 .mg-bar--gold { background: var(--accent); }
@@ -839,11 +850,18 @@ h1:focus, #main:focus { outline: none; }
 .mg-sq { flex: none; width: 6px; height: 6px; margin-left: 3px; border-radius: 1.5px; background: var(--accent); }
 .mg-ln { flex: 1; height: 4px; border-radius: 2px; background: rgba(15, 32, 64, 0.16); }
 
-/* Home overview: when the card is narrow (phones, and the two-column layout just above tablet width), stack each scope above its engagements */
+/* Home overview: when the card is narrow (phones, and the two-column layout just above tablet width), tighten the cards and shrink the small graphics */
 @container mz (max-width: 470px) {
-  .mz-tier { grid-template-columns: minmax(0, 1fr); row-gap: 14px; padding: 16px 0; }
-  .mz-scope { flex-direction: row; align-items: center; gap: 14px; }
-  .mz-svc { column-gap: 12px; }
+  .mz-tiers { --mgw: 68px; }
+  .mz-tier { padding: 12px 10px; }
+  .mz-link { column-gap: 12px; padding: 12px 12px 13px; }
+}
+
+/* Very narrow phones: the small graphic drops under the text so the words keep their width */
+@container mz (max-width: 300px) {
+  .mz-tiers { --mgw: 92px; }
+  .mz-link { grid-template-columns: minmax(0, 1fr); }
+  .mz-link .mg { margin-top: 6px; }
 }
 
 /* ---------- 7. About ---------- */
@@ -880,7 +898,7 @@ h1:focus, #main:focus { outline: none; }
 .about-photo[hidden] { display: none; }
 .about-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; background: #2b2d31; box-shadow: 0 1px 2px rgba(15, 32, 64, 0.08), 0 8px 24px rgba(15, 32, 64, 0.10); }
 .about-photo figcaption { margin-top: 12px; text-wrap: balance; text-align: center; padding: 0 2px; font-size: 16px; line-height: 1.5; color: var(--text-light); }
-.about-card { position: sticky; top: calc(var(--nav-h) + 24px); background: var(--navy); color: #fff; border-radius: 12px; padding: 32px 30px; overflow: hidden; }
+.about-card { position: relative; background: var(--navy); color: #fff; border-radius: 12px; padding: 32px 30px; overflow: hidden; }
 .about-card::after { content: ''; position: absolute; right: -90px; bottom: -90px; width: 280px; height: 280px; pointer-events: none; background: radial-gradient(circle, rgba(200, 146, 42, 0.2) 0%, transparent 70%); }
 .about-card-title { position: relative; z-index: 1; font-family: var(--serif); font-size: 21px; font-weight: 700; margin-bottom: 18px; }
 .about-card dl { position: relative; z-index: 1; }
@@ -965,7 +983,6 @@ h1:focus, #main:focus { outline: none; }
   .who-section { grid-template-columns: 1fr; }
   .who-items { position: static; }
   .io-explainer-grid, .about-layout, .contact-layout { grid-template-columns: 1fr; }
-  .about-card { position: relative; top: auto; }
   .about-layout { grid-template-areas: "main" "side" "values"; grid-template-rows: auto; }
   .about-side { margin-top: clamp(40px, 6vw, 56px); }
   .about-photo { max-width: 420px; }
@@ -1178,7 +1195,7 @@ h1:focus, #main:focus { outline: none; }
           <span class="svc-card-top"><span class="svc-card-format">Survey + Action Plan</span><span class="svc-lead-pill">Start Here</span></span>
           <h3>Employee Listening Survey &amp; Action Plan</h3>
           <p class="svc-card-q">What are our employees experiencing, and what should we do about it?</p>
-          <p class="svc-card-desc">A custom survey of your workforce, analyzed for patterns and themes and delivered as a clear report with prioritized recommendations and an action plan you can use.</p>
+          <p class="svc-card-desc">A custom survey of your workforce, analyzed for patterns and themes and delivered as a clear report with prioritized recommendations and action planning based on best practices.</p>
           <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
         <a class="svc-card" href="/team-health-diagnostic" data-page="svc-team">
@@ -1196,7 +1213,7 @@ h1:focus, #main:focus { outline: none; }
           <span class="svc-card-top"><span class="svc-card-format">Readiness Diagnostic</span></span>
           <h3>Change Readiness Pulse &amp; Roadmap</h3>
           <p class="svc-card-q">How is our workforce experiencing this change, and what comes next?</p>
-          <p class="svc-card-desc">Focus groups and a survey show where people stand on a change that's coming, underway, or already behind you, with a roadmap you can act on.</p>
+          <p class="svc-card-desc">Focus groups and a survey show where people stand on a change that's coming, underway, or already behind you, with a roadmap of next steps based on best practices.</p>
           <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </a>
         <a class="svc-card" href="/training-needs-assessment" data-page="svc-tna">
@@ -1261,20 +1278,24 @@ h1:focus, #main:focus { outline: none; }
           </div>
           <ul class="mz-svcs">
             <li class="mz-svc">
-              <div class="mz-text">
-                <p class="mz-name">Employee Listening Survey</p>
-                <p class="mz-q">What are our employees experiencing?</p>
-                <p class="mz-out"><span>You get</span> Executive report + action roadmap</p>
-              </div>
-              <div class="mg" aria-hidden="true"><span class="mg-row"><i class="mg-bar" style="width:86%"></i><b class="mg-tick" style="left:72%"></b></span><span class="mg-row"><i class="mg-bar" style="width:70%"></i><b class="mg-tick" style="left:58%"></b></span><span class="mg-row"><i class="mg-bar mg-bar--gold" style="width:50%"></i><b class="mg-tick" style="left:72%"></b></span></div>
+              <a class="mz-link" href="/employee-listening-survey-and-action-plan" data-page="svc-listening">
+                <span class="mz-name"><span class="mz-name-text">Employee Listening Survey</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                <span class="mz-text">
+                  <span class="mz-q">What are our employees experiencing?</span>
+                  <span class="mz-out"><span>You get</span> Executive report + action planning</span>
+                </span>
+                <span class="mg" aria-hidden="true"><span class="mg-row"><i class="mg-bar" style="width:86%"></i><b class="mg-tick" style="left:72%"></b></span><span class="mg-row"><i class="mg-bar" style="width:70%"></i><b class="mg-tick" style="left:58%"></b></span><span class="mg-row"><i class="mg-bar mg-bar--gold" style="width:50%"></i><b class="mg-tick" style="left:72%"></b></span></span>
+              </a>
             </li>
             <li class="mz-svc">
-              <div class="mz-text">
-                <p class="mz-name">Change Readiness Pulse</p>
-                <p class="mz-q">How is our workforce experiencing this change?</p>
-                <p class="mz-out"><span>You get</span> Readiness report + roadmap</p>
-              </div>
-              <div class="mg" aria-hidden="true"><span class="mg-stack" style="grid-template-columns:62fr 24fr 14fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:49fr 31fr 20fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:41fr 33fr 26fr"><i></i><i></i><i></i></span></div>
+              <a class="mz-link" href="/change-readiness-pulse-and-roadmap" data-page="svc-diagnostic">
+                <span class="mz-name"><span class="mz-name-text">Change Readiness Pulse</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                <span class="mz-text">
+                  <span class="mz-q">How is our workforce experiencing this change?</span>
+                  <span class="mz-out"><span>You get</span> Readiness report + roadmap</span>
+                </span>
+                <span class="mg" aria-hidden="true"><span class="mg-stack" style="grid-template-columns:62fr 24fr 14fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:49fr 31fr 20fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:41fr 33fr 26fr"><i></i><i></i><i></i></span></span>
+              </a>
             </li>
           </ul>
         </li>
@@ -1288,12 +1309,14 @@ h1:focus, #main:focus { outline: none; }
           </div>
           <ul class="mz-svcs">
             <li class="mz-svc">
-              <div class="mz-text">
-                <p class="mz-name">Team Health Diagnostic</p>
-                <p class="mz-q">How is each team really working together?</p>
-                <p class="mz-out"><span>You get</span> Team Dynamics Report</p>
-              </div>
-              <div class="mg mg--bins" aria-hidden="true"><span class="mg-bin"></span><span class="mg-bin mg-bin--in mg-bin--gold"><i></i><i></i></span><span class="mg-bin mg-bin--in"></span><span class="mg-bin mg-bin--in"><i></i><i></i></span><span class="mg-bin mg-bin--in"><i></i></span></div>
+              <a class="mz-link" href="/team-health-diagnostic" data-page="svc-team">
+                <span class="mz-name"><span class="mz-name-text">Team Health Diagnostic</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                <span class="mz-text">
+                  <span class="mz-q">How is each team really working together?</span>
+                  <span class="mz-out"><span>You get</span> Team Dynamics Report</span>
+                </span>
+                <span class="mg mg--bins" aria-hidden="true"><span class="mg-bin"></span><span class="mg-bin mg-bin--in mg-bin--gold"><i></i><i></i></span><span class="mg-bin mg-bin--in"></span><span class="mg-bin mg-bin--in"><i></i><i></i></span><span class="mg-bin mg-bin--in"><i></i></span></span>
+              </a>
             </li>
           </ul>
         </li>
@@ -1306,27 +1329,30 @@ h1:focus, #main:focus { outline: none; }
           </div>
           <ul class="mz-svcs">
             <li class="mz-svc">
-              <div class="mz-text">
-                <p class="mz-name">Training Needs Assessment</p>
-                <p class="mz-q">Is training the right fix?</p>
-                <p class="mz-out"><span>You get</span> Prioritized training report</p>
-              </div>
-              <div class="mg" aria-hidden="true"><span class="mg-db"><i class="mg-link" style="left:22%;width:56%"></i><i class="mg-dot mg-dot--c" style="left:22%"></i><i class="mg-dot mg-dot--m" style="left:78%"></i></span><span class="mg-db"><i class="mg-link" style="left:40%;width:34%"></i><i class="mg-dot mg-dot--c" style="left:40%"></i><i class="mg-dot mg-dot--m" style="left:74%"></i></span><span class="mg-db"><i class="mg-link" style="left:54%;width:16%"></i><i class="mg-dot mg-dot--c" style="left:54%"></i><i class="mg-dot mg-dot--m" style="left:70%"></i></span></div>
+              <a class="mz-link" href="/training-needs-assessment" data-page="svc-tna">
+                <span class="mz-name"><span class="mz-name-text">Training Needs Assessment</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                <span class="mz-text">
+                  <span class="mz-q">Is training the right fix?</span>
+                  <span class="mz-out"><span>You get</span> Prioritized training report</span>
+                </span>
+                <span class="mg" aria-hidden="true"><span class="mg-db"><i class="mg-link" style="left:22%;width:56%"></i><i class="mg-dot mg-dot--c" style="left:22%"></i><i class="mg-dot mg-dot--m" style="left:78%"></i></span><span class="mg-db"><i class="mg-link" style="left:40%;width:34%"></i><i class="mg-dot mg-dot--c" style="left:40%"></i><i class="mg-dot mg-dot--m" style="left:74%"></i></span><span class="mg-db"><i class="mg-link" style="left:54%;width:16%"></i><i class="mg-dot mg-dot--c" style="left:54%"></i><i class="mg-dot mg-dot--m" style="left:70%"></i></span></span>
+              </a>
             </li>
             <li class="mz-svc">
-              <div class="mz-text">
-                <p class="mz-name">Performance Standards</p>
-                <p class="mz-q">What does good performance look like in this role?</p>
-                <p class="mz-out"><span>You get</span> Standards + review toolkit</p>
-              </div>
-              <div class="mg" aria-hidden="true"><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i class="on"></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span></div>
+              <a class="mz-link" href="/performance-standards-and-review-toolkit" data-page="svc-prd">
+                <span class="mz-name"><span class="mz-name-text">Performance Standards</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                <span class="mz-text">
+                  <span class="mz-q">What does good performance look like in this role?</span>
+                  <span class="mz-out"><span>You get</span> Standards + review toolkit</span>
+                </span>
+                <span class="mg" aria-hidden="true"><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i class="on"></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span></span>
+              </a>
             </li>
           </ul>
         </li>
             </ul>
           </div>
-          <p class="chart-takeaway">Whichever lens fits, you finish with a clear deliverable and a live walkthrough.</p>
-          <figcaption class="chart-caption">A simplified overview, not client results. Real findings are specific to your organization.</figcaption>
+          <figcaption class="chart-caption mz-caption">A simplified overview, not client results. Real findings are specific to your organization.</figcaption>
         </figure>
 
       <p class="section-body">I work with organizations of all sizes and sectors that have real workforce complexity but no internal analytics function to make sense of it. That might mean several roles, several levels, or offices in more than one location. It usually means making decisions about your people without a clear picture of what's actually going on.</p>
@@ -1371,8 +1397,8 @@ h1:focus, #main:focus { outline: none; }
       </li>
       <li class="process-step">
         <div class="step-num" aria-hidden="true">5</div>
-        <h3 class="step-title">Debrief &amp; Action Plan</h3>
-        <p class="step-desc">We walk through the findings together and, for listening and team engagements, close with a concrete action plan for what to do next.</p>
+        <h3 class="step-title">Debrief &amp; Action Planning</h3>
+        <p class="step-desc">We walk through the findings together and, for listening and team engagements, close with action planning, based on best practices, for what to do next.</p>
       </li>
     </ol>
   </section>
@@ -1398,7 +1424,7 @@ h1:focus, #main:focus { outline: none; }
   <div class="page-hero">
     <div class="page-hero-content">
       <h1>Employee Listening Survey &amp; Action Plan</h1>
-      <p>A custom survey for your whole workforce, analyzed for patterns and themes, and delivered as a clear report with prioritized recommendations and a concrete action plan.</p>
+      <p>A custom survey for your whole workforce, analyzed for patterns and themes, and delivered as a clear report with research-backed recommendations and an action plan based on best practices.</p>
     </div>
     <div class="svc-stats-bar">
       <div class="svc-stat-item"><span class="svc-stat-label">Typical Timeline</span><span class="svc-stat-val">4&ndash;6 weeks</span></div>
@@ -1412,7 +1438,7 @@ h1:focus, #main:focus { outline: none; }
     <p class="service-tagline">Understand what your employees are experiencing, what's getting in the way, and what to do next.</p>
     <div class="service-inner">
       <div class="service-left">
-        <p class="service-description">In most workplaces, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey changes that. Maybe people are leaving or morale seems off, growth is straining how things work, or you want to get ahead of emerging concerns. Maybe this is your <span class="hl">first formal look at what employees think</span>, or maybe you just want to confirm that what seems to be working is actually working. An Employee Listening Survey &amp; Action Plan gives you a survey designed for your workforce, analyzed for patterns and themes, and delivered as a clear report you can <span class="hl">read, discuss, and act on</span>, with <span class="hl">specific, prioritized recommendations</span> and a concrete action plan.</p>
+        <p class="service-description">In most workplaces, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey changes that. Maybe people are leaving or morale seems off, growth is straining how things work, or you want to get ahead of emerging concerns. Maybe this is your <span class="hl">first formal look at what employees think</span>, or maybe you just want to confirm that what seems to be working is actually working. An Employee Listening Survey &amp; Action Plan gives you a survey designed for your workforce, analyzed for patterns and themes, and delivered as a clear report you can <span class="hl">read, discuss, and act on</span>, with <span class="hl">specific, prioritized recommendations</span> and action planning based on best practices.</p>
 
         <div class="els-reveals">
           <div class="els-reveal"><div class="els-reveal-bar"></div><div class="els-reveal-content">
@@ -1425,11 +1451,11 @@ h1:focus, #main:focus { outline: none; }
           </div></div>
           <div class="els-reveal"><div class="els-reveal-bar"></div><div class="els-reveal-content">
             <p class="els-reveal-q">What should we do first, who owns it, and what do we tell employees after?</p>
-            <p class="els-reveal-a">A prioritized action plan built from what your people told you, with clear owners, next steps, and a communication strategy that closes the loop.</p>
+            <p class="els-reveal-a">Action planning based on best practices from research, built from what your people told you, with prioritized next steps and a communication strategy that closes the loop.</p>
           </div></div>
         </div>
 
-        <p class="service-description">The report matters, but <span class="hl">what your organization does with it matters more</span>. Every engagement closes with a written plan and a live walkthrough with you and anyone else you'd like to include.</p>
+        <p class="service-description">The report matters, but <span class="hl">what your organization does with it matters more</span>. Every engagement closes with a written report, action planning based on best practices, and a live walkthrough with you and anyone else you'd like to include.</p>
         <p class="service-description">If you'd like help acting on the results, I can also facilitate a working session to set owners, dates, and a plan for telling employees what happens next. That is scoped separately.</p>
         <p class="service-description">Every survey is built around your specific workforce. For smaller teams, the approach adapts: when response volume is limited, analysis leads with themes and careful interpretation rather than statistics, so the findings stay honest and useful regardless of headcount.</p>
         <p class="service-description">Results are reported as the share of favorable, neutral, and unfavorable responses for each index, next to the themes and tone of the open-text comments, so you can see both the pattern and the reasons behind it.</p>
@@ -1615,14 +1641,11 @@ h1:focus, #main:focus { outline: none; }
         <h2 class="includes-title" id="inc-listening">What's Included</h2>
         <ul class="includes-list">
           <li>Intake call and signed scope agreement before work begins</li>
-          <li>A short organization questionnaire to capture your workforce structure, roles, and context</li>
-          <li>Custom survey built around your workforce and goals</li>
-          <li>Recruitment and reminder email templates ready for you to send</li>
-          <li>Response tracking while the survey is open, with an early heads-up if participation is low</li>
-          <li>Full analysis: results by question, results by topic, and themes from open-text comments</li>
-          <li>Executive Summary report with findings, employee comments (paraphrased where needed to protect confidentiality), and prioritized recommendations</li>
-          <li>Live walkthrough of the results</li>
-          <li>Action Roadmap: top priorities, recommended actions, and guidance on communicating results back to employees</li>
+          <li>Custom survey built around your workforce, roles, and goals</li>
+          <li>Email templates and response tracking, with an early heads-up if participation is low</li>
+          <li>Full analysis: results by topic and question, plus themes and tone in open-text comments</li>
+          <li>Executive Summary report with findings, employee comments (paraphrased where needed), prioritized recommendations, and a live walkthrough</li>
+          <li>Action planning based on best practices from research, including how to share results with employees</li>
         </ul>
         <p class="addon-note"><strong>Add-ons available:</strong> Pulse check 90 days post-delivery, manager-level breakouts, focus group facilitation, or a results presentation for your full staff.</p>
       </aside>
@@ -2005,7 +2028,7 @@ h1:focus, #main:focus { outline: none; }
             <li class="tl-step"><span class="tl-week">Weeks 2&ndash;3</span><span class="tl-name">Focus Groups</span><span class="tl-detail">Structured conversations with workforce segments</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 3&ndash;5</span><span class="tl-name">Survey Deployment</span><span class="tl-detail">Survey built on established change readiness research</span></li>
             <li class="tl-step"><span class="tl-week">Weeks 5&ndash;7</span><span class="tl-name">Analysis</span><span class="tl-detail">Focus group themes and survey results brought together</span></li>
-            <li class="tl-step"><span class="tl-week">Weeks 7&ndash;8</span><span class="tl-name">Report &amp; Walkthrough</span><span class="tl-detail">Change Readiness Report with a prioritized roadmap</span></li>
+            <li class="tl-step"><span class="tl-week">Weeks 7&ndash;8</span><span class="tl-name">Report &amp; Walkthrough</span><span class="tl-detail">Change Readiness Report with a prioritized roadmap based on best practices</span></li>
           </ol>
         </div>
         <div class="svc-notes">
@@ -2480,8 +2503,6 @@ h1:focus, #main:focus { outline: none; }
     <aside class="about-card" aria-labelledby="glance-title">
       <h2 class="about-card-title" id="glance-title">At a glance</h2>
       <dl>
-        <dt>Education</dt>
-        <dd>M.A. in Industrial-Organizational Psychology, George Mason University</dd>
         <dt>Background</dt>
         <dd>
           <ul>
@@ -2500,6 +2521,8 @@ h1:focus, #main:focus { outline: none; }
             <li>Photography, with my camera along for every backcountry adventure</li>
           </ul>
         </dd>
+        <dt>Education</dt>
+        <dd>M.A. in Industrial-Organizational Psychology, George Mason University</dd>
         <dt>Location</dt>
         <dd>Denver, CO, serving clients remotely nationwide</dd>
       </dl>
