@@ -335,28 +335,28 @@ h1:focus, #main:focus { outline: none; }
 .svc-card {
   position: relative; display: flex; flex-direction: column;
   background: #fff; border: 1px solid rgba(15, 32, 64, 0.14); border-radius: 6px;
-  padding: 30px 28px 26px; text-decoration: none; color: inherit; overflow: hidden;
+  padding: 36px 28px 24px; text-decoration: none; color: inherit; overflow: hidden;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .svc-card:hover { border-color: rgba(37, 99, 168, 0.55); box-shadow: 0 8px 28px rgba(15, 32, 64, 0.08); }
-.svc-card--featured { border-top: 3px solid var(--blue); padding-top: 28px; }  /* 3px border + 28px = same title line as the 1px-border cards */
-.svc-card-icon { position: absolute; top: 18px; right: 18px; color: rgba(200, 146, 42, 0.5); pointer-events: none; }
-.svc-card-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; min-height: 24px; margin-bottom: 14px; padding-right: 48px; }  /* min-height keeps every card title on one line across a row */
-.svc-card-format { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); }
-.svc-lead-pill {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--blue-dark); background: rgba(37, 99, 168, 0.09); padding: 3px 9px; border-radius: 3px;
+.svc-card--featured { border-top: 3px solid var(--blue); padding-top: 34px; }  /* 3px border + 34px = same title line as the 1px-border cards */
+.svc-card-icon { position: absolute; top: 31px; right: 18px; color: rgba(200, 146, 42, 0.5); pointer-events: none; }
+.svc-card--featured .svc-card-icon { top: 29px; }
+.svc-tab {  /* "Start Here": hangs off the blue top edge, takes no layout space */
+  position: absolute; top: 0; left: 28px; padding: 4px 10px 5px; border-radius: 0 0 4px 4px;
+  font-size: 11px; font-weight: 700; line-height: 1.2; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #fff; background: var(--blue);
 }
-.svc-card h3 { font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.3; color: var(--navy); margin-bottom: 10px; transition: color 0.2s; }
+.svc-card h3 { font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.3; color: var(--navy); margin-bottom: 10px; padding-right: 34px; transition: color 0.2s; }
 .svc-card:hover h3 { color: var(--blue-dark); }
 .svc-card-q { font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.45; color: var(--navy-mid); margin-bottom: 12px; }
 .svc-card-desc { font-size: 15px; line-height: 1.65; color: var(--text-light); margin-bottom: 20px; flex: 1; }
-.svc-card-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--blue-dark);
+
+@media (min-width: 769px) {
+  @supports (grid-template-rows: subgrid) {
+    .svc-row > .svc-card { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; }
+  }
 }
-.svc-card-link svg { transition: transform 0.2s; }
-.svc-card:hover .svc-card-link svg { transform: translateX(3px); }
 
 /* "Start with what you're noticing": a problem-first way into the five services */
 .notice { margin-top: 52px; padding-top: 38px; border-top: 1px solid rgba(15, 32, 64, 0.14); }
@@ -586,7 +586,6 @@ h1:focus, #main:focus { outline: none; }
   margin: 32px 0 36px; padding: 26px 26px 22px; min-width: 0;
   background: #fff; border: 1px solid var(--border); border-radius: 8px;
 }
-.who-intro .chart-card { margin: 28px 0 28px; }
 .chart-kicker { font-size: 11.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 8px; }
 .chart-title { font-family: var(--serif); font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--navy); }
 .chart-sub { margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--text-light); }
@@ -791,42 +790,20 @@ h1:focus, #main:focus { outline: none; }
 .ds-ticks { position: relative; height: 20px; margin: 6px 16px 0; }
 .ds-tick { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; color: var(--text-muted); }
 
-/* 6. Home: one organization, five lenses (a simplified overview of all five engagements) */
-.mz { container: mz / inline-size; --mgw: 92px; }
-.mz-key { margin-bottom: 14px; }
-.key-dot--faint { background: rgba(15, 32, 64, 0.16); }
-.key-sw--gold { background: var(--accent); }
-.mz-tiers { list-style: none; display: grid; gap: 14px; }
-.mz-tier { padding: 14px; background: var(--cream); border-radius: 10px; }
-.mz-scope { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
-.mz-scope-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.mz-scope-name { font-size: 13.5px; font-weight: 700; line-height: 1.25; color: var(--navy); }
-.mz-scope-note { font-size: 12.5px; line-height: 1.35; color: var(--text-light); }
-.mz-org { flex: none; display: flex; gap: 9px; }
-.mz-team { display: grid; grid-template-columns: repeat(2, 9px); grid-auto-rows: 9px; gap: 4px; }
-.mz-team i { display: block; border-radius: 50%; background: rgba(15, 32, 64, 0.16); }
-.mz-team i.on { background: var(--navy); }
-.mz-svcs { list-style: none; display: grid; gap: 10px; }
-/* Each engagement is one link card: hover and keyboard focus show it is clickable */
-.mz-link {
-  display: grid; grid-template-columns: minmax(0, 1fr) var(--mgw); column-gap: 16px; row-gap: 6px; align-items: center;
-  padding: 13px 16px 14px; background: #fff; border: 1px solid var(--border); border-radius: 8px;
-  color: inherit; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s;
+/* 6. Home service cards: one quiet footer per card (a small sketch of the result, what you get, and an arrow) */
+.svc-card-foot { display: flex; align-items: center; gap: 14px; padding-top: 16px; border-top: 1px solid rgba(15, 32, 64, 0.1); }
+.svc-card-out { flex: 1; min-width: 0; }
+.svc-card-out-k { display: block; margin-bottom: 2px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); }
+.svc-card-out-v { display: block; font-size: 14.5px; font-weight: 500; line-height: 1.35; color: var(--navy); }
+.svc-card-go {
+  flex: none; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;
+  border: 1px solid rgba(15, 32, 64, 0.2); border-radius: 50%; color: var(--blue-dark);
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
-.mz-link:hover { border-color: rgba(37, 99, 168, 0.55); box-shadow: 0 6px 20px rgba(15, 32, 64, 0.08); }
-.mz-link:focus-visible { border-radius: 8px; }
-.mz-name { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 15px; font-weight: 700; line-height: 1.25; color: var(--navy); }
-.mz-name-text { text-decoration-color: var(--blue-dark); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.mz-link:hover .mz-name-text { text-decoration-line: underline; }
-.mz-name svg { flex: none; color: var(--blue-dark); transition: transform 0.2s; }
-.mz-link:hover .mz-name svg { transform: translateX(3px); }
-.mz-text { display: block; min-width: 0; }
-.mz-q { display: block; font-size: 13.5px; line-height: 1.4; color: var(--text-light); }
-.mz-out { display: block; margin-top: 5px; font-size: 12.5px; line-height: 1.35; color: var(--text-light); }
-.mz-out > span { font-weight: 700; color: var(--navy); }
-.mz-out > span::after { content: ':'; }
-.mz-caption { margin-top: 16px; }
-.mg { display: flex; flex-direction: column; justify-content: center; gap: 8px; width: var(--mgw); height: 46px; }
+.svc-card-go svg { display: block; transition: transform 0.2s; }
+.svc-card:hover .svc-card-go { background: var(--blue-dark); border-color: var(--blue-dark); color: #fff; }
+.svc-card:hover .svc-card-go svg { transform: translateX(2px); }
+.mg { flex: none; display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 68px; height: 40px; }
 .mg-row, .mg-db, .mg-lv { position: relative; display: block; height: 9px; }
 .mg-bar { position: absolute; left: 0; top: 0; height: 9px; border-radius: 5px; background: var(--navy); }
 .mg-bar--gold { background: var(--accent); }
@@ -851,20 +828,6 @@ h1:focus, #main:focus { outline: none; }
 .mg-meter i.on { background: var(--navy); }
 .mg-sq { flex: none; width: 6px; height: 6px; margin-left: 3px; border-radius: 1.5px; background: var(--accent); }
 .mg-ln { flex: 1; height: 4px; border-radius: 2px; background: rgba(15, 32, 64, 0.16); }
-
-/* Home overview: when the card is narrow (phones, and the two-column layout just above tablet width), tighten the cards and shrink the small graphics */
-@container mz (max-width: 470px) {
-  .mz-tiers { --mgw: 68px; }
-  .mz-tier { padding: 12px 10px; }
-  .mz-link { column-gap: 12px; padding: 12px 12px 13px; }
-}
-
-/* Very narrow phones: the small graphic drops under the text so the words keep their width */
-@container mz (max-width: 300px) {
-  .mz-tiers { --mgw: 92px; }
-  .mz-link { grid-template-columns: minmax(0, 1fr); }
-  .mz-link .mg { margin-top: 6px; }
-}
 
 /* ---------- 7. About ---------- */
 .page-hero--simple { padding-bottom: 0; }
@@ -1087,6 +1050,15 @@ h1:focus, #main:focus { outline: none; }
 }
 
 @media (max-width: 560px) {
+  .svc-card { padding: 32px 22px 20px; }
+  .svc-card--featured { padding-top: 30px; }
+  .svc-tab { left: 22px; }
+  .svc-card-icon { top: 29px; right: 16px; }
+  .svc-card--featured .svc-card-icon { top: 27px; }
+  .svc-card-icon svg { width: 30px; height: 30px; }
+  .svc-card h3 { padding-right: 28px; }
+  .svc-card-desc { margin-bottom: 16px; }
+  .svc-card-foot { padding-top: 14px; }
   .chart-card { padding: 20px 16px 18px; }
   .chart-plot { margin-top: 20px; }
   .chart-takeaway { font-size: 16px; }
@@ -1195,45 +1167,41 @@ h1:focus, #main:focus { outline: none; }
       <div class="svc-row svc-row--2">
         <a class="svc-card svc-card--featured" href="/employee-listening-survey-and-action-plan" data-page="svc-listening">
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></span>
-          <span class="svc-card-top"><span class="svc-card-format">Survey + Action Plan</span><span class="svc-lead-pill">Start Here</span></span>
+          <span class="svc-tab">Start Here</span>
           <h3>Employee Listening Survey &amp; Action Plan</h3>
           <p class="svc-card-q">What are our employees experiencing, and what should we do about it?</p>
           <p class="svc-card-desc">A custom survey of your workforce, analyzed for patterns and themes and delivered as a clear report with prioritized recommendations and action planning based on best practices.</p>
-          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="svc-card-foot"><span class="mg" aria-hidden="true"><span class="mg-row"><i class="mg-bar" style="width:86%"></i><b class="mg-tick" style="left:72%"></b></span><span class="mg-row"><i class="mg-bar" style="width:70%"></i><b class="mg-tick" style="left:58%"></b></span><span class="mg-row"><i class="mg-bar mg-bar--gold" style="width:50%"></i><b class="mg-tick" style="left:72%"></b></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Executive report + action planning</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
         </a>
         <a class="svc-card" href="/team-health-diagnostic" data-page="svc-team">
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg></span>
-          <span class="svc-card-top"><span class="svc-card-format">Team Assessment</span></span>
           <h3>Team Health Diagnostic</h3>
           <p class="svc-card-q">How is each team really working together, and what would help?</p>
           <p class="svc-card-desc">Get a clear, honest picture of how a team, several teams, or a whole workforce is functioning right now, whether you're protecting strong performance or working through friction that's starting to affect results.</p>
-          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="svc-card-foot"><span class="mg mg--bins" aria-hidden="true"><span class="mg-bin"></span><span class="mg-bin mg-bin--in mg-bin--gold"><i></i><i></i></span><span class="mg-bin mg-bin--in"></span><span class="mg-bin mg-bin--in"><i></i><i></i></span><span class="mg-bin mg-bin--in"><i></i></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Team Dynamics Report</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
         </a>
       </div>
       <div class="svc-row svc-row--3">
         <a class="svc-card" href="/change-readiness-pulse-and-roadmap" data-page="svc-diagnostic">
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 15a9 9 0 0 1 18 0"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="3" y1="15" x2="5" y2="15"/><line x1="21" y1="15" x2="19" y2="15"/><line x1="12" y1="15" x2="17" y2="10"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg></span>
-          <span class="svc-card-top"><span class="svc-card-format">Readiness Diagnostic</span></span>
           <h3>Change Readiness Pulse &amp; Roadmap</h3>
           <p class="svc-card-q">How is our workforce experiencing this change, and what comes next?</p>
           <p class="svc-card-desc">Focus groups and a survey show where people stand on a change that's coming, underway, or already behind you, with a roadmap of next steps based on best practices.</p>
-          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="svc-card-foot"><span class="mg" aria-hidden="true"><span class="mg-stack" style="grid-template-columns:62fr 24fr 14fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:49fr 31fr 20fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:41fr 33fr 26fr"><i></i><i></i><i></i></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Readiness report + roadmap</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
         </a>
         <a class="svc-card" href="/training-needs-assessment" data-page="svc-tna">
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></span>
-          <span class="svc-card-top"><span class="svc-card-format">Training Assessment</span></span>
           <h3>Training Needs Assessment</h3>
           <p class="svc-card-q">Is training the right fix, and where should we invest?</p>
           <p class="svc-card-desc">Interviews and a short survey show what the role requires, where real skill gaps exist, and what to prioritize, before you commit the budget.</p>
-          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="svc-card-foot"><span class="mg" aria-hidden="true"><span class="mg-db"><i class="mg-link" style="left:22%;width:56%"></i><i class="mg-dot mg-dot--c" style="left:22%"></i><i class="mg-dot mg-dot--m" style="left:78%"></i></span><span class="mg-db"><i class="mg-link" style="left:40%;width:34%"></i><i class="mg-dot mg-dot--c" style="left:40%"></i><i class="mg-dot mg-dot--m" style="left:74%"></i></span><span class="mg-db"><i class="mg-link" style="left:54%;width:16%"></i><i class="mg-dot mg-dot--c" style="left:54%"></i><i class="mg-dot mg-dot--m" style="left:70%"></i></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Prioritized training report</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
         </a>
         <a class="svc-card" href="/performance-standards-and-review-toolkit" data-page="svc-prd">
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="2.5" fill="currentColor" stroke="none"/><circle cx="11" cy="18" r="2.5" fill="currentColor" stroke="none"/></svg></span>
-          <span class="svc-card-top"><span class="svc-card-format">Review Toolkit</span></span>
           <h3>Performance Standards &amp; Review Toolkit</h3>
           <p class="svc-card-q">What does good performance actually look like in this role?</p>
           <p class="svc-card-desc">Clear, behavior-based standards and a review toolkit, so managers can evaluate fairly and employees know what's expected.</p>
-          <span class="svc-card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="svc-card-foot"><span class="mg" aria-hidden="true"><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i class="on"></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Standards + review toolkit</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
         </a>
       </div>
     </div>
@@ -1259,104 +1227,6 @@ h1:focus, #main:focus { outline: none; }
       <div class="section-label">Who I Work With</div>
       <h2 class="section-title" id="who-title">The same quality of insight, without the enterprise price tag</h2>
       <p class="section-body">Suttle Insights is a deliberate nod to the nature of this work. The most valuable things a good analysis turns up are subtle, and rarely the ones anyone was already looking for.</p>
-        <figure class="chart-card" id="chart-home">
-          <div class="chart-head">
-            <p class="chart-kicker">A simplified view</p>
-            <h3 class="chart-title">One organization, five ways to look at it</h3>
-            <p class="chart-sub">The general kinds of insight each engagement can surface</p>
-          </div>
-          <div class="chart-plot mz">
-            <ul class="chart-key mz-key">
-              <li><span class="key-dot key-dot--navy"></span>Who&rsquo;s in view</li>
-              <li><span class="key-dot key-dot--faint"></span>Not in this lens</li>
-              <li><span class="key-sw key-sw--gold"></span>What stands out</li>
-            </ul>
-            <ul class="mz-tiers">
-        <li class="mz-tier">
-          <div class="mz-scope">
-            <div class="mz-org" aria-hidden="true"><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
-            <div class="mz-scope-text">
-              <p class="mz-scope-name">The whole workforce</p>
-            </div>
-          </div>
-          <ul class="mz-svcs">
-            <li class="mz-svc">
-              <a class="mz-link" href="/employee-listening-survey-and-action-plan" data-page="svc-listening">
-                <span class="mz-name"><span class="mz-name-text">Employee Listening Survey</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-                <span class="mz-text">
-                  <span class="mz-q">What are our employees experiencing?</span>
-                  <span class="mz-out"><span>You get</span> Executive report + action planning</span>
-                </span>
-                <span class="mg" aria-hidden="true"><span class="mg-row"><i class="mg-bar" style="width:86%"></i><b class="mg-tick" style="left:72%"></b></span><span class="mg-row"><i class="mg-bar" style="width:70%"></i><b class="mg-tick" style="left:58%"></b></span><span class="mg-row"><i class="mg-bar mg-bar--gold" style="width:50%"></i><b class="mg-tick" style="left:72%"></b></span></span>
-              </a>
-            </li>
-            <li class="mz-svc">
-              <a class="mz-link" href="/change-readiness-pulse-and-roadmap" data-page="svc-diagnostic">
-                <span class="mz-name"><span class="mz-name-text">Change Readiness Pulse</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-                <span class="mz-text">
-                  <span class="mz-q">How is our workforce experiencing this change?</span>
-                  <span class="mz-out"><span>You get</span> Readiness report + roadmap</span>
-                </span>
-                <span class="mg" aria-hidden="true"><span class="mg-stack" style="grid-template-columns:62fr 24fr 14fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:49fr 31fr 20fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:41fr 33fr 26fr"><i></i><i></i><i></i></span></span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="mz-tier">
-          <div class="mz-scope">
-            <div class="mz-org" aria-hidden="true"><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="mz-team"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="mz-team"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
-            <div class="mz-scope-text">
-              <p class="mz-scope-name">One team, or several</p>
-              <p class="mz-scope-note">Or the whole workforce, as one team</p>
-            </div>
-          </div>
-          <ul class="mz-svcs">
-            <li class="mz-svc">
-              <a class="mz-link" href="/team-health-diagnostic" data-page="svc-team">
-                <span class="mz-name"><span class="mz-name-text">Team Health Diagnostic</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-                <span class="mz-text">
-                  <span class="mz-q">How is each team really working together?</span>
-                  <span class="mz-out"><span>You get</span> Team Dynamics Report</span>
-                </span>
-                <span class="mg mg--bins" aria-hidden="true"><span class="mg-bin"></span><span class="mg-bin mg-bin--in mg-bin--gold"><i></i><i></i></span><span class="mg-bin mg-bin--in"></span><span class="mg-bin mg-bin--in"><i></i><i></i></span><span class="mg-bin mg-bin--in"><i></i></span></span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="mz-tier">
-          <div class="mz-scope">
-            <div class="mz-org" aria-hidden="true"><span class="mz-team"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span><span class="mz-team"><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span><span class="mz-team"><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="mz-team"><i></i><i></i><i></i><i></i><i class="on"></i><i></i></span></div>
-            <div class="mz-scope-text">
-              <p class="mz-scope-name">One role</p>
-            </div>
-          </div>
-          <ul class="mz-svcs">
-            <li class="mz-svc">
-              <a class="mz-link" href="/training-needs-assessment" data-page="svc-tna">
-                <span class="mz-name"><span class="mz-name-text">Training Needs Assessment</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-                <span class="mz-text">
-                  <span class="mz-q">Is training the right fix?</span>
-                  <span class="mz-out"><span>You get</span> Prioritized training report</span>
-                </span>
-                <span class="mg" aria-hidden="true"><span class="mg-db"><i class="mg-link" style="left:22%;width:56%"></i><i class="mg-dot mg-dot--c" style="left:22%"></i><i class="mg-dot mg-dot--m" style="left:78%"></i></span><span class="mg-db"><i class="mg-link" style="left:40%;width:34%"></i><i class="mg-dot mg-dot--c" style="left:40%"></i><i class="mg-dot mg-dot--m" style="left:74%"></i></span><span class="mg-db"><i class="mg-link" style="left:54%;width:16%"></i><i class="mg-dot mg-dot--c" style="left:54%"></i><i class="mg-dot mg-dot--m" style="left:70%"></i></span></span>
-              </a>
-            </li>
-            <li class="mz-svc">
-              <a class="mz-link" href="/performance-standards-and-review-toolkit" data-page="svc-prd">
-                <span class="mz-name"><span class="mz-name-text">Performance Standards</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-                <span class="mz-text">
-                  <span class="mz-q">What does good performance look like in this role?</span>
-                  <span class="mz-out"><span>You get</span> Standards + review toolkit</span>
-                </span>
-                <span class="mg" aria-hidden="true"><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i class="on"></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span></span>
-              </a>
-            </li>
-          </ul>
-        </li>
-            </ul>
-          </div>
-          <figcaption class="chart-caption mz-caption">A simplified overview, not client results. Real findings are specific to your organization.</figcaption>
-        </figure>
 
       <p class="section-body">I work with organizations of all sizes and sectors that have real workforce complexity but no internal analytics function to make sense of it. That might mean several roles, several levels, or offices in more than one location. It usually means making decisions about your people without a clear picture of what's actually going on.</p>
       <p class="section-body">That has meant working with all types and sizes of businesses and organizations, from nonprofits and federal agencies to convenience stores. I/O psychology works in all of them, and Suttle Insights is built on the idea that any leader of people can put solid people analytics to work, not just the ones who can afford a dedicated team.</p>
@@ -2619,7 +2489,7 @@ h1:focus, #main:focus { outline: none; }
             <span class="field-error" id="err-email" aria-live="polite"></span>
           </div>
           <div class="form-group">
-            <label for="company">Organization</label>
+            <label for="company">Company / organization</label>
             <input type="text" id="company" name="company" placeholder="Acme Co." autocomplete="organization">
           </div>
         </div>
