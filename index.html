@@ -306,7 +306,6 @@ h1:focus, #main:focus { outline: none; }
 
 .hero-sub { font-size: 18px; line-height: 1.7; color: rgba(255, 255, 255, 0.85); max-width: 620px; margin-bottom: 36px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
-.hero-note { margin-top: 18px; font-size: 14.5px; font-weight: 500; line-height: 1.5; letter-spacing: 0.01em; color: rgba(255, 255, 255, 0.82); }
 
 /* First-visit intro (home hero only). app.js removes .hero--intro once it has played, or as soon as the
    visitor lands on or moves to another page, so returning to Home shows the hero already in place.
@@ -320,7 +319,6 @@ h1:focus, #main:focus { outline: none; }
   .hero--intro .hero-eyebrow { opacity: 0; animation: heroSlideLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) 2.85s forwards; }
   .hero--intro .hero-sub { opacity: 0; animation: heroSlideUp 0.7s ease 2.85s forwards; }
   .hero--intro .hero-actions { opacity: 0; animation: heroSlideUp 0.7s ease 3.1s forwards; }
-  .hero--intro .hero-note { opacity: 0; animation: heroSlideUp 0.7s ease 3.3s forwards; }
 }
 
 
@@ -1150,12 +1148,11 @@ h1:focus, #main:focus { outline: none; }
     <div class="hero-content">
       <p class="hero-eyebrow">People Analytics &middot; Team Assessments &middot; Workforce Diagnostics</p>
       <h1 id="hero-title"><span class="hero-line1">Your people shape everything.</span><em class="hero-line2">So ask the questions that matter.</em></h1>
-      <p class="hero-sub">Suttle Insights brings organizations of any size the survey design, team assessments, and workforce analysis that large corporations rely on, so you can see clearly what your people think, feel, and need.</p>
+      <p class="hero-sub">Suttle Insights brings organizations of any size the survey design, team assessments, and workforce analyses that large corporations rely on, so you can see clearly what your people think, feel, and need.</p>
       <div class="hero-actions">
         <a class="btn-primary" href="#services" data-scroll="services">Explore Services</a>
         <a class="btn-outline" href="/contact" data-page="contact">Book a Free Discovery Call</a>
       </div>
-      <p class="hero-note">Fixed project fee. No surprise hourly bills.</p>
     </div>
   </section>
 
@@ -2616,7 +2613,7 @@ h1:focus, #main:focus { outline: none; }
     if (heroEl) heroEl.classList.remove('hero--intro');
   }
   if (heroEl && heroEl.classList.contains('hero--intro')) {
-    var lastEl = heroEl.querySelector('.hero-note');
+    var lastEl = heroEl.querySelector('.hero-actions');
     if (lastEl) lastEl.addEventListener('animationend', endHeroIntro);  /* last element in the sequence */
     heroIntroTimer = setTimeout(endHeroIntro, 5500);                    /* safety net */
   }
