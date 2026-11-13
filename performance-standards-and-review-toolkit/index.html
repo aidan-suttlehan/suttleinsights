@@ -26,7 +26,7 @@
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://suttleinsights.com/#organization","name":"Suttle Insights","legalName":"Suttle Insights LLC","url":"https://suttleinsights.com/","logo":{"@type":"ImageObject","url":"https://suttleinsights.com/logo.png","width":512,"height":512},"image":"https://suttleinsights.com/og-image.png","description":"People analytics, team dynamics, and workforce culture consulting from Denver: surveys, team assessments, and workforce analyses for organizations of any size.","email":"aidan@suttleinsights.com","founder":{"@id":"https://suttleinsights.com/#founder"},"address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"}},{"@type":"Person","@id":"https://suttleinsights.com/#founder","name":"Aidan Suttlehan","url":"https://suttleinsights.com/about/","image":"https://suttleinsights.com/aidan-suttlehan.jpg"},{"@type":"WebSite","@id":"https://suttleinsights.com/#website","url":"https://suttleinsights.com/","name":"Suttle Insights","publisher":{"@id":"https://suttleinsights.com/#organization"},"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#webpage","url":"https://suttleinsights.com/performance-standards-and-review-toolkit/","name":"Performance Standards & Review Toolkit | Suttle Insights","description":"Custom performance standards for a role or team in clear, observable behaviors, so managers evaluate consistently and employees know what's expected.","isPartOf":{"@id":"https://suttleinsights.com/#website"},"inLanguage":"en-US","mainEntity":{"@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#service"},"breadcrumb":{"@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#breadcrumb"}},{"@type":"Service","@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#service","name":"Performance Standards & Review Toolkit","description":"Custom performance standards for a role or team in clear, observable behaviors, so managers evaluate consistently and employees know what's expected.","url":"https://suttleinsights.com/performance-standards-and-review-toolkit/","provider":{"@id":"https://suttleinsights.com/#organization"},"areaServed":{"@type":"Country","name":"United States"}},{"@type":"BreadcrumbList","@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://suttleinsights.com/"},{"@type":"ListItem","position":2,"name":"Performance Standards & Review Toolkit","item":"https://suttleinsights.com/performance-standards-and-review-toolkit/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://suttleinsights.com/#organization","name":"Suttle Insights","legalName":"Suttle Insights LLC","url":"https://suttleinsights.com/","logo":{"@type":"ImageObject","url":"https://suttleinsights.com/logo.png","width":512,"height":512},"image":"https://suttleinsights.com/og-image.png","description":"People analytics, team dynamics, and workforce culture consulting from Denver: surveys, team assessments, and workforce analyses for organizations of any size.","email":"aidan@suttleinsights.com","founder":{"@id":"https://suttleinsights.com/#founder"},"address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"}},{"@type":"Person","@id":"https://suttleinsights.com/#founder","name":"Aidan Suttlehan","url":"https://suttleinsights.com/about/","image":"https://suttleinsights.com/aidan-suttlehan.jpg","sameAs":["https://www.linkedin.com/in/aidan-suttlehan/"]},{"@type":"WebSite","@id":"https://suttleinsights.com/#website","url":"https://suttleinsights.com/","name":"Suttle Insights","publisher":{"@id":"https://suttleinsights.com/#organization"},"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#webpage","url":"https://suttleinsights.com/performance-standards-and-review-toolkit/","name":"Performance Standards & Review Toolkit | Suttle Insights","description":"Custom performance standards for a role or team in clear, observable behaviors, so managers evaluate consistently and employees know what's expected.","isPartOf":{"@id":"https://suttleinsights.com/#website"},"inLanguage":"en-US","mainEntity":{"@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#service"},"breadcrumb":{"@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#breadcrumb"}},{"@type":"Service","@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#service","name":"Performance Standards & Review Toolkit","description":"Custom performance standards for a role or team in clear, observable behaviors, so managers evaluate consistently and employees know what's expected.","url":"https://suttleinsights.com/performance-standards-and-review-toolkit/","provider":{"@id":"https://suttleinsights.com/#organization"},"areaServed":{"@type":"Country","name":"United States"}},{"@type":"BreadcrumbList","@id":"https://suttleinsights.com/performance-standards-and-review-toolkit/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://suttleinsights.com/"},{"@type":"ListItem","position":2,"name":"Performance Standards & Review Toolkit","item":"https://suttleinsights.com/performance-standards-and-review-toolkit/"}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -1093,6 +1093,163 @@ h1:focus, #main:focus { outline: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 
+
+/* ==========================================================================
+   v200 additions: Home trust strip + animated hero dashboard, who cards, why section, light process band,
+   service-page jump chips + sticky sidebar, privacy note, phone adjustments
+   ========================================================================== */
+
+/* Home hero: text left, animated sample dashboard right (wide screens only) */
+.hero-visual { display: none; }
+@media (min-width: 1100px) {
+  .hero--split { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: clamp(36px, 4vw, 56px); align-items: center; }
+  .hero--split .hero-content { max-width: none; }
+  .hero--split h1 { font-size: clamp(32px, 3.4vw, 50px); }
+  .hero--split .hero-sub { max-width: 540px; }
+  .hero-visual { display: block; position: relative; z-index: 2; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero--intro .hero-visual { opacity: 0; animation: heroSlideUp 0.9s ease 3.3s forwards; }
+}
+.hv-card { background: #fff; border-radius: 14px; padding: 22px 22px 16px; box-shadow: 0 28px 70px rgba(4, 10, 24, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.hv-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 5px; }
+.hv-title { font-family: var(--serif); font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 12px; }
+.hv .chart-key { margin-bottom: 14px; font-size: 12px; gap: 4px 14px; }
+.hv-rows .sb-row + .sb-row { margin-top: 10px; }
+.hv-rows .sb-name { font-size: 13px; margin-bottom: 4px; }
+.hv-rows .sb-bar { height: 26px; border-radius: 13px; }
+.hv-rows .sb-seg { font-size: 12px; }
+.hv-row--low .sb-track { border-radius: 14px; box-shadow: 0 0 0 3px rgba(200, 146, 42, 0.55); }
+.hv-note { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); font-family: var(--serif); font-style: italic; font-size: 15px; line-height: 1.45; color: var(--navy); }
+.hv-cap { margin-top: 6px; font-size: 11.5px; line-height: 1.4; color: var(--text-muted); }
+/* the loop (script adds .hv--anim; without it, or with reduced motion, the finished chart is shown) */
+.hv--anim .hv-row .sb-bar { clip-path: inset(0 100% 0 0 round 13px); }
+.hv--anim .hv-row .sb-bm, .hv--anim .hv-row .sb-bmv { opacity: 0; }
+.hv--anim .hv-row--low .sb-track { box-shadow: 0 0 0 0 rgba(200, 146, 42, 0); }
+.hv--anim .hv-note { opacity: 0; transform: translateY(6px); }
+.hv--anim .hv-card { transition: opacity 0.6s ease; }
+.hv--anim.is-on .hv-row .sb-bar { clip-path: inset(0 0 0 0 round 13px); transition: clip-path 0.95s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 0.16s); }
+.hv--anim.is-on .hv-row .sb-bm, .hv--anim.is-on .hv-row .sb-bmv { opacity: 1; transition: opacity 0.4s ease 1.1s; }
+.hv--anim.is-hi .hv-row--low .sb-track { box-shadow: 0 0 0 3px rgba(200, 146, 42, 0.55); transition: box-shadow 0.4s ease; }
+.hv--anim.is-hi .hv-note { opacity: 1; transform: none; transition: opacity 0.5s ease, transform 0.5s ease; }
+.hv--anim.is-out .hv-card { opacity: 0; }
+.hv--reset, .hv--reset * { transition: none !important; }
+
+/* Home trust strip: who is behind the practice, right under the hero */
+.trust-strip { background: var(--warm-white); border-bottom: 1px solid rgba(15, 32, 64, 0.12); padding: 22px var(--pad-x); }
+.trust-in { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 26px; }
+.trust-photo {
+  flex: none; width: 76px; height: 76px; border-radius: 50%; background-color: #2b2d31;
+  background-repeat: no-repeat; background-size: 330%; background-position: 52% 7%;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 4.5px rgba(200, 146, 42, 0.75);
+}
+.trust-text { flex: 1 1 440px; min-width: 0; }
+.trust-lead { font-family: var(--serif); font-size: 19px; line-height: 1.35; color: var(--navy); }
+.trust-lead strong { font-weight: 700; }
+.trust-sub { margin-top: 3px; font-size: 14.5px; line-height: 1.5; color: var(--text-light); }
+.trust-sub a { color: var(--blue-dark); font-weight: 600; text-underline-offset: 3px; }
+.trust-sub a:hover { color: var(--navy); }
+.trust-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; flex: 1 1 300px; justify-content: flex-end; }
+.trust-chips li {
+  font-size: 13px; font-weight: 500; color: var(--blue-dark);
+  background: rgba(37, 99, 168, 0.1); border: 1px solid rgba(37, 99, 168, 0.35); padding: 5px 12px; border-radius: 20px;
+}
+
+/* Who I Work With: three cards instead of a long text column */
+.who-section { display: block; }
+.who-head { max-width: 760px; margin-bottom: 36px; }
+.who-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.who-card { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(15, 32, 64, 0.22); border-radius: 8px; padding: 26px 24px 24px; }
+.who-card-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-bottom: 16px; border-radius: 50%; background: rgba(200, 146, 42, 0.18); color: var(--accent-ink); }
+.who-card h3 { font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.3; color: var(--navy); margin-bottom: 8px; }
+.who-card p { font-size: 15.5px; line-height: 1.65; color: var(--text-light); }
+.who-foot { margin-top: 30px; max-width: 820px; }
+.who-notfit { font-size: 15.5px; line-height: 1.65; color: var(--text-light); }
+.who-notfit strong { color: var(--navy); }
+.who-foot .who-closing { margin-top: 16px; }
+
+/* Why a one-person practice */
+.why-section { background: var(--navy); color: #fff; padding: var(--section-y) var(--pad-x); }
+.why-section .section-label { color: var(--accent-light); }
+.why-section .section-title { color: #fff; max-width: 820px; margin-bottom: 38px; }
+.why-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 3.5vw, 48px); }
+.why-item { border-top: 2px solid var(--accent); padding-top: 18px; }
+.why-item h3 { font-family: var(--serif); font-size: 19px; font-weight: 600; line-height: 1.3; color: #fff; margin-bottom: 8px; }
+.why-item p { font-size: 15.5px; line-height: 1.7; color: rgba(255, 255, 255, 0.88); }
+
+/* How It Works moves to a light band so the dark bands around it stay distinct */
+.process-section { background: var(--warm-white); color: var(--text); border-top: 1px solid rgba(15, 32, 64, 0.1); }
+.process-section .section-label { color: var(--accent-ink); }
+.process-section .section-title { color: var(--navy); }
+.process-section .section-body { color: var(--text-light); }
+.process-steps::before { background: rgba(15, 32, 64, 0.28); }
+.step-title { color: var(--navy); }
+.step-desc { color: var(--text-light); }
+@media (max-width: 900px) {
+  .process-step { border-bottom-color: rgba(15, 32, 64, 0.12); }
+  .who-cards, .why-grid { grid-template-columns: 1fr; }
+  .why-grid { gap: 28px; }
+}
+
+/* Service pages: jump chips, and a sticky "What's Included" that always fits the window */
+.svc-jump { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: -8px 0 32px; }
+.svc-jump-label { margin-right: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--text-muted); }
+.svc-jump a {
+  padding: 6px 14px; border-radius: 999px; text-decoration: none; font-size: 13.5px; font-weight: 600; color: var(--blue-dark);
+  background: rgba(37, 99, 168, 0.08); border: 1px solid rgba(37, 99, 168, 0.3); transition: background 0.18s, border-color 0.18s;
+}
+.svc-jump a:hover { background: rgba(37, 99, 168, 0.16); border-color: rgba(37, 99, 168, 0.55); }
+.svc-page-body [id] { scroll-margin-top: calc(var(--nav-h) + 70px); }
+.service-includes-box { padding: 20px 20px 18px; }
+.includes-title { margin-bottom: 6px; }
+.includes-list li { padding: 6px 0; font-size: 13px; line-height: 1.4; gap: 9px; }
+.addon-note { margin-top: 10px; padding: 9px 11px; font-size: 12.5px; line-height: 1.45; }
+/* Desktop: the "What's Included" box starts beside the opening line instead of below the chips */
+@media (min-width: 901px) {
+  .svc-page-body { display: grid; grid-template-columns: minmax(0, 1fr) 280px; column-gap: clamp(32px, 5vw, 64px); align-items: start; }
+  .svc-page-body > .service-inner { display: contents; }
+  .svc-page-body > .service-tagline, .svc-page-body > .svc-jump { grid-column: 1; }
+  .svc-page-body .service-left { grid-column: 1; grid-row: 3; }
+  .svc-page-body .service-includes-box { grid-column: 2; grid-row: 1 / span 3; }
+}
+@media (min-width: 1100px) {
+  .svc-page-body { grid-template-columns: minmax(0, 1fr) clamp(300px, 29%, 372px); }
+}
+@media (min-width: 901px) {
+  .service-includes-box {
+    position: sticky; top: calc(var(--nav-h) + 62px);
+    max-height: calc(100vh - var(--nav-h) - 62px - 16px); max-height: calc(100dvh - var(--nav-h) - 62px - 16px);
+    overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+  /* Set by script when the whole box would not fit the window: it then scrolls with the page instead of being cut off */
+  .service-includes-box.inc-static { position: static; max-height: none; overflow: visible; }
+}
+@media (min-width: 901px) and (max-height: 560px) {
+  .service-includes-box { position: static; max-height: none; overflow: visible; }
+}
+
+/* Contact: optional marker and privacy note */
+.opt { font-weight: 400; font-size: 13px; color: var(--text-muted); }
+.privacy-note { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--border); }
+.privacy-note h3 { margin-bottom: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--text-muted); }
+.privacy-note p { font-size: 14px; line-height: 1.65; color: var(--text-light); }
+.privacy-note a { color: var(--blue-dark); font-weight: 600; text-underline-offset: 3px; }
+
+/* Phones: slimmer service cards, no "what you're noticing" list, call to action pinned as a bar */
+@media (max-width: 600px) {
+  .svc-card-desc { display: none; }
+  .svc-card-q { margin-bottom: 16px; }
+}
+@media (max-width: 768px) {
+  .notice { display: none; }
+  .svc-help { margin-top: 28px; }
+  .trust-chips { justify-content: flex-start; }
+  .float-cta {
+    left: 0; right: 0; bottom: 0; border-radius: 0; text-align: center;
+    padding: 15px 16px calc(15px + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -4px 18px rgba(15, 32, 64, 0.3);
+  }
+  .site-footer { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+}
 </style>
 </head>
 <body>
@@ -1133,7 +1290,7 @@ h1:focus, #main:focus { outline: none; }
       </div>
     </li>
     <li><a href="/about/" data-page="about">About</a></li>
-    <li><a class="nav-cta" href="/contact/" data-page="contact">Book a Discovery Call</a></li>
+    <li><a class="nav-cta" href="/contact/" data-page="contact">Request a Discovery Call</a></li>
   </ul>
   <button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
     <span></span><span></span><span></span>
@@ -1148,16 +1305,48 @@ h1:focus, #main:focus { outline: none; }
 <!-- ================= HOME ================= -->
 <div id="page-home" class="page">
 
-  <section class="hero hero--intro" aria-labelledby="hero-title">
+  <section class="hero hero--intro hero--split" aria-labelledby="hero-title">
     <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-content">
       <p class="hero-eyebrow">People Analytics &middot; Team Dynamics &middot; Workforce Culture</p>
       <h1 id="hero-title"><span class="hero-line1">Your people shape everything.</span><em class="hero-line2">So ask the questions that matter.</em></h1>
-      <p class="hero-sub">Suttle Insights brings organizations of any size the survey design, team assessments, and workforce analyses that large corporations rely on, delivered with interactive dashboards where the scope fits, so you can see clearly what your people think, feel, and need.</p>
+      <p class="hero-sub">The people analytics large companies rely on, built for organizations of any size. Clear answers in plain language, with interactive dashboards where the scope fits.</p>
       <div class="hero-actions">
         <a class="btn-primary" href="#services" data-scroll="services">Explore Services</a>
-        <a class="btn-outline" href="/contact/" data-page="contact">Book a Free Discovery Call</a>
+        <a class="btn-outline" href="/contact/" data-page="contact">Request a Free Discovery Call</a>
       </div>
+    </div>
+    <div class="hero-visual hv" role="img" aria-label="Sample results dashboard. Favorable responses range from 76 percent for Manager Relationship to 38 percent for Recognition, the lowest index. Illustrative sample data, not client results.">
+      <div class="hv-card" aria-hidden="true">
+        <p class="hv-kicker">A sample of what you'd see</p>
+        <p class="hv-title">Results by index</p>
+        <ul class="chart-key sb-key"><li><span class="key-sw sb-seg--1"></span>Favorable</li><li><span class="key-sw sb-seg--2"></span>Neutral</li><li><span class="key-sw sb-seg--3"></span>Unfavorable</li></ul>
+        <div class="hv-rows">
+        <div class="sb-row hv-row" style="--i:0"><p class="sb-name"><span>Manager Relationship</span><span class="sb-bmv">Benchmark 73%</span></p><div class="sb-track"><div class="sb-bar" style="grid-template-columns:76fr 15fr 9fr"><span class="sb-seg sb-seg--1">76%</span><span class="sb-seg sb-seg--2">15%</span><span class="sb-seg sb-seg--3">9%</span></div><span class="sb-bm" style="left:73%" aria-hidden="true"></span></div></div>
+        <div class="sb-row hv-row" style="--i:1"><p class="sb-name"><span>Role Clarity</span></p><div class="sb-track"><div class="sb-bar" style="grid-template-columns:68fr 21fr 11fr"><span class="sb-seg sb-seg--1">68%</span><span class="sb-seg sb-seg--2">21%</span><span class="sb-seg sb-seg--3">11%</span></div></div></div>
+        <div class="sb-row hv-row" style="--i:2"><p class="sb-name"><span>Employee Engagement</span></p><div class="sb-track"><div class="sb-bar" style="grid-template-columns:64fr 24fr 12fr"><span class="sb-seg sb-seg--1">64%</span><span class="sb-seg sb-seg--2">24%</span><span class="sb-seg sb-seg--3">12%</span></div></div></div>
+        <div class="sb-row hv-row" style="--i:3"><p class="sb-name"><span>Perception of Voice</span></p><div class="sb-track"><div class="sb-bar" style="grid-template-columns:51fr 27fr 22fr"><span class="sb-seg sb-seg--1">51%</span><span class="sb-seg sb-seg--2">27%</span><span class="sb-seg sb-seg--3">22%</span></div></div></div>
+        <div class="sb-row hv-row" style="--i:4"><p class="sb-name"><span>Communication</span></p><div class="sb-track"><div class="sb-bar" style="grid-template-columns:46fr 28fr 26fr"><span class="sb-seg sb-seg--1">46%</span><span class="sb-seg sb-seg--2">28%</span><span class="sb-seg sb-seg--3">26%</span></div></div></div>
+        <div class="sb-row hv-row hv-row--low" style="--i:5"><p class="sb-name"><span>Recognition</span></p><div class="sb-track"><div class="sb-bar" style="grid-template-columns:38fr 30fr 32fr"><span class="sb-seg sb-seg--1">38%</span><span class="sb-seg sb-seg--2">30%</span><span class="sb-seg sb-seg--3">32%</span></div></div></div>
+        </div>
+        <p class="hv-note">Recognition is the lowest index, with about a third of responses unfavorable.</p>
+        <p class="hv-cap">Illustrative sample data, not client results.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-strip" aria-label="Who is behind Suttle Insights">
+    <div class="trust-in">
+      <div class="trust-photo" role="img" aria-label="Aidan Suttlehan" style="background-image:url('/aidan-suttlehan.jpg')"></div>
+      <div class="trust-text">
+        <p class="trust-lead">Led by <strong>Aidan Suttlehan</strong>, M.A. in Industrial-Organizational Psychology</p>
+        <p class="trust-sub">I design and run every engagement myself. <a href="/about/" data-page="about">More about me</a></p>
+      </div>
+      <ul class="trust-chips">
+        <li>Psychometrics and survey design</li>
+        <li>Employee listening analytics</li>
+        <li>Workforce assessment and competency modeling</li>
+      </ul>
     </div>
   </section>
 
@@ -1221,27 +1410,56 @@ h1:focus, #main:focus { outline: none; }
       </ul>
     </div>
 
-    <p class="svc-help">Not sure which one fits? <a href="/contact/" data-page="contact">Book a free discovery call</a> and we'll work it out together.</p>
+    <p class="svc-help">Not sure which one fits? <a href="/contact/" data-page="contact">Request a free discovery call</a> and we'll work it out together.</p>
   </section>
 
   <section class="who-section" aria-labelledby="who-title">
-    <div class="who-intro">
+    <div class="who-head">
       <div class="section-label">Who I Work With</div>
       <h2 class="section-title" id="who-title">The same quality of insight, without the enterprise price tag</h2>
-      <p class="section-body">Suttle Insights is a deliberate nod to the nature of this work. The most valuable things a good analysis turns up are subtle, and rarely the ones anyone was already looking for.</p>
-
-      <p class="section-body">I work with organizations of all sizes and sectors that have real workforce complexity but no internal analytics function to make sense of it. That might mean several roles, several levels, or offices in more than one location. It usually means making decisions about your people without a clear picture of what's actually going on.</p>
-      <p class="section-body">That has meant working with all types and sizes of businesses and organizations, from nonprofits and federal agencies to convenience stores. I/O psychology works in all of them, and Suttle Insights is built on the idea that any leader of people can put solid people analytics to work, not just the ones who can afford a dedicated team.</p>
+      <p class="section-body">I work with organizations of all sizes and sectors, from nonprofits and federal agencies to convenience stores, that have real workforce complexity but no internal analytics function to make sense of it.</p>
     </div>
 
-    <div class="who-items">
-      <p class="who-items-lead">You might be a good fit if:</p>
-      <div class="who-item"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">Something is shifting in your organization, whether that's growth, change, or friction under the surface.</span></div>
-      <div class="who-item"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">There are enough layers in your business that no one internally is set up to make sense of the full picture.</span></div>
-      <div class="who-item"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">You're making calls about retention, structure, or culture without solid data behind them.</span></div>
-      <div class="who-item"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">You can sense something's off with your people, but you don't have the data to pin down what.</span></div>
-      <div class="who-item who-item--highlight"><span class="who-item-check" aria-hidden="true"></span><span class="who-item-text">You've never formally asked your employees what's working, and you're ready to start.</span></div>
+    <div class="who-cards">
+      <article class="who-card">
+        <span class="who-card-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+        <h3>Something is shifting</h3>
+        <p>Growth, change, or friction under the surface, and you want to see it clearly before deciding what to do.</p>
+      </article>
+      <article class="who-card">
+        <span class="who-card-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></span>
+        <h3>Too many layers to see it all</h3>
+        <p>There are enough roles, levels, or locations that no one internally is set up to make sense of the full picture.</p>
+      </article>
+      <article class="who-card">
+        <span class="who-card-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span>
+        <h3>Decisions without solid data</h3>
+        <p>You're making calls about retention, structure, or culture without data behind them, or you've never formally asked employees what's working and you're ready to start.</p>
+      </article>
+    </div>
+
+    <div class="who-foot">
+      <p class="who-notfit"><strong>Probably not the right fit:</strong> you want an ongoing HR outsourcing partner, a legal or compliance review, or a survey to back up a decision that has already been made.</p>
       <p class="who-closing">This kind of work should be accessible to any organization that takes its people seriously. Budget and headcount shouldn't be the reason it isn't.</p>
+    </div>
+  </section>
+
+  <section class="why-section" aria-labelledby="why-title">
+    <div class="section-label">The Practice</div>
+    <h2 class="section-title" id="why-title">Why a one-person practice works in your favor</h2>
+    <div class="why-grid">
+      <div class="why-item">
+        <h3>You work with me directly</h3>
+        <p>The person on your discovery call is the person who does the work. I design, run, and present every engagement myself, with no handoff to a junior team.</p>
+      </div>
+      <div class="why-item">
+        <h3>Fixed fee, defined scope</h3>
+        <p>Scope, timeline, and fee are agreed in writing before work starts, and any change to scope is agreed in writing first. No surprise hourly invoices.</p>
+      </div>
+      <div class="why-item">
+        <h3>Confidential by design</h3>
+        <p>Responses are reported only in aggregate, and identifiable employee data never goes into third-party AI tools.</p>
+      </div>
     </div>
   </section>
 
@@ -1268,7 +1486,7 @@ h1:focus, #main:focus { outline: none; }
       <li class="process-step">
         <div class="step-num" aria-hidden="true">4</div>
         <h3 class="step-title">Analysis &amp; Report</h3>
-        <p class="step-desc">You receive a clear, plain-language report with findings, themes, and prioritized next steps, not raw data. Where the scope fits, the report comes with an interactive dashboard so you can explore the results yourself.</p>
+        <p class="step-desc">You receive a clear, plain-language report with findings, themes, and prioritized next steps. Where the scope fits, an interactive dashboard comes with it.</p>
       </li>
       <li class="process-step">
         <div class="step-num" aria-hidden="true">5</div>
@@ -1282,7 +1500,7 @@ h1:focus, #main:focus { outline: none; }
     <div class="section-label">Get Started</div>
     <h2 class="section-title" id="cta-home-title">The first conversation is always free</h2>
     <p class="section-body">Tell me what's going on with your workforce and we'll figure out together which engagement fits. No pitch, no pressure, and no commitment until you decide to move forward.</p>
-    <a class="btn-primary" href="/contact/" data-page="contact">Book a Free Discovery Call</a>
+    <a class="btn-primary" href="/contact/" data-page="contact">Request a Free Discovery Call</a>
     <p class="cta-note">Discovery calls are 30 minutes by phone or video.</p>
   </section>
 </div>
@@ -1311,29 +1529,27 @@ h1:focus, #main:focus { outline: none; }
 
   <div class="svc-page-body">
     <p class="service-tagline">Understand what your employees are experiencing, what's getting in the way, and what to do next.</p>
+    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-listening" data-scroll="chart-listening">Sample results</a><a href="#listening-timeline" data-scroll="listening-timeline">Timeline</a><a href="#listening-needs" data-scroll="listening-needs">What I'll need</a><a href="#listening-conf" data-scroll="listening-conf">Confidentiality</a><a href="#listening-who" data-scroll="listening-who">Who does the work</a></nav>
     <div class="service-inner">
       <div class="service-left">
-        <p class="service-description">In most workplaces, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey changes that. Maybe people are leaving or morale seems off, growth is straining your culture and how things work, or you want to get ahead of emerging concerns. Maybe this is your <span class="hl">first formal look at what employees think</span>, or maybe you just want to confirm that what seems to be working is actually working. An Employee Listening Survey &amp; Action Plan gives you a survey designed for your workforce, analyzed for patterns and themes, and delivered as a clear report you can <span class="hl">read, discuss, and act on</span>, with <span class="hl">specific, prioritized recommendations</span> and action planning based on best practices.</p>
+        <p class="service-description">In most workplaces, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey brings it into the open, whether people are leaving, growth is straining your culture, or this is your <span class="hl">first formal look at what employees think</span>. You get a survey designed for your workforce and a clear report you can <span class="hl">read, discuss, and act on</span>, with <span class="hl">specific, prioritized recommendations</span> and action planning based on best practices.</p>
 
         <div class="els-reveals">
           <div class="els-reveal"><div class="els-reveal-bar"></div><div class="els-reveal-content">
             <p class="els-reveal-q">What are our employees actually experiencing, and what's getting in the way?</p>
-            <p class="els-reveal-a">The themes, friction points, and strengths that exist in your organization right now, surfaced in a way that's impossible to get through informal conversation or assumption.</p>
+            <p class="els-reveal-a">The themes, friction points, and strengths in your organization right now, surfaced in a way informal conversation can't match.</p>
           </div></div>
           <div class="els-reveal"><div class="els-reveal-bar"></div><div class="els-reveal-content">
             <p class="els-reveal-q">What's driving the patterns we're seeing, and how significant are they?</p>
-            <p class="els-reveal-a">What's underneath what employees said: the conditions, relationships, culture, and structural factors that explain why things are the way they are.</p>
+            <p class="els-reveal-a">The conditions, relationships, culture, and structural factors that explain why things are the way they are.</p>
           </div></div>
           <div class="els-reveal"><div class="els-reveal-bar"></div><div class="els-reveal-content">
             <p class="els-reveal-q">What should we do first, what should we focus on, and what do we tell employees after?</p>
-            <p class="els-reveal-a">Action planning based on best practices from research, built from what your people told you, with prioritized next steps, a suggested sequence, and a communication approach that closes the loop.</p>
+            <p class="els-reveal-a">Prioritized next steps, a suggested sequence, and a communication approach that closes the loop, built from what your people told you.</p>
           </div></div>
         </div>
 
-        <p class="service-description">The report matters, but <span class="hl">what your organization does with it matters more</span>. Every engagement closes with a written report and a live debrief with you and anyone else you'd like to include, where we walk through the findings and the action planning based on best practices.</p>
-        <p class="service-description">You also receive a one-page summary written for employees, with room for leadership to add what happens next, so the results reach the people who took the survey.</p>
-        <p class="service-description">Every survey is built around your specific workforce. For smaller teams, the approach adapts: when response volume is limited, analysis leads with themes and careful interpretation rather than statistics, so the findings stay honest and useful regardless of headcount.</p>
-        <p class="service-description">Results are reported as the share of favorable, neutral, and unfavorable responses for each index, next to the themes and sentiment of the open-text comments, so you can see both the pattern and the reasons behind it.</p>
+        <p class="service-description">The report matters, but <span class="hl">what your organization does with it matters more</span>, so every engagement closes with a live debrief and action planning.</p>
 
         <figure class="chart-card" id="chart-listening">
           <div class="chart-head">
@@ -1473,6 +1689,7 @@ h1:focus, #main:focus { outline: none; }
           <figcaption class="chart-caption">Illustrative sample data, not client results. Sentiment is the share of positive, neutral, and negative comments grouped under each theme. Comments are paraphrased where needed to protect confidentiality.</figcaption>
         </figure>
 
+        <p class="scope-note"><strong>Good to know.</strong> Every survey is built around your specific workforce. For smaller teams, when response volume is limited, analysis leads with themes and careful interpretation rather than statistics, so the findings stay honest and useful regardless of headcount.</p>
         <h2 class="dimensions-label">Survey topics, drawn from established research</h2>
         <div class="dimension-tags">
           <span class="dim-tag">Employee Engagement</span><span class="dim-tag">Organizational Commitment</span><span class="dim-tag">Job Satisfaction</span>
@@ -1481,7 +1698,7 @@ h1:focus, #main:focus { outline: none; }
           <span class="dim-tag">Burnout</span><span class="dim-tag">Intent to Stay</span><span class="dim-tag">Structural Barriers</span>
         </div>
 
-        <div class="tl">
+        <div class="tl" id="listening-timeline">
           <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:4">
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Survey Design</span><span class="tl-detail">Kick-off call, a short organization questionnaire, and the custom survey build</span></li>
@@ -1491,7 +1708,7 @@ h1:focus, #main:focus { outline: none; }
           </ol>
         </div>
         <div class="svc-notes">
-          <section class="svc-note">
+          <section class="svc-note" id="listening-needs">
             <h2 class="svc-note-title">What I'll need from you</h2>
             <ul class="svc-note-list">
               <li>One main contact for scheduling and questions</li>
@@ -1500,12 +1717,12 @@ h1:focus, #main:focus { outline: none; }
               <li>Sending the invitation and reminders to your employees, and joining the live walkthrough</li>
             </ul>
           </section>
-          <section class="svc-note svc-note--conf">
+          <section class="svc-note svc-note--conf" id="listening-conf">
             <h2 class="svc-note-title">Confidentiality protection</h2>
             <p>Responses are confidential and reported only in aggregate. I never share individual responses with leadership, I paraphrase comments that could identify someone, and groups too small to protect confidentiality are not reported separately. Identifiable employee data never goes into third-party AI tools, and any AI use is disclosed in your proposal.</p>
           </section>
         </div>
-        <p class="svc-byline"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="listening-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></p>
       </div>
 
       <aside class="service-includes-box" aria-labelledby="inc-listening">
@@ -1515,10 +1732,10 @@ h1:focus, #main:focus { outline: none; }
           <li>Custom survey built around your workforce, roles, and goals</li>
           <li>Email templates and response tracking, with an early heads-up if participation is low</li>
           <li>Full analysis: results by topic and question, plus themes and sentiment in open-text comments</li>
-          <li>Executive Report as a slide deck, with findings, employee comments (paraphrased where needed), prioritized recommendations, and a live debrief</li>
+          <li>Executive Report as a slide deck, with findings, prioritized recommendations, and a live debrief</li>
           <li>One-page summary for employees, with room for leadership to add what happens next</li>
-          <li>Interactive results dashboard, where the scope fits: filter results by group and browse comments by theme and sentiment</li>
-          <li>Action planning based on best practices from research, including how to share results with employees</li>
+          <li>Interactive results dashboard, where the scope fits: filter by group, browse comments by theme and sentiment</li>
+          <li>Action planning based on best practices, including how to share results with employees</li>
         </ul>
         <p class="addon-note"><strong>Add-ons available:</strong> Focus groups (two sessions with employees you choose), or a pulse check 90 days after delivery, which you can decide on at the final debrief.</p>
       </aside>
@@ -1529,7 +1746,7 @@ h1:focus, #main:focus { outline: none; }
     <div class="section-label">Get Started</div>
     <h2 class="section-title" id="cta-listening-title">Find out what your employees actually think, and what to do about it.</h2>
     <p class="section-body">A listening engagement typically runs 4&ndash;6 weeks from first call to final report. Start with a conversation. It's free, and there's no commitment until you've seen the proposal.</p>
-    <a class="btn-primary" href="/contact/" data-page="contact">Book a Free Discovery Call</a>
+    <a class="btn-primary" href="/contact/" data-page="contact">Request a Free Discovery Call</a>
     <p class="cta-note">Fixed-fee engagement. No surprise hourly invoices. Discovery calls are 30 minutes by phone or video.</p>
   </section>
 </div>
@@ -1558,27 +1775,25 @@ h1:focus, #main:focus { outline: none; }
 
   <div class="svc-page-body">
     <p class="service-tagline">Understand how your team is really functioning, where alignment is strong, and where friction or perception gaps need attention.</p>
+    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-team-tasks" data-scroll="chart-team-tasks">Sample results</a><a href="#team-timeline" data-scroll="team-timeline">Timeline</a><a href="#team-needs" data-scroll="team-needs">What I'll need</a><a href="#team-conf" data-scroll="team-conf">Confidentiality</a><a href="#team-who" data-scroll="team-who">Who does the work</a></nav>
     <div class="service-inner">
       <div class="service-left">
-        <p class="service-description">Most teams never get a clear, honest picture of how they're actually functioning. A Team Health Diagnostic provides that picture. Maybe your team is navigating growth, working through a leadership change, or dealing with friction that's affecting results. Or maybe things are going well and you just want to understand what's making it work. It's a structured evaluation that looks at three distinct layers at the same time:</p>
+        <p class="service-description">Most teams never get a clear, honest picture of how they're actually functioning. A Team Health Diagnostic provides that picture, whether your team is navigating growth, a leadership change, or friction that's affecting results, or things are going well and you want to understand why. It looks at three layers at the same time:</p>
 
         <div class="thd-layers">
           <div class="thd-layer" data-num="01"><div class="thd-layer-bar"></div>
             <h2 class="thd-layer-title">Team Processes</h2>
-            <p class="thd-layer-desc">How your team plans, coordinates, monitors progress, and manages conflict. These are the operational mechanics that either enable or constrain performance.</p></div>
+            <p class="thd-layer-desc">How your team plans, coordinates, monitors progress, and manages conflict: the operational mechanics that enable or constrain performance.</p></div>
           <div class="thd-layer" data-num="02"><div class="thd-layer-bar"></div>
             <h2 class="thd-layer-title">Team Climate</h2>
-            <p class="thd-layer-desc">The quality of trust, cohesion, cooperation, and leadership within the team. This is the team's culture as people experience it day to day, and it shapes whether people bring their best work.</p></div>
+            <p class="thd-layer-desc">The trust, cohesion, cooperation, and leadership within the team: the culture as people experience it day to day.</p></div>
           <div class="thd-layer" data-num="03"><div class="thd-layer-bar"></div>
             <h2 class="thd-layer-title">Role Interdependence</h2>
-            <p class="thd-layer-desc">Whether team members share an accurate understanding of how their work connects and who depends on whom. This is often the least visible source of friction.</p></div>
+            <p class="thd-layer-desc">Whether team members share an accurate understanding of how their work connects and who depends on whom, often the least visible source of friction.</p></div>
         </div>
 
-        <p class="service-description">What makes this diagnostic different is the <span class="hl">perception gap analysis</span>. Most team surveys just report averages, and averages hide the real story: when one team member rates trust at a 5 and another rates it at a 2, the average of 3.5 tells you almost nothing useful. This assessment looks at the spread in answers directly, mapping <span class="hl">where team members see things differently</span>. That disagreement is often the <span class="hl">most useful signal</span> you'll get.</p>
-        <p class="service-description">The survey also has each team member rate the team&rsquo;s core tasks on two things: how important the task is, and how much it depends on other people. Seeing those ratings side by side shows where everyone agrees on what matters and where people see the work differently.</p>
-        <p class="service-description">It works for a single team or for several teams compared side by side. To hear from your whole workforce, the Employee Listening Survey is the better fit.</p>
-        <p class="service-description">The deliverable is a Team Dynamics Report with clear areas of strength, prioritized opportunities, and <span class="hl">targeted, evidence-based recommendations</span> your team lead or manager can put to work.</p>
-        <p class="service-description">For very small teams, I take extra care so no one can be picked out of the results, and I treat the findings as directional rather than exact.</p>
+        <p class="service-description">What makes this diagnostic different is the <span class="hl">perception gap analysis</span>. Averages hide the real story: when one team member rates trust a 5 and another a 2, the average of 3.5 tells you almost nothing. This assessment maps <span class="hl">where team members see things differently</span>, which is often the <span class="hl">most useful signal</span> you'll get.</p>
+        <p class="service-description">Each team member also rates the team's core tasks on how important they are and how much they depend on other people, which shows where everyone agrees on what matters and where people see the work differently.</p>
 
         <figure class="chart-card" id="chart-team-tasks">
           <div class="chart-head">
@@ -1687,6 +1902,7 @@ h1:focus, #main:focus { outline: none; }
           <figcaption class="chart-caption">Illustrative sample data, not client results. Your report also shows how much team members agree within each area, since a good average can hide a split.</figcaption>
         </figure>
 
+        <p class="scope-note"><strong>Good to know.</strong> This works for a single team or for several teams compared side by side. To hear from your whole workforce, the Employee Listening Survey is the better fit. For very small teams, I take extra care so no one can be picked out of the results, and I treat the findings as directional rather than exact.</p>
         <h2 class="dimensions-label">What the assessment examines</h2>
         <div class="dimension-tags">
           <span class="dim-tag">Team Processes</span><span class="dim-tag">Planning &amp; Coordination</span><span class="dim-tag">Conflict Management</span>
@@ -1694,7 +1910,7 @@ h1:focus, #main:focus { outline: none; }
           <span class="dim-tag">Leadership Quality</span><span class="dim-tag">Role Interdependence</span><span class="dim-tag">Perception Gap Analysis</span>
         </div>
 
-        <div class="tl">
+        <div class="tl" id="team-timeline">
           <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:5">
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Interviews</span><span class="tl-detail">Context call and a brief interview</span></li>
@@ -1705,7 +1921,7 @@ h1:focus, #main:focus { outline: none; }
           </ol>
         </div>
         <div class="svc-notes">
-          <section class="svc-note">
+          <section class="svc-note" id="team-needs">
             <h2 class="svc-note-title">What I'll need from you</h2>
             <ul class="svc-note-list">
               <li>A team lead as my main contact, who confirms who is on the team</li>
@@ -1713,23 +1929,23 @@ h1:focus, #main:focus { outline: none; }
               <li>A decision after the debrief on whether and how to share the results with the team</li>
             </ul>
           </section>
-          <section class="svc-note svc-note--conf">
+          <section class="svc-note svc-note--conf" id="team-conf">
             <h2 class="svc-note-title">Confidentiality protection</h2>
             <p>Responses are confidential and reported only in aggregate. I never share individual responses with leadership, I paraphrase comments that could identify someone, and groups too small to protect confidentiality are not reported separately. Identifiable employee data never goes into third-party AI tools, and any AI use is disclosed in your proposal.</p>
           </section>
         </div>
-        <p class="svc-byline"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="team-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></p>
       </div>
 
       <aside class="service-includes-box" aria-labelledby="inc-team">
         <h2 class="includes-title" id="inc-team">What's Included</h2>
         <ul class="includes-list">
-          <li>Intake call and a brief interview to understand team context, goals, and what you're trying to learn</li>
-          <li>Custom team survey written for your team and built on established research on team processes and climate</li>
-          <li>Perception gap analysis that looks at both the averages and the spread in answers across each area</li>
+          <li>Intake call and a brief interview on team context, goals, and what you want to learn</li>
+          <li>Custom team survey built on established research on team processes and climate</li>
+          <li>Perception gap analysis of both the averages and the spread in answers for each area</li>
           <li>Task ratings from each team member on how important each core task is and how much it depends on others</li>
           <li>Team Dynamics Report with findings for each area, prioritized opportunities, and evidence-based recommendations</li>
-          <li>Action planning at the debrief, based on best practices from research, including how to share results with the team</li>
+          <li>Action planning at the debrief, based on best practices, including how to share results with the team</li>
           <li>Interactive results dashboard, where the scope fits, to explore the findings on your own</li>
         </ul>
         <p class="addon-note"><strong>Add-on available:</strong> A pulse check 90 days after delivery, which you can decide on at the final debrief.</p>
@@ -1741,7 +1957,7 @@ h1:focus, #main:focus { outline: none; }
     <div class="section-label">Get Started</div>
     <h2 class="section-title" id="cta-team-title">Find out what's really driving the dynamics on your team.</h2>
     <p class="section-body">If your team is performing well, this helps you protect it. If friction is starting to affect results, this helps you get ahead of it. Either way, the first conversation is free.</p>
-    <a class="btn-primary" href="/contact/" data-page="contact">Book a Free Discovery Call</a>
+    <a class="btn-primary" href="/contact/" data-page="contact">Request a Free Discovery Call</a>
     <p class="cta-note">Fixed-fee engagement. No surprise hourly invoices. Discovery calls are 30 minutes by phone or video.</p>
   </section>
 </div>
@@ -1770,9 +1986,10 @@ h1:focus, #main:focus { outline: none; }
 
   <div class="svc-page-body">
     <p class="service-tagline">Understand how your workforce is experiencing a significant change, what's helping, what's getting in the way, and what to do next.</p>
+    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-change" data-scroll="chart-change">Sample results</a><a href="#diagnostic-timeline" data-scroll="diagnostic-timeline">Timeline</a><a href="#diagnostic-needs" data-scroll="diagnostic-needs">What I'll need</a><a href="#diagnostic-conf" data-scroll="diagnostic-conf">Confidentiality</a><a href="#diagnostic-who" data-scroll="diagnostic-who">Who does the work</a></nav>
     <div class="service-inner">
       <div class="service-left">
-        <p class="service-description">Change is rarely a single moment. Sometimes it's a restructuring from six months ago that still has people unsettled, or a technology rollout that technically launched but never quite landed. Sometimes it's a leadership transition that left the organization misaligned in ways no one has fully named. And sometimes it's a change on the horizon that you suspect your workforce isn't ready for.</p>
+        <p class="service-description">Change is rarely a single moment, and what you need depends on where you are in it:</p>
 
         <div class="change-stages">
           <div class="change-stage change-stage--past"><div class="change-stage-when">Already behind you</div><h2 class="change-stage-title">The change that never quite landed</h2><p class="change-stage-desc">A restructure, rollout, or leadership transition that technically happened, but left gaps, confusion, or unresolved tension in its wake.</p></div>
@@ -1780,11 +1997,9 @@ h1:focus, #main:focus { outline: none; }
           <div class="change-stage change-stage--ahead"><div class="change-stage-when">On the horizon</div><h2 class="change-stage-title">Change you're about to introduce</h2><p class="change-stage-desc">A decision has been made. Before you announce it, understand whether your workforce is ready and what needs to be in place for it to stick.</p></div>
         </div>
 
-        <p class="service-description">The Change Readiness Pulse &amp; Roadmap is a structured diagnostic built for all of it: changes that are coming, changes that are underway, and <span class="hl">changes that are already behind you</span>. It's also the right choice for organizations that want a deeper, more targeted look at employee sentiment and engagement around a specific initiative or challenge, beyond what a general listening survey covers.</p>
-        <p class="service-description">It combines two focus groups with a survey built around five factors that matter most: whether the change makes sense to people, management support, confidence to succeed, communication clarity, and what is getting in the way, such as tools, process, or workload. Together, these build a complete picture of where your organization stands and what specific steps will move things forward.</p>
-        <p class="service-description">The deliverable is a report that <span class="hl">explains what's driving the results</span>, with prioritized findings and tailored recommendations you can act on. It's practical, evidence-based, and <span class="hl">specific to your organization's</span> culture, structure, and resources, built from <span class="hl">what your people actually told me</span>, not a generic template.</p>
-        <p class="scope-note"><strong>What this is and isn't.</strong> I assess readiness and recommend what to do next. I don't manage the change itself, and I don't give legal or compliance advice.</p>
-        <p class="service-description">We walk through the report together in a live debrief, which includes action planning based on best practices and how to talk with employees about the results.</p>
+        <p class="service-description">The Change Readiness Pulse &amp; Roadmap is a <span class="hl">structured diagnostic for all three</span>. It's also the right choice when you want a deeper, more targeted look at employee sentiment and engagement around a specific initiative or challenge, beyond what a general listening survey covers.</p>
+        <p class="service-description">It combines two focus groups with a survey built around five factors: whether the change makes sense to people, management support, confidence to succeed, communication clarity, and what is getting in the way, such as tools, process, or workload. Together they show where your organization stands and which steps will move things forward.</p>
+        <p class="service-description">The deliverable is a report that <span class="hl">explains what's driving the results</span>, with prioritized findings and recommendations <span class="hl">specific to your organization</span>, built from <span class="hl">what your people actually told me</span>, not a generic template.</p>
 
         <figure class="chart-card" id="chart-change">
           <div class="chart-head">
@@ -1889,13 +2104,14 @@ h1:focus, #main:focus { outline: none; }
           <figcaption class="chart-caption">Illustrative sample data, not client results.</figcaption>
         </figure>
 
+        <p class="scope-note"><strong>What this is and isn't.</strong> I assess readiness and recommend what to do next. I don't manage the change itself, and I don't give legal or compliance advice.</p>
         <h2 class="dimensions-label">What the assessment examines</h2>
         <div class="dimension-tags">
           <span class="dim-tag">The Change Makes Sense</span><span class="dim-tag">Management Support</span><span class="dim-tag">Confidence to Succeed</span>
           <span class="dim-tag">Communication Clarity</span><span class="dim-tag">What's Getting in the Way</span>
         </div>
 
-        <div class="tl">
+        <div class="tl" id="diagnostic-timeline">
           <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 6&ndash;8 weeks</span></div>
           <ol class="tl-track" style="--steps:5">
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Scoping</span><span class="tl-detail">Change context, who to involve, and the engagement plan</span></li>
@@ -1906,7 +2122,7 @@ h1:focus, #main:focus { outline: none; }
           </ol>
         </div>
         <div class="svc-notes">
-          <section class="svc-note">
+          <section class="svc-note" id="diagnostic-needs">
             <h2 class="svc-note-title">What I'll need from you</h2>
             <ul class="svc-note-list">
               <li>A short description of the change and who it affects</li>
@@ -1914,25 +2130,25 @@ h1:focus, #main:focus { outline: none; }
               <li>Choosing who takes part in the focus groups. You choose the mix of participants, and you do not attend.</li>
             </ul>
           </section>
-          <section class="svc-note svc-note--conf">
+          <section class="svc-note svc-note--conf" id="diagnostic-conf">
             <h2 class="svc-note-title">Confidentiality protection</h2>
             <p>Responses are confidential and reported only in aggregate. I never share individual responses with leadership, I paraphrase comments that could identify someone, and groups too small to protect confidentiality are not reported separately. Identifiable employee data never goes into third-party AI tools, and any AI use is disclosed in your proposal.</p>
           </section>
         </div>
-        <p class="svc-byline"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, organizational culture analytics, and executive reporting. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="diagnostic-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, organizational culture analytics, and executive reporting. <a href="/about/" data-page="about">More about me</a></p>
       </div>
 
       <aside class="service-includes-box" aria-labelledby="inc-diagnostic">
         <h2 class="includes-title" id="inc-diagnostic">What's Included</h2>
         <ul class="includes-list">
-          <li>Scoping call to understand the change, the context, and who needs to be involved</li>
+          <li>Scoping call on the change, the context, and who needs to be involved</li>
           <li>Signed scope agreement before work begins</li>
           <li>Two focus groups to surface perceptions, concerns, and recurring themes</li>
-          <li>Survey written for your organization and built on established change readiness research (whether the change makes sense, support, confidence, communication, and what's in the way)</li>
+          <li>Survey built on established change readiness research (whether the change makes sense, support, confidence, communication, and what's in the way)</li>
           <li>Combined analysis: survey results for each factor alongside the focus group themes that help explain them</li>
-          <li>Change Readiness Report with what's driving the results and prioritized recommendations</li>
-          <li>Action planning at the debrief, based on best practices from research, including how to talk with employees about the results</li>
-          <li>Interactive results dashboard, where the scope fits: filter results by group and browse comments by theme and sentiment</li>
+          <li>Change Readiness Report on what's driving the results, with prioritized recommendations</li>
+          <li>Action planning at the debrief, based on best practices, including how to talk with employees about the results</li>
+          <li>Interactive results dashboard, where the scope fits: filter by group, browse comments by theme and sentiment</li>
         </ul>
         <p class="addon-note"><strong>Add-ons available:</strong> Additional focus groups if the change touches more groups, or a pulse check 90 days after delivery, which you can decide on at the final debrief.</p>
       </aside>
@@ -1943,7 +2159,7 @@ h1:focus, #main:focus { outline: none; }
     <div class="section-label">Get Started</div>
     <h2 class="section-title" id="cta-diagnostic-title">Find out how ready your workforce actually is before the change lands.</h2>
     <p class="section-body">If a change you've already made still hasn't fully landed, this is built for that too. Either way, the first conversation is free.</p>
-    <a class="btn-primary" href="/contact/" data-page="contact">Book a Free Discovery Call</a>
+    <a class="btn-primary" href="/contact/" data-page="contact">Request a Free Discovery Call</a>
     <p class="cta-note">Fixed-fee engagement. No surprise hourly invoices. Discovery calls are 30 minutes by phone or video.</p>
   </section>
 </div>
@@ -1972,9 +2188,10 @@ h1:focus, #main:focus { outline: none; }
 
   <div class="svc-page-body">
     <p class="service-tagline">Understand what's actually behind the performance gap, whether training is the right response, and where a development investment will have the most impact.</p>
+    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-tna" data-scroll="chart-tna">Sample results</a><a href="#tna-timeline" data-scroll="tna-timeline">Timeline</a><a href="#tna-needs" data-scroll="tna-needs">What I'll need</a><a href="#tna-who" data-scroll="tna-who">Who does the work</a></nav>
     <div class="service-inner">
       <div class="service-left">
-        <p class="service-description">When performance isn't where it should be, training is often the first thing organizations reach for. Sometimes that's the right call. Often it isn't. The problem might be a process issue, a tool gap, unclear expectations, or a management routine that needs attention. Training cannot address any of these.</p>
+        <p class="service-description">When performance isn't where it should be, training is often the first thing organizations reach for. Sometimes that's the right call. Often the cause is a process issue, a tool gap, unclear expectations, or a management routine, and training can't fix any of those.</p>
 
         <div class="tna-diagnostic">
           <div class="tna-col tna-col--yes"><div class="tna-col-label">When it is a training problem</div><h2 class="tna-col-heading">A real skills gap</h2>
@@ -1991,8 +2208,8 @@ h1:focus, #main:focus { outline: none; }
 
         <p class="service-description">It is most useful when you're weighing a training program or manager development, when onboarding is taking longer than it should, or when a new tool or process isn't being adopted.</p>
 
-        <p class="service-description">A Training Needs Assessment helps you figure out which one you're dealing with <span class="hl">before committing the budget</span>. Through interviews and a targeted survey of the people in the role, this assessment maps what the job actually requires, where <span class="hl">genuine skill gaps</span> exist, and <span class="hl">whether training is the right solution</span>. The result is a clear, prioritized report that tells you what to train, who needs it most, and why, along with any non-training barriers that should be addressed first. When only a few people hold the role, I rely on interviews rather than a survey, so the findings stay honest.</p>
-        <p class="service-description">This assessment identifies what training is needed and why. It does not design or deliver the training itself. The report gives you what you need to <span class="hl">decide where to invest your time and effort</span>, whether that turns out to be formal training, coaching, or practice on the job. It also includes a Plan of Instruction: a short outline of what the training for each of your top three priorities should cover and how it could be taught, so you have a head start on building it. For other needs, the report points you to where to invest or look further.</p>
+        <p class="service-description">A Training Needs Assessment tells you which one you're dealing with <span class="hl">before committing the budget</span>. Interviews and a targeted survey of the people in the role map what the job actually requires, where <span class="hl">genuine skill gaps</span> exist, and <span class="hl">whether training is the right solution</span>. The report says what to train, who needs it most, and why, along with any non-training barriers to address first.</p>
+        <p class="service-description">The report helps you <span class="hl">decide where to invest your time and effort</span>, whether that turns out to be formal training, coaching, or practice on the job. It also includes a Plan of Instruction for your top three priorities: a short outline of what each should cover and how it could be taught. For other needs, the report points you to where to invest or look further.</p>
 
         <figure class="chart-card" id="chart-tna">
           <div class="chart-head">
@@ -2132,7 +2349,8 @@ h1:focus, #main:focus { outline: none; }
           <figcaption class="chart-caption">Illustrative sample data, not client results. Causes are drawn from the interviews and the survey.</figcaption>
         </figure>
 
-        <div class="tl">
+        <p class="scope-note"><strong>Good to know.</strong> This assessment identifies what training is needed and why. It does not design or deliver the training itself. When only a few people hold the role, I rely on interviews rather than a survey, so the findings stay honest.</p>
+        <div class="tl" id="tna-timeline">
           <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:4">
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Goals &amp; Context</span><span class="tl-detail">Interview: goals, context, and training history</span></li>
@@ -2142,7 +2360,7 @@ h1:focus, #main:focus { outline: none; }
           </ol>
         </div>
         <div class="svc-notes svc-notes--single">
-          <section class="svc-note">
+          <section class="svc-note" id="tna-needs">
             <h2 class="svc-note-title">What I'll need from you</h2>
             <ul class="svc-note-list">
               <li>Role documents, such as job descriptions and an org chart</li>
@@ -2151,7 +2369,7 @@ h1:focus, #main:focus { outline: none; }
             </ul>
           </section>
         </div>
-        <p class="svc-byline"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, competency modeling, and training and leadership development. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="tna-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, competency modeling, and training and leadership development. <a href="/about/" data-page="about">More about me</a></p>
       </div>
 
       <aside class="service-includes-box" aria-labelledby="inc-tna">
@@ -2159,10 +2377,10 @@ h1:focus, #main:focus { outline: none; }
         <ul class="includes-list">
           <li>Interview about your goals, context, and current training efforts</li>
           <li>Survey and/or interviews with managers and the people in the role to map what the job requires</li>
-          <li>Survey of the people in the role to show where skill gaps are largest and confirm whether training is the right solution</li>
+          <li>Survey of the people in the role to show where skill gaps are largest and whether training is the right solution</li>
           <li>Priority ranking of training needs by gap, importance, and readiness, with an invest, redirect, or hold off call for each</li>
           <li>Training Needs Assessment report with prioritized findings and recommended training approaches</li>
-          <li>Plan of Instruction for up to your three top priorities: a short outline of what each should cover and how it could be taught</li>
+          <li>Plan of Instruction for up to your top three priorities: what each should cover and how it could be taught</li>
           <li>Interactive results dashboard, where the scope fits, to explore the findings on your own</li>
           <li>Recommendations to help new skills carry over to the job after training</li>
         </ul>
@@ -2174,7 +2392,7 @@ h1:focus, #main:focus { outline: none; }
     <div class="section-label">Get Started</div>
     <h2 class="section-title" id="cta-tna-title">Not sure if training is the right answer?</h2>
     <p class="section-body">Most organizations find out after spending the budget. This is how you find out before. Tell me what performance gap you're trying to close. The first conversation is free.</p>
-    <a class="btn-primary" href="/contact/" data-page="contact">Book a Free Discovery Call</a>
+    <a class="btn-primary" href="/contact/" data-page="contact">Request a Free Discovery Call</a>
     <p class="cta-note">Fixed-fee engagement. No surprise hourly invoices. Discovery calls are 30 minutes by phone or video.</p>
   </section>
 </div>
@@ -2203,10 +2421,11 @@ h1:focus, #main:focus { outline: none; }
 
   <div class="svc-page-body">
     <p class="service-tagline">Define what good performance looks like in observable terms so managers can give feedback consistently and employees know what's expected.</p>
+    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-prd" data-scroll="chart-prd">Sample results</a><a href="#prd-timeline" data-scroll="prd-timeline">Timeline</a><a href="#prd-needs" data-scroll="prd-needs">What I'll need</a><a href="#prd-who" data-scroll="prd-who">Who does the work</a></nav>
     <div class="service-inner">
       <div class="service-left">
         <p class="service-description">For most organizations, performance reviews are an afterthought. A generic template gets dusted off once a year, ratings vary from manager to manager, and the process feels <span class="hl">arbitrary to the people on the receiving end</span>. That's not really a people problem, it's a design problem.</p>
-        <p class="service-description">A Performance Standards &amp; Review Toolkit gives your organization a custom set of performance expectations for a specific role or team, grounded in what the job actually requires and described in <span class="hl">clear, observable behavioral terms</span>. Managers walk away with a tool they can <span class="hl">apply consistently</span>, employees get a transparent standard to work toward, and performance conversations become <span class="hl">easier to navigate</span> for everyone involved.</p>
+        <p class="service-description">A Performance Standards &amp; Review Toolkit gives your organization a custom set of performance expectations for a specific role or team, grounded in what the job actually requires and described in <span class="hl">clear, observable behavioral terms</span>, so reviews are easier to give and to receive.</p>
 
         <div class="perf-impact">
           <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><h2 class="perf-row-name">Managers</h2></div><div class="perf-row-gain"><p><strong>Consistent language and a structured process.</strong> Every manager evaluates against the same behavioral standard, so ratings reflect actual performance, not personal style or relationship history.</p></div></div>
@@ -2214,8 +2433,7 @@ h1:focus, #main:focus { outline: none; }
           <div class="perf-row"><div class="perf-row-who"><div class="perf-row-role">For</div><h2 class="perf-row-name">Owners &amp; Leaders</h2></div><div class="perf-row-gain"><p><strong>A consistent, evidence-based process.</strong> Performance decisions grounded in observable behavior, not gut feel, are easier to explain and apply the same way each time.</p></div></div>
         </div>
 
-        <p class="service-description">The work starts with conversations with the people closest to the role: managers who evaluate it and the people who do it. Their real examples of what strong, solid, and developing performance looks like become the foundation, rather than generic competency frameworks imported from somewhere else. The depth scales to the need: a practical role scorecard when you need clear standards quickly, or a more thoroughly tested review tool when the role is more complex or the stakes are higher.</p>
-        <p class="scope-note"><strong>Your decisions stay yours.</strong> The toolkit is built to make reviews clearer and more consistent. It isn't legal advice, and it doesn't set pay or promotion rules. I recommend having your HR lead or legal counsel review the finished tools before you use them in decisions about pay, promotion, or discipline.</p>
+        <p class="service-description">The work starts with conversations with the managers who evaluate the role and the people who do it. Their real examples of what strong, solid, and developing performance looks like become the foundation, rather than generic competency frameworks. The depth scales to the need: a practical role scorecard when you need clear standards quickly, or a more thoroughly tested review tool when the role is more complex or the stakes are higher.</p>
 
         <figure class="chart-card" id="chart-prd">
           <div class="chart-head">
@@ -2278,7 +2496,8 @@ h1:focus, #main:focus { outline: none; }
           <figcaption class="chart-caption">Illustrative sample data, not client results. In practice, ratings come closer together when managers use the same standard and compare notes.</figcaption>
         </figure>
 
-        <div class="tl">
+        <p class="scope-note"><strong>Your decisions stay yours.</strong> The toolkit is built to make reviews clearer and more consistent. It isn't legal advice, and it doesn't set pay or promotion rules. I recommend having your HR lead or legal counsel review the finished tools before you use them in decisions about pay, promotion, or discipline.</p>
+        <div class="tl" id="prd-timeline">
           <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:4">
             <li class="tl-step"><span class="tl-week">Week 1</span><span class="tl-name">Intake &amp; Document Review</span><span class="tl-detail">Role brief, process review, and job description analysis</span></li>
@@ -2288,7 +2507,7 @@ h1:focus, #main:focus { outline: none; }
           </ol>
         </div>
         <div class="svc-notes svc-notes--single">
-          <section class="svc-note">
+          <section class="svc-note" id="prd-needs">
             <h2 class="svc-note-title">What I'll need from you</h2>
             <ul class="svc-note-list">
               <li>Existing job descriptions and any current review forms</li>
@@ -2297,7 +2516,7 @@ h1:focus, #main:focus { outline: none; }
             </ul>
           </section>
         </div>
-        <p class="svc-byline"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes exam development, psychometric analysis, and competency modeling. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="prd-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes exam development, psychometric analysis, and competency modeling. <a href="/about/" data-page="about">More about me</a></p>
       </div>
 
       <aside class="service-includes-box" aria-labelledby="inc-prd">
@@ -2305,10 +2524,10 @@ h1:focus, #main:focus { outline: none; }
         <ul class="includes-list">
           <li>Consultation on the role(s), current review process, and performance challenges</li>
           <li>Review of existing job descriptions and appraisal materials</li>
-          <li>Structured interviews with managers and the people in the role to identify what strong, solid, and developing performance actually looks like</li>
+          <li>Structured interviews with managers and the people in the role on what strong, solid, and developing performance actually looks like</li>
           <li>Custom performance standards with clear, observable behavioral examples at each level</li>
           <li>Review form tailored to your role and organization</li>
-          <li>Rater guide with guidance for consistent, fair evaluation and performance conversations</li>
+          <li>Rater guide for consistent, fair evaluation and performance conversations</li>
         </ul>
         <p class="addon-note"><strong>Add-on available:</strong> A manager calibration session (60 to 90 minutes), where managers practice applying the standards together and compare their ratings.</p>
       </aside>
@@ -2319,7 +2538,7 @@ h1:focus, #main:focus { outline: none; }
     <div class="section-label">Get Started</div>
     <h2 class="section-title" id="cta-prd-title">Find out what a consistent, trusted performance standard looks like for your organization.</h2>
     <p class="section-body">If your managers are evaluating in their own way and your employees don't know what to aim for, the toolkit solves both. The first conversation is free.</p>
-    <a class="btn-primary" href="/contact/" data-page="contact">Book a Free Discovery Call</a>
+    <a class="btn-primary" href="/contact/" data-page="contact">Request a Free Discovery Call</a>
     <p class="cta-note">Fixed-fee engagement. No surprise hourly invoices. Discovery calls are 30 minutes by phone or video.</p>
   </section>
 </div>
@@ -2419,7 +2638,7 @@ h1:focus, #main:focus { outline: none; }
     <div class="section-label">Work Together</div>
     <h2 class="section-title" id="cta-about-title">Let's start with a conversation</h2>
     <p class="section-body">If you're not sure what you need yet, that's exactly what the discovery call is for.</p>
-    <a class="btn-primary" href="/contact/" data-page="contact">Book a Free Discovery Call</a>
+    <a class="btn-primary" href="/contact/" data-page="contact">Request a Free Discovery Call</a>
   </section>
 </div>
 
@@ -2525,8 +2744,8 @@ h1:focus, #main:focus { outline: none; }
         </div>
 
         <div class="form-group">
-          <label for="message">What's prompting this, and what decision will the results inform? <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="message" name="message" placeholder="Tell me what's going on with your workforce and what you'd like the results to help you decide. Any context helps." required aria-describedby="err-message"></textarea>
+          <label for="message">What's prompting this, and what decision will the results inform? <span class="opt">(optional)</span></label>
+          <textarea id="message" name="message" placeholder="Tell me what's going on with your workforce and what you'd like the results to help you decide. Any context helps." aria-describedby="err-message"></textarea>
           <span class="field-error" id="err-message" aria-live="polite"></span>
         </div>
 
@@ -2535,20 +2754,25 @@ h1:focus, #main:focus { outline: none; }
         <button type="submit" class="form-submit" id="submit-btn">Send Request</button>
         <p class="form-note">I'll respond within 1&ndash;2 business days to schedule a discovery call or answer any questions.</p>
       </form>
+
+      <section class="privacy-note" id="privacy" aria-labelledby="privacy-title">
+        <h3 id="privacy-title">Privacy</h3>
+        <p>What you send through this form reaches me by email through the form service Formspree. I use it only to reply to you and, if we work together, to scope the engagement. I don't sell or share it, and I don't add anyone to a mailing list. To have anything you sent deleted, email <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>.</p>
+      </section>
     </div>
   </div>
 </div>
 
 </main>
 
-<a class="float-cta" id="float-cta" href="/contact/" data-page="contact">Book a Discovery Call</a>
+<a class="float-cta" id="float-cta" href="/contact/" data-page="contact">Request a Discovery Call</a>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
       <div class="footer-logo"><span class="nav-name-a">suttle</span><span class="nav-name-b"> insights</span></div>
       <p class="footer-tagline">People analytics, team dynamics, and workforce culture consulting for organizations that take their people seriously.</p>
-      <p class="footer-contact">Denver, CO<br><a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a></p>
+      <p class="footer-contact">Denver, CO<br><a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a><br><a href="https://www.linkedin.com/in/aidan-suttlehan/" target="_blank" rel="noopener noreferrer" aria-label="Aidan Suttlehan on LinkedIn (opens in a new tab)">LinkedIn</a></p>
     </div>
     <nav class="footer-nav-col" aria-label="Footer">
       <div class="footer-nav-section">
@@ -2562,7 +2786,8 @@ h1:focus, #main:focus { outline: none; }
       <div class="footer-nav-section">
         <div class="footer-nav-label">Practice</div>
         <a class="footer-nav-link" href="/about/" data-page="about">About</a>
-        <a class="footer-nav-link" href="/contact/" data-page="contact">Book a Discovery Call</a>
+        <a class="footer-nav-link" href="/contact/" data-page="contact">Request a Discovery Call</a>
+        <a class="footer-nav-link" href="/contact/" data-page="contact" data-anchor="privacy">Privacy</a>
       </div>
     </nav>
   </div>
@@ -2625,9 +2850,9 @@ h1:focus, #main:focus { outline: none; }
     },
     "contact": {
         "path": "/contact/",
-        "title": "Book a Discovery Call | Suttle Insights",
-        "ogTitle": "Book a Discovery Call | Suttle Insights",
-        "description": "Book a free 30-minute discovery call by phone or video. Tell me what's going on and I'll be straightforward about whether and how I can help."
+        "title": "Request a Discovery Call | Suttle Insights",
+        "ogTitle": "Request a Discovery Call | Suttle Insights",
+        "description": "Request a free 30-minute discovery call by phone or video. Tell me what's going on and I'll be straightforward about whether and how I can help."
     }
 };
   var FLOAT_PAGES = { 'home': 1, 'svc-listening': 1, 'svc-team': 1, 'svc-diagnostic': 1, 'svc-tna': 1, 'svc-prd': 1 };
@@ -2774,8 +2999,10 @@ h1:focus, #main:focus { outline: none; }
     if (!a) return;
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
-    if (a.dataset.page) showPage(a.dataset.page);
-    else { closeMenus(); scrollToId(a.dataset.scroll); }
+    if (a.dataset.page) {
+      showPage(a.dataset.page);
+      if (a.dataset.anchor) window.requestAnimationFrame(function () { scrollToId(a.dataset.anchor); });
+    } else { closeMenus(); scrollToId(a.dataset.scroll); }
   });
 
   window.addEventListener('popstate', function () { showPage(pageFromPath(window.location.pathname), { noPush: true }); });
@@ -2784,7 +3011,10 @@ h1:focus, #main:focus { outline: none; }
   var ticking = false;
   function onScroll() {
     var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-    if (floatCta) floatCta.classList.toggle('visible', !!FLOAT_PAGES[current] && y > 300);
+    var thr = 300;
+    if (current === 'home' && heroEl) thr = Math.max(300, heroEl.offsetHeight - 80);   /* on Home, once the hero has scrolled away */
+    var deskSvc = current.indexOf('svc-') === 0 && window.innerWidth > 900;   /* desktop service pages: the sticky nav button and the sidebar already cover this */
+    if (floatCta) floatCta.classList.toggle('visible', !!FLOAT_PAGES[current] && !deskSvc && y > thr);
     if (progress) {
       if (current.indexOf('svc-') === 0) {
         var max = document.documentElement.scrollHeight - window.innerHeight;
@@ -2860,6 +3090,70 @@ h1:focus, #main:focus { outline: none; }
           submitBtn.disabled = false;
         });
     });
+  })();
+
+  /* ---------- Home hero dashboard loop (decorative; the finished chart shows without scripting or with reduced motion) ---------- */
+  (function () {
+    var hv = document.querySelector('.hv');
+    if (!hv) return;
+    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var timers = [], onScreen = true, started = false;
+    function later(fn, ms) { timers.push(window.setTimeout(fn, ms)); }
+    function clear() { timers.forEach(window.clearTimeout); timers = []; started = false; }
+    function reduced() { return !!(mq && mq.matches); }
+    function cycle() {
+      clear();
+      started = true;
+      hv.classList.add('hv--anim', 'hv--reset');
+      hv.classList.remove('is-on', 'is-hi', 'is-out');
+      void hv.offsetWidth;                         /* flush so the reset state is painted before the bars grow */
+      hv.classList.remove('hv--reset');
+      later(function () { hv.classList.add('is-on'); }, 250);
+      later(function () { hv.classList.add('is-hi'); }, 3300);
+      later(function () { hv.classList.add('is-out'); }, 8300);
+      later(cycle, 9100);
+    }
+    function stop() { clear(); hv.classList.remove('hv--anim', 'hv--reset', 'is-on', 'is-hi', 'is-out'); }
+    function sync() {
+      var home = document.getElementById('page-home');
+      var show = onScreen && !document.hidden && home && home.classList.contains('active') && hv.offsetParent !== null && !reduced();
+      if (!show) { stop(); return; }
+      if (started) return;
+      var heroEl2 = document.querySelector('.hero');
+      var wait = heroEl2 && heroEl2.classList.contains('hero--intro') ? 3500 : 0;   /* let the first-visit intro finish */
+      clear(); started = true;
+      later(cycle, wait);
+    }
+    document.addEventListener('visibilitychange', sync);
+    document.addEventListener('pageShown', sync);
+    window.addEventListener('resize', function () { window.setTimeout(sync, 150); });
+    if (mq && mq.addEventListener) mq.addEventListener('change', sync);
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (entries) { onScreen = entries[0].isIntersecting; sync(); }).observe(hv);
+    }
+    sync();
+  })();
+
+  /* ---------- Service pages: pin "What's Included" only when the whole box fits the window ---------- */
+  (function () {
+    var timer = null;
+    function fit() {
+      var boxes = document.querySelectorAll('.service-includes-box');
+      var navH = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 70;
+      var room = window.innerHeight - navH - 62 - 16;
+      for (var i = 0; i < boxes.length; i++) {
+        var b = boxes[i];
+        b.classList.remove('inc-static');
+        if (b.offsetParent === null || window.innerWidth <= 900) continue;
+        if (b.scrollHeight > room) b.classList.add('inc-static');
+      }
+    }
+    function later() { window.clearTimeout(timer); timer = window.setTimeout(fit, 120); }
+    window.addEventListener('resize', later);
+    document.addEventListener('pageShown', later);
+    window.addEventListener('load', later);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(later);
+    later();
   })();
 
   /* ---------- Hero network animation (decorative) ---------- */
