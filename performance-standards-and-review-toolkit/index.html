@@ -1250,6 +1250,7 @@ h1:focus, #main:focus { outline: none; }
   }
   .site-footer { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
 }
+.privacy-note p + p { margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -2758,6 +2759,7 @@ h1:focus, #main:focus { outline: none; }
       <section class="privacy-note" id="privacy" aria-labelledby="privacy-title">
         <h3 id="privacy-title">Privacy</h3>
         <p>What you send through this form reaches me by email through the form service Formspree. I use it only to reply to you and, if we work together, to scope the engagement. I don't sell or share it, and I don't add anyone to a mailing list. To have anything you sent deleted, email <a href="mailto:aidan@suttleinsights.com">aidan@suttleinsights.com</a>.</p>
+        <p>This site uses Cloudflare Web Analytics to count visits and see which pages are read. It doesn't use cookies or track individual visitors.</p>
       </section>
     </div>
   </div>
@@ -3273,5 +3275,8 @@ h1:focus, #main:focus { outline: none; }
 })();
 
 </script>
+<!-- Cloudflare Web Analytics -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e41a0a1e18d940fb86a7ea28655400ac"}'></script>
+<!-- End Cloudflare Web Analytics -->
 </body>
 </html>
