@@ -1326,7 +1326,11 @@ h1:focus, #main:focus { outline: none; }
 @media (max-width: 768px) {
   .notice { display: none; }
   .svc-help { margin-top: 28px; }
-  .trust-chips { justify-content: flex-start; }
+  .trust-in { gap: 14px 16px; }
+  .trust-photo { width: 64px; height: 64px; }
+  .trust-text { flex: 1 1 0; }                 /* text sits beside the photo instead of wrapping under it */
+  .trust-lead { font-size: 17px; }
+  .trust-chips { flex: 1 1 100%; justify-content: flex-start; }
   .float-cta {
     left: 0; right: 0; bottom: 0; border-radius: 0; text-align: center;
     padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px) * 0.4);
