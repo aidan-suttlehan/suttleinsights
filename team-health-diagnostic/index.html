@@ -451,31 +451,11 @@ h1:focus, #main:focus { outline: none; }
 .svc-stat-label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: rgba(255, 255, 255, 0.8); }
 .svc-stat-val { font-size: 15px; font-weight: 600; line-height: 1.3; color: #fff; }
 
-.svc-page-body { background: #fff; padding: clamp(40px, 5vw, 64px) var(--pad-x) clamp(56px, 7vw, 88px); }
-.service-tagline {
-  font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2vw, 23px); line-height: 1.6; color: var(--navy);
-  max-width: 760px; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border);
-}
-.service-inner { display: grid; grid-template-columns: minmax(0, 1fr) clamp(270px, 28%, 330px); gap: clamp(32px, 5vw, 64px); align-items: start; }
+.svc-page-body { background: #fff; padding: 0; }
+.service-inner { display: block; }
 .service-left { min-width: 0; }
 .service-description { font-size: 16.5px; line-height: 1.8; color: var(--text-light); max-width: 68ch; margin-bottom: 28px; }
 
-.service-includes-box { position: static; background: var(--navy); border-radius: 10px; padding: 26px 24px; }  /* stays in place and scrolls with the page */
-.includes-title { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 12px; }
-.includes-list { display: flex; flex-direction: column; }
-.includes-list li {
-  display: flex; align-items: flex-start; gap: 10px; padding: 9px 0;
-  font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-}
-.includes-list li:last-child { border-bottom: 0; }
-.includes-list li::before { content: '\2713'; color: var(--accent-light); font-weight: 700; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
-.addon-note {
-  margin-top: 16px; padding: 12px 14px; font-size: 13.5px; line-height: 1.55;
-  color: rgba(255, 255, 255, 0.9); background: rgba(255, 255, 255, 0.1);
-  border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0;
-}
-.addon-note strong { color: var(--accent-light); }
 
 /* Practical notes under each service page: what the client does, how confidentiality is handled */
 .svc-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 44px; }
@@ -942,7 +922,6 @@ h1:focus, #main:focus { outline: none; }
 
 /* ---------- 10. Responsive ---------- */
 @media (max-width: 1100px) {
-  .service-inner { grid-template-columns: minmax(0, 1fr) 280px; }
   .svc-row--3 { grid-template-columns: 1fr 1fr; }
   .svc-row--3 > :last-child { grid-column: 1 / -1; }
 }
@@ -964,8 +943,6 @@ h1:focus, #main:focus { outline: none; }
   .step-num { grid-row: 1 / 3; width: 44px; height: 44px; font-size: 18px; margin: 0; }
   .step-title { align-self: end; margin: 0; }
   .step-desc { align-self: start; }
-  .service-inner { grid-template-columns: 1fr; }
-  .service-includes-box { position: static; order: -1; }
   .svc-notes { grid-template-columns: 1fr; }
   .notice-list { grid-template-columns: 1fr; }
   .svc-stats-bar { grid-template-columns: 1fr 1fr; }
@@ -1317,41 +1294,241 @@ h1:focus, #main:focus { outline: none; }
   .why-grid { gap: 28px; }
 }
 
-/* Service pages: jump chips, and a sticky "What's Included" that always fits the window */
-.svc-jump { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: -8px 0 32px; }
+/* ==========================================================================
+   Service pages (v209): icon strip, alternating bands, stronger cards
+   ========================================================================== */
+.svc-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.svc-page-body [id] { scroll-margin-top: calc(var(--nav-h) + 70px); }
+.svc-ic { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Every direct block of the page body is a full-width band; content sits on the site grid */
+.svc-band { padding: clamp(44px, 5.5vw, 76px) var(--pad-x); }
+.svc-band--overview { background: #fff; padding-top: clamp(34px, 4vw, 52px); padding-bottom: clamp(36px, 4.5vw, 60px); }
+.svc-band--how { background: #fff; }
+.svc-band--incl, .svc-band--samples {
+  background: linear-gradient(180deg, #F7F3EA 0%, #F1EBDD 100%);
+  border-top: 1px solid rgba(200, 146, 42, 0.22); border-bottom: 1px solid rgba(200, 146, 42, 0.22);
+}
+.svc-band--incl { padding-top: clamp(34px, 4.2vw, 54px); padding-bottom: clamp(36px, 4.5vw, 58px); border-top: 0; }
+
+/* ---------- Icon strip: what is included ---------- */
+.svc-incl-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; margin-bottom: 26px; }
+.svc-incl-title { font-family: var(--serif); font-size: clamp(26px, 2.8vw, 34px); font-weight: 700; line-height: 1.15; color: var(--navy); }
+.svc-incl-sub { font-size: 16px; line-height: 1.5; color: var(--text-light); }
+.svc-incl-grid { list-style: none; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+.svc-incl-item {
+  position: relative; grid-column: span 3; display: flex; flex-direction: column; gap: 16px; min-width: 0;
+  padding: 24px 22px 22px; background: #fff; border: 1px solid rgba(15, 32, 64, 0.1); border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(15, 32, 64, 0.06), 0 14px 28px -16px rgba(15, 32, 64, 0.32);
+}
+.svc-incl-item::before {
+  content: ''; position: absolute; top: -1px; left: 22px; width: 38px; height: 4px; border-radius: 0 0 4px 4px;
+  background: var(--accent);
+}
+.svc-incl-grid--7 .svc-incl-item:nth-child(n+5) { grid-column: span 4; }
+.svc-incl-grid--6 .svc-incl-item { grid-column: span 4; }
+.svc-incl-badge {
+  flex: none; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 15px;
+  color: var(--accent-light); background: linear-gradient(145deg, var(--navy-mid) 0%, var(--navy) 100%);
+  box-shadow: 0 0 0 5px rgba(200, 146, 42, 0.16);
+}
+.svc-incl-name { font-family: var(--serif); font-size: 18px; font-weight: 700; line-height: 1.25; color: var(--navy); }
+.svc-incl-desc { margin-top: 6px; font-size: 14.5px; line-height: 1.55; color: var(--text-light); }
+.svc-incl-addon {
+  display: flex; align-items: flex-start; gap: 14px; margin-top: 20px; padding: 15px 20px;
+  font-size: 15px; line-height: 1.6; color: var(--text-light);
+  background: rgba(255, 255, 255, 0.7); border: 1.5px dashed rgba(200, 146, 42, 0.7); border-radius: 14px;
+}
+.svc-incl-addon strong { color: var(--accent-ink); }
+.svc-incl-plus { position: relative; flex: none; width: 24px; height: 24px; margin-top: 1px; border-radius: 50%; background: var(--accent); }
+.svc-incl-plus::before, .svc-incl-plus::after { content: ''; position: absolute; left: 50%; top: 50%; background: var(--navy); border-radius: 1px; transform: translate(-50%, -50%); }
+.svc-incl-plus::before { width: 11px; height: 2px; }
+.svc-incl-plus::after { width: 2px; height: 11px; }
+
+/* ---------- Jump chips and opening paragraphs ---------- */
+.svc-jump { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 34px; }
 .svc-jump-label { margin-right: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--text-muted); }
 .svc-jump a {
-  padding: 6px 14px; border-radius: 999px; text-decoration: none; font-size: 13.5px; font-weight: 600; color: var(--blue-dark);
-  background: rgba(37, 99, 168, 0.08); border: 1px solid rgba(37, 99, 168, 0.3); transition: background 0.18s, border-color 0.18s;
+  padding: 7px 15px; border-radius: 999px; text-decoration: none; font-size: 13.5px; font-weight: 600; color: var(--navy);
+  background: #fff; border: 1px solid rgba(15, 32, 64, 0.22); box-shadow: 0 1px 2px rgba(15, 32, 64, 0.06);
+  transition: background 0.18s, border-color 0.18s;
 }
-.svc-jump a:hover { background: rgba(37, 99, 168, 0.16); border-color: rgba(37, 99, 168, 0.55); }
-.svc-page-body [id] { scroll-margin-top: calc(var(--nav-h) + 70px); }
-.service-includes-box { padding: 20px 20px 18px; }
-.includes-title { margin-bottom: 6px; }
-.includes-list li { padding: 6px 0; font-size: 13px; line-height: 1.4; gap: 9px; }
-.addon-note { margin-top: 10px; padding: 9px 11px; font-size: 12.5px; line-height: 1.45; }
-/* Desktop: the "What's Included" box starts beside the opening line instead of below the chips */
+.svc-jump a:hover { background: #FBF3E0; border-color: var(--accent); }
+.service-description { font-size: 17.5px; line-height: 1.8; color: #2A3446; max-width: 74ch; margin-bottom: 28px; }
+.svc-jump + .service-description {
+  font-size: clamp(18px, 1.5vw, 20.5px); line-height: 1.7; color: var(--navy); font-weight: 500;
+  max-width: 66ch; padding-left: 22px; border-left: 4px solid var(--accent);
+}
+
+/* ---------- Section headings ---------- */
+.svc-sec-head { max-width: 780px; margin-bottom: 34px; }
+.svc-sec-kicker { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+.svc-sec-kicker::before { content: ''; width: 30px; height: 2px; background: var(--accent); }
+.svc-sec-title { margin-top: 10px; font-family: var(--serif); font-size: clamp(28px, 3.2vw, 40px); font-weight: 700; line-height: 1.15; color: var(--navy); }
+.svc-sec-sub { margin-top: 12px; font-size: 16.5px; line-height: 1.7; color: var(--text-light); }
+
+/* ---------- Intro callouts: one per service ---------- */
+.els-reveals, .tna-diagnostic, .perf-impact { border-radius: 16px; box-shadow: 0 2px 4px rgba(15, 32, 64, 0.06), 0 18px 36px -22px rgba(15, 32, 64, 0.38); }
+.els-reveal { grid-template-columns: 5px 1fr; }
+.els-reveal-content { padding: 24px 28px; }
+.els-reveal-q { font-size: 19px; }
+.thd-layers { gap: 18px; background: none; border: 0; border-radius: 0; overflow: visible; }
+.thd-layer {
+  padding: 30px 26px 28px; background: #fff; border: 1px solid rgba(15, 32, 64, 0.12); border-top: 5px solid var(--navy); border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(15, 32, 64, 0.06), 0 18px 36px -22px rgba(15, 32, 64, 0.38);
+}
+.thd-layer::after { top: 8px; right: 16px; font-size: 76px; color: rgba(200, 146, 42, 0.22); }
+.thd-layer-bar { background: var(--accent); }
+.thd-layer-title { font-size: 20px; }
+.change-stages { gap: 18px; }
+.change-stage { padding: 26px 24px; border-radius: 16px; border-left-width: 5px; box-shadow: 0 2px 4px rgba(15, 32, 64, 0.06), 0 18px 36px -22px rgba(15, 32, 64, 0.38); }
+.change-stage-title { font-size: 20px; }
+.tna-col { padding: 30px 28px; }
+.perf-row-gain, .perf-row-who { padding-top: 24px; padding-bottom: 24px; }
+
+/* ---------- Sample results band ---------- */
+.svc-band--samples .chart-card {
+  --cc-pad: clamp(18px, 2.6vw, 32px);
+  margin: 0 0 30px; padding: 0 var(--cc-pad) 26px; overflow: hidden; border: 0; border-radius: 18px;
+  box-shadow: 0 2px 4px rgba(15, 32, 64, 0.08), 0 26px 48px -24px rgba(15, 32, 64, 0.5);
+}
+.svc-band--samples .chart-head {
+  position: relative; margin: 0 calc(-1 * var(--cc-pad)) 28px; padding: 24px var(--cc-pad) 22px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+}
+.svc-band--samples .chart-head::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, var(--accent) 0%, rgba(200, 146, 42, 0) 70%); }
+.svc-band--samples .chart-kicker {
+  display: inline-block; margin-bottom: 12px; padding: 4px 12px; border-radius: 999px;
+  color: var(--accent-light); background: rgba(232, 176, 80, 0.14); border: 1px solid rgba(232, 176, 80, 0.45);
+}
+.svc-band--samples .chart-title { font-size: clamp(21px, 2.1vw, 26px); color: #fff; }
+.svc-band--samples .chart-sub { margin-top: 6px; font-size: 15px; color: rgba(255, 255, 255, 0.88); }
+.svc-band--samples .chart-plot { margin-top: 0; }
+.svc-band--samples .chart-takeaway {
+  position: relative; margin-top: 26px; padding: 18px 22px 18px 68px; border: 0; border-radius: 14px;
+  background: #FBF3E0; font-style: normal; font-weight: 600; font-size: 17.5px; line-height: 1.5; color: var(--navy);
+}
+.svc-band--samples .chart-takeaway::before {
+  content: ''; position: absolute; left: 20px; top: 50%; width: 30px; height: 30px; transform: translateY(-50%);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C8922A' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6M10 21h4'/%3E%3Cpath d='M12 3a6 6 0 0 0-3.5 10.9c.7.5 1 1.3 1 2.1h5c0-.8.3-1.6 1-2.1A6 6 0 0 0 12 3z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.svc-band--samples .chart-caption { margin-top: 14px; }
+.svc-band--samples .scope-note {
+  position: relative; max-width: none; margin: 6px 0 0; padding: 22px 26px 22px 72px; font-size: 16px; line-height: 1.7;
+  background: #fff; border: 1px solid rgba(200, 146, 42, 0.4); border-left: 5px solid var(--accent); border-radius: 14px;
+  box-shadow: 0 14px 28px -20px rgba(15, 32, 64, 0.4);
+}
+.svc-band--samples .scope-note::before {
+  content: ''; position: absolute; left: 24px; top: 22px; width: 28px; height: 28px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C8922A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* ---------- How it works band ---------- */
+.svc-band--how .dimensions-label {
+  display: flex; align-items: center; gap: 12px; margin: 0 0 16px; padding: 0; border: 0;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-muted);
+}
+.svc-band--how .dimensions-label::before { content: ''; width: 22px; height: 2px; background: var(--accent); }
+.svc-band--how .dimension-tags { gap: 10px; margin-bottom: 10px; }
+.svc-band--how .dim-tag {
+  position: relative; padding: 8px 16px 8px 30px; font-size: 14px; font-weight: 600; color: var(--navy);
+  background: rgba(37, 99, 168, 0.09); border: 1px solid rgba(37, 99, 168, 0.35); border-radius: 999px;
+}
+.svc-band--how .dim-tag::before { content: ''; position: absolute; left: 13px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: var(--accent); }
+
+.tl { margin-top: 44px; counter-reset: tl; border-radius: 18px; background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-mid) 100%); box-shadow: 0 26px 48px -26px rgba(15, 32, 64, 0.7); }
+.tl-header { padding: 22px 30px; }
+.tl-label-text { font-size: 13px; }
+.tl-duration { font-size: 13.5px; padding: 4px 13px; }
+.tl-track { padding: 32px 30px 36px; list-style: none; }
+.tl-step { counter-increment: tl; padding: 48px 18px 0 0; }
+.tl-step::before {
+  content: counter(tl); display: grid; place-items: center; width: 32px; height: 32px;
+  font-size: 13.5px; font-weight: 700; color: var(--navy); background: var(--accent-light); box-shadow: 0 0 0 5px rgba(200, 146, 42, 0.24);
+}
+.tl-step::after { top: 15px; left: 46px; right: 12px; }
+.tl-week { font-size: 13px; }
+.tl-name { font-size: 16.5px; }
+.tl-detail { font-size: 14px; }
+
+.svc-notes { gap: 22px; margin-top: 40px; }
+.svc-note {
+  position: relative; overflow: hidden; padding: 32px 28px 26px; background: var(--cream); border: 1px solid rgba(15, 32, 64, 0.12); border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(15, 32, 64, 0.06), 0 18px 36px -22px rgba(15, 32, 64, 0.38);
+}
+.svc-note::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: var(--accent); }
+.svc-note::before {
+  content: ''; display: block; width: 48px; height: 48px; margin-bottom: 16px; border-radius: 14px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8B050' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='3' width='16' height='18' rx='2'/%3E%3Cpath d='m8 9 1.5 1.5L12 8M8 15l1.5 1.5L12 14M14.5 9.5H17M14.5 15.5H17'/%3E%3C/svg%3E") center / 26px no-repeat,
+    linear-gradient(145deg, var(--navy-mid) 0%, var(--navy) 100%);
+}
+.svc-note--conf::before {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8B050' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s7-3.5 7-9.5V5.5L12 3 5 5.5v6C5 17.5 12 21 12 21z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E") center / 26px no-repeat,
+    linear-gradient(145deg, var(--navy-mid) 0%, var(--navy) 100%);
+}
+.svc-note-title { font-size: 21px; }
 @media (min-width: 901px) {
-  .svc-page-body { display: grid; grid-template-columns: minmax(0, 1fr) 280px; column-gap: clamp(32px, 5vw, 64px); align-items: start; }
-  .svc-page-body > .service-inner { display: contents; }
-  .svc-page-body > .service-tagline, .svc-page-body > .svc-jump { grid-column: 1; }
-  .svc-page-body .service-left { grid-column: 1; grid-row: 3; }
-  .svc-page-body .service-includes-box { grid-column: 2; grid-row: 1 / span 3; }
+  /* One note on its own: title block on the left, the list on the right */
+  .svc-notes--single .svc-note { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); column-gap: 48px; align-items: center; padding: 32px 36px 30px; }
+  .svc-notes--single .svc-note::before { grid-column: 1; grid-row: 1; margin-bottom: 16px; }
+  .svc-notes--single .svc-note-title { grid-column: 1; grid-row: 2; margin: 0; }
+  .svc-notes--single .svc-note-list { grid-column: 2; grid-row: 1 / span 2; gap: 12px; }
 }
-@media (min-width: 1100px) {
-  .svc-page-body { grid-template-columns: minmax(0, 1fr) clamp(300px, 29%, 372px); }
+.svc-byline {
+  display: flex; align-items: center; gap: 24px; max-width: none; margin-top: 28px; padding: 22px 28px;
+  font-size: 15.5px; line-height: 1.7; background: #fff; border: 1px solid rgba(15, 32, 64, 0.14); border-left: 5px solid var(--accent); border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(15, 32, 64, 0.06), 0 18px 36px -22px rgba(15, 32, 64, 0.38);
 }
-@media (min-width: 901px) {
-  .service-includes-box {
-    position: sticky; top: calc(var(--nav-h) + 62px);
-    max-height: calc(100vh - var(--nav-h) - 62px - 16px); max-height: calc(100dvh - var(--nav-h) - 62px - 16px);
-    overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-  }
-  /* Set by script when the whole box would not fit the window: it then scrolls with the page instead of being cut off */
-  .service-includes-box.inc-static { position: static; max-height: none; overflow: visible; }
+.svc-byline-photo { flex: none; width: 84px; height: 84px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; box-shadow: 0 0 0 4px #fff, 0 0 0 6px rgba(200, 146, 42, 0.75); }
+.svc-byline > span { min-width: 0; max-width: 78ch; }
+
+/* ---------- Research sources: a quiet footer to the page ---------- */
+.svc-page-body > .research-refs { max-width: none; margin: 0; padding: 28px var(--pad-x) 40px; border-top: 1px solid var(--border); }
+.svc-page-body > .research-refs .research-refs-list { max-width: 820px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .svc-incl-item, .svc-incl-grid--7 .svc-incl-item:nth-child(n+5), .svc-incl-grid--6 .svc-incl-item { grid-column: span 6; }
+  .svc-incl-grid--7 .svc-incl-item:last-child { grid-column: span 12; }
 }
-@media (min-width: 901px) and (max-height: 560px) {
-  .service-includes-box { position: static; max-height: none; overflow: visible; }
+@media (max-width: 900px) {
+  .svc-notes { grid-template-columns: 1fr; }
+  .thd-layers, .change-stages { gap: 14px; }
+}
+@media (max-width: 768px) {
+  .tl-track { grid-template-columns: 1fr; padding: 24px 22px 28px; }
+  .tl-step { padding: 0 0 26px 52px; }
+  .tl-step:last-child { padding-bottom: 0; }
+  .tl-step::before { top: 0; }
+  .tl-step::after { display: block; top: 34px; bottom: 0; left: 15px; right: auto; width: 1px; height: auto; }
+  .tl-step:last-child::after { display: none; }
+}
+@media (max-width: 720px) {
+  .svc-band { padding-top: 40px; padding-bottom: 44px; }
+  .svc-incl-head { margin-bottom: 20px; }
+  .svc-incl-grid { gap: 12px; }
+  .svc-incl-item, .svc-incl-grid--7 .svc-incl-item:nth-child(n+5), .svc-incl-grid--6 .svc-incl-item, .svc-incl-grid--7 .svc-incl-item:last-child { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; gap: 16px; padding: 18px 18px 18px 18px; }
+  .svc-incl-badge { width: 46px; height: 46px; border-radius: 13px; }
+  .svc-incl-badge .svc-ic { width: 23px; height: 23px; }
+  .svc-incl-item::before { left: 18px; width: 30px; }
+  .svc-incl-name { font-size: 17px; }
+  .svc-incl-desc { margin-top: 4px; font-size: 14px; }
+  .svc-incl-addon { padding: 13px 16px; font-size: 14.5px; }
+  .svc-jump + .service-description { padding-left: 16px; border-left-width: 3px; }
+  .svc-sec-head { margin-bottom: 26px; }
+  .svc-band--samples .chart-takeaway { padding: 16px 18px 16px 58px; font-size: 16.5px; }
+  .svc-band--samples .chart-takeaway::before { left: 16px; width: 26px; height: 26px; }
+  .svc-band--samples .scope-note { padding: 18px 20px 18px 62px; font-size: 15.5px; }
+  .svc-band--samples .scope-note::before { left: 18px; top: 18px; width: 26px; height: 26px; }
+  .tl-header { padding: 18px 22px; }
+  .svc-note { padding: 24px 22px 22px; }
+  .svc-byline { align-items: flex-start; gap: 18px; padding: 20px 20px; font-size: 15px; }
+  .svc-byline-photo { width: 64px; height: 64px; }
+}
+@media (max-width: 480px) {
+  .svc-byline { flex-direction: column; }
 }
 
 /* Contact: optional marker and privacy note */
@@ -1386,6 +1563,7 @@ h1:focus, #main:focus { outline: none; }
 </head>
 <body>
 <a class="skip-link" href="#main" data-scroll="main">Skip to main content</a>
+<svg class="svc-sprite" aria-hidden="true" focusable="false"><defs><symbol id="ic-agree" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></symbol><symbol id="ic-survey" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h.01M8 12h.01M8 16h.01M12 8h4M12 12h4M12 16h4"/></symbol><symbol id="ic-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol><symbol id="ic-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><rect x="5" y="11" width="3" height="9" rx=".5"/><rect x="10.5" y="5" width="3" height="15" rx=".5"/><rect x="16" y="14" width="3" height="6" rx=".5"/></symbol><symbol id="ic-deck" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8M7 12l3-3 3 2 4-4"/></symbol><symbol id="ic-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="ic-dash" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="10" width="8" height="11" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/></symbol><symbol id="ic-flag" viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></symbol><symbol id="ic-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.7 7.1L4 20l1-4.5A8 8 0 1 1 21 12z"/></symbol><symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M17.5 14a6.5 6.5 0 0 1 4 6"/></symbol><symbol id="ic-split" viewBox="0 0 24 24"><path d="M3 12h5l6-6h5"/><path d="m8 12 6 6h5"/><path d="m17 3 3 3-3 3M17 15l3 3-3 3"/></symbol><symbol id="ic-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol><symbol id="ic-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol><symbol id="ic-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol><symbol id="ic-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol><symbol id="ic-sliders" viewBox="0 0 24 24"><path d="M5 3v6M5 15v6M12 3v2M12 11v10M19 3v10M19 19v2"/><path d="M2.5 12h5M9.5 8h5M16.5 16h5"/></symbol><symbol id="ic-rank" viewBox="0 0 24 24"><path d="M3 21h18"/><rect x="9" y="8" width="6" height="13"/><rect x="3" y="13" width="6" height="8"/><rect x="15" y="16" width="6" height="5"/></symbol><symbol id="ic-book" viewBox="0 0 24 24"><path d="M3 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H3z"/><path d="M21 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></symbol><symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.9-4.9M8 10.5h5"/></symbol><symbol id="ic-transfer" viewBox="0 0 24 24"><path d="M4 5v14"/><path d="M4 12h14"/><path d="m13 6 6 6-6 6"/></symbol><symbol id="ic-levels" viewBox="0 0 24 24"><path d="M3 21h6v-6h6V9h6V3"/></symbol><symbol id="ic-form" viewBox="0 0 24 24"><path d="M8 8h8M8 12h8M8 16h3"/><path d="M5 3h14a1 1 0 0 1 1 1v6M5 3a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h8"/><path d="m14 20 5-5 2 2-5 5h-2z"/></symbol><symbol id="ic-scale" viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M5 7h14"/><path d="m5 7-3 7a3.5 3 0 0 0 6 0z"/><path d="m19 7-3 7a3.5 3 0 0 0 6 0z"/></symbol></defs></svg>
 
 <header>
 <nav class="site-nav" aria-label="Main">
@@ -1697,10 +1875,27 @@ h1:focus, #main:focus { outline: none; }
   </div>
 
   <div class="svc-page-body">
-    <p class="service-tagline">Understand what your employees are experiencing, what's getting in the way, and what to do next.</p>
-    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-listening" data-scroll="chart-listening">Sample results</a><a href="#listening-timeline" data-scroll="listening-timeline">Timeline</a><a href="#listening-needs" data-scroll="listening-needs">What I'll need</a><a href="#listening-conf" data-scroll="listening-conf">Confidentiality</a><a href="#listening-who" data-scroll="listening-who">Who does the work</a></nav>
+    <section class="svc-band svc-band--incl" aria-labelledby="inc-listening">
+    <div class="svc-incl-head">
+      <h2 class="svc-incl-title" id="inc-listening">What's included</h2>
+      <p class="svc-incl-sub">From the first call to the final debrief.</p>
+    </div>
+    <ul class="svc-incl-grid svc-incl-grid--8">
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-agree"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Intake &amp; scope</p><p class="svc-incl-desc">A call and a signed agreement before any work begins</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-survey"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Custom survey</p><p class="svc-incl-desc">Built around your workforce, roles, and goals</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-mail"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Response tracking</p><p class="svc-incl-desc">Email templates, with an early heads-up if participation is low</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-chart"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Full analysis</p><p class="svc-incl-desc">Results by topic and question, plus themes and sentiment in comments</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-deck"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Executive Report</p><p class="svc-incl-desc">A slide deck with findings, prioritized recommendations, and a live debrief</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-doc"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Employee summary</p><p class="svc-incl-desc">One page for employees, with room for leadership to add next steps</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-dash"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Results dashboard</p><p class="svc-incl-desc">Filter by group and browse comments, where the scope fits</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-flag"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Action planning</p><p class="svc-incl-desc">Based on best practices, including how to share results with employees</p></div></li>
+    </ul>
+    <p class="svc-incl-addon"><span class="svc-incl-plus" aria-hidden="true"></span><span><strong>Add-ons available:</strong> Focus groups (two sessions with employees you choose), or a pulse check 90 days after delivery, which you can decide on at the final debrief.</span></p>
+  </section>
     <div class="service-inner">
       <div class="service-left">
+        <div class="svc-band svc-band--overview">
+          <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#listening-samples" data-scroll="listening-samples">Sample results</a><a href="#listening-timeline" data-scroll="listening-timeline">Timeline</a><a href="#listening-needs" data-scroll="listening-needs">What I'll need</a><a href="#listening-conf" data-scroll="listening-conf">Confidentiality</a><a href="#listening-who" data-scroll="listening-who">Who does the work</a></nav>
         <p class="service-description">In most workplaces, the honest picture of what employees are experiencing lives in hallway conversations and exit interviews. A listening survey brings it into the open, whether people are leaving, growth is straining your culture, or this is your <span class="hl">first formal look at what employees think</span>. You get a survey designed for your workforce and a clear report you can <span class="hl">read, discuss, and act on</span>, with <span class="hl">specific, prioritized recommendations</span> and action planning based on best practices.</p>
 
         <div class="els-reveals">
@@ -1732,10 +1927,19 @@ h1:focus, #main:focus { outline: none; }
           <p class="research-feature-caption">Published research findings, not client results.</p>
         </div>
 
+        </div>
+
+        <section class="svc-band svc-band--samples" id="listening-samples" aria-labelledby="listening-samples-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">Sample results</p>
+          <h2 class="svc-sec-title" id="listening-samples-title">What you'll see in your report</h2>
+          <p class="svc-sec-sub">Illustrative samples of the kinds of views included. Yours are built from your own results.</p>
+        </div>
+
         <figure class="chart-card" id="chart-listening">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Results by index</h2>
+            <h3 class="chart-title">Results by index</h3>
             <p class="chart-sub">Share of responses in each band, most favorable first, with a benchmark where one applies</p>
           </div>
           <div class="chart-plot sb sb--compact" role="img" aria-label="Favorable responses range from 76 percent for Manager Relationship to 38 percent for Recognition. Manager Relationship sits three points above its benchmark of 73 percent.">
@@ -1802,7 +2006,7 @@ h1:focus, #main:focus { outline: none; }
         <figure class="chart-card" id="chart-listening-themes">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Themes and sentiment in open-text comments</h2>
+            <h3 class="chart-title">Themes and sentiment in open-text comments</h3>
             <p class="chart-sub">Themes listed from most to least common, with the sentiment of the comments under each</p>
           </div>
           <div class="chart-plot">
@@ -1871,7 +2075,15 @@ h1:focus, #main:focus { outline: none; }
         </figure>
 
         <p class="scope-note"><strong>Good to know.</strong> Every survey is built around your specific workforce. For smaller teams, when response volume is limited, analysis leads with themes and careful interpretation rather than statistics, so the findings stay honest and useful regardless of headcount.</p>
-        <h2 class="dimensions-label">Survey topics, drawn from established research</h2>
+        </section>
+
+        <section class="svc-band svc-band--how" id="listening-how" aria-labelledby="listening-how-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">How it works</p>
+          <h2 class="svc-sec-title" id="listening-how-title">What to expect</h2>
+        </div>
+
+        <h3 class="dimensions-label">Survey topics, drawn from established research</h3>
         <div class="dimension-tags">
           <span class="dim-tag">Employee Engagement</span><span class="dim-tag">Organizational Commitment</span><span class="dim-tag">Job Satisfaction</span>
           <span class="dim-tag">Recognition</span><span class="dim-tag">Communication</span><span class="dim-tag">Perception of Voice</span>
@@ -1890,7 +2102,7 @@ h1:focus, #main:focus { outline: none; }
         </div>
         <div class="svc-notes">
           <section class="svc-note" id="listening-needs">
-            <h2 class="svc-note-title">What I'll need from you</h2>
+            <h3 class="svc-note-title">What I'll need from you</h3>
             <ul class="svc-note-list">
               <li>One main contact for scheduling and questions</li>
               <li>A list of your departments or locations, so results can be reported by group</li>
@@ -1899,27 +2111,13 @@ h1:focus, #main:focus { outline: none; }
             </ul>
           </section>
           <section class="svc-note svc-note--conf" id="listening-conf">
-            <h2 class="svc-note-title">Confidentiality protection</h2>
+            <h3 class="svc-note-title">Confidentiality protection</h3>
             <p>Responses are confidential and reported only in aggregate. I never share individual responses with leadership, I paraphrase comments that could identify someone, and groups too small to protect confidentiality are not reported separately. Identifiable employee data never goes into third-party AI tools, and any AI use is disclosed in your proposal.</p>
           </section>
         </div>
-        <p class="svc-byline" id="listening-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="listening-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></span></p>
+        </section>
       </div>
-
-      <aside class="service-includes-box" aria-labelledby="inc-listening">
-        <h2 class="includes-title" id="inc-listening">What's Included</h2>
-        <ul class="includes-list">
-          <li>Intake call and signed scope agreement before work begins</li>
-          <li>Custom survey built around your workforce, roles, and goals</li>
-          <li>Email templates and response tracking, with an early heads-up if participation is low</li>
-          <li>Full analysis: results by topic and question, plus themes and sentiment in open-text comments</li>
-          <li>Executive Report as a slide deck, with findings, prioritized recommendations, and a live debrief</li>
-          <li>One-page summary for employees, with room for leadership to add what happens next</li>
-          <li>Interactive results dashboard, where the scope fits: filter by group, browse comments by theme and sentiment</li>
-          <li>Action planning based on best practices, including how to share results with employees</li>
-        </ul>
-        <p class="addon-note"><strong>Add-ons available:</strong> Focus groups (two sessions with employees you choose), or a pulse check 90 days after delivery, which you can decide on at the final debrief.</p>
-      </aside>
     </div>
     <div class="research-refs">
       <h2 class="research-refs-title">Research sources</h2>
@@ -1962,10 +2160,26 @@ h1:focus, #main:focus { outline: none; }
   </div>
 
   <div class="svc-page-body">
-    <p class="service-tagline">Understand how your team is really functioning, where alignment is strong, and where friction or perception gaps need attention.</p>
-    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-team-tasks" data-scroll="chart-team-tasks">Sample results</a><a href="#team-timeline" data-scroll="team-timeline">Timeline</a><a href="#team-needs" data-scroll="team-needs">What I'll need</a><a href="#team-conf" data-scroll="team-conf">Confidentiality</a><a href="#team-who" data-scroll="team-who">Who does the work</a></nav>
+    <section class="svc-band svc-band--incl" aria-labelledby="inc-team">
+    <div class="svc-incl-head">
+      <h2 class="svc-incl-title" id="inc-team">What's included</h2>
+      <p class="svc-incl-sub">From the first call to the final debrief.</p>
+    </div>
+    <ul class="svc-incl-grid svc-incl-grid--7">
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-chat"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Intake interview</p><p class="svc-incl-desc">A call and brief interview on team context, goals, and what you want to learn</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-survey"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Custom team survey</p><p class="svc-incl-desc">Built on established research on team processes and climate</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-split"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Perception gap analysis</p><p class="svc-incl-desc">Both the averages and the spread in answers for each area</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-star"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Task ratings</p><p class="svc-incl-desc">How important each core task is and how much it depends on others</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-doc"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Team Dynamics Report</p><p class="svc-incl-desc">Findings for each area, prioritized opportunities, and evidence-based recommendations</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-flag"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Action planning</p><p class="svc-incl-desc">At the debrief, including how to share results with the team</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-dash"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Results dashboard</p><p class="svc-incl-desc">Explore the findings on your own, where the scope fits</p></div></li>
+    </ul>
+    <p class="svc-incl-addon"><span class="svc-incl-plus" aria-hidden="true"></span><span><strong>Add-on available:</strong> A pulse check 90 days after delivery, which you can decide on at the final debrief.</span></p>
+  </section>
     <div class="service-inner">
       <div class="service-left">
+        <div class="svc-band svc-band--overview">
+          <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#team-samples" data-scroll="team-samples">Sample results</a><a href="#team-timeline" data-scroll="team-timeline">Timeline</a><a href="#team-needs" data-scroll="team-needs">What I'll need</a><a href="#team-conf" data-scroll="team-conf">Confidentiality</a><a href="#team-who" data-scroll="team-who">Who does the work</a></nav>
         <p class="service-description">Most teams never get a clear, honest picture of how they're actually functioning. A Team Health Diagnostic provides that picture, whether your team is navigating growth, a leadership change, or friction that's affecting results, or things are going well and you want to understand why. It looks at three layers at the same time:</p>
 
         <div class="thd-layers">
@@ -1992,10 +2206,19 @@ h1:focus, #main:focus { outline: none; }
           <p class="research-feature-caption">Published research findings, not client results.</p>
         </div>
 
+        </div>
+
+        <section class="svc-band svc-band--samples" id="team-samples" aria-labelledby="team-samples-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">Sample results</p>
+          <h2 class="svc-sec-title" id="team-samples-title">What you'll see in your report</h2>
+          <p class="svc-sec-sub">Illustrative samples of the kinds of views included. Yours are built from your own results.</p>
+        </div>
+
         <figure class="chart-card" id="chart-team-tasks">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Task ratings from each team member</h2>
+            <h3 class="chart-title">Task ratings from each team member</h3>
             <p class="chart-sub">Each dot is one team member's rating, from 1 to 5</p>
           </div>
           <div class="chart-plot tk" role="img" aria-label="Team members agree that making decisions together is important, but their ratings of how much it depends on teammates run from 2 to 5, the widest disagreement of any task.">
@@ -2042,7 +2265,7 @@ h1:focus, #main:focus { outline: none; }
         <figure class="chart-card" id="chart-team">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Team health by team and area</h2>
+            <h3 class="chart-title">Team health by team and area</h3>
             <p class="chart-sub">Average score on a 1 to 5 scale</p>
             <p class="chart-lead"><strong>For workforces with multiple teams</strong>, the work often differs from team to team. Each team can be rated on its own tasks and responsibilities, then compared side by side.</p>
           </div>
@@ -2100,7 +2323,15 @@ h1:focus, #main:focus { outline: none; }
         </figure>
 
         <p class="scope-note"><strong>Good to know.</strong> This works for a single team or for several teams compared side by side. To hear from your whole workforce, the Employee Listening Survey is the better fit. For very small teams, I take extra care so no one can be picked out of the results, and I treat the findings as directional rather than exact.</p>
-        <h2 class="dimensions-label">What the assessment examines</h2>
+        </section>
+
+        <section class="svc-band svc-band--how" id="team-how" aria-labelledby="team-how-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">How it works</p>
+          <h2 class="svc-sec-title" id="team-how-title">What to expect</h2>
+        </div>
+
+        <h3 class="dimensions-label">What the assessment examines</h3>
         <div class="dimension-tags">
           <span class="dim-tag">Team Processes</span><span class="dim-tag">Planning &amp; Coordination</span><span class="dim-tag">Conflict Management</span>
           <span class="dim-tag">Trust</span><span class="dim-tag">Cohesion &amp; Cooperation</span><span class="dim-tag">Team Climate</span>
@@ -2119,7 +2350,7 @@ h1:focus, #main:focus { outline: none; }
         </div>
         <div class="svc-notes">
           <section class="svc-note" id="team-needs">
-            <h2 class="svc-note-title">What I'll need from you</h2>
+            <h3 class="svc-note-title">What I'll need from you</h3>
             <ul class="svc-note-list">
               <li>A team lead as my main contact, who confirms who is on the team</li>
               <li>Sending the survey link to team members</li>
@@ -2127,26 +2358,13 @@ h1:focus, #main:focus { outline: none; }
             </ul>
           </section>
           <section class="svc-note svc-note--conf" id="team-conf">
-            <h2 class="svc-note-title">Confidentiality protection</h2>
+            <h3 class="svc-note-title">Confidentiality protection</h3>
             <p>Responses are confidential and reported only in aggregate. I never share individual responses with leadership, I paraphrase comments that could identify someone, and groups too small to protect confidentiality are not reported separately. Identifiable employee data never goes into third-party AI tools, and any AI use is disclosed in your proposal.</p>
           </section>
         </div>
-        <p class="svc-byline" id="team-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="team-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></span></p>
+        </section>
       </div>
-
-      <aside class="service-includes-box" aria-labelledby="inc-team">
-        <h2 class="includes-title" id="inc-team">What's Included</h2>
-        <ul class="includes-list">
-          <li>Intake call and a brief interview on team context, goals, and what you want to learn</li>
-          <li>Custom team survey built on established research on team processes and climate</li>
-          <li>Perception gap analysis of both the averages and the spread in answers for each area</li>
-          <li>Task ratings from each team member on how important each core task is and how much it depends on others</li>
-          <li>Team Dynamics Report with findings for each area, prioritized opportunities, and evidence-based recommendations</li>
-          <li>Action planning at the debrief, based on best practices, including how to share results with the team</li>
-          <li>Interactive results dashboard, where the scope fits, to explore the findings on your own</li>
-        </ul>
-        <p class="addon-note"><strong>Add-on available:</strong> A pulse check 90 days after delivery, which you can decide on at the final debrief.</p>
-      </aside>
     </div>
     <div class="research-refs">
       <h2 class="research-refs-title">Research sources</h2>
@@ -2188,10 +2406,26 @@ h1:focus, #main:focus { outline: none; }
   </div>
 
   <div class="svc-page-body">
-    <p class="service-tagline">Understand how your workforce is experiencing a significant change, what's helping, what's getting in the way, and what to do next.</p>
-    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-change" data-scroll="chart-change">Sample results</a><a href="#diagnostic-timeline" data-scroll="diagnostic-timeline">Timeline</a><a href="#diagnostic-needs" data-scroll="diagnostic-needs">What I'll need</a><a href="#diagnostic-conf" data-scroll="diagnostic-conf">Confidentiality</a><a href="#diagnostic-who" data-scroll="diagnostic-who">Who does the work</a></nav>
+    <section class="svc-band svc-band--incl" aria-labelledby="inc-diagnostic">
+    <div class="svc-incl-head">
+      <h2 class="svc-incl-title" id="inc-diagnostic">What's included</h2>
+      <p class="svc-incl-sub">From the first call to the final debrief.</p>
+    </div>
+    <ul class="svc-incl-grid svc-incl-grid--7">
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-compass"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Scoping &amp; agreement</p><p class="svc-incl-desc">A call on the change and who is involved, then a signed scope before work begins</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-users"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Two focus groups</p><p class="svc-incl-desc">Surface perceptions, concerns, and recurring themes</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-survey"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Readiness survey</p><p class="svc-incl-desc">Built on established change readiness research</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-layers"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Combined analysis</p><p class="svc-incl-desc">Survey results for each factor alongside the focus group themes that explain them</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-doc"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Change Readiness Report</p><p class="svc-incl-desc">What is driving the results, with prioritized recommendations</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-flag"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Action planning</p><p class="svc-incl-desc">At the debrief, including how to talk with employees about the results</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-dash"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Results dashboard</p><p class="svc-incl-desc">Filter by group and browse comments, where the scope fits</p></div></li>
+    </ul>
+    <p class="svc-incl-addon"><span class="svc-incl-plus" aria-hidden="true"></span><span><strong>Add-ons available:</strong> Additional focus groups if the change touches more groups, or a pulse check 90 days after delivery, which you can decide on at the final debrief.</span></p>
+  </section>
     <div class="service-inner">
       <div class="service-left">
+        <div class="svc-band svc-band--overview">
+          <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#diagnostic-samples" data-scroll="diagnostic-samples">Sample results</a><a href="#diagnostic-timeline" data-scroll="diagnostic-timeline">Timeline</a><a href="#diagnostic-needs" data-scroll="diagnostic-needs">What I'll need</a><a href="#diagnostic-conf" data-scroll="diagnostic-conf">Confidentiality</a><a href="#diagnostic-who" data-scroll="diagnostic-who">Who does the work</a></nav>
         <p class="service-description">Change is rarely a single moment, and what you need depends on where you are in it:</p>
 
         <div class="change-stages">
@@ -2213,10 +2447,19 @@ h1:focus, #main:focus { outline: none; }
           <p class="research-feature-caption">Published research findings, not client results.</p>
         </div>
 
+        </div>
+
+        <section class="svc-band svc-band--samples" id="diagnostic-samples" aria-labelledby="diagnostic-samples-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">Sample results</p>
+          <h2 class="svc-sec-title" id="diagnostic-samples-title">What you'll see in your report</h2>
+          <p class="svc-sec-sub">Illustrative samples of the kinds of views included. Yours are built from your own results.</p>
+        </div>
+
         <figure class="chart-card" id="chart-change">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Readiness by factor</h2>
+            <h3 class="chart-title">Readiness by factor</h3>
             <p class="chart-sub">Share of survey responses in each category</p>
           </div>
           <div class="chart-plot sb" role="img" aria-label="Management support is the most favorable factor, at 62 percent favorable. Communication clarity is the lowest, at 41 percent favorable and 26 percent unfavorable.">
@@ -2274,7 +2517,7 @@ h1:focus, #main:focus { outline: none; }
         <figure class="chart-card" id="chart-change-recs">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">From findings to recommendations</h2>
+            <h3 class="chart-title">From findings to recommendations</h3>
             <p class="chart-sub">In priority order, with the survey and focus group evidence behind each one</p>
           </div>
           <div class="chart-plot rc">
@@ -2317,7 +2560,15 @@ h1:focus, #main:focus { outline: none; }
         </figure>
 
         <p class="scope-note"><strong>What this is and isn't.</strong> I assess readiness and recommend what to do next. I don't manage the change itself, and I don't give legal or compliance advice.</p>
-        <h2 class="dimensions-label">What the assessment examines</h2>
+        </section>
+
+        <section class="svc-band svc-band--how" id="diagnostic-how" aria-labelledby="diagnostic-how-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">How it works</p>
+          <h2 class="svc-sec-title" id="diagnostic-how-title">What to expect</h2>
+        </div>
+
+        <h3 class="dimensions-label">What the assessment examines</h3>
         <div class="dimension-tags">
           <span class="dim-tag">The Change Makes Sense</span><span class="dim-tag">Management Support</span><span class="dim-tag">Confidence to Succeed</span>
           <span class="dim-tag">Communication Clarity</span><span class="dim-tag">What's Getting in the Way</span>
@@ -2335,7 +2586,7 @@ h1:focus, #main:focus { outline: none; }
         </div>
         <div class="svc-notes">
           <section class="svc-note" id="diagnostic-needs">
-            <h2 class="svc-note-title">What I'll need from you</h2>
+            <h3 class="svc-note-title">What I'll need from you</h3>
             <ul class="svc-note-list">
               <li>A short description of the change and who it affects</li>
               <li>Sending the survey to the people affected</li>
@@ -2343,27 +2594,13 @@ h1:focus, #main:focus { outline: none; }
             </ul>
           </section>
           <section class="svc-note svc-note--conf" id="diagnostic-conf">
-            <h2 class="svc-note-title">Confidentiality protection</h2>
+            <h3 class="svc-note-title">Confidentiality protection</h3>
             <p>Responses are confidential and reported only in aggregate. I never share individual responses with leadership, I paraphrase comments that could identify someone, and groups too small to protect confidentiality are not reported separately. Identifiable employee data never goes into third-party AI tools, and any AI use is disclosed in your proposal.</p>
           </section>
         </div>
-        <p class="svc-byline" id="diagnostic-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, organizational culture analytics, and executive reporting. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="diagnostic-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, organizational culture analytics, and executive reporting. <a href="/about/" data-page="about">More about me</a></span></p>
+        </section>
       </div>
-
-      <aside class="service-includes-box" aria-labelledby="inc-diagnostic">
-        <h2 class="includes-title" id="inc-diagnostic">What's Included</h2>
-        <ul class="includes-list">
-          <li>Scoping call on the change, the context, and who needs to be involved</li>
-          <li>Signed scope agreement before work begins</li>
-          <li>Two focus groups to surface perceptions, concerns, and recurring themes</li>
-          <li>Survey built on established change readiness research (whether the change makes sense, support, confidence, communication, and what's in the way)</li>
-          <li>Combined analysis: survey results for each factor alongside the focus group themes that help explain them</li>
-          <li>Change Readiness Report on what's driving the results, with prioritized recommendations</li>
-          <li>Action planning at the debrief, based on best practices, including how to talk with employees about the results</li>
-          <li>Interactive results dashboard, where the scope fits: filter by group, browse comments by theme and sentiment</li>
-        </ul>
-        <p class="addon-note"><strong>Add-ons available:</strong> Additional focus groups if the change touches more groups, or a pulse check 90 days after delivery, which you can decide on at the final debrief.</p>
-      </aside>
     </div>
     <div class="research-refs">
       <h2 class="research-refs-title">Research sources</h2>
@@ -2405,10 +2642,26 @@ h1:focus, #main:focus { outline: none; }
   </div>
 
   <div class="svc-page-body">
-    <p class="service-tagline">Understand what's actually behind the performance gap, whether training is the right response, and where a development investment will have the most impact.</p>
-    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-tna" data-scroll="chart-tna">Sample results</a><a href="#tna-timeline" data-scroll="tna-timeline">Timeline</a><a href="#tna-needs" data-scroll="tna-needs">What I'll need</a><a href="#tna-who" data-scroll="tna-who">Who does the work</a></nav>
+    <section class="svc-band svc-band--incl" aria-labelledby="inc-tna">
+    <div class="svc-incl-head">
+      <h2 class="svc-incl-title" id="inc-tna">What's included</h2>
+      <p class="svc-incl-sub">From the first interview to the plan of instruction.</p>
+    </div>
+    <ul class="svc-incl-grid svc-incl-grid--8">
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-chat"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Goals interview</p><p class="svc-incl-desc">Your goals, context, and current training efforts</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-briefcase"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Job mapping</p><p class="svc-incl-desc">Survey and/or interviews with managers and the people in the role</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-sliders"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Skill gap survey</p><p class="svc-incl-desc">Shows where gaps are largest and whether training is the right solution</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-rank"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Priority ranking</p><p class="svc-incl-desc">By gap, importance, and readiness, with an invest, redirect, or hold off call for each</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-doc"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Assessment report</p><p class="svc-incl-desc">Prioritized findings and recommended training approaches</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-book"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Plan of Instruction</p><p class="svc-incl-desc">For up to your top three priorities: what to cover and how it could be taught</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-dash"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Results dashboard</p><p class="svc-incl-desc">Explore the findings on your own, where the scope fits</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-transfer"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Transfer support</p><p class="svc-incl-desc">Recommendations to help new skills carry over to the job</p></div></li>
+    </ul>
+  </section>
     <div class="service-inner">
       <div class="service-left">
+        <div class="svc-band svc-band--overview">
+          <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#tna-samples" data-scroll="tna-samples">Sample results</a><a href="#tna-timeline" data-scroll="tna-timeline">Timeline</a><a href="#tna-needs" data-scroll="tna-needs">What I'll need</a><a href="#tna-who" data-scroll="tna-who">Who does the work</a></nav>
         <p class="service-description">When performance isn't where it should be, training is often the first thing organizations reach for. Sometimes that's the right call. Often the cause is a process issue, a tool gap, unclear expectations, or a management routine, and training can't fix any of those.</p>
 
         <div class="tna-diagnostic">
@@ -2429,10 +2682,19 @@ h1:focus, #main:focus { outline: none; }
         <p class="service-description">A Training Needs Assessment tells you which one you're dealing with <span class="hl">before committing the budget</span>. Interviews and a targeted survey of the people in the role map what the job actually requires, where <span class="hl">genuine skill gaps</span> exist, and <span class="hl">whether training is the right solution</span>. The report says what to train, who needs it most, and why, along with any non-training barriers to address first.</p>
         <p class="service-description">The report helps you <span class="hl">decide where to invest your time and effort</span>, whether that turns out to be formal training, coaching, or practice on the job. It also includes a Plan of Instruction for your top three priorities: a short outline of what each should cover and how it could be taught. For other needs, the report points you to where to invest or look further.</p>
 
+        </div>
+
+        <section class="svc-band svc-band--samples" id="tna-samples" aria-labelledby="tna-samples-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">Sample results</p>
+          <h2 class="svc-sec-title" id="tna-samples-title">What you'll see in your report</h2>
+          <p class="svc-sec-sub">Illustrative samples of the kinds of views included. Yours are built from your own results.</p>
+        </div>
+
         <figure class="chart-card" id="chart-tna">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Training needs ranked by gap</h2>
+            <h3 class="chart-title">Training needs ranked by gap</h3>
             <p class="chart-sub">Average score on a 1 to 5 scale, widest gap first</p>
           </div>
           <div class="chart-plot db" role="img" aria-label="Coaching conversations and giving feedback have the widest gaps between importance and current skill, and they are also the two skills rated most important. The gap in prioritizing work points to a fix other than training.">
@@ -2500,7 +2762,7 @@ h1:focus, #main:focus { outline: none; }
         <figure class="chart-card" id="chart-tna-causes">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">What is behind each gap</h2>
+            <h3 class="chart-title">What is behind each gap</h3>
             <p class="chart-sub">The likely cause of each of the four widest gaps, and whether training is the right response</p>
           </div>
           <div class="chart-plot cm">
@@ -2568,6 +2830,14 @@ h1:focus, #main:focus { outline: none; }
         </figure>
 
         <p class="scope-note"><strong>Good to know.</strong> This assessment identifies what training is needed and why. It does not design or deliver the training itself. When only a few people hold the role, I rely on interviews rather than a survey, so the findings stay honest.</p>
+        </section>
+
+        <section class="svc-band svc-band--how" id="tna-how" aria-labelledby="tna-how-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">How it works</p>
+          <h2 class="svc-sec-title" id="tna-how-title">What to expect</h2>
+        </div>
+
         <div class="tl" id="tna-timeline">
           <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:4">
@@ -2579,7 +2849,7 @@ h1:focus, #main:focus { outline: none; }
         </div>
         <div class="svc-notes svc-notes--single">
           <section class="svc-note" id="tna-needs">
-            <h2 class="svc-note-title">What I'll need from you</h2>
+            <h3 class="svc-note-title">What I'll need from you</h3>
             <ul class="svc-note-list">
               <li>Role documents, such as job descriptions and an org chart</li>
               <li>A review of the task list before the survey is designed</li>
@@ -2587,22 +2857,9 @@ h1:focus, #main:focus { outline: none; }
             </ul>
           </section>
         </div>
-        <p class="svc-byline" id="tna-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, competency modeling, and training and leadership development. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="tna-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, competency modeling, and training and leadership development. <a href="/about/" data-page="about">More about me</a></span></p>
+        </section>
       </div>
-
-      <aside class="service-includes-box" aria-labelledby="inc-tna">
-        <h2 class="includes-title" id="inc-tna">What's Included</h2>
-        <ul class="includes-list">
-          <li>Interview about your goals, context, and current training efforts</li>
-          <li>Survey and/or interviews with managers and the people in the role to map what the job requires</li>
-          <li>Survey of the people in the role to show where skill gaps are largest and whether training is the right solution</li>
-          <li>Priority ranking of training needs by gap, importance, and readiness, with an invest, redirect, or hold off call for each</li>
-          <li>Training Needs Assessment report with prioritized findings and recommended training approaches</li>
-          <li>Plan of Instruction for up to your top three priorities: what each should cover and how it could be taught</li>
-          <li>Interactive results dashboard, where the scope fits, to explore the findings on your own</li>
-          <li>Recommendations to help new skills carry over to the job after training</li>
-        </ul>
-      </aside>
     </div>
   </div>
 
@@ -2638,10 +2895,25 @@ h1:focus, #main:focus { outline: none; }
   </div>
 
   <div class="svc-page-body">
-    <p class="service-tagline">Define what good performance looks like in observable terms so managers can give feedback consistently and employees know what's expected.</p>
-    <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#chart-prd" data-scroll="chart-prd">Sample results</a><a href="#prd-timeline" data-scroll="prd-timeline">Timeline</a><a href="#prd-needs" data-scroll="prd-needs">What I'll need</a><a href="#prd-who" data-scroll="prd-who">Who does the work</a></nav>
+    <section class="svc-band svc-band--incl" aria-labelledby="inc-prd">
+    <div class="svc-incl-head">
+      <h2 class="svc-incl-title" id="inc-prd">What's included</h2>
+      <p class="svc-incl-sub">From the first consultation to the finished toolkit.</p>
+    </div>
+    <ul class="svc-incl-grid svc-incl-grid--6">
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-chat"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Consultation</p><p class="svc-incl-desc">On the role(s), your current review process, and performance challenges</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-search"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Document review</p><p class="svc-incl-desc">Existing job descriptions and appraisal materials</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-users"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Structured interviews</p><p class="svc-incl-desc">With managers and the people in the role on what strong, solid, and developing performance looks like</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-levels"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Performance standards</p><p class="svc-incl-desc">Clear, observable behavioral examples at each level</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-form"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Review form</p><p class="svc-incl-desc">Tailored to your role and organization</p></div></li>
+      <li class="svc-incl-item"><span class="svc-incl-badge" aria-hidden="true"><svg class="svc-ic"><use href="#ic-scale"/></svg></span><div class="svc-incl-text"><p class="svc-incl-name">Rater guide</p><p class="svc-incl-desc">For consistent, fair evaluation and performance conversations</p></div></li>
+    </ul>
+    <p class="svc-incl-addon"><span class="svc-incl-plus" aria-hidden="true"></span><span><strong>Add-on available:</strong> A manager calibration session (60 to 90 minutes), where managers practice applying the standards together and compare their ratings.</span></p>
+  </section>
     <div class="service-inner">
       <div class="service-left">
+        <div class="svc-band svc-band--overview">
+          <nav class="svc-jump" aria-label="On this page"><span class="svc-jump-label">On this page</span><a href="#prd-samples" data-scroll="prd-samples">Sample results</a><a href="#prd-timeline" data-scroll="prd-timeline">Timeline</a><a href="#prd-needs" data-scroll="prd-needs">What I'll need</a><a href="#prd-who" data-scroll="prd-who">Who does the work</a></nav>
         <p class="service-description">For most organizations, performance reviews are an afterthought. A generic template gets dusted off once a year, ratings vary from manager to manager, and the process feels <span class="hl">arbitrary to the people on the receiving end</span>. That's not really a people problem, it's a design problem.</p>
         <p class="service-description">A Performance Standards &amp; Review Toolkit gives your organization a custom set of performance expectations for a specific role or team, grounded in what the job actually requires and described in <span class="hl">clear, observable behavioral terms</span>, so reviews are easier to give and to receive.</p>
 
@@ -2662,10 +2934,19 @@ h1:focus, #main:focus { outline: none; }
           <p class="research-feature-caption">Published research findings, not client results.</p>
         </div>
 
+        </div>
+
+        <section class="svc-band svc-band--samples" id="prd-samples" aria-labelledby="prd-samples-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">Sample results</p>
+          <h2 class="svc-sec-title" id="prd-samples-title">What you'll see in your toolkit</h2>
+          <p class="svc-sec-sub">Illustrative samples of what the toolkit includes. Yours are written around your own roles.</p>
+        </div>
+
         <figure class="chart-card" id="chart-prd">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">What each level looks like on the job</h2>
+            <h3 class="chart-title">What each level looks like on the job</h3>
             <p class="chart-sub">One skill from a sample standard, with observable behaviors at each level</p>
           </div>
           <div class="chart-plot bs">
@@ -2692,7 +2973,7 @@ h1:focus, #main:focus { outline: none; }
         <figure class="chart-card" id="chart-prd-consistency">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
-            <h2 class="chart-title">Five reviewers, one employee</h2>
+            <h3 class="chart-title">Five reviewers, one employee</h3>
             <p class="chart-sub">Each dot is one reviewer's rating, from 1 to 5</p>
           </div>
           <div class="chart-plot ds" role="img" aria-label="Five reviewers rating the same employee average 3.6 both before and with shared standards, but their ratings spread from 2 to 5 before and only from 3 to 4 with shared standards.">
@@ -2724,6 +3005,14 @@ h1:focus, #main:focus { outline: none; }
         </figure>
 
         <p class="scope-note"><strong>Your decisions stay yours.</strong> The toolkit is built to make reviews clearer and more consistent. It isn't legal advice, and it doesn't set pay or promotion rules. I recommend having your HR lead or legal counsel review the finished tools before you use them in decisions about pay, promotion, or discipline.</p>
+        </section>
+
+        <section class="svc-band svc-band--how" id="prd-how" aria-labelledby="prd-how-title">
+        <div class="svc-sec-head">
+          <p class="svc-sec-kicker">How it works</p>
+          <h2 class="svc-sec-title" id="prd-how-title">What to expect</h2>
+        </div>
+
         <div class="tl" id="prd-timeline">
           <div class="tl-header"><span class="tl-label-text">Rough Timeline</span><span class="tl-duration">About 4&ndash;6 weeks</span></div>
           <ol class="tl-track" style="--steps:4">
@@ -2735,7 +3024,7 @@ h1:focus, #main:focus { outline: none; }
         </div>
         <div class="svc-notes svc-notes--single">
           <section class="svc-note" id="prd-needs">
-            <h2 class="svc-note-title">What I'll need from you</h2>
+            <h3 class="svc-note-title">What I'll need from you</h3>
             <ul class="svc-note-list">
               <li>Existing job descriptions and any current review forms</li>
               <li>Time with managers and the people in the role for interviews</li>
@@ -2743,21 +3032,9 @@ h1:focus, #main:focus { outline: none; }
             </ul>
           </section>
         </div>
-        <p class="svc-byline" id="prd-who"><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes exam development, psychometric analysis, and competency modeling. <a href="/about/" data-page="about">More about me</a></p>
+        <p class="svc-byline" id="prd-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes exam development, psychometric analysis, and competency modeling. <a href="/about/" data-page="about">More about me</a></span></p>
+        </section>
       </div>
-
-      <aside class="service-includes-box" aria-labelledby="inc-prd">
-        <h2 class="includes-title" id="inc-prd">What's Included</h2>
-        <ul class="includes-list">
-          <li>Consultation on the role(s), current review process, and performance challenges</li>
-          <li>Review of existing job descriptions and appraisal materials</li>
-          <li>Structured interviews with managers and the people in the role on what strong, solid, and developing performance actually looks like</li>
-          <li>Custom performance standards with clear, observable behavioral examples at each level</li>
-          <li>Review form tailored to your role and organization</li>
-          <li>Rater guide for consistent, fair evaluation and performance conversations</li>
-        </ul>
-        <p class="addon-note"><strong>Add-on available:</strong> A manager calibration session (60 to 90 minutes), where managers practice applying the standards together and compare their ratings.</p>
-      </aside>
     </div>
     <div class="research-refs">
       <h2 class="research-refs-title">Research sources</h2>
@@ -3392,28 +3669,6 @@ h1:focus, #main:focus { outline: none; }
       new IntersectionObserver(function (entries) { onScreen = entries[0].isIntersecting; sync(); }).observe(hv);
     }
     sync();
-  })();
-
-  /* ---------- Service pages: pin "What's Included" only when the whole box fits the window ---------- */
-  (function () {
-    var timer = null;
-    function fit() {
-      var boxes = document.querySelectorAll('.service-includes-box');
-      var navH = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 70;
-      var room = window.innerHeight - navH - 62 - 16;
-      for (var i = 0; i < boxes.length; i++) {
-        var b = boxes[i];
-        b.classList.remove('inc-static');
-        if (b.offsetParent === null || window.innerWidth <= 900) continue;
-        if (b.scrollHeight > room) b.classList.add('inc-static');
-      }
-    }
-    function later() { window.clearTimeout(timer); timer = window.setTimeout(fit, 120); }
-    window.addEventListener('resize', later);
-    document.addEventListener('pageShown', later);
-    window.addEventListener('load', later);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(later);
-    later();
   })();
 
   /* ---------- Hero network animation (decorative) ---------- */
