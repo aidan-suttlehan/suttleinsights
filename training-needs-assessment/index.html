@@ -360,21 +360,6 @@ h1:focus, #main:focus { outline: none; }
   }
 }
 
-/* "Start with what you're noticing": a problem-first way into the five services */
-.notice { margin-top: 52px; padding-top: 38px; border-top: 1px solid rgba(15, 32, 64, 0.22); }
-.notice-title { font-family: var(--serif); font-size: clamp(22px, 2.4vw, 28px); font-weight: 600; line-height: 1.25; color: var(--navy); margin-bottom: 6px; }
-.notice-sub { font-size: 16px; line-height: 1.6; color: var(--text-light); margin-bottom: 22px; }
-.notice-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px; list-style: none; }
-.notice-link {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px;
-  padding: 14px 18px; background: #fff; border: 1px solid rgba(15, 32, 64, 0.22); border-radius: 6px;
-  text-decoration: none; color: inherit; transition: border-color 0.2s, box-shadow 0.2s;
-}
-.notice-link:hover { border-color: rgba(37, 99, 168, 0.55); box-shadow: 0 6px 20px rgba(15, 32, 64, 0.08); }
-.notice-say { display: block; font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.4; color: var(--navy); }
-.notice-svc { display: block; margin-top: 4px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); }
-.notice-link svg { flex-shrink: 0; color: var(--blue-dark); transition: transform 0.2s; }
-.notice-link:hover svg { transform: translateX(3px); }
 
 .svc-help { margin-top: 28px; font-size: 16px; color: var(--text-light); }
 .svc-help a { color: var(--blue-dark); font-weight: 600; text-underline-offset: 3px; }
@@ -944,7 +929,6 @@ h1:focus, #main:focus { outline: none; }
   .step-title { align-self: end; margin: 0; }
   .step-desc { align-self: start; }
   .svc-notes { grid-template-columns: 1fr; }
-  .notice-list { grid-template-columns: 1fr; }
   .svc-stats-bar { grid-template-columns: 1fr 1fr; }
   .svc-stat-item + .svc-stat-item { padding-left: 0; border-left: 0; }
   .svc-stat-item { padding: 16px 16px 16px 0; }
@@ -1477,11 +1461,10 @@ h1:focus, #main:focus { outline: none; }
   .svc-notes--single .svc-note-list { grid-column: 2; grid-row: 1 / span 2; gap: 12px; }
 }
 .svc-byline {
-  display: flex; align-items: center; gap: 24px; max-width: none; margin-top: 28px; padding: 22px 28px;
+  display: block; max-width: none; margin-top: 28px; padding: 22px 28px;
   font-size: 15.5px; line-height: 1.7; background: #fff; border: 1px solid rgba(15, 32, 64, 0.14); border-left: 5px solid var(--accent); border-radius: 16px;
   box-shadow: 0 2px 4px rgba(15, 32, 64, 0.06), 0 18px 36px -22px rgba(15, 32, 64, 0.38);
 }
-.svc-byline-photo { flex: none; width: 84px; height: 84px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; box-shadow: 0 0 0 4px #fff, 0 0 0 6px rgba(200, 146, 42, 0.75); }
 .svc-byline > span { min-width: 0; max-width: 78ch; }
 
 /* ---------- Research sources: a quiet footer to the page ---------- */
@@ -1524,11 +1507,7 @@ h1:focus, #main:focus { outline: none; }
   .svc-band--samples .scope-note::before { left: 18px; top: 18px; width: 26px; height: 26px; }
   .tl-header { padding: 18px 22px; }
   .svc-note { padding: 24px 22px 22px; }
-  .svc-byline { align-items: flex-start; gap: 18px; padding: 20px 20px; font-size: 15px; }
-  .svc-byline-photo { width: 64px; height: 64px; }
-}
-@media (max-width: 480px) {
-  .svc-byline { flex-direction: column; }
+  .svc-byline { padding: 20px 20px; font-size: 15px; }
 }
 
 /* Contact: optional marker and privacy note */
@@ -1538,13 +1517,12 @@ h1:focus, #main:focus { outline: none; }
 .privacy-note p { font-size: 14px; line-height: 1.65; color: var(--text-light); }
 .privacy-note a { color: var(--blue-dark); font-weight: 600; text-underline-offset: 3px; }
 
-/* Phones: slimmer service cards, no "what you're noticing" list, call to action pinned as a bar */
+/* Phones: slimmer service cards, call to action pinned as a bar */
 @media (max-width: 600px) {
   .svc-card-desc { display: none; }
   .svc-card-q { margin-bottom: 16px; }
 }
 @media (max-width: 768px) {
-  .notice { display: none; }
   .svc-help { margin-top: 28px; }
   .trust-in { gap: 14px 16px; }
   .trust-photo { width: 64px; height: 64px; }
@@ -1559,11 +1537,145 @@ h1:focus, #main:focus { outline: none; }
   .site-footer { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px) * 0.4); }
 }
 .privacy-note p + p { margin-top: 10px; }
+/* ==========================================================================
+   Homepage (v210): raised cards, icon badges, stronger bands
+   ========================================================================== */
+.what-strip .section-label, .who-section .section-label, .research-band .section-label, .why-section .section-label, .process-section .section-label {
+  display: flex; align-items: center; gap: 12px;
+}
+.what-strip .section-label::before, .who-section .section-label::before, .research-band .section-label::before, .why-section .section-label::before, .process-section .section-label::before {
+  content: ''; flex: none; width: 30px; height: 2px; background: var(--accent);
+}
+
+/* ---------- Services ---------- */
+.what-strip { background: linear-gradient(180deg, #F7F3EA 0%, #F1EBDD 100%); }
+.svc-row { gap: 24px; }
+.svc-card {
+  border: 1px solid rgba(15, 32, 64, 0.08); border-top: 4px solid var(--navy); border-radius: 18px; padding: 38px 30px 26px;
+  box-shadow: 0 2px 4px rgba(15, 32, 64, 0.08), 0 20px 40px -22px rgba(15, 32, 64, 0.45);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.svc-card:hover { border-color: rgba(15, 32, 64, 0.08); border-top-color: var(--navy); box-shadow: 0 2px 4px rgba(15, 32, 64, 0.1), 0 28px 48px -22px rgba(15, 32, 64, 0.55); }
+.svc-card--featured { border-top: 4px solid var(--accent); padding-top: 38px; box-shadow: 0 0 0 2px rgba(200, 146, 42, 0.5), 0 2px 4px rgba(15, 32, 64, 0.08), 0 24px 44px -22px rgba(15, 32, 64, 0.5); }
+.svc-card--featured:hover { border-top-color: var(--accent); box-shadow: 0 0 0 2px rgba(200, 146, 42, 0.7), 0 2px 4px rgba(15, 32, 64, 0.1), 0 30px 50px -22px rgba(15, 32, 64, 0.55); }
+.svc-tab { left: 30px; color: var(--navy); background: var(--accent); }
+.svc-card-icon {
+  top: 28px; right: 24px; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 15px;
+  color: var(--accent-light); background: linear-gradient(145deg, var(--navy-mid) 0%, var(--navy) 100%); box-shadow: 0 0 0 5px rgba(200, 146, 42, 0.16);
+}
+.svc-card--featured .svc-card-icon { top: 28px; }
+.svc-card-icon svg { width: 28px; height: 28px; }
+.svc-card h3 { font-size: 22px; font-weight: 700; padding-right: 76px; }
+.svc-card-q { font-size: 16.5px; }
+.svc-card-foot { border-top-color: rgba(15, 32, 64, 0.14); }
+.svc-help {
+  margin-top: 34px; padding: 20px 26px; text-align: center; font-size: 17px; line-height: 1.6; color: var(--text-light);
+  background: rgba(255, 255, 255, 0.75); border: 1.5px dashed rgba(200, 146, 42, 0.7); border-radius: 16px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .svc-card:hover { transform: translateY(-4px); }
+}
+
+/* ---------- Who I work with ---------- */
+.who-section { background: #fff; }
+.who-cards { gap: 24px; }
+.who-card {
+  position: relative; padding: 32px 28px 28px; background: var(--cream); border: 1px solid rgba(15, 32, 64, 0.08); border-radius: 18px;
+  box-shadow: 0 2px 4px rgba(15, 32, 64, 0.07), 0 20px 40px -24px rgba(15, 32, 64, 0.42);
+}
+.who-card::before { content: ''; position: absolute; top: -1px; left: 28px; width: 40px; height: 4px; border-radius: 0 0 4px 4px; background: var(--accent); }
+.who-card-icon {
+  width: 54px; height: 54px; margin-bottom: 20px; border-radius: 15px;
+  color: var(--accent-light); background: linear-gradient(145deg, var(--navy-mid) 0%, var(--navy) 100%); box-shadow: 0 0 0 5px rgba(200, 146, 42, 0.16);
+}
+.who-card-icon svg { width: 26px; height: 26px; }
+.who-card h3 { font-size: 21px; font-weight: 700; margin-bottom: 10px; }
+.who-foot { max-width: none; display: grid; gap: 26px; margin-top: 34px; }
+.who-notfit {
+  position: relative; max-width: 900px; padding: 20px 26px 20px 70px; font-size: 16px; line-height: 1.7;
+  background: #FBF3E0; border-left: 5px solid var(--accent); border-radius: 14px;
+}
+.who-notfit::before {
+  content: ''; position: absolute; left: 24px; top: 20px; width: 28px; height: 28px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C8922A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.who-foot .who-closing {
+  max-width: 900px; margin-top: 0; padding: 4px 0 4px 28px; border-top: 0; border-left: 5px solid var(--accent);
+  font-style: normal; font-weight: 600; font-size: clamp(21px, 2.1vw, 27px); line-height: 1.4; color: var(--navy);
+}
+
+/* ---------- Research ---------- */
+.research-band { background: linear-gradient(180deg, #F7F3EA 0%, #F1EBDD 100%); border-top: 1px solid rgba(200, 146, 42, 0.22); border-bottom: 1px solid rgba(200, 146, 42, 0.22); }
+.research-feature--cols { margin: 0; padding: clamp(28px, 3.4vw, 44px) clamp(24px, 3.4vw, 44px) clamp(20px, 2.6vw, 28px); border-radius: 18px; box-shadow: 0 2px 4px rgba(15, 32, 64, 0.1), 0 28px 52px -26px rgba(15, 32, 64, 0.6); }
+.research-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding-bottom: 8px; }
+.research-cols .research-item { display: block; padding: 4px clamp(18px, 2.6vw, 38px) 14px; }
+.research-cols .research-item:first-child { padding-left: 0; }
+.research-cols .research-item:last-child { padding-right: 0; }
+.research-cols .research-item + .research-item { border-top: 0; border-left: 1px solid rgba(255, 255, 255, 0.18); }
+.research-cols .research-fig { display: block; margin-bottom: 18px; font-size: clamp(38px, 4.3vw, 56px); white-space: normal; }
+.research-cols .research-item-text { max-width: none; font-size: 16px; }
+.research-band .research-refs { max-width: none; margin-top: 26px; border-top-color: rgba(15, 32, 64, 0.2); }
+.research-band .research-refs [id] { scroll-margin-top: calc(var(--nav-h) + 24px); }
+
+/* ---------- Why a one-person practice ---------- */
+.why-grid { gap: clamp(18px, 2.4vw, 28px); }
+.why-item {
+  position: relative; overflow: hidden; padding: 34px 30px 30px; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 18px;
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+.why-item::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--accent); }
+.why-ic { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 20px; border-radius: 15px; color: var(--navy); background: var(--accent-light); }
+.why-item h3 { margin-bottom: 10px; font-size: 21px; font-weight: 700; }
+
+/* ---------- How it works ---------- */
+.process-section { background: #fff; }
+.process-steps { margin-top: 68px; column-gap: 16px; }
+.process-steps::before { display: none; }
+.process-step {
+  padding: 0 20px 28px; background: var(--cream); border: 1px solid rgba(15, 32, 64, 0.08); border-radius: 18px;
+  box-shadow: 0 2px 4px rgba(15, 32, 64, 0.07), 0 20px 40px -24px rgba(15, 32, 64, 0.42);
+}
+.step-num { width: 58px; height: 58px; margin: -29px auto 20px; font-size: 22px; box-shadow: 0 0 0 5px var(--cream), 0 0 0 7px rgba(200, 146, 42, 0.55); }
+.step-title { font-size: 17px; font-weight: 700; }
+.step-desc { font-size: 14.5px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .process-steps { grid-template-columns: 1fr; margin-top: 36px; row-gap: 14px; }
+  .process-step, .process-step:last-child {
+    display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; row-gap: 3px; align-items: start;
+    text-align: left; padding: 18px 20px 18px 18px; border: 1px solid rgba(15, 32, 64, 0.08);
+  }
+  .step-num { grid-row: 1 / 3; width: 44px; height: 44px; margin: 0; font-size: 18px; box-shadow: none; }
+  .step-title { align-self: end; margin: 0; }
+  .step-desc { align-self: start; }
+}
+@media (max-width: 900px) {
+  .research-cols { grid-template-columns: 1fr; }
+  .research-cols .research-item, .research-cols .research-item:first-child, .research-cols .research-item:last-child { padding: 20px 0 18px; }
+  .research-cols .research-item:first-child { padding-top: 4px; }
+  .research-cols .research-item + .research-item { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.18); }
+}
+@media (max-width: 600px) {
+  .svc-card { padding: 34px 22px 22px; }
+  .svc-card--featured { padding-top: 34px; }
+  .svc-tab, .svc-card--featured .svc-tab { left: 22px; }
+  .svc-card-icon, .svc-card--featured .svc-card-icon { top: 24px; right: 18px; width: 46px; height: 46px; border-radius: 13px; }
+  .svc-card-icon svg { width: 24px; height: 24px; }
+  .svc-card h3 { font-size: 20px; padding-right: 62px; }
+  .svc-help { padding: 16px 18px; font-size: 16px; }
+  .who-card { padding: 28px 22px 24px; }
+  .who-notfit { padding: 18px 20px 18px 62px; font-size: 15.5px; }
+  .who-notfit::before { left: 18px; top: 18px; width: 26px; height: 26px; }
+  .who-foot .who-closing { padding-left: 20px; border-left-width: 4px; }
+  .why-item { padding: 28px 24px 24px; }
+}
+
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main" data-scroll="main">Skip to main content</a>
-<svg class="svc-sprite" aria-hidden="true" focusable="false"><defs><symbol id="ic-agree" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></symbol><symbol id="ic-survey" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h.01M8 12h.01M8 16h.01M12 8h4M12 12h4M12 16h4"/></symbol><symbol id="ic-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol><symbol id="ic-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><rect x="5" y="11" width="3" height="9" rx=".5"/><rect x="10.5" y="5" width="3" height="15" rx=".5"/><rect x="16" y="14" width="3" height="6" rx=".5"/></symbol><symbol id="ic-deck" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8M7 12l3-3 3 2 4-4"/></symbol><symbol id="ic-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="ic-dash" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="10" width="8" height="11" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/></symbol><symbol id="ic-flag" viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></symbol><symbol id="ic-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.7 7.1L4 20l1-4.5A8 8 0 1 1 21 12z"/></symbol><symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M17.5 14a6.5 6.5 0 0 1 4 6"/></symbol><symbol id="ic-split" viewBox="0 0 24 24"><path d="M3 12h5l6-6h5"/><path d="m8 12 6 6h5"/><path d="m17 3 3 3-3 3M17 15l3 3-3 3"/></symbol><symbol id="ic-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol><symbol id="ic-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol><symbol id="ic-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol><symbol id="ic-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol><symbol id="ic-sliders" viewBox="0 0 24 24"><path d="M5 3v6M5 15v6M12 3v2M12 11v10M19 3v10M19 19v2"/><path d="M2.5 12h5M9.5 8h5M16.5 16h5"/></symbol><symbol id="ic-rank" viewBox="0 0 24 24"><path d="M3 21h18"/><rect x="9" y="8" width="6" height="13"/><rect x="3" y="13" width="6" height="8"/><rect x="15" y="16" width="6" height="5"/></symbol><symbol id="ic-book" viewBox="0 0 24 24"><path d="M3 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H3z"/><path d="M21 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></symbol><symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.9-4.9M8 10.5h5"/></symbol><symbol id="ic-transfer" viewBox="0 0 24 24"><path d="M4 5v14"/><path d="M4 12h14"/><path d="m13 6 6 6-6 6"/></symbol><symbol id="ic-levels" viewBox="0 0 24 24"><path d="M3 21h6v-6h6V9h6V3"/></symbol><symbol id="ic-form" viewBox="0 0 24 24"><path d="M8 8h8M8 12h8M8 16h3"/><path d="M5 3h14a1 1 0 0 1 1 1v6M5 3a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h8"/><path d="m14 20 5-5 2 2-5 5h-2z"/></symbol><symbol id="ic-scale" viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M5 7h14"/><path d="m5 7-3 7a3.5 3 0 0 0 6 0z"/><path d="m19 7-3 7a3.5 3 0 0 0 6 0z"/></symbol></defs></svg>
+<svg class="svc-sprite" aria-hidden="true" focusable="false"><defs><symbol id="ic-agree" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></symbol><symbol id="ic-survey" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h.01M8 12h.01M8 16h.01M12 8h4M12 12h4M12 16h4"/></symbol><symbol id="ic-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol><symbol id="ic-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><rect x="5" y="11" width="3" height="9" rx=".5"/><rect x="10.5" y="5" width="3" height="15" rx=".5"/><rect x="16" y="14" width="3" height="6" rx=".5"/></symbol><symbol id="ic-deck" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8M7 12l3-3 3 2 4-4"/></symbol><symbol id="ic-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="ic-dash" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="10" width="8" height="11" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/></symbol><symbol id="ic-flag" viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></symbol><symbol id="ic-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.7 7.1L4 20l1-4.5A8 8 0 1 1 21 12z"/></symbol><symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M17.5 14a6.5 6.5 0 0 1 4 6"/></symbol><symbol id="ic-split" viewBox="0 0 24 24"><path d="M3 12h5l6-6h5"/><path d="m8 12 6 6h5"/><path d="m17 3 3 3-3 3M17 15l3 3-3 3"/></symbol><symbol id="ic-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol><symbol id="ic-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol><symbol id="ic-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol><symbol id="ic-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol><symbol id="ic-sliders" viewBox="0 0 24 24"><path d="M5 3v6M5 15v6M12 3v2M12 11v10M19 3v10M19 19v2"/><path d="M2.5 12h5M9.5 8h5M16.5 16h5"/></symbol><symbol id="ic-rank" viewBox="0 0 24 24"><path d="M3 21h18"/><rect x="9" y="8" width="6" height="13"/><rect x="3" y="13" width="6" height="8"/><rect x="15" y="16" width="6" height="5"/></symbol><symbol id="ic-book" viewBox="0 0 24 24"><path d="M3 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H3z"/><path d="M21 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></symbol><symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.9-4.9M8 10.5h5"/></symbol><symbol id="ic-transfer" viewBox="0 0 24 24"><path d="M4 5v14"/><path d="M4 12h14"/><path d="m13 6 6 6-6 6"/></symbol><symbol id="ic-levels" viewBox="0 0 24 24"><path d="M3 21h6v-6h6V9h6V3"/></symbol><symbol id="ic-form" viewBox="0 0 24 24"><path d="M8 8h8M8 12h8M8 16h3"/><path d="M5 3h14a1 1 0 0 1 1 1v6M5 3a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h8"/><path d="m14 20 5-5 2 2-5 5h-2z"/></symbol><symbol id="ic-scale" viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M5 7h14"/><path d="m5 7-3 7a3.5 3 0 0 0 6 0z"/><path d="m19 7-3 7a3.5 3 0 0 0 6 0z"/></symbol><symbol id="ic-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="ic-tag" viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></symbol><symbol id="ic-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol></defs></svg>
 
 <header>
 <nav class="site-nav" aria-label="Main">
@@ -1675,6 +1787,7 @@ h1:focus, #main:focus { outline: none; }
   </section>
 
   <section class="what-strip" id="services" aria-labelledby="services-title">
+    <div class="section-label">Engagements</div>
     <h2 class="section-title" id="services-title">Clear answers to the questions every organization has about its people</h2>
     <p class="section-body">You don't need a full-time HR analytics department or a large consulting firm to understand your people. You need the right questions, the right analysis, and a report you can actually use.</p>
 
@@ -1721,19 +1834,6 @@ h1:focus, #main:focus { outline: none; }
       </div>
     </div>
 
-    <div class="notice">
-      <h3 class="notice-title">Start with what you're noticing</h3>
-      <p class="notice-sub">Choose the line that sounds most like your situation.</p>
-      <ul class="notice-list">
-        <li><a class="notice-link" href="/employee-listening-survey-and-action-plan/" data-page="svc-listening"><span><span class="notice-say">&ldquo;We don't know how our people are feeling.&rdquo;</span><span class="notice-svc">Employee Listening Survey</span></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
-        <li><a class="notice-link" href="/employee-listening-survey-and-action-plan/" data-page="svc-listening"><span><span class="notice-say">&ldquo;People are leaving, or morale and culture seem off.&rdquo;</span><span class="notice-svc">Employee Listening Survey</span></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
-        <li><a class="notice-link" href="/team-health-diagnostic/" data-page="svc-team"><span><span class="notice-say">&ldquo;This team isn't working well together.&rdquo;</span><span class="notice-svc">Team Health Diagnostic</span></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
-        <li><a class="notice-link" href="/change-readiness-pulse-and-roadmap/" data-page="svc-diagnostic"><span><span class="notice-say">&ldquo;We're rolling out something new.&rdquo;</span><span class="notice-svc">Change Readiness Pulse &amp; Roadmap</span></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
-        <li><a class="notice-link" href="/training-needs-assessment/" data-page="svc-tna"><span><span class="notice-say">&ldquo;We want to build training.&rdquo;</span><span class="notice-svc">Training Needs Assessment</span></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
-        <li><a class="notice-link" href="/performance-standards-and-review-toolkit/" data-page="svc-prd"><span><span class="notice-say">&ldquo;Managers review people inconsistently.&rdquo;</span><span class="notice-svc">Performance Standards &amp; Review Toolkit</span></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></li>
-      </ul>
-    </div>
-
     <p class="svc-help">Not sure which one fits? <a href="/contact/" data-page="contact">Request a free discovery call</a> and we'll work it out together.</p>
   </section>
 
@@ -1771,24 +1871,31 @@ h1:focus, #main:focus { outline: none; }
   <section class="research-band" aria-labelledby="research-title">
     <div class="section-label">Why It Matters</div>
     <h2 class="section-title" id="research-title">What the research says</h2>
-    <ul class="research-grid">
-      <li class="research-stat">
-        <p class="research-num">Half to 2x</p>
-        <p class="research-text">their annual salary is what it can cost to replace one employee, so keeping good people is worth real money.</p>
-        <p class="research-src">Source: <a href="https://www.gallup.com/workplace/247391/fixable-problem-costs-businesses-trillion.aspx" target="_blank" rel="noopener noreferrer">Gallup<span class="sr-only"> (opens in a new tab)</span></a></p>
-      </li>
-      <li class="research-stat">
-        <p class="research-num">23%</p>
-        <p class="research-text">higher profitability, and 78% lower absenteeism, in business units in the top quarter for engagement than in the bottom quarter.</p>
-        <p class="research-src">Source: <a href="https://www.gallup.com/workplace/321725/gallup-q12-meta-analysis.aspx" target="_blank" rel="noopener noreferrer">Gallup Q12 meta-analysis of nearly 184,000 business units<span class="sr-only"> (opens in a new tab)</span></a></p>
-      </li>
-      <li class="research-stat">
-        <p class="research-num">29%</p>
-        <p class="research-text">of U.S. employees were engaged at work in the third quarter of 2026, so there is plenty of room to stand out.</p>
-        <p class="research-src">Source: <a href="https://www.gallup.com/workplace/716117/employee-engagement-below-30-first-time-years.aspx" target="_blank" rel="noopener noreferrer">Gallup, Q3 2026<span class="sr-only"> (opens in a new tab)</span></a></p>
-      </li>
-    </ul>
-    <p class="research-caption">Published research findings, not client results.</p>
+    <div class="research-feature research-feature--cols" role="note" aria-label="What the research says">
+      <div class="research-cols">
+        <div class="research-item">
+          <p class="research-fig">Half to 2x</p>
+          <p class="research-item-text">their annual salary is what it can cost to replace one employee, so keeping good people is worth real money.<sup class="research-fn"><a href="#ref-home-1" data-scroll="ref-home-1" aria-label="Source 1">1</a></sup></p>
+        </div>
+        <div class="research-item">
+          <p class="research-fig">23%</p>
+          <p class="research-item-text">higher profitability, and 78% lower absenteeism, in business units in the top quarter for engagement than in the bottom quarter.<sup class="research-fn"><a href="#ref-home-2" data-scroll="ref-home-2" aria-label="Source 2">2</a></sup></p>
+        </div>
+        <div class="research-item">
+          <p class="research-fig">29%</p>
+          <p class="research-item-text">of U.S. employees were engaged at work in the third quarter of 2026, so there is plenty of room to stand out.<sup class="research-fn"><a href="#ref-home-3" data-scroll="ref-home-3" aria-label="Source 3">3</a></sup></p>
+        </div>
+      </div>
+      <p class="research-feature-caption">Published research findings, not client results.</p>
+    </div>
+    <div class="research-refs">
+      <h2 class="research-refs-title">Research sources</h2>
+      <ol class="research-refs-list">
+        <li id="ref-home-1"><a href="https://www.gallup.com/workplace/247391/fixable-problem-costs-businesses-trillion.aspx" target="_blank" rel="noopener noreferrer">Gallup, estimated cost of employee turnover<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li id="ref-home-2"><a href="https://www.gallup.com/workplace/321725/gallup-q12-meta-analysis.aspx" target="_blank" rel="noopener noreferrer">Gallup Q12 meta-analysis of nearly 184,000 business units<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li id="ref-home-3"><a href="https://www.gallup.com/workplace/716117/employee-engagement-below-30-first-time-years.aspx" target="_blank" rel="noopener noreferrer">Gallup, U.S. employee engagement, third quarter of 2026<span class="sr-only"> (opens in a new tab)</span></a></li>
+      </ol>
+    </div>
   </section>
 
   <section class="why-section" aria-labelledby="why-title">
@@ -1796,14 +1903,17 @@ h1:focus, #main:focus { outline: none; }
     <h2 class="section-title" id="why-title">Why a one-person practice works in your favor</h2>
     <div class="why-grid">
       <div class="why-item">
+        <span class="why-ic" aria-hidden="true"><svg class="svc-ic"><use href="#ic-person"/></svg></span>
         <h3>You work with me directly</h3>
         <p>The person on your discovery call is the person who does the work. I design, run, and present every engagement myself, with no handoff to a junior team.</p>
       </div>
       <div class="why-item">
+        <span class="why-ic" aria-hidden="true"><svg class="svc-ic"><use href="#ic-tag"/></svg></span>
         <h3>Fixed fee, defined scope</h3>
         <p>Scope, timeline, and fee are agreed in writing before work starts, and any change to scope is agreed in writing first. No surprise hourly invoices.</p>
       </div>
       <div class="why-item">
+        <span class="why-ic" aria-hidden="true"><svg class="svc-ic"><use href="#ic-lock"/></svg></span>
         <h3>Confidential by design</h3>
         <p>Responses are reported only in aggregate, and identifiable employee data never goes into third-party AI tools.</p>
       </div>
@@ -2115,7 +2225,7 @@ h1:focus, #main:focus { outline: none; }
             <p>Responses are confidential and reported only in aggregate. I never share individual responses with leadership, I paraphrase comments that could identify someone, and groups too small to protect confidentiality are not reported separately. Identifiable employee data never goes into third-party AI tools, and any AI use is disclosed in your proposal.</p>
           </section>
         </div>
-        <p class="svc-byline" id="listening-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></span></p>
+        <p class="svc-byline" id="listening-who"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></span></p>
         </section>
       </div>
     </div>
@@ -2362,7 +2472,7 @@ h1:focus, #main:focus { outline: none; }
             <p>Responses are confidential and reported only in aggregate. I never share individual responses with leadership, I paraphrase comments that could identify someone, and groups too small to protect confidentiality are not reported separately. Identifiable employee data never goes into third-party AI tools, and any AI use is disclosed in your proposal.</p>
           </section>
         </div>
-        <p class="svc-byline" id="team-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></span></p>
+        <p class="svc-byline" id="team-who"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, survey analysis, and organizational culture analytics. <a href="/about/" data-page="about">More about me</a></span></p>
         </section>
       </div>
     </div>
@@ -2598,7 +2708,7 @@ h1:focus, #main:focus { outline: none; }
             <p>Responses are confidential and reported only in aggregate. I never share individual responses with leadership, I paraphrase comments that could identify someone, and groups too small to protect confidentiality are not reported separately. Identifiable employee data never goes into third-party AI tools, and any AI use is disclosed in your proposal.</p>
           </section>
         </div>
-        <p class="svc-byline" id="diagnostic-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, organizational culture analytics, and executive reporting. <a href="/about/" data-page="about">More about me</a></span></p>
+        <p class="svc-byline" id="diagnostic-who"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes employee listening, organizational culture analytics, and executive reporting. <a href="/about/" data-page="about">More about me</a></span></p>
         </section>
       </div>
     </div>
@@ -2857,7 +2967,7 @@ h1:focus, #main:focus { outline: none; }
             </ul>
           </section>
         </div>
-        <p class="svc-byline" id="tna-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, competency modeling, and training and leadership development. <a href="/about/" data-page="about">More about me</a></span></p>
+        <p class="svc-byline" id="tna-who"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes workforce assessment, competency modeling, and training and leadership development. <a href="/about/" data-page="about">More about me</a></span></p>
         </section>
       </div>
     </div>
@@ -3032,7 +3142,7 @@ h1:focus, #main:focus { outline: none; }
             </ul>
           </section>
         </div>
-        <p class="svc-byline" id="prd-who"><img class="svc-byline-photo" src="/aidan-suttlehan.jpg" alt="" width="84" height="84" loading="lazy" decoding="async"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes exam development, psychometric analysis, and competency modeling. <a href="/about/" data-page="about">More about me</a></span></p>
+        <p class="svc-byline" id="prd-who"><span><strong>Who does the work.</strong> I design and lead every engagement myself. I hold an M.A. in Industrial-Organizational Psychology, and my background includes exam development, psychometric analysis, and competency modeling. <a href="/about/" data-page="about">More about me</a></span></p>
         </section>
       </div>
     </div>
