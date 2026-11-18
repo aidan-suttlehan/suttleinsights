@@ -1260,6 +1260,28 @@ h1:focus, #main:focus { outline: none; }
 .why-item h3 { font-family: var(--serif); font-size: 19px; font-weight: 600; line-height: 1.3; color: #fff; margin-bottom: 8px; }
 .why-item p { font-size: 15.5px; line-height: 1.7; color: rgba(255, 255, 255, 0.88); }
 
+/* Research notes (v206): published findings from other sources, kept apart from the illustrative sample charts */
+.research-band { background: var(--warm-white); color: var(--text); padding: var(--section-y) var(--pad-x); border-top: 1px solid rgba(15, 32, 64, 0.1); }
+.research-band .section-label { color: var(--accent-ink); }
+.research-band .section-title { max-width: 820px; margin-bottom: 32px; }
+.research-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding: 0; margin: 0; }
+.research-stat { display: flex; flex-direction: column; background: #fff; border: 1px solid rgba(15, 32, 64, 0.22); border-radius: 8px; padding: 26px 24px 22px; }
+.research-num { font-family: var(--serif); font-weight: 700; font-size: clamp(34px, 3.6vw, 48px); line-height: 1.1; color: var(--navy); margin-bottom: 14px; }
+.research-num::after { content: ''; display: block; width: 36px; height: 2px; margin-top: 12px; background: var(--accent); }
+.research-text { font-size: 15.5px; line-height: 1.65; color: var(--text-light); }
+.research-src { margin-top: auto; padding-top: 14px; font-size: 13px; line-height: 1.5; color: var(--text-muted); }
+.research-src a, .research-note-src a { color: var(--blue-dark); font-weight: 600; text-underline-offset: 3px; }
+.research-src a:hover, .research-note-src a:hover { color: var(--navy); }
+.research-caption { margin-top: 20px; font-size: 13px; line-height: 1.5; color: var(--text-muted); }
+.research-note { display: grid; grid-template-columns: 3px minmax(0, 1fr); max-width: 68ch; margin: 4px 0 28px; background: rgba(200, 146, 42, 0.07); border: 1px solid rgba(200, 146, 42, 0.3); border-radius: 8px; overflow: hidden; }
+.research-note-bar { background: var(--accent); }
+.research-note-body { padding: 16px 22px; }
+.research-note-kicker { font-size: 11.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 8px; }
+.research-note-text { font-size: 15.5px; line-height: 1.7; color: var(--text-light); }
+.research-note-src { margin-top: 6px; font-size: 13px; line-height: 1.5; color: var(--text-muted); }
+.research-note-src + .research-note-text { margin-top: 14px; }
+@media (max-width: 900px) { .research-grid { grid-template-columns: 1fr; } }
+
 /* How It Works moves to a light band so the dark bands around it stay distinct */
 .process-section { background: var(--warm-white); color: var(--text); border-top: 1px solid rgba(15, 32, 64, 0.1); }
 .process-section .section-label { color: var(--accent-ink); }
@@ -1615,6 +1637,29 @@ h1:focus, #main:focus { outline: none; }
     </div>
   </section>
 
+  <section class="research-band" aria-labelledby="research-title">
+    <div class="section-label">Why It Matters</div>
+    <h2 class="section-title" id="research-title">What the research says</h2>
+    <ul class="research-grid">
+      <li class="research-stat">
+        <p class="research-num">Half to 2x</p>
+        <p class="research-text">their annual salary is what it can cost to replace one employee, so keeping good people is worth real money.</p>
+        <p class="research-src">Source: <a href="https://www.gallup.com/workplace/247391/fixable-problem-costs-businesses-trillion.aspx" target="_blank" rel="noopener noreferrer">Gallup<span class="sr-only"> (opens in a new tab)</span></a></p>
+      </li>
+      <li class="research-stat">
+        <p class="research-num">23%</p>
+        <p class="research-text">higher profitability, and 78% lower absenteeism, in business units in the top quarter for engagement than in the bottom quarter.</p>
+        <p class="research-src">Source: <a href="https://www.gallup.com/workplace/321725/gallup-q12-meta-analysis.aspx" target="_blank" rel="noopener noreferrer">Gallup Q12 meta-analysis of nearly 184,000 business units<span class="sr-only"> (opens in a new tab)</span></a></p>
+      </li>
+      <li class="research-stat">
+        <p class="research-num">29%</p>
+        <p class="research-text">of U.S. employees were engaged at work in the third quarter of 2026, so there is plenty of room to stand out.</p>
+        <p class="research-src">Source: <a href="https://www.gallup.com/workplace/716117/employee-engagement-below-30-first-time-years.aspx" target="_blank" rel="noopener noreferrer">Gallup, Q3 2026<span class="sr-only"> (opens in a new tab)</span></a></p>
+      </li>
+    </ul>
+    <p class="research-caption">Published research findings, not client results.</p>
+  </section>
+
   <section class="why-section" aria-labelledby="why-title">
     <div class="section-label">The Practice</div>
     <h2 class="section-title" id="why-title">Why a one-person practice works in your favor</h2>
@@ -1721,6 +1766,17 @@ h1:focus, #main:focus { outline: none; }
         </div>
 
         <p class="service-description">The report matters, but <span class="hl">what your organization does with it matters more</span>, so every engagement closes with a live debrief and action planning.</p>
+
+        <div class="research-note" role="note" aria-label="What the research says">
+          <div class="research-note-bar" aria-hidden="true"></div>
+          <div class="research-note-body">
+            <p class="research-note-kicker">What the research says</p>
+            <p class="research-note-text">Gallup estimates that a 100-person organization with average pay of $50,000 can face roughly $660,000 to $2.6 million a year in turnover and replacement costs. Knowing what keeps people, and what makes them consider leaving, is where it starts.</p>
+            <p class="research-note-src">Source: <a href="https://www.gallup.com/workplace/247391/fixable-problem-costs-businesses-trillion.aspx" target="_blank" rel="noopener noreferrer">Gallup<span class="sr-only"> (opens in a new tab)</span></a></p>
+            <p class="research-note-text">Surveys pay off when someone acts on the results, and a 2021 review of the research found the follow-up step is often neglected. That is why the action plan is built into the report.</p>
+            <p class="research-note-src">Source: <a href="https://doi.org/10.3389/fpsyg.2021.801073" target="_blank" rel="noopener noreferrer">Huebner and Zacher, 2021, Frontiers in Psychology<span class="sr-only"> (opens in a new tab)</span></a></p>
+          </div>
+        </div>
 
         <figure class="chart-card" id="chart-listening">
           <div class="chart-head">
@@ -1966,6 +2022,15 @@ h1:focus, #main:focus { outline: none; }
         <p class="service-description">What makes this diagnostic different is the <span class="hl">perception gap analysis</span>. Averages hide the real story: when one team member rates trust a 5 and another a 2, the average of 3.5 tells you almost nothing. This assessment maps <span class="hl">where team members see things differently</span>, which is often the <span class="hl">most useful signal</span> you'll get.</p>
         <p class="service-description">Each team member also rates the team's core tasks on how important they are and how much they depend on other people, which shows where everyone agrees on what matters and where people see the work differently.</p>
 
+        <div class="research-note" role="note" aria-label="What the research says">
+          <div class="research-note-bar" aria-hidden="true"></div>
+          <div class="research-note-body">
+            <p class="research-note-kicker">What the research says</p>
+            <p class="research-note-text">According to Gallup, at least 70% of the difference in employee engagement scores comes down to the manager. That makes the team the most useful place to look.</p>
+            <p class="research-note-src">Source: <a href="https://www.gallup.com/workplace/236570/employees-need-clear-expectations.aspx" target="_blank" rel="noopener noreferrer">Gallup<span class="sr-only"> (opens in a new tab)</span></a></p>
+          </div>
+        </div>
+
         <figure class="chart-card" id="chart-team-tasks">
           <div class="chart-head">
             <p class="chart-kicker">A sample of what you'd see</p>
@@ -2171,6 +2236,15 @@ h1:focus, #main:focus { outline: none; }
         <p class="service-description">The Change Readiness Pulse &amp; Roadmap is a <span class="hl">structured diagnostic for all three</span>. It's also the right choice when you want a deeper, more targeted look at employee sentiment and engagement around a specific initiative or challenge, beyond what a general listening survey covers.</p>
         <p class="service-description">It combines two focus groups with a survey built around five factors: whether the change makes sense to people, management support, confidence to succeed, communication clarity, and what is getting in the way, such as tools, process, or workload. Together they show where your organization stands and which steps will move things forward.</p>
         <p class="service-description">The deliverable is a report that <span class="hl">explains what's driving the results</span>, with prioritized findings and recommendations <span class="hl">specific to your organization</span>, built from <span class="hl">what your people actually told me</span>, not a generic template.</p>
+
+        <div class="research-note" role="note" aria-label="What the research says">
+          <div class="research-note-bar" aria-hidden="true"></div>
+          <div class="research-note-body">
+            <p class="research-note-kicker">What the research says</p>
+            <p class="research-note-text">Prosci's research with change practitioners found that projects with excellent change management were about seven times more likely to meet their objectives than those with poor change management. Knowing how ready people are lets you plan for the people side of the change before launch.</p>
+            <p class="research-note-src">Source: <a href="https://prosci.com/blog/why-change-management" target="_blank" rel="noopener noreferrer">Prosci, Best Practices in Change Management, 12th edition<span class="sr-only"> (opens in a new tab)</span></a></p>
+          </div>
+        </div>
 
         <figure class="chart-card" id="chart-change">
           <div class="chart-head">
@@ -2605,6 +2679,15 @@ h1:focus, #main:focus { outline: none; }
         </div>
 
         <p class="service-description">The work starts with conversations with the managers who evaluate the role and the people who do it. Their real examples of what strong, solid, and developing performance looks like become the foundation, rather than generic competency frameworks. The depth scales to the need: a practical role scorecard when you need clear standards quickly, or a more thoroughly tested review tool when the role is more complex or the stakes are higher.</p>
+
+        <div class="research-note" role="note" aria-label="What the research says">
+          <div class="research-note-bar" aria-hidden="true"></div>
+          <div class="research-note-body">
+            <p class="research-note-kicker">What the research says</p>
+            <p class="research-note-text">In the third quarter of 2026, only 46% of U.S. employees strongly agreed that they know what is expected of them at work. Gallup describes clear expectations as among the most basic things employees need to perform.</p>
+            <p class="research-note-src">Source: <a href="https://www.gallup.com/workplace/716117/employee-engagement-below-30-first-time-years.aspx" target="_blank" rel="noopener noreferrer">Gallup, Q3 2026<span class="sr-only"> (opens in a new tab)</span></a></p>
+          </div>
+        </div>
 
         <figure class="chart-card" id="chart-prd">
           <div class="chart-head">
