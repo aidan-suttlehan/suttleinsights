@@ -762,11 +762,11 @@ h1:focus, #main:focus { outline: none; }
 
 /* 6. Home service cards: one quiet footer per card (what you receive, as the same icons the service page uses, and an arrow) */
 .svc-card-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px 14px; padding-top: 16px; border-top: 1px solid rgba(15, 32, 64, 0.18); }
-.svc-recv { grid-column: 1 / -1; display: flex; gap: 10px; }
-.svc-recv-item { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
-.svc-recv-ico { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; color: var(--navy); background: linear-gradient(145deg, var(--accent-light) 0%, var(--accent) 100%); box-shadow: 0 0 0 3px rgba(200, 146, 42, 0.2); }
-.svc-recv-ico .svc-ic { width: 20px; height: 20px; }
-.svc-recv-name { font-size: 12.5px; font-weight: 600; line-height: 1.3; color: var(--navy); }
+.svc-recv { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 9px 18px; }
+.svc-recv-item { min-width: 0; display: flex; align-items: flex-start; gap: 8px; }
+.svc-recv-ico { display: flex; flex: none; margin-top: 1px; color: var(--accent-ink); }
+.svc-recv-ico .svc-ic { width: 19px; height: 19px; stroke-width: 1.8; }
+.svc-recv-name { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--navy); }
 .svc-card-out-k { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); }
 .svc-card-go {
   flex: none; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;
