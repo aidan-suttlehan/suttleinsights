@@ -1679,7 +1679,7 @@ h1:focus, #main:focus { outline: none; }
 .step-desc { font-size: 14.5px; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   .process-steps { grid-template-columns: 1fr; margin-top: 36px; row-gap: 14px; }
   .process-step, .process-step:last-child {
     display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; row-gap: 3px; align-items: start;
@@ -1710,6 +1710,27 @@ h1:focus, #main:focus { outline: none; }
   .why-item { padding: 28px 24px 24px; }
 }
 
+/* v224: Home sample band (small screens), FAQ, service-page question line, About name line */
+.home-sample { display: none; }
+@media (max-width: 1099px) { .home-sample { display: block; } }
+.home-sample .svc-sec-head { margin-bottom: 26px; }
+.home-sample-more { margin: 0; font-size: 16px; }
+.home-sample-more a { color: var(--blue-dark); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.faq-section { background: var(--cream); padding: var(--section-y) var(--pad-x); display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.faq-head .section-title { margin-bottom: 14px; }
+.faq-head p { font-size: 17px; line-height: 1.7; color: var(--text-light); max-width: 34ch; }
+.faq-list { display: grid; gap: 12px; }
+.faq-item { background: #fff; border: 1px solid rgba(15, 32, 64, 0.12); border-radius: 14px; box-shadow: 0 2px 4px rgba(15, 32, 64, 0.05); }
+.faq-item[open] { border-color: rgba(200, 146, 42, 0.55); box-shadow: 0 2px 4px rgba(15, 32, 64, 0.06), 0 18px 36px -24px rgba(15, 32, 64, 0.4); }
+.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 22px; cursor: pointer; list-style: none; font-family: var(--serif); font-size: 19px; font-weight: 600; line-height: 1.35; color: var(--navy); border-radius: 14px; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; flex: none; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(200, 146, 42, 0.18); color: var(--accent-ink); font-family: var(--sans); font-size: 20px; font-weight: 600; line-height: 1; }
+.faq-item[open] summary::after { content: '\2212'; background: var(--accent); color: var(--navy); }
+.faq-item summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.faq-item p { padding: 0 22px 20px; font-size: 16.5px; line-height: 1.7; color: var(--text-light); max-width: 68ch; }
+@media (max-width: 900px) { .faq-section { grid-template-columns: 1fr; } .faq-item summary { padding: 16px 18px; font-size: 18px; } .faq-item p { padding: 0 18px 18px; font-size: 16px; } }
+.page-hero .page-hero-q { font-family: var(--serif); font-style: italic; font-size: clamp(19px, 1.9vw, 23px); line-height: 1.45; color: var(--accent-light); max-width: 32em; margin: 0 0 18px; }
+.about-body .about-name-note { margin-top: 26px; padding-left: 20px; border-left: 4px solid var(--accent); font-family: var(--serif); font-style: italic; font-size: clamp(19px, 1.8vw, 22px); line-height: 1.55; color: var(--navy); }
 </style>
 </head>
 <body>
@@ -1870,9 +1891,82 @@ h1:focus, #main:focus { outline: none; }
     <p class="svc-help">Not sure which one fits? <a href="/contact/" data-page="contact">Request a free discovery call</a> and we'll work it out together.</p>
   </section>
 
+  <section class="svc-band svc-band--samples home-sample" aria-labelledby="home-sample-title">
+    <div class="svc-sec-head">
+      <h2 class="svc-sec-title" id="home-sample-title">A sample of what you'll see in your reports</h2>
+      <p class="svc-sec-sub">Illustrative samples of the kinds of views included. Yours are built from your own results.</p>
+    </div>
+    <figure class="chart-card" id="chart-home-sample">
+          <div class="chart-head">
+            <h3 class="chart-title">Results by index</h3>
+            <p class="chart-sub">Share of responses in each band, most favorable first, with a benchmark where one applies</p>
+          </div>
+          <div class="chart-plot sb sb--compact" role="img" aria-label="Favorable responses range from 76 percent for Manager Relationship to 38 percent for Recognition. Manager Relationship sits three points above its benchmark of 73 percent.">
+            <ul class="chart-key sb-key">
+              <li><span class="key-sw sb-seg--1"></span>Favorable</li>
+              <li><span class="key-sw sb-seg--2"></span>Neutral</li>
+              <li><span class="key-sw sb-seg--3"></span>Unfavorable</li>
+              <li><span class="key-tick"></span>Benchmark (percent favorable)</li>
+            </ul>
+            <div class="sb-row">
+              <p class="sb-name"><span>Manager Relationship</span><span class="sb-bmv">Benchmark 73%</span></p>
+              <div class="sb-track">
+                <div class="sb-bar" style="grid-template-columns:76fr 15fr 9fr">
+                  <span class="sb-seg sb-seg--1">76%</span><span class="sb-seg sb-seg--2">15%</span><span class="sb-seg sb-seg--3">9%</span>
+                </div>
+                <span class="sb-bm" style="left:73%" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="sb-row">
+              <p class="sb-name"><span>Role Clarity</span></p>
+              <div class="sb-track">
+                <div class="sb-bar" style="grid-template-columns:68fr 21fr 11fr">
+                  <span class="sb-seg sb-seg--1">68%</span><span class="sb-seg sb-seg--2">21%</span><span class="sb-seg sb-seg--3">11%</span>
+                </div>
+              </div>
+            </div>
+            <div class="sb-row">
+              <p class="sb-name"><span>Employee Engagement</span></p>
+              <div class="sb-track">
+                <div class="sb-bar" style="grid-template-columns:64fr 24fr 12fr">
+                  <span class="sb-seg sb-seg--1">64%</span><span class="sb-seg sb-seg--2">24%</span><span class="sb-seg sb-seg--3">12%</span>
+                </div>
+              </div>
+            </div>
+            <div class="sb-row">
+              <p class="sb-name"><span>Perception of Voice</span></p>
+              <div class="sb-track">
+                <div class="sb-bar" style="grid-template-columns:51fr 27fr 22fr">
+                  <span class="sb-seg sb-seg--1">51%</span><span class="sb-seg sb-seg--2">27%</span><span class="sb-seg sb-seg--3">22%</span>
+                </div>
+              </div>
+            </div>
+            <div class="sb-row">
+              <p class="sb-name"><span>Communication</span></p>
+              <div class="sb-track">
+                <div class="sb-bar" style="grid-template-columns:46fr 28fr 26fr">
+                  <span class="sb-seg sb-seg--1">46%</span><span class="sb-seg sb-seg--2">28%</span><span class="sb-seg sb-seg--3">26%</span>
+                </div>
+              </div>
+            </div>
+            <div class="sb-row">
+              <p class="sb-name"><span>Recognition</span></p>
+              <div class="sb-track">
+                <div class="sb-bar" style="grid-template-columns:38fr 30fr 32fr">
+                  <span class="sb-seg sb-seg--1">38%</span><span class="sb-seg sb-seg--2">30%</span><span class="sb-seg sb-seg--3">32%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="chart-takeaway">Manager Relationship is the strongest index and sits a few points above its benchmark. Recognition is the lowest, with about a third of responses unfavorable.</p>
+          <figcaption class="chart-caption">Illustrative sample data, not client results. A benchmark line appears only on questions worded to match a published national survey. Your report states how many people responded.</figcaption>
+        </figure>
+    <p class="home-sample-more"><a href="/employee-listening-survey-and-action-plan/" data-page="svc-listening">See more samples on the Employee Listening page</a></p>
+  </section>
+
   <section class="who-section" aria-labelledby="who-title">
     <div class="who-head">
-      <h2 class="section-title" id="who-title">The same quality of insight, without the enterprise price tag</h2>
+      <h2 class="section-title" id="who-title">Three situations where an outside view helps</h2>
       <p class="section-body">I work with organizations of all sizes and sectors, from nonprofits and federal agencies to convenience stores, that have real workforce complexity but no internal analytics function to make sense of it.</p>
     </div>
 
@@ -1981,6 +2075,21 @@ h1:focus, #main:focus { outline: none; }
     </ol>
   </section>
 
+  <section class="faq-section" aria-labelledby="faq-title">
+    <div class="faq-head">
+      <h2 class="section-title" id="faq-title">Common questions</h2>
+      <p>Short answers to what people usually ask before the first call.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open><summary>How much does an engagement cost?</summary><p>Every engagement is a fixed fee, agreed in writing before work starts, with no surprise hourly invoices. The fee depends on which engagement fits, how many people are involved, and what you want delivered, so I scope it on the free discovery call and put the number in your written proposal. You see the full cost before you commit to anything.</p></details>
+      <details class="faq-item"><summary>How much of my team's time does it take?</summary><p>Most of the work happens on my side. You spend time on the discovery call, on sharing the context I need, and on the final debrief. Your employees' part is a survey, interview, or focus group, depending on the engagement, and we plan the timing around your calendar.</p></details>
+      <details class="faq-item"><summary>Is this only for larger organizations?</summary><p>No. I work with organizations of all sizes and sectors, from nonprofits and federal agencies to convenience stores. With a smaller group, I adjust how results are reported so no one's answers can be traced back to them.</p></details>
+      <details class="faq-item"><summary>Will my employees' answers stay confidential?</summary><p>Yes. Results are reported only in aggregate, and groups too small to protect anyone's identity are combined or left out. Identifiable employee data never goes into third-party AI tools.</p></details>
+      <details class="faq-item"><summary>What happens after I get the findings?</summary><p>We walk through them together in a debrief. For the listening, team, and change engagements, the report and debrief also include action planning based on best practices: where to focus first and what to do next.</p></details>
+      <details class="faq-item"><summary>What if the findings are hard to hear?</summary><p>Every organization has strengths to protect as well as things to improve, and the report shows both in plain language. The point is to see your situation clearly and know where to start, not to assign blame.</p></details>
+    </div>
+  </section>
+
   <section class="cta-section" aria-labelledby="cta-home-title">
     <h2 class="section-title" id="cta-home-title">The first conversation is always free</h2>
     <p class="section-body">Tell me what's going on with your workforce and we'll figure out together which engagement fits. No pitch, no pressure, and no commitment until you decide to move forward.</p>
@@ -2001,6 +2110,7 @@ h1:focus, #main:focus { outline: none; }
   <div class="page-hero">
     <div class="page-hero-content">
       <h1>Employee Listening Survey &amp; Action Plan</h1>
+      <p class="page-hero-q">What are our employees experiencing, what's behind it, and what should we do about it?</p>
       <p>A custom survey for your whole workforce, analyzed for patterns and themes, and delivered as a clear report with research-backed recommendations and an action plan based on best practices.</p>
     </div>
     <div class="svc-stats-bar">
@@ -2291,6 +2401,7 @@ h1:focus, #main:focus { outline: none; }
   <div class="page-hero">
     <div class="page-hero-content">
       <h1>Team Health Diagnostic</h1>
+      <p class="page-hero-q">How is this team really working together, where do people see things differently, and what would help?</p>
       <p>A structured look at how your team is actually working across processes, climate, and role interdependence, including a perception gap analysis that shows where team members see things differently.</p>
     </div>
     <div class="svc-stats-bar">
@@ -2542,6 +2653,7 @@ h1:focus, #main:focus { outline: none; }
   <div class="page-hero">
     <div class="page-hero-content">
       <h1>Change Readiness Pulse &amp; Roadmap</h1>
+      <p class="page-hero-q">How is our workforce experiencing this change, what's getting in the way, and what comes next?</p>
       <p>A structured diagnostic that combines focus groups with a survey built on established readiness research to show how your workforce is experiencing a significant change, and what to do next.</p>
     </div>
     <div class="svc-stats-bar">
@@ -2783,6 +2895,7 @@ h1:focus, #main:focus { outline: none; }
   <div class="page-hero">
     <div class="page-hero-content">
       <h1>Training Needs Assessment</h1>
+      <p class="page-hero-q">Is training the right fix, which skill gaps matter most, and where should we invest?</p>
       <p>Before your organization invests in training, find out whether training is actually the right fix, what to prioritize, and where development investment will make the most difference.</p>
     </div>
     <div class="svc-stats-bar">
@@ -3041,6 +3154,7 @@ h1:focus, #main:focus { outline: none; }
   <div class="page-hero">
     <div class="page-hero-content">
       <h1>Performance Standards &amp; Review Toolkit</h1>
+      <p class="page-hero-q">What does good performance look like in this role, how should we measure it, and how do we review it fairly?</p>
       <p>Custom performance expectations for a specific role or team, grounded in what the job actually requires and described in clear, observable behavioral terms so managers can evaluate consistently and employees know what's expected.</p>
     </div>
     <div class="svc-stats-bar">
@@ -3224,30 +3338,6 @@ h1:focus, #main:focus { outline: none; }
     </div>
   </div>
 
-  <section class="org-psych-section" aria-labelledby="orgpsych-label">
-    <div class="org-psych-eyebrow">
-      <h2 class="section-label" id="orgpsych-label">What is Organizational Psychology?</h2>
-      <div class="org-psych-eyebrow-line" aria-hidden="true"></div>
-    </div>
-    <div class="io-explainer-grid">
-      <div>
-        <p class="org-psych-lead">Industrial-Organizational (I/O) psychology is the scientific study of human behavior in the workplace. It applies structured research methods and psychological principles to the questions every organization faces.</p>
-        <ul class="org-psych-questions">
-          <li>How engaged are our employees?</li>
-          <li>What is actually driving turnover?</li>
-          <li>How do our teams function, and what gets in the way?</li>
-          <li>What is our culture really like, and is it working for us?</li>
-          <li>What does our workforce need to succeed?</li>
-          <li>Where should we invest in development?</li>
-        </ul>
-        <p class="org-psych-close">I/O psychologists are trained to design the surveys, assessments, and diagnostic tools that answer these questions reliably, analyze the data with the right methods, and translate findings into recommendations grounded in evidence rather than instinct.</p>
-      </div>
-      <div class="io-explainer-callout">
-        <p>It is one of the most practically applicable fields in psychology, and <em>one of the least visible to the small businesses that could benefit from it most.</em></p>
-      </div>
-    </div>
-  </section>
-
   <div class="about-layout">
     <div class="about-main">
       <h2 class="section-title" style="margin-bottom:28px;">The person behind the practice</h2>
@@ -3257,6 +3347,7 @@ h1:focus, #main:focus { outline: none; }
         <p>In my day-to-day work, I focus on organizational culture and employee listening at a Fortune 100 aerospace and defense company, supporting a workforce of thousands of people. That means designing surveys, making sense of open-text responses at scale, and building executive-ready dashboards that turn complex people data into clear insight leaders can actually use.</p>
         <p>The same thinking runs through the rest of my work. As a psychometrician, I built certification and licensing exams that measure what they claim to measure and hold up to scrutiny, working alongside subject-matter experts who know their fields inside out. As an external consultant across a range of industries, especially nonprofit organizations and even federal agencies, I figured out what roles really demand of the people in them, aligned training and leadership development to match, and listened to employees and volunteers through surveys and open-ended comments that reveal what the numbers alone can't. Through all of it, I've always prioritized telling a story with the data and making sure it's actionable.</p>
         <p><strong>Suttle Insights exists because every organization deserves access to honest, substantive people analytics, and cost or headcount shouldn't be the reason it stays out of reach.</strong></p>
+        <p class="about-name-note">The most valuable things this practice surfaces are rarely the ones anyone was already looking for.</p>
       </div>
     </div>
 
@@ -3303,6 +3394,30 @@ h1:focus, #main:focus { outline: none; }
       <div class="value-item"><h3>Actionable, always</h3><p>A report that sits in a drawer isn't useful. Every deliverable is built around what you can actually do next.</p></div>
     </div>
   </div>
+
+  <section class="org-psych-section" aria-labelledby="orgpsych-label">
+    <div class="org-psych-eyebrow">
+      <h2 class="section-label" id="orgpsych-label">What is Organizational Psychology?</h2>
+      <div class="org-psych-eyebrow-line" aria-hidden="true"></div>
+    </div>
+    <div class="io-explainer-grid">
+      <div>
+        <p class="org-psych-lead">Industrial-Organizational (I/O) psychology is the scientific study of human behavior in the workplace. It applies structured research methods and psychological principles to the questions every organization faces.</p>
+        <ul class="org-psych-questions">
+          <li>How engaged are our employees?</li>
+          <li>What is actually driving turnover?</li>
+          <li>How do our teams function, and what gets in the way?</li>
+          <li>What is our culture really like, and is it working for us?</li>
+          <li>What does our workforce need to succeed?</li>
+          <li>Where should we invest in development?</li>
+        </ul>
+        <p class="org-psych-close">I/O psychologists are trained to design the surveys, assessments, and diagnostic tools that answer these questions reliably, analyze the data with the right methods, and translate findings into recommendations grounded in evidence rather than instinct.</p>
+      </div>
+      <div class="io-explainer-callout">
+        <p>It is one of the most practically applicable fields in psychology, and <em>one of the least visible to the small businesses that could benefit from it most.</em></p>
+      </div>
+    </div>
+  </section>
 
   <section class="cta-section" aria-labelledby="cta-about-title">
     <h2 class="section-title" id="cta-about-title">Let's start with a conversation</h2>
