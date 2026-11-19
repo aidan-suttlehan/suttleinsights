@@ -760,11 +760,14 @@ h1:focus, #main:focus { outline: none; }
 .ds-ticks { position: relative; height: 20px; margin: 6px 16px 0; }
 .ds-tick { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; color: var(--text-muted); }
 
-/* 6. Home service cards: one quiet footer per card (a small sketch of the result, what you get, and an arrow) */
-.svc-card-foot { display: flex; align-items: center; gap: 14px; padding-top: 16px; border-top: 1px solid rgba(15, 32, 64, 0.18); }
-.svc-card-out { flex: 1; min-width: 0; }
-.svc-card-out-k { display: block; margin-bottom: 2px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); }
-.svc-card-out-v { display: block; font-size: 14.5px; font-weight: 500; line-height: 1.35; color: var(--navy); }
+/* 6. Home service cards: one quiet footer per card (what you receive, as the same icons the service page uses, and an arrow) */
+.svc-card-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px 14px; padding-top: 16px; border-top: 1px solid rgba(15, 32, 64, 0.18); }
+.svc-recv { grid-column: 1 / -1; display: flex; gap: 10px; }
+.svc-recv-item { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+.svc-recv-ico { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; color: var(--navy); background: linear-gradient(145deg, var(--accent-light) 0%, var(--accent) 100%); box-shadow: 0 0 0 3px rgba(200, 146, 42, 0.2); }
+.svc-recv-ico .svc-ic { width: 20px; height: 20px; }
+.svc-recv-name { font-size: 12.5px; font-weight: 600; line-height: 1.3; color: var(--navy); }
+.svc-card-out-k { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); }
 .svc-card-go {
   flex: none; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;
   border: 1px solid rgba(15, 32, 64, 0.35); border-radius: 50%; color: var(--blue-dark);
@@ -773,31 +776,6 @@ h1:focus, #main:focus { outline: none; }
 .svc-card-go svg { display: block; transition: transform 0.2s; }
 .svc-card:hover .svc-card-go { background: var(--blue-dark); border-color: var(--blue-dark); color: #fff; }
 .svc-card:hover .svc-card-go svg { transform: translateX(2px); }
-.mg { flex: none; display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 68px; height: 40px; }
-.mg-row, .mg-db, .mg-lv { position: relative; display: block; height: 9px; }
-.mg-bar { position: absolute; left: 0; top: 0; height: 9px; border-radius: 5px; background: var(--navy); }
-.mg-bar--gold { background: var(--accent); }
-.mg-tick { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; border-radius: 1px; background: var(--navy); box-shadow: 0 0 0 1px #fff; }
-.mg--bins { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; }
-.mg-bin { display: flex; flex-direction: column-reverse; align-items: center; gap: 2px; padding-bottom: 3px; border-radius: 4px; background: rgba(15, 32, 64, 0.08); }
-.mg-bin--in { background: var(--cream-deep); }
-.mg-bin i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--navy); }
-.mg-bin--gold i { background: var(--accent); }
-.mg-stack { display: grid; gap: 1px; height: 9px; border-radius: 5px; overflow: hidden; }
-.mg-stack i:nth-child(1) { background: var(--navy); }
-.mg-stack i:nth-child(2) { background: #B9C2D4; }
-.mg-stack i:nth-child(3) { background: var(--accent); }
-.mg-db::before { content: ''; position: absolute; left: 0; right: 0; top: 4px; border-top: 1px solid var(--border); }
-.mg-link { position: absolute; top: 3px; height: 3px; border-radius: 2px; background: rgba(15, 32, 64, 0.28); }
-.mg-dot { position: absolute; top: 0; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; box-shadow: 0 0 0 1.5px #fff; }
-.mg-dot--m { background: var(--navy); }
-.mg-dot--c { background: var(--accent); }
-.mg-lv { display: flex; align-items: center; gap: 5px; }
-.mg-meter { display: flex; gap: 2px; }
-.mg-meter i { display: block; width: 9px; height: 6px; border-radius: 2px; background: rgba(15, 32, 64, 0.2); }
-.mg-meter i.on { background: var(--navy); }
-.mg-sq { flex: none; width: 6px; height: 6px; margin-left: 3px; border-radius: 1.5px; background: var(--accent); }
-.mg-ln { flex: 1; height: 4px; border-radius: 2px; background: rgba(15, 32, 64, 0.22); }
 
 /* ---------- 7. About ---------- */
 .page-hero--simple { padding-bottom: 0; }
@@ -1857,14 +1835,14 @@ h1:focus, #main:focus { outline: none; }
           <h3>Employee Listening Survey &amp; Action Plan</h3>
           <p class="svc-card-q">What are our employees experiencing, what's behind it, and what should we do about it?</p>
           <p class="svc-card-desc">A custom survey of your workforce, analyzed for patterns and themes and delivered as a clear report with prioritized recommendations and action planning based on best practices.</p>
-          <span class="svc-card-foot"><span class="mg" aria-hidden="true"><span class="mg-row"><i class="mg-bar" style="width:86%"></i><b class="mg-tick" style="left:72%"></b></span><span class="mg-row"><i class="mg-bar" style="width:70%"></i><b class="mg-tick" style="left:58%"></b></span><span class="mg-row"><i class="mg-bar mg-bar--gold" style="width:50%"></i><b class="mg-tick" style="left:72%"></b></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Executive report + action planning</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
+          <span class="svc-card-foot"><span class="svc-card-out-k">What you receive</span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><span class="svc-recv"><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-deck"/></svg></span><span class="svc-recv-name">Executive Report</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-doc"/></svg></span><span class="svc-recv-name">Employee summary</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-dash"/></svg></span><span class="svc-recv-name">Results dashboard</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-flag"/></svg></span><span class="svc-recv-name">Action planning</span></span></span></span>
         </a>
         <a class="svc-card" href="/team-health-diagnostic/" data-page="svc-team">
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg></span>
           <h3>Team Health Diagnostic</h3>
           <p class="svc-card-q">How is this team really working together, where do people see responsibilities differently, and what would help?</p>
           <p class="svc-card-desc">Get a clear, honest picture of how a team or several teams are functioning right now, whether you're protecting strong performance or working through friction that's starting to affect results.</p>
-          <span class="svc-card-foot"><span class="mg mg--bins" aria-hidden="true"><span class="mg-bin"></span><span class="mg-bin mg-bin--in mg-bin--gold"><i></i><i></i></span><span class="mg-bin mg-bin--in"></span><span class="mg-bin mg-bin--in"><i></i><i></i></span><span class="mg-bin mg-bin--in"><i></i></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Team Dynamics Report</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
+          <span class="svc-card-foot"><span class="svc-card-out-k">What you receive</span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><span class="svc-recv"><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-doc"/></svg></span><span class="svc-recv-name">Team Dynamics Report</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-flag"/></svg></span><span class="svc-recv-name">Action planning</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-dash"/></svg></span><span class="svc-recv-name">Results dashboard</span></span></span></span>
         </a>
       </div>
       <div class="svc-row svc-row--3">
@@ -1873,21 +1851,21 @@ h1:focus, #main:focus { outline: none; }
           <h3>Change Readiness Pulse &amp; Roadmap</h3>
           <p class="svc-card-q">How is our workforce experiencing this change, what's getting in the way, and what comes next?</p>
           <p class="svc-card-desc">Focus groups and a survey show where people stand on a change that's coming, underway, or already behind you, with a roadmap of next steps based on best practices.</p>
-          <span class="svc-card-foot"><span class="mg" aria-hidden="true"><span class="mg-stack" style="grid-template-columns:62fr 24fr 14fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:49fr 31fr 20fr"><i></i><i></i><i></i></span><span class="mg-stack" style="grid-template-columns:41fr 33fr 26fr"><i></i><i></i><i></i></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Readiness report + roadmap</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
+          <span class="svc-card-foot"><span class="svc-card-out-k">What you receive</span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><span class="svc-recv"><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-doc"/></svg></span><span class="svc-recv-name">Change Readiness Report</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-flag"/></svg></span><span class="svc-recv-name">Action planning</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-dash"/></svg></span><span class="svc-recv-name">Results dashboard</span></span></span></span>
         </a>
         <a class="svc-card" href="/training-needs-assessment/" data-page="svc-tna">
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></span>
           <h3>Training Needs Assessment</h3>
           <p class="svc-card-q">Is training the right fix, which skill gaps matter most, and where should we invest?</p>
           <p class="svc-card-desc">Interviews and a short survey show what the role requires, where real skill gaps exist, and what to prioritize, plus a Plan of Instruction for your top needs, before you commit the budget.</p>
-          <span class="svc-card-foot"><span class="mg" aria-hidden="true"><span class="mg-db"><i class="mg-link" style="left:22%;width:56%"></i><i class="mg-dot mg-dot--c" style="left:22%"></i><i class="mg-dot mg-dot--m" style="left:78%"></i></span><span class="mg-db"><i class="mg-link" style="left:40%;width:34%"></i><i class="mg-dot mg-dot--c" style="left:40%"></i><i class="mg-dot mg-dot--m" style="left:74%"></i></span><span class="mg-db"><i class="mg-link" style="left:54%;width:16%"></i><i class="mg-dot mg-dot--c" style="left:54%"></i><i class="mg-dot mg-dot--m" style="left:70%"></i></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Report + Plan of Instruction</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
+          <span class="svc-card-foot"><span class="svc-card-out-k">What you receive</span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><span class="svc-recv"><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-doc"/></svg></span><span class="svc-recv-name">Assessment report</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-book"/></svg></span><span class="svc-recv-name">Plan of Instruction</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-dash"/></svg></span><span class="svc-recv-name">Results dashboard</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-transfer"/></svg></span><span class="svc-recv-name">Transfer support</span></span></span></span>
         </a>
         <a class="svc-card" href="/performance-standards-and-review-toolkit/" data-page="svc-prd">
           <span class="svc-card-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="2.5" fill="currentColor" stroke="none"/><circle cx="11" cy="18" r="2.5" fill="currentColor" stroke="none"/></svg></span>
           <h3>Performance Standards &amp; Review Toolkit</h3>
           <p class="svc-card-q">What does good performance look like in this role, how should we measure it, and how do we review it fairly?</p>
           <p class="svc-card-desc">Clear, behavior-based standards and a review toolkit, so managers can evaluate fairly and employees know what's expected.</p>
-          <span class="svc-card-foot"><span class="mg" aria-hidden="true"><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i class="on"></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i class="on"></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span><span class="mg-lv"><span class="mg-meter"><i class="on"></i><i></i><i></i></span><b class="mg-sq"></b><b class="mg-ln"></b></span></span><span class="svc-card-out"><span class="svc-card-out-k">You get</span> <span class="svc-card-out-v">Standards + review toolkit</span></span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></span>
+          <span class="svc-card-foot"><span class="svc-card-out-k">What you receive</span><span class="svc-card-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><span class="svc-recv"><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-levels"/></svg></span><span class="svc-recv-name">Performance standards</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-form"/></svg></span><span class="svc-recv-name">Review form</span></span><span class="svc-recv-item"><span class="svc-recv-ico" aria-hidden="true"><svg class="svc-ic"><use href="#ic-scale"/></svg></span><span class="svc-recv-name">Rater guide</span></span></span></span>
         </a>
       </div>
     </div>
