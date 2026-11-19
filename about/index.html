@@ -1731,6 +1731,10 @@ h1:focus, #main:focus { outline: none; }
 @media (max-width: 900px) { .faq-section { grid-template-columns: 1fr; } .faq-item summary { padding: 16px 18px; font-size: 18px; } .faq-item p { padding: 0 18px 18px; font-size: 16px; } }
 .page-hero .page-hero-q { font-family: var(--serif); font-style: italic; font-size: clamp(19px, 1.9vw, 23px); line-height: 1.45; color: var(--accent-light); max-width: 32em; margin: 0 0 18px; }
 .about-body .about-name-note { margin-top: 26px; padding-left: 20px; border-left: 4px solid var(--accent); font-family: var(--serif); font-style: italic; font-size: clamp(19px, 1.8vw, 22px); line-height: 1.55; color: var(--navy); }
+
+/* v229: keep the service-card icon badge clear of the question line (title row is at least as tall as the badge) */
+.svc-card h3 { min-height: 48px; }
+@media (max-width: 600px) { .svc-card h3 { min-height: 40px; } }
 </style>
 </head>
 <body>
@@ -3410,9 +3414,9 @@ h1:focus, #main:focus { outline: none; }
       <div class="discovery-box">
         <h2>What to expect</h2>
         <ol class="discovery-steps">
-          <li><strong>A free 30-minute call.</strong> No scope or commitment needed. We talk through your workforce situation and what you want to learn.</li>
-          <li><strong>A clear next step.</strong> You leave knowing which engagement fits and what it would cost.</li>
-          <li><strong>A written proposal, if it's a fit.</strong> Scope, timeline, and a fixed fee, with no surprise hourly invoices. No pressure, no pitch.</li>
+          <li><strong>A free 30-minute call.</strong> No scope or commitment needed.</li>
+          <li><strong>A conversation about your people and your business.</strong> I get to know your organization, your workforce, and what you want to learn.</li>
+          <li><strong>A clear follow-up from me.</strong> Afterward I send my recommendation and how we'd approach a customized engagement for you and your workforce. If it's a fit, that includes scope, timeline, and a fixed fee, with no surprise hourly invoices. No pressure, no pitch.</li>
         </ol>
       </div>
 
